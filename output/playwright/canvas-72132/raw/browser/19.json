@@ -1,0 +1,22 @@
+{
+  "status": 200,
+  "navigationError": null,
+  "url": "https://canvas.ust.hk/courses/72132/quizzes/164867",
+  "title": "HKUST Canvas - Project Group Forming: COMP5331 (L1) - Knowledge Discovery in Databases",
+  "html": "\n            \n\n\n\n\n<div id=\"quiz_show\">\n\n  <header class=\"quiz-header\">\n\n\n    <h1 id=\"quiz_title\">\n      Project Group Forming\n    </h1>\n\n\n      <div id=\"quiz_details_wrapper\" data-submitted-count=\"\"></div>\n      \n\n<base target=\"_top\">\n<ul id=\"quiz_student_details\">\n  <li>\n    <span class=\"title\">Due</span>\n    <span class=\"value\">\n        <span data-tooltip=\"\" data-html-tooltip-title=\"Sep 18 at 1:30pm\">\n          Sep 18 at 1:30pm\n        </span>\n    </span>\n  </li>\n\n  <li style=\"display: none;\">\n    <span class=\"title\">Points</span>\n    <span class=\"value\">_</span>\n  </li>\n\n  <li>\n    <span class=\"title\">Questions</span>\n    <span class=\"value\">18</span>\n  </li>\n  \n  <li>\n    <span class=\"title\">Available</span>\n    <span class=\"value\">\n        Sep 9 at 1:30pm - Sep 18 at 1:30pm\n    </span>\n  </li>\n\n  <li>\n    <span class=\"title\">Time Limit</span>\n    <span class=\"value\">\n        None\n    </span>\n  </li>\n\n\n</ul>\n\n\n\n\n        <div class=\"lock_explanation\">\n          This quiz was locked Sep 18 at 1:30pm.\n        </div>\n\n    <div id=\"quiz-submission-version-table\"></div>\n\n  </header>\n\n  <div id=\"direct-share-mount-point\"></div>\n  <div id=\"assign-to-mount-point\"></div>\n\n    \n  <div class=\"quiz-submission \">\n  <h4>Quiz results are protected for this quiz and are not visible to students.</h4>\n\n  <div class=\"alert\">\n    <i class=\"icon-warning\" aria-label=\"Warning\"></i>\n    <span>Correct answers are hidden.</span>\n  </div>\n\n  <div class=\"quiz_score\" style=\"display: none;\">\n      Score for this survey:\n    <span class=\"score_value\">0</span> out of _\n  </div>\n</div>\n\n\n\n\n  <div id=\"assignment_external_tools\"><div></div></div>\n\n  <div id=\"module_sequence_footer\" style=\"display: none;\"></div>\n\n</div>\n\n          ",
+  "text": "Project Group Forming\nDue Sep 18 at 1:30pm Questions 18 Available Sep 9 at 1:30pm - Sep 18 at 1:30pm Time Limit None\nThis quiz was locked Sep 18 at 1:30pm.\nQuiz results are protected for this quiz and are not visible to students.\n Correct answers are hidden.",
+  "links": [],
+  "media": [],
+  "frames": [
+    {
+      "url": "about:blank",
+      "title": "",
+      "html": "",
+      "text": "",
+      "links": [],
+      "media": []
+    }
+  ],
+  "requested_url": "https://canvas.ust.hk/courses/72132/quizzes/164867",
+  "kind": "page"
+}

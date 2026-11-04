@@ -1,0 +1,13 @@
+{
+  "status": null,
+  "navigationError": "TimeoutError: page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://lbdiscover.hkust.edu.hk/primo/newsearch.php?TYPE=crsid&SEARCH=COMP+5331\", waiting until \"domcontentloaded\"\u001b[22m\n",
+  "url": "https://julac-hkust.primo.exlibrisgroup.com/discovery/search?query=course_code,contains,COMP%205331,AND&tab=Everything&search_scope=HKUST_Catalog&sortby=rank&vid=852JULAC_HKUST:HKUST&&mode=advanced&offset=0&pcAvailability=false",
+  "title": "",
+  "html": "",
+  "text": "",
+  "links": [],
+  "media": [],
+  "frames": [],
+  "requested_url": "https://lbdiscover.hkust.edu.hk/primo/newsearch.php?TYPE=crsid&SEARCH=COMP+5331",
+  "kind": "external"
+}

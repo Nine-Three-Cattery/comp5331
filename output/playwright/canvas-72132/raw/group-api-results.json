@@ -1,0 +1,115 @@
+[
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910",
+    "status": 200,
+    "data": {
+      "id": 228910,
+      "name": "Group7",
+      "description": null,
+      "is_public": false,
+      "join_level": "invitation_only",
+      "group_category_id": 24434,
+      "max_membership": null,
+      "created_at": "2026-09-13T07:52:20Z",
+      "members_count": 6,
+      "storage_quota_mb": 104,
+      "context_type": "Course",
+      "course_id": 72132,
+      "context_name": "COMP5331 (L1) - Knowledge Discovery in Databases",
+      "avatar_url": null,
+      "role": null,
+      "leader": null,
+      "is_full": null,
+      "has_submission": true,
+      "concluded": false,
+      "non_collaborative": false
+    }
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/pages?per_page=100",
+    "status": 200,
+    "data": []
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/files?per_page=100",
+    "status": 200,
+    "data": [
+      {
+        "id": 12679226,
+        "folder_id": 2034711,
+        "display_name": "COMP5331_Implementation_Proposal.pdf",
+        "filename": "COMP5331_Implementation_Proposal.pdf",
+        "upload_status": "success",
+        "content-type": "application/pdf",
+        "url": "https://canvas.ust.hk/files/12679226/download?download_frd=1",
+        "size": 1795368,
+        "created_at": "2026-09-23T05:59:48Z",
+        "updated_at": "2026-09-23T06:00:17Z",
+        "unlock_at": null,
+        "locked": false,
+        "hidden": false,
+        "lock_at": null,
+        "hidden_for_user": false,
+        "thumbnail_url": null,
+        "modified_at": "2026-09-23T05:59:48Z",
+        "mime_class": "pdf",
+        "media_entry_id": null,
+        "category": "uncategorized",
+        "locked_for_user": false
+      }
+    ]
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/discussion_topics?per_page=100",
+    "status": 200,
+    "data": []
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/users?per_page=100",
+    "status": 200,
+    "data": [
+      {
+        "id": 146353,
+        "name": "CHEUNG, Alan Pak To",
+        "created_at": "2023-08-09T07:32:36Z",
+        "sortable_name": "CHEUNG, Alan Pak To",
+        "short_name": "CHEUNG, Alan Pak To"
+      },
+      {
+        "id": 199660,
+        "name": "LI, Junhao",
+        "created_at": "2026-07-24T08:08:28Z",
+        "sortable_name": "LI, Junhao",
+        "short_name": "LI, Junhao"
+      },
+      {
+        "id": 199505,
+        "name": "LU, Yichong",
+        "created_at": "2026-07-24T08:06:51Z",
+        "sortable_name": "LU, Yichong",
+        "short_name": "LU, Yichong"
+      },
+      {
+        "id": 124197,
+        "name": "WANG, Yifan",
+        "created_at": "2022-07-14T00:33:18Z",
+        "sortable_name": "WANG, Yifan",
+        "short_name": "WANG, Yifan"
+      },
+      {
+        "id": 191571,
+        "name": "YAN, Zhengyang",
+        "created_at": "2026-01-08T11:04:43Z",
+        "sortable_name": "YAN, Zhengyang",
+        "short_name": "YAN, Zhengyang"
+      },
+      {
+        "id": 141351,
+        "name": "ZHANG, Zongmin",
+        "created_at": "2023-07-19T00:31:15Z",
+        "sortable_name": "ZHANG, Zongmin",
+        "short_name": "ZHANG, Zongmin"
+      }
+    ]
+  }
+]

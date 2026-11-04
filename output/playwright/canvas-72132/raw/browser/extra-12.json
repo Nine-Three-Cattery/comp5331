@@ -1,0 +1,30 @@
+{
+  "status": 200,
+  "navigationError": null,
+  "url": "https://canvas.ust.hk/groups/228910/lti_collaborations",
+  "title": "HKUST Canvas - External Collaborations",
+  "html": "<div class=\"CollaborationsApp\"><div><div class=\"ic-Action-header\" data-testid=\"collaborations-header\"><div class=\"ic-Action-header__Primary\"><h1 class=\"screenreader-only\" data-testid=\"collaborations-title\">Collaborations</h1></div><div class=\"ic-Action-header__Secondary\" data-testid=\"collaborations-actions\"><div class=\"al-dropdown__container create-collaborations-dropdown\" data-testid=\"new-collaborations-dropdown\"><div><button type=\"button\" class=\"al-trigger Button Button--primary\" aria-label=\"Add Collaboration\" href=\"#\">+ Collaboration</button><ul class=\"al-options\" role=\"menu\" tabindex=\"0\" aria-expanded=\"false\" aria-activedescendant=\"new-collaborations-dropdown\"><li><a href=\"lti_collaborations/external_tools/1102?launch_type=collaboration&amp;display=borderless\" rel=\"external\" role=\"menuitem\">Google Drive</a></li><li><a href=\"lti_collaborations/external_tools/5401?launch_type=collaboration&amp;display=borderless\" rel=\"external\" role=\"menuitem\">Microsoft Education</a></li><li><a href=\"lti_collaborations/external_tools/1118?launch_type=collaboration&amp;display=borderless\" rel=\"external\" role=\"menuitem\">Office 365</a></li></ul></div></div></div></div><div class=\"GettingStartedCollaborations\"><div class=\"image-collaborations-container\"><img aria-hidden=\"true\" alt=\"\" class=\"image-collaborations\" src=\"/images/svg-icons/icon-collaborations.svg\"></div><div class=\"Collaborations--GettingStarted\"><div><h2 class=\"ic-Action-header__Heading\">Getting started with Collaborations</h2><p>Collaborations are web-based tools to work collaboratively on tasks like taking notes or grouped papers. Get started by clicking on the \"+ Collaboration\" button.</p><a href=\"https://community.canvaslms.com/t5/Canvas-Basics-Guide/What-are-Collaborations/ta-p/61\">Learn more about collaborations</a></div></div></div></div></div>",
+  "text": "Collaborations\n+ Collaboration\nGetting started with Collaborations\n\nCollaborations are web-based tools to work collaboratively on tasks like taking notes or grouped papers. Get started by clicking on the \"+ Collaboration\" button.\n\nLearn more about collaborations",
+  "links": [
+    {
+      "title": "Google Drive",
+      "url": "https://canvas.ust.hk/groups/228910/lti_collaborations/external_tools/1102?launch_type=collaboration&display=borderless"
+    },
+    {
+      "title": "Microsoft Education",
+      "url": "https://canvas.ust.hk/groups/228910/lti_collaborations/external_tools/5401?launch_type=collaboration&display=borderless"
+    },
+    {
+      "title": "Office 365",
+      "url": "https://canvas.ust.hk/groups/228910/lti_collaborations/external_tools/1118?launch_type=collaboration&display=borderless"
+    },
+    {
+      "title": "Learn more about collaborations",
+      "url": "https://community.canvaslms.com/t5/Canvas-Basics-Guide/What-are-Collaborations/ta-p/61"
+    }
+  ],
+  "media": [],
+  "frames": [],
+  "requested_url": "https://canvas.ust.hk/groups/228910/lti_collaborations",
+  "kind": "group"
+}

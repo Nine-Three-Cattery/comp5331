@@ -1,0 +1,22 @@
+{
+  "status": 200,
+  "navigationError": null,
+  "url": "https://canvas.ust.hk/courses/72132/quizzes/164866",
+  "title": "HKUST Canvas - Project - Declaring Contribution of Each Member: COMP5331 (L1) - Knowledge Discovery in Databases",
+  "html": "\n            \n\n\n\n\n<div id=\"quiz_show\">\n\n  <header class=\"quiz-header\">\n\n\n    <h1 id=\"quiz_title\">\n      Project - Declaring Contribution of Each Member\n    </h1>\n\n\n      <div id=\"quiz_details_wrapper\" data-submitted-count=\"\"></div>\n      \n\n<base target=\"_top\">\n<ul id=\"quiz_student_details\">\n  <li>\n    <span class=\"title\">Due</span>\n    <span class=\"value\">\n        <span data-tooltip=\"\" data-html-tooltip-title=\"Nov 29 at 11:59pm\">\n          Nov 29 at 11:59pm\n        </span>\n    </span>\n  </li>\n\n  <li style=\"display: none;\">\n    <span class=\"title\">Points</span>\n    <span class=\"value\">_</span>\n  </li>\n\n  <li>\n    <span class=\"title\">Questions</span>\n    <span class=\"value\">4</span>\n  </li>\n  \n  <li>\n    <span class=\"title\">Available</span>\n    <span class=\"value\">\n        Nov 6 at 1:30pm - Dec 5 at 11:59pm\n    </span>\n  </li>\n\n  <li>\n    <span class=\"title\">Time Limit</span>\n    <span class=\"value\">\n        None\n    </span>\n  </li>\n\n\n</ul>\n\n\n\n\n        <div class=\"lock_explanation\">\n          This quiz is locked until Nov 6 at 1:30pm.\n        </div>\n\n    <div id=\"quiz-submission-version-table\"></div>\n\n  </header>\n\n  <div id=\"direct-share-mount-point\"></div>\n  <div id=\"assign-to-mount-point\"></div>\n\n\n\n  <div id=\"assignment_external_tools\"><div></div></div>\n\n  <div id=\"module_sequence_footer\" style=\"display: none;\"></div>\n\n</div>\n\n          ",
+  "text": "Project - Declaring Contribution of Each Member\nDue Nov 29 at 11:59pm Questions 4 Available Nov 6 at 1:30pm - Dec 5 at 11:59pm Time Limit None\nThis quiz is locked until Nov 6 at 1:30pm.",
+  "links": [],
+  "media": [],
+  "frames": [
+    {
+      "url": "about:blank",
+      "title": "",
+      "html": "",
+      "text": "",
+      "links": [],
+      "media": []
+    }
+  ],
+  "requested_url": "https://canvas.ust.hk/courses/72132/quizzes/164866",
+  "kind": "page"
+}

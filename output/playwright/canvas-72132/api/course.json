@@ -1,0 +1,46 @@
+{
+  "id": 72132,
+  "name": "COMP5331 (L1) - Knowledge Discovery in Databases",
+  "course_code": "COMP5331 (L1)",
+  "account_id": 83,
+  "created_at": "2026-07-19T16:32:34Z",
+  "start_at": null,
+  "default_view": "wiki",
+  "enrollment_term_id": 293,
+  "is_public": false,
+  "grading_standard_id": null,
+  "root_account_id": 1,
+  "uuid": "DEmQm9rMZE4Uwh0IeCLPzuKxRXq0hMKeiMyt6i0z",
+  "license": "private",
+  "grade_passback_setting": null,
+  "syllabus_body": null,
+  "end_at": null,
+  "public_syllabus": false,
+  "public_syllabus_to_auth": true,
+  "storage_quota_mb": 5242,
+  "is_public_to_auth_users": true,
+  "homeroom_course": false,
+  "course_color": null,
+  "friendly_name": null,
+  "apply_assignment_group_weights": false,
+  "calendar": {
+    "ics": "https://canvas.ust.hk/feeds/calendars/course_DEmQm9rMZE4Uwh0IeCLPzuKxRXq0hMKeiMyt6i0z.ics"
+  },
+  "time_zone": "Asia/Hong_Kong",
+  "blueprint": false,
+  "template": false,
+  "enrollments": [
+    {
+      "type": "student",
+      "role": "StudentEnrollment",
+      "role_id": 21,
+      "user_id": 141351,
+      "enrollment_state": "active",
+      "limit_privileges_to_course_section": false
+    }
+  ],
+  "hide_final_grades": true,
+  "workflow_state": "available",
+  "restrict_enrollments_to_course_dates": false,
+  "horizon_course": false
+}

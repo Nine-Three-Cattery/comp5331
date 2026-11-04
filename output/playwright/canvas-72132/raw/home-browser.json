@@ -1,0 +1,115 @@
+{
+  "url": "https://canvas.ust.hk/courses/72132",
+  "title": "HKUST Canvas - COMP5331 (L1) - Knowledge Discovery in Databases",
+  "html": "\n            \n\n\n\n\n<div id=\"course_home_content\">\n    <div id=\"wiki_page_show\"><div class=\"header-bar-outer-container\">\n  <div class=\"sticky-toolbar\" data-sticky=\"\">\n    <div class=\"header-bar page-toolbar as-course-home\">\n      <div class=\"page-toolbar-start\">\n        <div class=\"page-heading\">\n              <h1 class=\"course-title\" title=\"COMP5331 (L1) - Knowledge Discovery in Databases\">COMP5331 (L1) - Knowledge Discovery in Databases<button aria-haspopup=\"dialog\" class=\"ally-accessible-versions ally-add-tooltip\" data-id=\"page:708679\" data-ally-content-id=\"page:708679\" data-ally-richcontent-eid=\"page:708679\" aria-label=\"Alternative formats\" title=\"Alternative formats\">\n    <svg width=\"22\" height=\"13\" viewBox=\"0 0 22 13\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\" focusable=\"false\" role=\"presentation\">\n        <path fill=\"currentColor\" d=\"M22,4.3875 L17.1875,11.7 L12.375,4.3875 L15.2625,4.3875 L15.2625,0 L19.1125,0 L19.1125,4.3875 L22,4.3875 Z M0,13 L7.56170223,2.6 L15.125,13 L11.5074634,13 C10.8377941,11.637446 9.34323244,10.6886103 7.60683311,10.6886103 C5.87043379,10.6886103 4.37564424,11.637446 3.70597488,13 L0,13 Z M5.76079766,8.21256906 C5.76079766,9.12421192 6.56722727,9.86326321 7.56170223,9.86326321 C8.55617719,9.86326321 9.36237887,9.12421192 9.36237887,8.21256906 C9.36237887,7.3009262 8.55617719,6.56187491 7.56170223,6.56187491 C6.56722727,6.56187491 5.76079766,7.3009262 5.76079766,8.21256906 Z\"></path>\n    </svg>\n</button></h1>\n        </div>\n        </div>\n        <div class=\"page-toolbar-end\">\n          <div class=\"buttons\">\n\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"page-changed-alert\" role=\"alert\" aria-atomic=\"true\" aria-live=\"polite\"></div>\n  </div>\n\n<div id=\"direct-share-mount-point\"></div>\n\n<div class=\"show-content user_content clearfix enhanced\" data-resource-type=\"wiki_page.body\" data-resource-id=\"708679\" data-lti-page-content=\"true\">\n  <h1 class=\"page-title\">COMP5331: Knowledge Discovery in Databases (Fall 2026)</h1>\n  <div id=\"todo-date-mount-point\"></div>\n      <h1><span style=\"color: #0000ff;\"><strong>COMP5331: Knowledge Discovery in Databases (Fall 2026)</strong></span></h1>\n<p><strong>Instructor:<br>&nbsp;&nbsp;&nbsp;&nbsp;</strong><a class=\"external\" href=\"http://www.cse.ust.hk/~raywong\" target=\"_blank\" rel=\"noopener\"><span>Prof. Raymond Chi-Wing Wong</span></a><br>&nbsp;&nbsp;&nbsp;<strong>Office Hours:</strong><span>&nbsp;</span>TBA<br><br><strong>TA:&nbsp;&nbsp;</strong><br>&nbsp; &nbsp;Name: Hong SU (Co-ordinator)<br>&nbsp; &nbsp;Email: hsuag &lt;at&gt; connect.ust.hk<br><br>&nbsp; &nbsp;Name: Jinming ZHANG&nbsp;<br>&nbsp; &nbsp;Email: jzhanggc &lt;at&gt; connect.ust.hk<br><br><strong>Menu</strong></p>\n<ul>\n<ul>\n<li><a title=\"CourseDetails\" href=\"https://canvas.ust.hk/courses/72132/pages/coursedetails\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/coursedetails\" data-api-returntype=\"Page\"><strong>Course Details</strong></a></li>\n<li><a title=\"GradingScheme\" href=\"https://canvas.ust.hk/courses/72132/pages/gradingscheme\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/gradingscheme\" data-api-returntype=\"Page\"><strong>Grading Scheme</strong></a></li>\n<li><a title=\"LectureNotes\" href=\"https://canvas.ust.hk/courses/72132/pages/lecturenotes\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/lecturenotes\" data-api-returntype=\"Page\"><strong>Lecture Notes</strong></a></li>\n<li><a title=\"HW\" href=\"https://canvas.ust.hk/courses/72132/pages/hw\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/hw\" data-api-returntype=\"Page\"><strong>HW</strong></a></li>\n<li><a title=\"Project\" href=\"https://canvas.ust.hk/courses/72132/pages/project\" data-course-type=\"wikiPages\" data-published=\"true\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/project\" data-api-returntype=\"Page\"><strong>Project</strong></a><a title=\"Project\" href=\"https://canvas.ust.hk/courses/72132/pages/project-old-2\" data-course-type=\"wikiPages\" data-published=\"true\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/project-old-2\" data-api-returntype=\"Page\"><strong></strong></a></li>\n<li><a title=\"Exam\" href=\"https://canvas.ust.hk/courses/72132/pages/exam\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/exam\" data-api-returntype=\"Page\"><strong>Exam</strong></a></li>\n<li><a title=\"Written Notes\" href=\"https://canvas.ust.hk/courses/72132/pages/written-notes\" data-course-type=\"wikiPages\" data-published=\"true\" data-api-endpoint=\"https://canvas.ust.hk/api/v1/courses/72132/pages/written-notes\" data-api-returntype=\"Page\"><strong>Written Notes</strong></a></li>\n</ul>\n</ul>\n<p>&nbsp;</p>\n<div id=\"assign-to-mount-point\"></div>\n<div id=\"choose-editor-mount-point\"></div>\n</div>\n</div>\n</div>\n<div id=\"wizard_box\"></div>\n\n          ",
+  "links": [
+    {
+      "title": "Home",
+      "url": "https://canvas.ust.hk/courses/72132"
+    },
+    {
+      "title": "Discussions",
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics"
+    },
+    {
+      "title": "Grades1",
+      "url": "https://canvas.ust.hk/courses/72132/grades"
+    },
+    {
+      "title": "Lucid (Whiteboard)",
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/4768"
+    },
+    {
+      "title": "Chat",
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/5118"
+    },
+    {
+      "title": "Zoom Meeting",
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/5243"
+    },
+    {
+      "title": "Course Reserve",
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/5621"
+    },
+    {
+      "title": "Notebook",
+      "url": "https://canvas.ust.hk/courses/72132/notebook"
+    },
+    {
+      "title": "Prof. Raymond Chi-Wing Wong",
+      "url": "http://www.cse.ust.hk/~raywong"
+    },
+    {
+      "title": "Course Details",
+      "url": "https://canvas.ust.hk/courses/72132/pages/coursedetails"
+    },
+    {
+      "title": "Grading Scheme",
+      "url": "https://canvas.ust.hk/courses/72132/pages/gradingscheme"
+    },
+    {
+      "title": "Lecture Notes",
+      "url": "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+    },
+    {
+      "title": "HW",
+      "url": "https://canvas.ust.hk/courses/72132/pages/hw"
+    },
+    {
+      "title": "Project",
+      "url": "https://canvas.ust.hk/courses/72132/pages/project"
+    },
+    {
+      "title": "",
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-old-2"
+    },
+    {
+      "title": "Exam",
+      "url": "https://canvas.ust.hk/courses/72132/pages/exam"
+    },
+    {
+      "title": "Written Notes",
+      "url": "https://canvas.ust.hk/courses/72132/pages/written-notes"
+    },
+    {
+      "title": "View Course Stream",
+      "url": "https://canvas.ust.hk/courses/72132?view=feed"
+    },
+    {
+      "title": "View Course Calendar",
+      "url": "https://canvas.ust.hk/calendar?include_contexts=course_72132"
+    },
+    {
+      "title": "View Course Notifications",
+      "url": "https://canvas.ust.hk/courses/72132?view=notifications"
+    },
+    {
+      "title": "HW2",
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441788"
+    },
+    {
+      "title": "Project Final Report Su…",
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441790"
+    },
+    {
+      "title": "Project - Declaring Con…",
+      "url": "https://canvas.ust.hk/courses/72132/quizzes/164866"
+    },
+    {
+      "title": "Project PPT/Source Co…",
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441791"
+    },
+    {
+      "title": "Project Student Present…",
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441793"
+    },
+    {
+      "title": "Group7",
+      "url": "https://canvas.ust.hk/groups/228910"
+    },
+    {
+      "title": "HW1\n      \n          100 out of 100",
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441787/submissions/141351"
+    }
+  ]
+}

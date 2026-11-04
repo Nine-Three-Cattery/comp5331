@@ -1,0 +1,22 @@
+{
+  "status": 200,
+  "navigationError": null,
+  "url": "https://canvas.ust.hk/groups/228910/conferences",
+  "title": "HKUST Canvas - Web Conferences: Group7",
+  "html": "\n            \n\n<h1 class=\"screenreader-only\">Conferences</h1>\n\n<div id=\"big-blue-button-message-container\"></div>\n<div id=\"conference-alternatives-container\"></div>\n<div id=\"react-conference-modal-container\"></div>\n\n    <div class=\"ic-Action-header ic-Action-header--before-item-groups\">\n      <div class=\"ic-Action-header__Secondary\">\n        <button type=\"button\" class=\"btn btn-primary new-conference-btn\" title=\"New Conference\" aria-label=\"New Conference\">\n          <i class=\"icon-plus\"></i>\n          Add Conference\n        </button>\n      </div>\n    </div>\n\n<div class=\"item-group-container item-box\">\n    <div class=\"item-group-condensed\">\n      <div class=\"ig-header\">\n        <h2 class=\"ig-header-title\">\n          <a class=\"element_toggler accessible-toggler\" href=\"#\" aria-label=\"New Conferences\" aria-controls=\"new-conference-list\" aria-expanded=\"true\">\n            <i class=\"icon-mini-arrow-down auto_rotate\"></i>\n            New Conferences\n          </a>\n        </h2>\n      </div>\n      <div class=\"item-group-expandable\" id=\"new-conference-list\"><p class=\"emptyMessage\">There are no new conferences</p>\n</div>\n    </div>\n\n  <div class=\"item-group-condensed\">\n    <div class=\"ig-header\">\n      <h2 class=\"ig-header-title\">\n        <a class=\"element_toggler accessible-toggler\" href=\"#\" aria-label=\"Concluded Conferences\" aria-controls=\"concluded-conference-list\" aria-expanded=\"true\">\n          <i class=\"icon-mini-arrow-down auto_rotate\"></i>\n          Concluded Conferences\n        </a>\n      </h2>\n    </div>\n    <div class=\"item-group-expandable\" id=\"concluded-conference-list\"><p class=\"emptyMessage\">There are no concluded conferences</p>\n</div>\n  </div>\n\n</div>\n\n<div id=\"add_conference_form\"></div>\n\n          ",
+  "text": "Conferences\n Add Conference\n New Conferences\n\nThere are no new conferences\n\n Concluded Conferences\n\nThere are no concluded conferences",
+  "links": [
+    {
+      "title": "New Conferences",
+      "url": "https://canvas.ust.hk/groups/228910/conferences#"
+    },
+    {
+      "title": "Concluded Conferences",
+      "url": "https://canvas.ust.hk/groups/228910/conferences#"
+    }
+  ],
+  "media": [],
+  "frames": [],
+  "requested_url": "https://canvas.ust.hk/groups/228910/conferences",
+  "kind": "group"
+}

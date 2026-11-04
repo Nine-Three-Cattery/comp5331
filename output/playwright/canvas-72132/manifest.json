@@ -1,0 +1,3746 @@
+{
+  "root_url": "https://canvas.ust.hk/courses/72132",
+  "course_title": "COMP5331 (L1) - Knowledge Discovery in Databases",
+  "captured_at": "2026-11-04T21:12:29.046167+08:00",
+  "records": [
+    {
+      "url": "https://canvas.ust.hk/courses/72132",
+      "title": "HKUST Canvas - COMP5331 (L1) - Knowledge Discovery in Databases",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132?include[]=syllabus_body",
+      "title": "course",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/course.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/tabs",
+      "title": "tabs",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/tabs.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages?per_page=100",
+      "title": "pages",
+      "kind": "api",
+      "status": 404,
+      "local_path": "api/pages.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/modules?per_page=100&include[]=items",
+      "title": "modules",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/modules.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/assignments?per_page=100&include[]=submission",
+      "title": "assignments",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/assignments.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics?per_page=100",
+      "title": "discussions",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussions.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/quizzes?per_page=100",
+      "title": "quizzes",
+      "kind": "api",
+      "status": 404,
+      "local_path": "api/quizzes.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/files?per_page=100",
+      "title": "files",
+      "kind": "api",
+      "status": 403,
+      "local_path": "api/files.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/folders?per_page=100",
+      "title": "folders",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/folders.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/groups?per_page=100",
+      "title": "groups",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/groups.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/announcements?context_codes[]=course_72132&per_page=100",
+      "title": "announcements",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/announcements.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/calendar_events?context_codes[]=course_72132&all_events=true&per_page=100",
+      "title": "calendar",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/calendar.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441787",
+      "title": "HW1",
+      "kind": "assignment",
+      "status": 200,
+      "local_path": "pages/courses--72132--assignments--441787.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/hw"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/assignments/441787/submissions/self?include[]=submission_comments&include[]=submission_history&include[]=rubric_assessment",
+      "title": "assignment-441787-my-submission",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/assignment-441787-my-submission.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441788",
+      "title": "HW2",
+      "kind": "assignment",
+      "status": 200,
+      "local_path": "pages/courses--72132--assignments--441788.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/assignments/441788/submissions/self?include[]=submission_comments&include[]=submission_history&include[]=rubric_assessment",
+      "title": "assignment-441788-my-submission",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/assignment-441788-my-submission.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441792",
+      "title": "Project Proposal",
+      "kind": "assignment",
+      "status": 200,
+      "local_path": "pages/courses--72132--assignments--441792.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-importantdates-submissionsites"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/assignments/441792/submissions/self?include[]=submission_comments&include[]=submission_history&include[]=rubric_assessment",
+      "title": "assignment-441792-my-submission",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/assignment-441792-my-submission.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441790",
+      "title": "Project Final Report Submission",
+      "kind": "assignment",
+      "status": 200,
+      "local_path": "pages/courses--72132--assignments--441790.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/assignments/441790/submissions/self?include[]=submission_comments&include[]=submission_history&include[]=rubric_assessment",
+      "title": "assignment-441790-my-submission",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/assignment-441790-my-submission.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441791",
+      "title": "Project PPT/Source Code submission",
+      "kind": "assignment",
+      "status": 200,
+      "local_path": "pages/courses--72132--assignments--441791.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/assignments/441791/submissions/self?include[]=submission_comments&include[]=submission_history&include[]=rubric_assessment",
+      "title": "assignment-441791-my-submission",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/assignment-441791-my-submission.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441793",
+      "title": "Project Student Presentation Order Form",
+      "kind": "assignment",
+      "status": 200,
+      "local_path": "pages/courses--72132--assignments--441793.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/assignments/441793/submissions/self?include[]=submission_comments&include[]=submission_history&include[]=rubric_assessment",
+      "title": "assignment-441793-my-submission",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/assignment-441793-my-submission.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/640346",
+      "title": "Looking for project group :)",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--640346.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/640346/view",
+      "title": "discussion-640346-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-640346-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/640331",
+      "title": "Looking for a group or teammates",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--640331.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/640331/view",
+      "title": "discussion-640331-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-640331-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/639305",
+      "title": "Looking for project group",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--639305.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/639305/view",
+      "title": "discussion-639305-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-639305-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/639086",
+      "title": "Looking for a group :)",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--639086.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/639086/view",
+      "title": "discussion-639086-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-639086-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/638441",
+      "title": "Looking for group members!!",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--638441.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/638441/view",
+      "title": "discussion-638441-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-638441-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628772",
+      "title": "Is there any group that needs members? I still don't have a group",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628772.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628772/view",
+      "title": "discussion-628772-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628772-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628771",
+      "title": "I am together with one of my groupmate(2 people in total). W want to be together with 4 people!",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628771.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628771/view",
+      "title": "discussion-628771-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628771-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628770",
+      "title": "Want one more group member",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628770.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628770/view",
+      "title": "discussion-628770-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628770-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628769",
+      "title": "Finding groupmates",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628769.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628769/view",
+      "title": "discussion-628769-view",
+      "kind": "api",
+      "status": 403,
+      "local_path": null,
+      "source_urls": [],
+      "detail": "Response was not JSON; possibly a login redirect."
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628768",
+      "title": "Want 3-4 members to form a group or Join in a group",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628768.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628768/view",
+      "title": "discussion-628768-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628768-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628767",
+      "title": "Looking for a Group",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628767.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628767/view",
+      "title": "discussion-628767-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628767-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628766",
+      "title": "Request for group formation",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628766.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628766/view",
+      "title": "discussion-628766-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628766-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628765",
+      "title": "who is in group 19",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628765.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628765/view",
+      "title": "discussion-628765-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628765-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628764",
+      "title": "About proposal",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628764.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628764/view",
+      "title": "discussion-628764-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628764-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics/628763",
+      "title": "about the caculator",
+      "kind": "discussion",
+      "status": 200,
+      "local_path": "pages/courses--72132--discussion_topics--628763.html",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/discussion_topics/628763/view",
+      "title": "discussion-628763-view",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/discussion-628763-view.json",
+      "source_urls": []
+    },
+    {
+      "url": "http://www.cse.ust.hk/~raywong",
+      "title": "Raymond Chi-Wing Wong (Raymond Wong), HKUST CSE",
+      "kind": "external",
+      "status": 200,
+      "local_path": "pages/browser--17.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/coursedetails",
+      "title": "page-coursedetails",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-coursedetails.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/coursedetails",
+      "title": "CourseDetails",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--coursedetails.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/gradingscheme",
+      "title": "page-gradingscheme",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-gradingscheme.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/gradingscheme",
+      "title": "GradingScheme",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--gradingscheme.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/lecturenotes",
+      "title": "page-lecturenotes",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-lecturenotes.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/lecturenotes",
+      "title": "LectureNotes",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--lecturenotes.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/hw",
+      "title": "page-hw",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-hw.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/hw",
+      "title": "HW",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--hw.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project",
+      "title": "page-project",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project",
+      "title": "Project",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-old-2",
+      "title": "page-project-old-2",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-old-2.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-old-2",
+      "title": "Project-old",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-old-2.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/exam",
+      "title": "page-exam",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-exam.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/exam",
+      "title": "Exam",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--exam.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/written-notes",
+      "title": "page-written-notes",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-written-notes.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/written-notes",
+      "title": "Written Notes",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--written-notes.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/discussion_topics",
+      "title": "HKUST Canvas - Discussions: COMP5331 (L1) - Knowledge Discovery in Databases",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--01.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/grades",
+      "title": "HKUST Canvas - Grades for ZHANG, Zongmin: COMP5331 (L1) - Knowledge Discovery in DatabasesMedian 90.0, High 100.0, Low 58.0Your Score: 100.0 out of 100",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--18.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/4768",
+      "title": "HKUST Canvas - Lucid (Whiteboard)",
+      "kind": "tool",
+      "status": "unavailable",
+      "local_path": null,
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。 工具只有启动外壳、空框架或登录/授权提示，未获取工具内部内容。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/5118",
+      "title": "HKUST Canvas - Chat",
+      "kind": "tool",
+      "status": "unavailable",
+      "local_path": null,
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。 工具只有启动外壳、空框架或登录/授权提示，未获取工具内部内容。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/5243",
+      "title": "HKUST Canvas - Zoom Meeting",
+      "kind": "tool",
+      "status": "unavailable",
+      "local_path": null,
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。 工具只有启动外壳、空框架或登录/授权提示，未获取工具内部内容。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/external_tools/5621",
+      "title": "HKUST Canvas - Course Reserve",
+      "kind": "tool",
+      "status": 200,
+      "local_path": "pages/browser--02.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。 仅保存实际 iframe 可见内容的静态快照，不表示第三方工具内部内容已全部抓全。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/notebook",
+      "title": "HKUST Canvas - Notebook",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--03.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132?view=feed",
+      "title": "HKUST Canvas - COMP5331 (L1) - Knowledge Discovery in DatabasesTo Do Items Loading",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--04.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/calendar?include_contexts=course_72132",
+      "title": "HKUST Canvas - Calendar",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--05.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132?view=notifications",
+      "title": "HKUST Canvas - Canvas LMS",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--06.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/quizzes/164866",
+      "title": "HKUST Canvas - Project - Declaring Contribution of Each Member: COMP5331 (L1) - Knowledge Discovery in Databases",
+      "kind": "quiz",
+      "status": 200,
+      "local_path": "pages/browser--07.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "已保存当前账号可见的测验说明；题目或结果按 Canvas 原有锁定状态不可读取。"
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910",
+      "title": "HKUST Canvas - Group7: Group7: COMP5331 (L1)Loading page",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--08.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/assignments/441787/submissions/141351",
+      "title": "HKUST Canvas - HW1: ZHANG, Zongmin",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/browser--09.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "http://pathadvisor.ust.hk/interface.php?roomno=ltg",
+      "title": "HKUST Path Advisor",
+      "kind": "external",
+      "status": 200,
+      "local_path": "pages/browser--10.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/coursedetails"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "http://pathadvisor.ust.hk/interface.php?roomno=lte",
+      "title": "HKUST Path Advisor",
+      "kind": "external",
+      "status": 200,
+      "local_path": "pages/browser--11.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/coursedetails"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://rvcmedia.ust.hk/media?path=26FA_COMP5331-L1_260912_yRvwcb62Ik",
+      "title": "COMP5331 lecture recording — 2026-09-12 (playback link)",
+      "kind": "external",
+      "status": 200,
+      "local_path": "pages/recording.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/coursedetails"
+      ],
+      "detail": "按用户要求，仅保存录像网页和播放链接，不下载完整 MP4。"
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-importantdates-submissionsites",
+      "title": "page-project-importantdates-submissionsites",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-importantdates-submissionsites.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-importantdates-submissionsites",
+      "title": "Project-ImportantDates-SubmissionSites",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-importantdates-submissionsites.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-groupforming",
+      "title": "page-project-groupforming",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-groupforming.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-groupforming",
+      "title": "Project-GroupForming",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-groupforming.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-proposal",
+      "title": "page-project-proposal",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-proposal.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-proposal",
+      "title": "Project-Proposal",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-proposal.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-finalreport",
+      "title": "page-project-finalreport",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-finalreport.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-finalreport",
+      "title": "Project-FinalReport",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-finalreport.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-grouplist",
+      "title": "page-project-grouplist",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-grouplist.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-grouplist",
+      "title": "Project-GroupList",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-grouplist.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-presentation",
+      "title": "page-project-presentation",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-presentation.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-presentation",
+      "title": "Project-Presentation",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-presentation.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/courses/72132/pages/project-suggestedtopics",
+      "title": "page-project-suggestedtopics",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/page-project-suggestedtopics.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics",
+      "title": "Project-SuggestedTopics",
+      "kind": "page",
+      "status": 200,
+      "local_path": "pages/courses--72132--pages--project-suggestedtopics.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project"
+      ]
+    },
+    {
+      "url": "http://pathadvisor.ust.hk/interface.php?roomno=lta",
+      "title": "HKUST Path Advisor",
+      "kind": "external",
+      "status": 200,
+      "local_path": "pages/browser--12.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/exam"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "http://pathadvisor.ust.hk/interface.php?roomno=1409",
+      "title": "HKUST Path Advisor",
+      "kind": "external",
+      "status": 200,
+      "local_path": "pages/browser--13.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/exam"
+      ],
+      "detail": "浏览器 HTTP 状态：200。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/quizzes/164867",
+      "title": "HKUST Canvas - Project Group Forming: COMP5331 (L1) - Knowledge Discovery in Databases",
+      "kind": "quiz",
+      "status": 200,
+      "local_path": "pages/browser--14.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-importantdates-submissionsites"
+      ],
+      "detail": "已保存当前账号可见的测验说明；题目或结果按 Canvas 原有锁定状态不可读取。"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/quizzes/164865",
+      "title": "HKUST Canvas - Project Presentation Schedule Availability: COMP5331 (L1) - Knowledge Discovery in Databases",
+      "kind": "quiz",
+      "status": 200,
+      "local_path": "pages/browser--15.html",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-importantdates-submissionsites"
+      ],
+      "detail": "已保存当前账号可见的测验说明；题目或结果按 Canvas 原有锁定状态不可读取。"
+    },
+    {
+      "url": "https://docs.google.com/spreadsheets/d/1-qm5Wqq2WCezETTBw6w0W6t3JZ5oxuQqECLOxqXWEFE/edit",
+      "title": "COMP5331 Group Forming Signup Sheet (Excel)",
+      "kind": "external",
+      "status": 200,
+      "local_path": "external/group-forming-signup.xlsx",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-groupforming"
+      ],
+      "detail": "72335 bytes; downloaded using the sheet export endpoint"
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440300",
+      "title": "file-12440300",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440300.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440315",
+      "title": "file-12440315",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440315.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440318",
+      "title": "file-12440318",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440318.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440319",
+      "title": "file-12440319",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440319.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440322",
+      "title": "file-12440322",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440322.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440323",
+      "title": "file-12440323",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440323.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440324",
+      "title": "file-12440324",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440324.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440325",
+      "title": "file-12440325",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440325.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440326",
+      "title": "file-12440326",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440326.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440327",
+      "title": "file-12440327",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440327.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440328",
+      "title": "file-12440328",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440328.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440331",
+      "title": "file-12440331",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440331.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440332",
+      "title": "file-12440332",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440332.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440335",
+      "title": "file-12440335",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440335.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440346",
+      "title": "file-12440346",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440346.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440351",
+      "title": "file-12440351",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440351.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440356",
+      "title": "file-12440356",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440356.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440358",
+      "title": "file-12440358",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440358.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440362",
+      "title": "file-12440362",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440362.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440364",
+      "title": "file-12440364",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440364.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440367",
+      "title": "file-12440367",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440367.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440369",
+      "title": "file-12440369",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440369.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440370",
+      "title": "file-12440370",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440370.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440394",
+      "title": "file-12440394",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440394.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440401",
+      "title": "file-12440401",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440401.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440402",
+      "title": "file-12440402",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440402.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440414",
+      "title": "file-12440414",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440414.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12440415",
+      "title": "file-12440415",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12440415.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12584984",
+      "title": "file-12584984",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12584984.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12584985",
+      "title": "file-12584985",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12584985.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588614",
+      "title": "file-12588614",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588614.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588624",
+      "title": "file-12588624",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588624.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588637",
+      "title": "file-12588637",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588637.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588644",
+      "title": "file-12588644",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588644.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588648",
+      "title": "file-12588648",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588648.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588658",
+      "title": "file-12588658",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588658.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588660",
+      "title": "file-12588660",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588660.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12588782",
+      "title": "file-12588782",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12588782.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12590870",
+      "title": "file-12590870",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12590870.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591235",
+      "title": "file-12591235",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591235.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591318",
+      "title": "file-12591318",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591318.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591323",
+      "title": "file-12591323",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591323.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591329",
+      "title": "file-12591329",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591329.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591521",
+      "title": "file-12591521",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591521.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591526",
+      "title": "file-12591526",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591526.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591570",
+      "title": "file-12591570",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591570.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591600",
+      "title": "file-12591600",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591600.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591642",
+      "title": "file-12591642",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591642.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591654",
+      "title": "file-12591654",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591654.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591666",
+      "title": "file-12591666",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591666.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591668",
+      "title": "file-12591668",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591668.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591677",
+      "title": "file-12591677",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591677.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591682",
+      "title": "file-12591682",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591682.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591687",
+      "title": "file-12591687",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591687.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591700",
+      "title": "file-12591700",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591700.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591705",
+      "title": "file-12591705",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591705.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591708",
+      "title": "file-12591708",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591708.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591713",
+      "title": "file-12591713",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591713.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591720",
+      "title": "file-12591720",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591720.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591725",
+      "title": "file-12591725",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591725.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591729",
+      "title": "file-12591729",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591729.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591734",
+      "title": "file-12591734",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591734.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591744",
+      "title": "file-12591744",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591744.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591751",
+      "title": "file-12591751",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591751.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591754",
+      "title": "file-12591754",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591754.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591759",
+      "title": "file-12591759",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591759.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591763",
+      "title": "file-12591763",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591763.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591767",
+      "title": "file-12591767",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591767.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591768",
+      "title": "file-12591768",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591768.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591775",
+      "title": "file-12591775",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591775.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591777",
+      "title": "file-12591777",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591777.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591780",
+      "title": "file-12591780",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591780.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591781",
+      "title": "file-12591781",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591781.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591785",
+      "title": "file-12591785",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591785.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591790",
+      "title": "file-12591790",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591790.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591793",
+      "title": "file-12591793",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591793.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591818",
+      "title": "file-12591818",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591818.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591820",
+      "title": "file-12591820",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591820.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591821",
+      "title": "file-12591821",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591821.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591825",
+      "title": "file-12591825",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591825.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591850",
+      "title": "file-12591850",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591850.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591867",
+      "title": "file-12591867",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591867.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591886",
+      "title": "file-12591886",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591886.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591887",
+      "title": "file-12591887",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591887.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591888",
+      "title": "file-12591888",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591888.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591893",
+      "title": "file-12591893",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591893.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591904",
+      "title": "file-12591904",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591904.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591911",
+      "title": "file-12591911",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591911.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591912",
+      "title": "file-12591912",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591912.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591923",
+      "title": "file-12591923",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591923.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591924",
+      "title": "file-12591924",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591924.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591927",
+      "title": "file-12591927",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591927.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591938",
+      "title": "file-12591938",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591938.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591944",
+      "title": "file-12591944",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591944.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591945",
+      "title": "file-12591945",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591945.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591946",
+      "title": "file-12591946",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591946.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591949",
+      "title": "file-12591949",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591949.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591950",
+      "title": "file-12591950",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591950.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591952",
+      "title": "file-12591952",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591952.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591954",
+      "title": "file-12591954",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591954.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591957",
+      "title": "file-12591957",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591957.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591967",
+      "title": "file-12591967",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591967.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591970",
+      "title": "file-12591970",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591970.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591979",
+      "title": "file-12591979",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591979.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591983",
+      "title": "file-12591983",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591983.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591984",
+      "title": "file-12591984",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591984.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591986",
+      "title": "file-12591986",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591986.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591988",
+      "title": "file-12591988",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591988.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591991",
+      "title": "file-12591991",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591991.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591993",
+      "title": "file-12591993",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591993.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12591996",
+      "title": "file-12591996",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12591996.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12592020",
+      "title": "file-12592020",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12592020.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12592022",
+      "title": "file-12592022",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12592022.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12592086",
+      "title": "file-12592086",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12592086.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12596674",
+      "title": "file-12596674",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12596674.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12637130",
+      "title": "file-12637130",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12637130.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12637131",
+      "title": "file-12637131",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12637131.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12637132",
+      "title": "file-12637132",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12637132.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12637133",
+      "title": "file-12637133",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12637133.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12644696",
+      "title": "file-12644696",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12644696.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12649307",
+      "title": "file-12649307",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12649307.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12679226",
+      "title": "file-12679226",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12679226.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12680119",
+      "title": "file-12680119",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12680119.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12715930",
+      "title": "file-12715930",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12715930.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12729335",
+      "title": "file-12729335",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12729335.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12740211",
+      "title": "file-12740211",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12740211.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12776876",
+      "title": "file-12776876",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12776876.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12785728",
+      "title": "file-12785728",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12785728.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12790404",
+      "title": "file-12790404",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12790404.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12795993",
+      "title": "file-12795993",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12795993.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12821299",
+      "title": "file-12821299",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12821299.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12828035",
+      "title": "file-12828035",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12828035.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12839851",
+      "title": "file-12839851",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12839851.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12871904",
+      "title": "file-12871904",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12871904.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12906705",
+      "title": "file-12906705",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12906705.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12936239",
+      "title": "file-12936239",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12936239.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12949633",
+      "title": "file-12949633",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12949633.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12978508",
+      "title": "file-12978508",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12978508.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440300",
+      "title": "dendrogram.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440300--dendrogram.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "1580032 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440315",
+      "title": "SVM.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440315--SVM.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "452096 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440318",
+      "title": "otherDataStream.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440318--otherDataStream.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "791040 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440319",
+      "title": "neuralNetwork.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440319--neuralNetwork.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "1437696 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440322",
+      "title": "MaximumLikelihoodFromIncompleteDataViaTheEMAlgorithm.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440322--MaximumLikelihoodFromIncompleteDataViaTheEMAlgorithm.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "5551251 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440323",
+      "title": "ImplementingDataCubesEfficiently.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440323--ImplementingDataCubesEfficiently.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "1242296 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440324",
+      "title": "AutomaticSubspaceClusteringOfHighDimensionalDataForDataMiningApplications.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440324--AutomaticSubspaceClusteringOfHighDimensionalDataForDataMiningApplications.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "260705 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440325",
+      "title": "FastAlgorithmsForMiningAssociationRules.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440325--FastAlgorithmsForMiningAssociationRules.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "288933 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440326",
+      "title": "BIRCHAnEfficientDataClusteringMethodForVeryLargeDatabases.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440326--BIRCHAnEfficientDataClusteringMethodForVeryLargeDatabases.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "1486612 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440327",
+      "title": "ADensityBasedAlgorithmForDiscoveringClusters in Large Spatial DatabasesWithNoise.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440327--ADensityBasedAlgorithmForDiscoveringClusters in Large Spatial DatabasesWithNoise.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "82063 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440328",
+      "title": "dataStream.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440328--dataStream.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "1061376 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440331",
+      "title": "fp-tree.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440331--fp-tree.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "3490816 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440332",
+      "title": "LOFIdentifyingDensityBasedLocalOutliers.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440332--LOFIdentifyingDensityBasedLocalOutliers.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "225898 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440346",
+      "title": "EntropyBasedSubspaceClusteringForMiningNumericalData.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440346--EntropyBasedSubspaceClusteringForMiningNumericalData.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "260583 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440351",
+      "title": "LongShortTermMemory.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440351--LongShortTermMemory.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "433336 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440356",
+      "title": "MiningHighSpeedDataStreams.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440356--MiningHighSpeedDataStreams.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "144647 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440358",
+      "title": "WhenIsNearestNeighborMeaningful.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440358--WhenIsNearestNeighborMeaningful.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "266530 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440364",
+      "title": "EfficientComputationOfFrequentAndTop-kElementsInDataStreams.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440364--EfficientComputationOfFrequentAndTop-kElementsInDataStreams.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "278776 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440335",
+      "title": "subspace.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440335--subspace.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "2530304 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440367",
+      "title": "ApproximateFrequencyCountsOverDataStreams.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440367--ApproximateFrequencyCountsOverDataStreams.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "227423 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440362",
+      "title": "recurrentNeuralNetwork.pptx",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440362--recurrentNeuralNetwork.pptx",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "799433 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440401",
+      "title": "otherClustering.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440401--otherClustering.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "258048 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440394",
+      "title": "StudentPresentationOrderForm.doc",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/12440394--StudentPresentationOrderForm.doc",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-presentation"
+      ],
+      "detail": "478208 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440414",
+      "title": "MiningFrequentPatternsWithoutCandidateGeneration.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/References/12440414--MiningFrequentPatternsWithoutCandidateGeneration.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "290095 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440402",
+      "title": "outlier.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440402--outlier.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "418304 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440370",
+      "title": "rule.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440370--rule.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "1832448 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440369",
+      "title": "datawarehouse.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440369--datawarehouse.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "2121216 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12584985",
+      "title": "VerticalFederatedKMeansForMultiViewDataGuidedByAKMeansCostBoundAfterProjection.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12584985--VerticalFederatedKMeansForMultiViewDataGuidedByAKMeansCostBoundAfterProjection.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1755868 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12440415",
+      "title": "classification.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12440415--classification.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "3125760 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588614",
+      "title": "Multi-ModalRepresentationforSpatiallyResolvedTranscriptomicsBasedonGlobalCorrelationandDynamicClusterDiscovery.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588614--Multi-ModalRepresentationforSpatiallyResolvedTranscriptomicsBasedonGlobalCorrelationandDynamicClusterDiscovery.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3872934 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588624",
+      "title": "ExDBSCANExplainingDBSCANwithCounterfactualReasoning.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588624--ExDBSCANExplainingDBSCANwithCounterfactualReasoning.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2750620 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12584984",
+      "title": "ConstraintAlignedSubspaceTransformationForScalableKernelMetricLearningInClustering.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12584984--ConstraintAlignedSubspaceTransformationForScalableKernelMetricLearningInClustering.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "5977974 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588637",
+      "title": "Hypergraph-BasedUnalignedMulti-ViewClusteringviaCluster-AwareFeatureExtraction.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588637--Hypergraph-BasedUnalignedMulti-ViewClusteringviaCluster-AwareFeatureExtraction.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3603423 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588658",
+      "title": "Information-TheoreticActiveCorrelationClustering.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588658--Information-TheoreticActiveCorrelationClustering.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "781834 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588644",
+      "title": "BSPk-Means.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588644--BSPk-Means.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2563802 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588648",
+      "title": "Structure-GuidedSemi-SupervisedClusteringviaEvolvingStarNetwork.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588648--Structure-GuidedSemi-SupervisedClusteringviaEvolvingStarNetwork.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1699859 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588782",
+      "title": "xLSTMADAPowerfulxLSTM-basedMethodforAnomalyDetection.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588782--xLSTMADAPowerfulxLSTM-basedMethodforAnomalyDetection.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "421221 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12588660",
+      "title": "ClusterSSFDAClusteredSemi-SupervisedFederatedDomainAdaptation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12588660--ClusterSSFDAClusteredSemi-SupervisedFederatedDomainAdaptation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "497629 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12590870",
+      "title": "TrivialGraphFeaturesandClassicalLearningareEnoughtoDetectRandomAnomalies.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12590870--TrivialGraphFeaturesandClassicalLearningareEnoughtoDetectRandomAnomalies.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "801849 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591235",
+      "title": "FlexibleWindowingforCorrelation-AwareRankinginAnomalousEnvironments.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/1-Clustering/12591235--FlexibleWindowingforCorrelation-AwareRankinginAnomalousEnvironments.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1004172 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591323",
+      "title": "Causal-DFMDiffusion-BasedCausal-InvariantDynamicFactorModelforStockReturnPrediction.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591323--Causal-DFMDiffusion-BasedCausal-InvariantDynamicFactorModelforStockReturnPrediction.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2334347 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591329",
+      "title": "ESTIMEfficientandScalableTensorialIncompleteMulti-viewSemi-supervisedClassification.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591329--ESTIMEfficientandScalableTensorialIncompleteMulti-viewSemi-supervisedClassification.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2170816 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591521",
+      "title": "ConflictingNodeDiscriminationGraphNeuralNetworkforSemi-supervisedNodeClassification.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591521--ConflictingNodeDiscriminationGraphNeuralNetworkforSemi-supervisedNodeClassification.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2536252 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591570",
+      "title": "Retrieval-AugmentedFeatureGenerationforDomain-SpecificClassification.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591570--Retrieval-AugmentedFeatureGenerationforDomain-SpecificClassification.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1029227 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591600",
+      "title": "EfficientLarge-ScaleLearningofMinimaxRiskClassifiers.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591600--EfficientLarge-ScaleLearningofMinimaxRiskClassifiers.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "372261 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591642",
+      "title": "RevisitingOne-Versus-OneandOne-Versus-RestInsightsintoImbalancedMulti-ClassClassification.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591642--RevisitingOne-Versus-OneandOne-Versus-RestInsightsintoImbalancedMulti-ClassClassification.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "624932 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591654",
+      "title": "DisentangledContrastiveRepresentationLearning_forZero-ShotBiomedicalTextClassification.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591654--DisentangledContrastiveRepresentationLearning_forZero-ShotBiomedicalTextClassification.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "628125 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591526",
+      "title": "ProgNetProgram-GroundedEvidenceCompositionforInterpretableGraphClassification.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591526--ProgNetProgram-GroundedEvidenceCompositionforInterpretableGraphClassification.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3558868 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591318",
+      "title": "SamGoGASamplingBasedGraph-of-GraphsFrameworkforImbalancedGraphClassification.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/2-Classification/12591318--SamGoGASamplingBasedGraph-of-GraphsFrameworkforImbalancedGraphClassification.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "6550718 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591668",
+      "title": "Causality-BasedConformalImputationCorrectionwithNon-RandomMissingLabels.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/3-Association/12591668--Causality-BasedConformalImputationCorrectionwithNon-RandomMissingLabels.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1472588 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591677",
+      "title": "AnAgenticFrameworkforSocialEventForecastingApproachesUsingCausalityContextualizedChainofThought.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/3-Association/12591677--AnAgenticFrameworkforSocialEventForecastingApproachesUsingCausalityContextualizedChainofThought.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "535739 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591666",
+      "title": "CAADCausality-AwareMultivariateTimeSeriesAnomalyDetectionviaMulti-ScaleAlignmentandStructuralCausalConsistency.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/3-Association/12591666--CAADCausality-AwareMultivariateTimeSeriesAnomalyDetectionviaMulti-ScaleAlignmentandStructuralCausalConsistency.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2101485 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591682",
+      "title": "EM-BasedTransferLearningforGaussianCausalModelsUnderCovariateandTargetShift.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/3-Association/12591682--EM-BasedTransferLearningforGaussianCausalModelsUnderCovariateandTargetShift.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "695993 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591700",
+      "title": "RAEANeuralNetworkDimensionalityReductionMethodforNearestNeighborsPreservationinVectorSearch.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/4-Vector Search/12591700--RAEANeuralNetworkDimensionalityReductionMethodforNearestNeighborsPreservationinVectorSearch.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "627706 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591687",
+      "title": "DiffuGCDiffusionModelCanHelpDiscoverGrangerCausalityfromInterventionalTimeSeries.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/3-Association/12591687--DiffuGCDiffusionModelCanHelpDiscoverGrangerCausalityfromInterventionalTimeSeries.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1908993 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591705",
+      "title": "FastVectorQuantizationAlgorithmforScaNN.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/4-Vector Search/12591705--FastVectorQuantizationAlgorithmforScaNN.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1408281 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591713",
+      "title": "PickUpWhereYouLeftOffAnEfficientSolutionforContinuousVectorSimilaritySearch.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/4-Vector Search/12591713--PickUpWhereYouLeftOffAnEfficientSolutionforContinuousVectorSimilaritySearch.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3807076 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591720",
+      "title": "Recall-AwareEarlyTerminationinApproximateNearestNeighborSearch.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/4-Vector Search/12591720--Recall-AwareEarlyTerminationinApproximateNearestNeighborSearch.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3932534 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591729",
+      "title": "Bradley-TerryRankingsforRecommenderSystemsAcrossDatasetTaxonomies.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591729--Bradley-TerryRankingsforRecommenderSystemsAcrossDatasetTaxonomies.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1526719 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591734",
+      "title": "ManCARManifold-ConstrainedLatentReasoningwithAdaptiveTest-TimeComputationforSequentialRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591734--ManCARManifold-ConstrainedLatentReasoningwithAdaptiveTest-TimeComputationforSequentialRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1192817 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591744",
+      "title": "IstheLastCheck-InAllYouNeedNextPOIRecommendationRecallandRerank.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591744--IstheLastCheck-InAllYouNeedNextPOIRecommendationRecallandRerank.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1961145 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591751",
+      "title": "SpendSearchWhereItPaysValue-GuidedStructuredSamplingandOptimizationforGenerativeRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591751--SpendSearchWhereItPaysValue-GuidedStructuredSamplingandOptimizationforGenerativeRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2906282 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591754",
+      "title": "HowDoGraphSignalsAffectRecommendationUnveilingtheMysteryofLowandHigh-FrequencyGraphSignals.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591754--HowDoGraphSignalsAffectRecommendationUnveilingtheMysteryofLowandHigh-FrequencyGraphSignals.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2198150 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591759",
+      "title": "VI-MMRecSimilarity-AwareTrainingCost-freeVirtualUser-ItemInteractionsforMultimodalRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591759--VI-MMRecSimilarity-AwareTrainingCost-freeVirtualUser-ItemInteractionsforMultimodalRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1559086 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591708",
+      "title": "RUQuantTowardsRefiningUniformQuantizationforLargeLanguageModels.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/4-Vector Search/12591708--RUQuantTowardsRefiningUniformQuantizationforLargeLanguageModels.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "11453946 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591725",
+      "title": "Black-BoxEmbeddingInversionAttackonVectorDatabases.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/4-Vector Search/12591725--Black-BoxEmbeddingInversionAttackonVectorDatabases.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "10640104 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591767",
+      "title": "Align-for-FusionHarmonizingTriplePreferencesviaDual-orientedDiffusionforCross-domainSequentialRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591767--Align-for-FusionHarmonizingTriplePreferencesviaDual-orientedDiffusionforCross-domainSequentialRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1945547 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591763",
+      "title": "EnhancingMultimodalRecommendationviaMultimodalRepresentationCalibrationinSpectralDomain.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591763--EnhancingMultimodalRecommendationviaMultimodalRepresentationCalibrationinSpectralDomain.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3966019 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591775",
+      "title": "UnleashingthePotentialofNeighborsDiffusion-basedLatentNeighborGenerationforSession-basedRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591775--UnleashingthePotentialofNeighborsDiffusion-basedLatentNeighborGenerationforSession-basedRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2870487 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591777",
+      "title": "FromAgnostictoSpecificLatentPreferenceDiffusionforMulti-BehaviorSequentialRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591777--FromAgnostictoSpecificLatentPreferenceDiffusionforMulti-BehaviorSequentialRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2237085 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591780",
+      "title": "LISRecModelingUserPreferenceswithLearnedItemShortcutsforSequentialRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591780--LISRecModelingUserPreferenceswithLearnedItemShortcutsforSequentialRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1963561 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591768",
+      "title": "MergeRecModelMergingforData-IsolatedCross-DomainSequentialRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591768--MergeRecModelMergingforData-IsolatedCross-DomainSequentialRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "5031010 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591781",
+      "title": "DIRECDiffusion-BasedReview-EmbeddingGenerationforAccurateCross-DomainRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591781--DIRECDiffusion-BasedReview-EmbeddingGenerationforAccurateCross-DomainRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2602168 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591793",
+      "title": "HiSTHierarchicalSemanticTreeAugmentationforGenerativeRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591793--HiSTHierarchicalSemanticTreeAugmentationforGenerativeRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2132929 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591820",
+      "title": "EfficientSequentialRecommendationforLongTermUserInterestViaPersonalization.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591820--EfficientSequentialRecommendationforLongTermUserInterestViaPersonalization.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "702549 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591785",
+      "title": "InteractiveRecommendationAgentwithActiveUserCommands.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591785--InteractiveRecommendationAgentwithActiveUserCommands.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "4712336 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591818",
+      "title": "MoSTAFoundationModelforMulti-modalitySpatio-temporalTrafficPrediction.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591818--MoSTAFoundationModelforMulti-modalitySpatio-temporalTrafficPrediction.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2911015 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591821",
+      "title": "BeyondStaticLLMPoliciesImitation-EnhancedReinforcementLearningforRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591821--BeyondStaticLLMPoliciesImitation-EnhancedReinforcementLearningforRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "731353 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591825",
+      "title": "FaSTEfficientandEffectiveLong-HorizonForecastingforLarge-ScaleSpatial-TemporalGraphsviaMixture-of-Experts.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591825--FaSTEfficientandEffectiveLong-HorizonForecastingforLarge-ScaleSpatial-TemporalGraphsviaMixture-of-Experts.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1594423 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591867",
+      "title": "DAMADualAlignmentFrameworkforEnhancedLLM-PoweredRecommendations.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591867--DAMADualAlignmentFrameworkforEnhancedLLM-PoweredRecommendations.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1565545 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591850",
+      "title": "Equilibrium-BasedNFTMarketplaceRecommendationforNFTswithBreeding.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591850--Equilibrium-BasedNFTMarketplaceRecommendationforNFTswithBreeding.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1767828 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591790",
+      "title": "Rec2EmbeddingTableReconstructionforDeepRecommenderSystems.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/5-Recommendation System/12591790--Rec2EmbeddingTableReconstructionforDeepRecommenderSystems.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "9335838 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591886",
+      "title": "RIPCNARoadImpedancePrincipalComponentNetworkforProbabilisticTrafficFlowForecasting.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591886--RIPCNARoadImpedancePrincipalComponentNetworkforProbabilisticTrafficFlowForecasting.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "4081042 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591893",
+      "title": "Think2GoGenerativeNextPOIRecommendationwithLLMReasoning.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591893--Think2GoGenerativeNextPOIRecommendationwithLLMReasoning.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1533405 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591904",
+      "title": "Zero-ShotCross-CityTrajectoryPredictionUsingHypernetworks.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591904--Zero-ShotCross-CityTrajectoryPredictionUsingHypernetworks.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1312732 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591887",
+      "title": "Incident-GuidedSpatiotemporalTrafficForecasting.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591887--Incident-GuidedSpatiotemporalTrafficForecasting.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "6103828 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591911",
+      "title": "SPOTSpatio-temporalPatternMiningandOptimizationforLoadConsolidationinFreightTransportationNetworks.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591911--SPOTSpatio-temporalPatternMiningandOptimizationforLoadConsolidationinFreightTransportationNetworks.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1241680 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591912",
+      "title": "AdaSports-TrajRole-andDomain-AwareAdaptationforMulti-AgentTrajectoryModelinginSports.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591912--AdaSports-TrajRole-andDomain-AwareAdaptationforMulti-AgentTrajectoryModelinginSports.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1427368 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591923",
+      "title": "FairClass-IncrementalLearningusingSampleWeighting.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/7-Fairness, Equity and Justice/12591923--FairClass-IncrementalLearningusingSampleWeighting.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1582443 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591944",
+      "title": "fair-LDPUncertainty-GuidedFairnessandPrivacyforFederatedHealthcareLearning.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/7-Fairness, Equity and Justice/12591944--fair-LDPUncertainty-GuidedFairnessandPrivacyforFederatedHealthcareLearning.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "312521 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591945",
+      "title": "Modularity-FairDeepCommunityDetection.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/7-Fairness, Equity and Justice/12591945--Modularity-FairDeepCommunityDetection.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "518164 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591946",
+      "title": "TABFAIRGDTAFastFairTabularDataGeneratorusingAutoregressiveDecisionTrees.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/7-Fairness, Equity and Justice/12591946--TABFAIRGDTAFastFairTabularDataGeneratorusingAutoregressiveDecisionTrees.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1186642 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591938",
+      "title": "MARCELMultifacetedSpatial-TemporalContrastiveLearningforGenericSpatial-TemporalRepresentations.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591938--MARCELMultifacetedSpatial-TemporalContrastiveLearningforGenericSpatial-TemporalRepresentations.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3160457 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591950",
+      "title": "TimeDistillEfficientLong-TermTimeSeriesForecastingwithMLPviaCross-ArchitectureDistillation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591950--TimeDistillEfficientLong-TermTimeSeriesForecastingwithMLPviaCross-ArchitectureDistillation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2725273 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591924",
+      "title": "PerturbationEffectsonRobustnessandIndividualFairness.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/7-Fairness, Equity and Justice/12591924--PerturbationEffectsonRobustnessandIndividualFairness.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "4378939 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591949",
+      "title": "TimeBridgeBetterDiffusionPriorDesignwithBridgeModelsforTimeSeriesGeneration.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591949--TimeBridgeBetterDiffusionPriorDesignwithBridgeModelsforTimeSeriesGeneration.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3879604 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591952",
+      "title": "NeuralPredictiveControltoCoordinateDiscrete-andContinuous-TimeModelsforTime-SeriesAnalysiswithControl-TheoreticalImprovements.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591952--NeuralPredictiveControltoCoordinateDiscrete-andContinuous-TimeModelsforTime-SeriesAnalysiswithControl-TheoreticalImprovements.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3513729 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591888",
+      "title": "DSPIGCNDual-streamPhysics-informedGraphConvolutionalNetworkforReliablePedestrianTrajectoryPrediction.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/6-Mining Spatial and Temporal Data/12591888--DSPIGCNDual-streamPhysics-informedGraphConvolutionalNetworkforReliablePedestrianTrajectoryPrediction.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "13682843 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591979",
+      "title": "In-contextLearningofEvolvingDataStreamswithTabularFoundationalModels.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12591979--In-contextLearningofEvolvingDataStreamswithTabularFoundationalModels.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1239945 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591967",
+      "title": "FastMiningandDynamicTime-to-EventPredictionoverMulti-sensorDataStreams.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12591967--FastMiningandDynamicTime-to-EventPredictionoverMulti-sensorDataStreams.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1755876 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591957",
+      "title": "CCDCapturingCross-CorrelationswithDeformableConvolutionalNetworksforMultivariateTimeSeriesForecasting.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591957--CCDCapturingCross-CorrelationswithDeformableConvolutionalNetworksforMultivariateTimeSeriesForecasting.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2034304 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591970",
+      "title": "PBSketchFindingPeriodicBurstItemsinDataStreams.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12591970--PBSketchFindingPeriodicBurstItemsinDataStreams.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2541192 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591983",
+      "title": "DiffuGCDiffusionModelCanHelpDiscoverGrangerCausalityfromInterventionalTimeSeries.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591983--DiffuGCDiffusionModelCanHelpDiscoverGrangerCausalityfromInterventionalTimeSeries.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1909008 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591954",
+      "title": "Instruction-basedTimeSeriesEditing.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591954--Instruction-basedTimeSeriesEditing.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "5250981 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591984",
+      "title": "EffectiveSeriesDecompositionandComponentsLearningforTimeSeriesGeneration.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591984--EffectiveSeriesDecompositionandComponentsLearningforTimeSeriesGeneration.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1671115 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591988",
+      "title": "MTS-DMAEDual-MaskedAutoencoderforUnsupervisedMultivariateTimeSeriesRepresentationLearning.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591988--MTS-DMAEDual-MaskedAutoencoderforUnsupervisedMultivariateTimeSeriesRepresentationLearning.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "1560956 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12592020",
+      "title": "ImprovingGeneralizationCapabilitiesofModelsTrainedonTimeSeriesDataUsingNovelDownsamplingMethods.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12592020--ImprovingGeneralizationCapabilitiesofModelsTrainedonTimeSeriesDataUsingNovelDownsamplingMethods.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "461823 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12592022",
+      "title": "Test-TimeGraphRebirthforGNNGeneralizationUnderDistributionShifts.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12592022--Test-TimeGraphRebirthforGNNGeneralizationUnderDistributionShifts.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "905344 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591993",
+      "title": "CAST-NormCoupledAdaptiveSpatio-TemporalNormalizationforMultivariateTimeSeriesForecasting.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12591993--CAST-NormCoupledAdaptiveSpatio-TemporalNormalizationforMultivariateTimeSeriesForecasting.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2085581 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591996",
+      "title": "LF-FilterDifferentiatedProcessingforIntra-FlowPacketDelayMonitoringinHigh-SpeedDataStreams.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12591996--LF-FilterDifferentiatedProcessingforIntra-FlowPacketDelayMonitoringinHigh-SpeedDataStreams.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "2093681 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12596674",
+      "title": "overview.ppt",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Notes/12596674--overview.ppt",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/lecturenotes"
+      ],
+      "detail": "1088000 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591986",
+      "title": "OnTheNecessityofMulti-DomainExplanationAnUncertaintyPrincipleApproachforDeepTimeSeriesModels.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/8-Time Series/12591986--OnTheNecessityofMulti-DomainExplanationAnUncertaintyPrincipleApproachforDeepTimeSeriesModels.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "3386202 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12637132",
+      "title": "COMP5331-WrittenNotes-9Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12637132--COMP5331-WrittenNotes-9Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "203136 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12644696",
+      "title": "hw1.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/hw/12644696--hw1.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/hw"
+      ],
+      "detail": "112443 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591991",
+      "title": "Road-ConstrainedVehicleTrajectoryRecoveryfromTrafficVideoUsingSpatio-TemporalVoxelRepresentation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12591991--Road-ConstrainedVehicleTrajectoryRecoveryfromTrafficVideoUsingSpatio-TemporalVoxelRepresentation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "4741416 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12637130",
+      "title": "COMP5331-WrittenNotes-16Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12637130--COMP5331-WrittenNotes-16Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "2502753 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12637133",
+      "title": "COMP5331-WrittenNotes-11Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12637133--COMP5331-WrittenNotes-11Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "2268462 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12679226",
+      "title": "COMP5331_Implementation_Proposal.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/12679226--COMP5331_Implementation_Proposal.pdf",
+      "source_urls": [],
+      "detail": "1795368 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12649307",
+      "title": "COMP5331-WrittenNotes-18Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12649307--COMP5331-WrittenNotes-18Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "2063543 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12637131",
+      "title": "COMP5331-WrittenNotes-12Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12637131--COMP5331-WrittenNotes-12Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/coursedetails",
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "3555869 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12715930",
+      "title": "COMP5331-WrittenNotes-25Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12715930--COMP5331-WrittenNotes-25Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1625460 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12680119",
+      "title": "COMP5331-WrittenNotes-23Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12680119--COMP5331-WrittenNotes-23Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "2548960 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12729335",
+      "title": "COMP5331-WrittenNotes-30Sept2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12729335--COMP5331-WrittenNotes-30Sept2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1826741 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12795993",
+      "title": "hw2.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/hw/12795993--hw2.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/hw"
+      ],
+      "detail": "146297 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12776876",
+      "title": "COMP5331-WrittenNotes-7Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12776876--COMP5331-WrittenNotes-7Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1884640 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12740211",
+      "title": "COMP5331-WrittenNotes-2Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12740211--COMP5331-WrittenNotes-2Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1989457 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12821299",
+      "title": "hw1-sol.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/hw/12821299--hw1-sol.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/hw"
+      ],
+      "detail": "440933 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12790404",
+      "title": "COMP5331-WrittenNotes-9Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12790404--COMP5331-WrittenNotes-9Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1433519 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12785728",
+      "title": "1000023458.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/12785728--1000023458.pdf",
+      "source_urls": [],
+      "detail": "2130161 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12906705",
+      "title": "COMP5331-WrittenNotes-23Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12906705--COMP5331-WrittenNotes-23Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "763478 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12936239",
+      "title": "COMP5331-WrittenNotes-28Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12936239--COMP5331-WrittenNotes-28Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "405196 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12828035",
+      "title": "COMP5331-WrittenNotes-14Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12828035--COMP5331-WrittenNotes-14Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1654849 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12949633",
+      "title": "COMP5331-WrittenNotes-30Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12949633--COMP5331-WrittenNotes-30Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1489956 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12871904",
+      "title": "COMP5331-WrittenNotes-21Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12871904--COMP5331-WrittenNotes-21Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "2525483 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12839851",
+      "title": "COMP5331-WrittenNotes-16Oct2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12839851--COMP5331-WrittenNotes-16Oct2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "2867275 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12978508",
+      "title": "COMP5331-WrittenNotes-4Nov2026.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/WrittenNotes/12978508--COMP5331-WrittenNotes-4Nov2026.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/written-notes"
+      ],
+      "detail": "1756430 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12592086",
+      "title": "DiscoveringCommunitiesinContinuous-TimeTemporalNetworksbyOptimizingL-Modularity.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/9-Data Stream/12592086--DiscoveringCommunitiesinContinuous-TimeTemporalNetworksbyOptimizingL-Modularity.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "10667936 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12591927",
+      "title": "RaceMEDARace-AwareApproachtoAccurateandFairMedicationRecommendation.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Project/References/7-Fairness, Equity and Justice/12591927--RaceMEDARace-AwareApproachtoAccurateandFairMedicationRecommendation.pdf",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/pages/project-suggestedtopics"
+      ],
+      "detail": "22640213 bytes"
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910/announcements",
+      "title": "HKUST Canvas - Announcements: Group7",
+      "kind": "group",
+      "status": 200,
+      "local_path": "pages/browser--22.html",
+      "detail": "浏览器 HTTP 状态：200。",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910/wiki",
+      "title": "HKUST Canvas - Group7: Pages",
+      "kind": "group",
+      "status": 200,
+      "local_path": "pages/browser--23.html",
+      "detail": "浏览器 HTTP 状态：200。",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910/users",
+      "title": "HKUST Canvas - Group Roster: Group7",
+      "kind": "group",
+      "status": 200,
+      "local_path": "pages/browser--24.html",
+      "detail": "浏览器 HTTP 状态：200。",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910/discussion_topics",
+      "title": "HKUST Canvas - Discussions: Group7",
+      "kind": "group",
+      "status": 200,
+      "local_path": "pages/browser--25.html",
+      "detail": "浏览器 HTTP 状态：200。",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910/files",
+      "title": "HKUST Canvas - Files",
+      "kind": "group",
+      "status": 200,
+      "local_path": "pages/browser--26.html",
+      "detail": "浏览器 HTTP 状态：200。",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910/conferences",
+      "title": "HKUST Canvas - Web Conferences: Group7",
+      "kind": "group",
+      "status": 200,
+      "local_path": "pages/browser--27.html",
+      "detail": "浏览器 HTTP 状态：200。",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/groups/228910/lti_collaborations",
+      "title": "HKUST Canvas - External Collaborations",
+      "kind": "group",
+      "status": 200,
+      "local_path": "pages/browser--28.html",
+      "detail": "浏览器 HTTP 状态：200。",
+      "source_urls": []
+    },
+    {
+      "url": "https://lbdiscover.hkust.edu.hk/primo/newsearch.php?TYPE=crsid&SEARCH=COMP+5331",
+      "title": "https://lbdiscover.hkust.edu.hk/primo/newsearch.php?TYPE=crsid&SEARCH=COMP+5331",
+      "kind": "external",
+      "status": "empty",
+      "local_path": null,
+      "detail": "浏览器 HTTP 状态：None。 导航提示：TimeoutError: page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://lbdiscover.hkust.edu.hk/primo/newsearch.php?TYPE=crsid&SEARCH=COMP+5331\", waiting until \"domcontentloaded\"\u001b[22m\n 页面与框架正文为空，未计为已保存内容。",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/external_tools/5621"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/groups/228910",
+      "title": "Group7 metadata",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/group-metadata.json",
+      "source_urls": [
+        "https://canvas.ust.hk/groups/228910"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/groups/228910/pages?per_page=100",
+      "title": "Group7 pages",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/group-pages.json",
+      "source_urls": [
+        "https://canvas.ust.hk/groups/228910"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/groups/228910/files?per_page=100",
+      "title": "Group7 files",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/group-files.json",
+      "source_urls": [
+        "https://canvas.ust.hk/groups/228910"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/groups/228910/discussion_topics?per_page=100",
+      "title": "Group7 discussions",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/group-discussions.json",
+      "source_urls": [
+        "https://canvas.ust.hk/groups/228910"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/groups/228910/users?per_page=100",
+      "title": "Group7 people",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/group-people.json",
+      "source_urls": [
+        "https://canvas.ust.hk/groups/228910"
+      ]
+    },
+    {
+      "url": "https://canvas.ust.hk/api/v1/files/12724083",
+      "title": "Feedback file metadata",
+      "kind": "api",
+      "status": 200,
+      "local_path": "api/file-12724083.json",
+      "source_urls": []
+    },
+    {
+      "url": "https://canvas.ust.hk/courses/72132/files/12724083",
+      "title": "7-RaymondComment.pdf",
+      "kind": "file",
+      "status": 200,
+      "local_path": "files/Feedback/12724083--7-RaymondComment.pdf",
+      "detail": "184960 bytes",
+      "source_urls": [
+        "https://canvas.ust.hk/courses/72132/assignments/441789"
+      ]
+    }
+  ],
+  "notes": [
+    "课程页面与附件使用本人已登录会话读取；未修改课程内容、未开始测验、未提交作业或发送消息。",
+    "原始 API 响应保存在 api/；正文保存在 pages/；附件保存在 files/。未成功获取的入口保留在清单中。",
+    "离线 HTML 已移除脚本与交互表单，已下载课程页面和文件链接改为本地相对路径；第三方工具仅保存实际获取的框架静态快照。",
+    "范围为课程 72132 的实际链接及当前账号可读取的课程、小组内容；外部教师网站、校园地图和图书馆保存落地页或可见内容，不递归整个外部网站。",
+    "课程页面目录和整课文件列表接口受限，因此沿课程正文中的实际链接收集；无法枚举未链接或被权限隐藏的内容。",
+    "测验仅保存当前可见说明，题目或结果按 Canvas 原有状态锁定；一个讨论主题的回复接口返回 403。",
+    "Lucid、Chat、Zoom 的浏览器框架未返回可见正文，图书馆导航超时；这些入口保留实际失败状态。",
+    "录像按用户后续要求只保留播放链接，未下载完整 MP4。"
+  ]
+}

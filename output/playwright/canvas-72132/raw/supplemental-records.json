@@ -1,0 +1,91 @@
+[
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910",
+    "title": "Group7 metadata",
+    "kind": "api",
+    "status": 200,
+    "local_path": "api/group-metadata.json",
+    "source_urls": [
+      "https://canvas.ust.hk/groups/228910"
+    ]
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/pages?per_page=100",
+    "title": "Group7 pages",
+    "kind": "api",
+    "status": 200,
+    "local_path": "api/group-pages.json",
+    "source_urls": [
+      "https://canvas.ust.hk/groups/228910"
+    ]
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/files?per_page=100",
+    "title": "Group7 files",
+    "kind": "api",
+    "status": 200,
+    "local_path": "api/group-files.json",
+    "source_urls": [
+      "https://canvas.ust.hk/groups/228910"
+    ]
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/discussion_topics?per_page=100",
+    "title": "Group7 discussions",
+    "kind": "api",
+    "status": 200,
+    "local_path": "api/group-discussions.json",
+    "source_urls": [
+      "https://canvas.ust.hk/groups/228910"
+    ]
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/groups/228910/users?per_page=100",
+    "title": "Group7 people",
+    "kind": "api",
+    "status": 200,
+    "local_path": "api/group-people.json",
+    "source_urls": [
+      "https://canvas.ust.hk/groups/228910"
+    ]
+  },
+  {
+    "url": "https://canvas.ust.hk/courses/72132/quizzes/164865",
+    "kind": "quiz",
+    "detail": "已保存当前账号可见的测验说明；题目或结果按 Canvas 原有锁定状态不可读取。"
+  },
+  {
+    "url": "https://canvas.ust.hk/courses/72132/quizzes/164866",
+    "kind": "quiz",
+    "detail": "已保存当前账号可见的测验说明；题目或结果按 Canvas 原有锁定状态不可读取。"
+  },
+  {
+    "url": "https://canvas.ust.hk/courses/72132/quizzes/164867",
+    "kind": "quiz",
+    "detail": "已保存当前账号可见的测验说明；题目或结果按 Canvas 原有锁定状态不可读取。"
+  },
+  {
+    "url": "https://canvas.ust.hk/api/v1/files/12724083",
+    "title": "Feedback file metadata",
+    "kind": "api",
+    "status": 200,
+    "local_path": "api/file-12724083.json"
+  },
+  {
+    "url": "https://canvas.ust.hk/courses/72132/files/12724083",
+    "title": "7-RaymondComment.pdf",
+    "kind": "file",
+    "status": 200,
+    "local_path": "files/Feedback/12724083--7-RaymondComment.pdf",
+    "detail": "184960 bytes",
+    "source_urls": [
+      "https://canvas.ust.hk/courses/72132/assignments/441789"
+    ]
+  },
+  {
+    "url": "https://lbdiscover.hkust.edu.hk/primo/newsearch.php?TYPE=crsid&SEARCH=COMP+5331",
+    "source_urls": [
+      "https://canvas.ust.hk/courses/72132/external_tools/5621"
+    ]
+  }
+]

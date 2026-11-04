@@ -1,0 +1,22 @@
+{
+  "status": 200,
+  "navigationError": null,
+  "url": "https://canvas.ust.hk/courses/72132/quizzes/164865",
+  "title": "HKUST Canvas - Project Presentation Schedule Availability: COMP5331 (L1) - Knowledge Discovery in Databases",
+  "html": "\n            \n\n\n\n\n<div id=\"quiz_show\">\n\n  <header class=\"quiz-header\">\n\n\n    <h1 id=\"quiz_title\">\n      Project Presentation Schedule Availability\n    <button aria-haspopup=\"dialog\" class=\"ally-accessible-versions ally-add-tooltip\" data-id=\"quiz:164865\" data-ally-content-id=\"quiz:164865\" data-ally-richcontent-eid=\"quiz:164865\" aria-label=\"Alternative formats\" title=\"Alternative formats\">\n    <svg width=\"22\" height=\"13\" viewBox=\"0 0 22 13\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\" focusable=\"false\" role=\"presentation\">\n        <path fill=\"currentColor\" d=\"M22,4.3875 L17.1875,11.7 L12.375,4.3875 L15.2625,4.3875 L15.2625,0 L19.1125,0 L19.1125,4.3875 L22,4.3875 Z M0,13 L7.56170223,2.6 L15.125,13 L11.5074634,13 C10.8377941,11.637446 9.34323244,10.6886103 7.60683311,10.6886103 C5.87043379,10.6886103 4.37564424,11.637446 3.70597488,13 L0,13 Z M5.76079766,8.21256906 C5.76079766,9.12421192 6.56722727,9.86326321 7.56170223,9.86326321 C8.55617719,9.86326321 9.36237887,9.12421192 9.36237887,8.21256906 C9.36237887,7.3009262 8.55617719,6.56187491 7.56170223,6.56187491 C6.56722727,6.56187491 5.76079766,7.3009262 5.76079766,8.21256906 Z\"></path>\n    </svg>\n</button></h1>\n\n\n      <div id=\"quiz_details_wrapper\" data-submitted-count=\"\"></div>\n      \n\n<base target=\"_top\">\n<ul id=\"quiz_student_details\">\n  <li>\n    <span class=\"title\">Due</span>\n    <span class=\"value\">\n        <span data-tooltip=\"\" data-html-tooltip-title=\"Oct 2 at 1:30pm\">\n          Oct 2 at 1:30pm\n        </span>\n    </span>\n  </li>\n\n  <li style=\"display: none;\">\n    <span class=\"title\">Points</span>\n    <span class=\"value\">_</span>\n  </li>\n\n  <li>\n    <span class=\"title\">Questions</span>\n    <span class=\"value\">2</span>\n  </li>\n  \n  <li>\n    <span class=\"title\">Available</span>\n    <span class=\"value\">\n        Sep 18 at 1:30pm - Oct 6 at 1:30pm\n    </span>\n  </li>\n\n  <li>\n    <span class=\"title\">Time Limit</span>\n    <span class=\"value\">\n        None\n    </span>\n  </li>\n\n\n</ul>\n\n  <h2>Instructions</h2>\n  <div class=\"description user_content enhanced\" role=\"region\" aria-label=\"Quiz Instructions\">\n    <p><span>Note that only one representative of your group is needed to submit this form.&nbsp;</span><br><span>If we do not hear from you by 2 Oct (1:30pm), we assume that you will be free in all time slots.</span></p>\n  </div>\n\n\n\n        <div class=\"lock_explanation\">\n          This quiz was locked Oct 6 at 1:30pm.\n        </div>\n\n    <div id=\"quiz-submission-version-table\"></div>\n\n  </header>\n\n  <div id=\"direct-share-mount-point\"></div>\n  <div id=\"assign-to-mount-point\"></div>\n\n\n\n  <div id=\"assignment_external_tools\"><div></div></div>\n\n  <div id=\"module_sequence_footer\" style=\"display: none;\"></div>\n\n</div>\n\n          ",
+  "text": "Project Presentation Schedule Availability \nDue Oct 2 at 1:30pm Questions 2 Available Sep 18 at 1:30pm - Oct 6 at 1:30pm Time Limit None\nInstructions\n\nNote that only one representative of your group is needed to submit this form. \nIf we do not hear from you by 2 Oct (1:30pm), we assume that you will be free in all time slots.\n\nThis quiz was locked Oct 6 at 1:30pm.",
+  "links": [],
+  "media": [],
+  "frames": [
+    {
+      "url": "about:blank",
+      "title": "",
+      "html": "",
+      "text": "",
+      "links": [],
+      "media": []
+    }
+  ],
+  "requested_url": "https://canvas.ust.hk/courses/72132/quizzes/164865",
+  "kind": "page"
+}

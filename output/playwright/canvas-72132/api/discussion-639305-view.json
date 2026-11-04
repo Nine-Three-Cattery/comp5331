@@ -1,0 +1,49 @@
+{
+  "unread_entries": [
+    1000269,
+    1002522
+  ],
+  "forced_entries": [],
+  "entry_ratings": {},
+  "participants": [
+    {
+      "id": 148539,
+      "anonymous_id": "36m3",
+      "display_name": "SHAO, Ruizhe",
+      "avatar_image_url": "https://canvas.ust.hk/images/messages/avatar-50.png",
+      "html_url": "https://canvas.ust.hk/courses/72132/users/148539",
+      "pronouns": null
+    },
+    {
+      "id": 163248,
+      "anonymous_id": "3hyo",
+      "display_name": "HUANG, Ruping",
+      "avatar_image_url": "https://canvas.ust.hk/images/messages/avatar-50.png",
+      "html_url": "https://canvas.ust.hk/courses/72132/users/163248",
+      "pronouns": null
+    }
+  ],
+  "view": [
+    {
+      "id": 1000269,
+      "created_at": "2026-09-15T00:55:05Z",
+      "updated_at": "2026-09-15T00:55:05Z",
+      "parent_id": null,
+      "rating_count": null,
+      "rating_sum": null,
+      "user_id": 148539,
+      "message": "<p>Hi, good to hear form you.</p>\n<p>I am a part time phd , and hope we can form a group.</p>\n<p>I have added you wechat</p>\n<p>&nbsp;</p>\n<p>Shaoruizhe</p>"
+    },
+    {
+      "id": 1002522,
+      "created_at": "2026-09-16T15:49:02Z",
+      "updated_at": "2026-09-16T15:49:02Z",
+      "parent_id": null,
+      "rating_count": null,
+      "rating_sum": null,
+      "user_id": 163248,
+      "message": "<p>Hi,</p>\n<p>I saw your post about forming a group for the COMP5331 project. I’m also looking for a group and would be happy to join you if there is still a spot available.</p>\n<p>I’m a CSE PhD student working mainly on ML/AI. Have added your wechat.</p>\n<p>Thanks,<br>Ruping</p>"
+    }
+  ],
+  "new_entries": []
+}

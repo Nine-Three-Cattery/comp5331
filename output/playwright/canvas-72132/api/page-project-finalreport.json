@@ -1,0 +1,16 @@
+{
+  "url": "project-finalreport",
+  "title": "Project-FinalReport",
+  "created_at": "2026-08-14T00:58:45Z",
+  "editing_roles": "teachers",
+  "page_id": 708713,
+  "published": true,
+  "hide_from_students": false,
+  "front_page": false,
+  "html_url": "https://canvas.ust.hk/courses/72132/pages/project-finalreport",
+  "todo_date": null,
+  "publish_at": null,
+  "updated_at": "2026-08-14T00:58:45Z",
+  "locked_for_user": false,
+  "body": "<h2><span style=\"color: #0000ff;\"><a style=\"color: #0000ff;\" name=\"project\"></a>Project (Final Report)</span></h2>\n<p>Please write a final report including the following items.</p>\n<ul>\n<li>A specific topic (or title) for this project</li>\n<li>Type of this project: Survey/Implementation/Research</li>\n<li>Group No.</li>\n<li>Information of each member of your group\n<ul>\n<li>Student ID</li>\n<li>Student name</li>\n<li>Your research/FYP supervisor (if any)</li>\n<li>Your own research/FYP topic (if any) and an explanation why this project is different from your own research topic</li>\n<li>A declaration statement that this project is done solely within the course but not other scopes (e.g., other courses and research projects)</li>\n</ul>\n</li>\n<li>Content\n<ul>\n<li>Number of words\n<ul>\n<li>Survey Type\n<ul>\n<li>about 5,000~10,000 words</li>\n</ul>\n</li>\n<li>Implementation Type\n<ul>\n<li>about 1,000~10,000 words</li>\n</ul>\n</li>\n<li>Research Type\n<ul>\n<li>about 5,000~10,000 words</li>\n</ul>\n</li>\n<li>For each type,\n<ul>\n<li>if you like, you can write in more words with the instructor's approval</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Guideline\n<ul>\n<li>Write a normal report (e.g., Introduction, Related Work, Algorithm, Conclusion, References, ...)</li>\n<li>Write an additional section called \"Contribution\". The number of words in this section does not count towards to the total number of words specified above\n<ul>\n<li>For each member in the group, please write a sub-section with 100-500 words stating your contributions to the project (e.g., what you have done for this project)</li>\n<li>Note: Even though you write this paragraph in the single report (to be submitted once for the whole group), each individual member in the group are also required to fill in an individual online form to specify the percentage of contributions to the project *privately* with written contributions.</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>"
+}
