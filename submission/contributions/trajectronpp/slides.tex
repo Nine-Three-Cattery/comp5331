@@ -1,0 +1,60 @@
+\input{contributions/trajectronpp/analysis.tex}
+\providecommand{\TppInsight}[1]{\csname tpp:#1\endcsname}
+\begin{frame}{Trajectron++ samples futures from visible histories}
+\noindent{\small\bfseries\color{Teal} LI JUNHAO / MODEL IMPLEMENTATION}\par\medskip
+\begin{tikzpicture}[
+  stage/.style={draw=Rule,fill=Wash,rounded corners=3pt,minimum height=1.38cm,
+    text width=2.72cm,align=left,inner sep=0.14cm,anchor=west,font=\small}
+]
+\node[stage] (history) at (0,0)
+  {\textcolor{Teal}{\bfseries 01 / History}\\Target + 3\,m\\neighbor graph};
+\node[stage] (latent) at (3.51,0)
+  {\textcolor{Teal}{\bfseries 02 / Latent}\\25-category\\latent prior};
+\node[stage] (decode) at (7.02,0)
+  {\textcolor{Teal}{\bfseries 03 / Motion}\\GRU predicts\\2D velocity};
+\node[stage] (paths) at (10.53,0)
+  {\textcolor{Teal}{\bfseries 04 / Paths}\\Integrate to 20\\metric forecasts};
+\draw[-stealth,Teal] (history.east) -- (latent.west);
+\draw[-stealth,Teal] (latent.east) -- (decode.west);
+\draw[-stealth,Teal] (decode.east) -- (paths.west);
+\end{tikzpicture}
+
+\vspace{0.55cm}
+\begin{columns}[T,onlytextwidth]
+\column{.59\textwidth}
+{\bfseries\color{Teal} Causal input gate}\par\smallskip
+Compute motion within the observed window. Changing future target or
+neighbor positions leaves same-seed forecasts identical.
+\column{.35\textwidth}
+{\bfseries\color{Teal} Audited evidence}\par\smallskip
+15 trained runs, validation-only selection and 90 test bundles.
+\end{columns}
+\end{frame}
+
+\begin{frame}{More samples improve coverage while mean error stays flat}
+\begin{columns}[c,onlytextwidth]
+\column{.61\textwidth}
+\includegraphics[width=\linewidth]{contributions/trajectronpp/assets/sampling_slide.pdf}
+\column{.34\textwidth}
+{\color{Teal}\Huge\bfseries \TppInsight{BudgetReduction}\%\par}
+\textbf{lower minADE}\par
+\smallskip
+\TppInsight{OneSampleADE}\,m with one path\\
+\ModelMetric{trajectronpp}{clean_0}{min_ade_mean}\,m with twenty\\[3pt]
+MeanADE stays near \ModelMetric{trajectronpp}{clean_0}{mean_ade_mean}\,m.
+\end{columns}
+\smallskip
+{\small\color{Muted}Same forecasts, re-scored at each budget. Equal weight for five held-out scenes.}
+\end{frame}
+
+\begin{frame}{Even 5\,cm noise hurt more than two missing points}
+\centering
+\includegraphics[width=.94\linewidth]{contributions/trajectronpp/assets/paired_robustness.pdf}
+
+\begin{minipage}{.91\linewidth}
+\small
+\textcolor{Teal}{\bfseries \TppInsight{NoiseDominantFolds}/5 held-out scenes.}
+Open circles show scenes. Diamonds and bars show macros and descriptive
+95\% intervals. Neighbor histories stay visible.
+\end{minipage}
+\end{frame}

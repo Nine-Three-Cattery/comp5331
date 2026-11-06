@@ -1,0 +1,72 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,booktabs,graphicx,xcolor,titlesec,fancyhdr,caption,float}
+\usepackage[margin=0.78in,headheight=14pt]{geometry}
+\usepackage[colorlinks=true,linkcolor=Teal,citecolor=Teal,urlcolor=Teal]{hyperref}
+\input{palette.tex}
+\input{common.tex}
+\setlength{\textfloatsep}{13pt plus 3pt minus 3pt}
+\setlength{\intextsep}{6pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\titleformat{\section}{\large\sffamily\bfseries\color{Ink}}{\color{Teal}\thesection}{0.65em}{}
+\titleformat{\subsection}{\large\sffamily\bfseries\color{Teal}}{\thesubsection}{0.65em}{}
+\captionsetup{font=small,labelfont={sf,bf,color=Teal}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{Muted}COMP5331 / GROUP 7}
+\fancyhead[R]{\small\sffamily\color{Muted}ETH/UCY BENCHMARK}
+\fancyfoot[R]{\small\sffamily\color{Muted}\thepage}
+\renewcommand{\headrulewidth}{0.25pt}
+\begin{document}
+\color{Ink}
+{\sffamily\bfseries\color{Teal}\small IMPLEMENTATION STUDY \hfill FALL 2026\par}
+\vspace{0.4em}
+{\sffamily\bfseries\LARGE Comparing six pedestrian\\trajectory predictors\par}
+{\sffamily\small\color{Muted}\SubmissionStatus\par}
+\vspace{0.45em}
+{\color{Rule}\hrule}
+\vspace{0.4em}
+
+\section{Research question}
+How do forecast error, sample coverage and robustness trade off when six
+independent models receive the same histories? We use eight observed and
+twelve future positions at 0.4\,s intervals on five ETH/UCY holdouts
+\cite{pellegrini2009,lerner2007}. Models share ordered windows, three
+training seeds and validation-only checkpoint selection.
+
+\section{Reading the evidence}
+ADE averages displacement over time. FDE measures endpoint displacement.
+Report one path for deterministic models, or minimum and mean errors over
+twenty samples for probabilistic models. Energy Score uses RMS trajectory
+displacement \cite{gneiting2007}. Folds receive equal weight after
+averaging seeds.
+
+We perturb target history with 0.05, 0.10 or 0.20\,m Gaussian position noise,
+or remove the last one or two target observations and extrapolate from the
+last two visible points. Neighbor histories and future labels stay fixed.
+Timing uses 128 targets with batch size 32, three warmups and ten
+measurements, from in-memory neutral positions to CPU predictions.
+
+\section{Independent implementations}
+\input{generated/model-report.tex}
+
+\section{Comparison}
+\begin{table}[H]
+\centering
+\caption{Audited clean fold macros in meters. Minimum error depends on the sample budget \(K\).}
+\label{tab:group-clean}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & \(K\) & minADE & minFDE & meanADE & meanFDE & ES \\
+\midrule
+\input{generated/comparison-rows.tex}
+\end{tabular}
+\end{table}
+\IfFileExists{editor/report_synthesis.tex}{\input{editor/report_synthesis.tex}}{%
+The cross-model synthesis is pending review of all six contributions.}
+
+\small\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

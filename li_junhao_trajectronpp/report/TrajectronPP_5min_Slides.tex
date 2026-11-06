@@ -1,0 +1,117 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usecolortheme{dolphin}
+\usepackage{amsmath,booktabs,graphicx}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\graphicspath{{../outputs/causal_v2/runs/figures/}{../outputs/causal_v2/results/}}
+\input{causal_results.tex}
+\title{Trajectron++ on ETH/UCY}
+\subtitle{Independent pedestrian forecasting with causal inputs}
+\author{LI Junhao \quad COMP5331 Group 7}
+\date{Fall 2026}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\begin{center}
+\small Eight observations $\to$ twelve future positions $\to$ twenty plausible trajectories
+\end{center}
+\end{frame}
+
+\begin{frame}{A graph-conditioned distribution of future paths}
+\begin{enumerate}
+\item Target and 3 m pedestrian-edge histories feed two recurrent encoders.
+\item The history-conditioned prior samples one of 25 latent categories.
+\item A GRU samples correlated velocities and integrates them in meters.
+\end{enumerate}
+\begin{block}{Training and inference}
+The training posterior sees future labels. Test sampling uses observed
+target history and observed neighbor context.
+\end{block}
+\end{frame}
+
+\begin{frame}{The benchmark enforces what is visible at the anchor}
+\begin{itemize}
+\item Five scene holdouts, three training seeds, $\Delta t=0.4$ s.
+\item Choose checkpoints on clean validation Energy Score with $K=20$.
+\item Centered derivatives leaked future coordinates into old inputs.
+\item Recompute motion with window-local backward differences for targets and neighbors.
+\end{itemize}
+\begin{alertblock}{Regression criterion}
+Change a target or neighbor after the anchor. Features and same-seed
+predictions must remain identical in all six conditions.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Clean forecasts across five held-out scenes}
+\begin{columns}[T]
+\begin{column}{.53\textwidth}
+\small
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Fold & minADE & meanADE & ES \\
+\midrule
+\SlideFoldRows
+\bottomrule
+\end{tabular}
+
+\medskip
+\scriptsize All results in meters. Rows average three seeds.
+\end{column}
+\begin{column}{.42\textwidth}
+\begin{block}{Equal-weight fold macro}
+minADE \textbf{\CleanMinADE{} m}\\
+minFDE \textbf{\CleanMinFDE{} m}\\
+meanADE \textbf{\CleanMeanADE{} m}\\
+Energy Score \textbf{\CleanEnergy{} m}
+\end{block}
+\footnotesize Best-sample and typical-sample error answer different questions.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Target-history corruption changes forecast error}
+\begin{columns}[T]
+\begin{column}{.61\textwidth}
+\includegraphics[width=\linewidth]{robustness.pdf}
+\end{column}
+\begin{column}{.35\textwidth}
+\small
+\textbf{Paired meanADE change}\\[4pt]
+0.20 m noise: \NoiseMeanDelta{} m\\
+Missing two: \MissingMeanDelta{} m
+
+\medskip
+Neighbor histories stay visible. The same windows and future labels are used
+in every condition.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fixed ETH example and measured runtime}
+\centering
+\includegraphics[width=\linewidth]{eth_presentation.png}
+
+\small Black observations, orange truth, blue samples and endpoints.
+Dashed black shows the causal fill.\par
+\medskip
+\textbf{\RuntimeTotal{} ms} median end-to-end for 128 targets.
+\RuntimePre{} ms preprocessing and \RuntimePred{} ms inference with sampling
+are separately measured medians.
+\end{frame}
+
+\begin{frame}{What the group can verify and compare}
+\begin{itemize}
+\item 15 selected checkpoints and 90 audited test bundles.
+\item Match the window IDs, perturbations, metric evaluator and runtime boundary.
+\item Use mean errors and Energy Score alongside best-of-20.
+\item Treat proximity as a descriptive diagnostic for separately sampled forecasts.
+\end{itemize}
+\begin{block}{Reproduction}
+Run the fixed fixture, predict from a selected checkpoint, and recompute the
+main table from the stored predictions.
+\end{block}
+\end{frame}
+\end{document}

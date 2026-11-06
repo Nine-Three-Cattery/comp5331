@@ -1,0 +1,12 @@
+{
+  "protocol": "causal_v2",
+  "runs": 15,
+  "prediction_bundles": 90,
+  "artifact": {"name": "", "sha256": ""},
+  "evidence": {},
+  "runtime_ms": {
+    "preprocessing_ms": null,
+    "prediction_sampling_ms": null,
+    "end_to_end_ms": null
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "protocol": "causal_v2",
+  "runs": 15,
+  "prediction_bundles": 90,
+  "artifact": {
+    "name": "COMP5331_TrajectronPP_LI_Junhao_causal_v2.tar.gz",
+    "sha256": "c4cce9d63f1bc3c2af69260814b3ead719c0ac3e92fd6f6cd4f8ebea6588af59"
+  },
+  "evidence": {
+    "audit.json": "f40574d901b03f8b7794531e9dd7c77f71bdd31f1b9b3ba6aed66a065113a91a",
+    "delivery/reproduction_check.json": "5be6f2138b57b4a727051e004225400190e476d75e8c9ec4aca309bb410a1726",
+    "results/group7_trajectronpp.csv": "00f43f077f5b0e82b5690b19f14c836e4dffd739e9d50d873bf173f788ea3fa3",
+    "results/runtime.csv": "63cdaf1f8916eebf594351998a59dbd8ed3771ef6ab208587638f17af1bb66a0",
+    "results/formal_statistical_effects.csv": "65e6b812f1cdbbdd30cd2fd8af69203d36759ff3b522fb0a715b56b3baf60081",
+    "results/robustness.pdf": "7e22a5a944df32c9bba45c5a4aba0113865eda2935bc35b230d5bc928814a7ec",
+    "runs/figures/eth_presentation.png": "b56d78c89c1fb26dd0d2797628186201742b8ac89d07dc81039ed50b8e407740"
+  },
+  "runtime_ms": {
+    "preprocessing_ms": 30.78441903926432,
+    "prediction_sampling_ms": 7.350099622271955,
+    "end_to_end_ms": 38.66516693960875
+  }
+}
