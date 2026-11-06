@@ -6,7 +6,7 @@ The six assignments and stable IDs are in [the model registry](submission/models
 
 ## 1. Create your model branch and set up the benchmark
 
-Clone `group7/project` using the [README](README.md#join-the-project).
+Clone `group7/project` using the [README](README.md).
 If you already have a checkout of the GitHub repository, fetch that branch
 before your first switch to it.
 
