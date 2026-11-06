@@ -2,6 +2,8 @@
 
 ## Start here
 
+Use `group7/project` as the base for model branches and pull requests.
+
 1. Follow the [clone-to-merge SOP](CONTRIBUTING.md) and consult the
    [model registry](submission/models.json). Use the registry to identify
    the assigned owner, code directory and contribution ID.

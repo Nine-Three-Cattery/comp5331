@@ -4,12 +4,22 @@ Run commands from the repository root in a Linux x86-64 checkout. On macOS
 or Windows, use the group's Linux host or WSL for the reference benchmark.
 The six assignments and stable IDs are in [the model registry](submission/models.json).
 
-## 1. Set up the shared benchmark
+## 1. Create your model branch and set up the benchmark
 
-Clone the group's repository, then run the following. Replace the example
-ID with your assigned ID before creating the branch.
+Clone `group7/project` using the [README](README.md#join-the-project).
+If you already have a checkout of the GitHub repository, fetch that branch
+before your first switch to it.
 
 ```bash
+git fetch origin refs/heads/group7/project:refs/remotes/origin/group7/project
+git switch --track origin/group7/project
+```
+
+From `group7/project`, run the following. Replace the example ID with your
+assigned ID before creating the branch.
+
+```bash
+git pull --ff-only origin group7/project
 export MODEL=social_lstm
 git switch -c "model/$MODEL"
 python3.12 -m venv .venv
@@ -71,16 +81,18 @@ the release archive in ignored paths. Share the full release through the
 group's agreed location and record the filename and SHA-256 in provenance.
 
 Use the [submission guide](submission/README.md) and templates for English
-report, Beamer frames and notes. Submit one model branch for review. The
+report, Beamer frames and notes. Review staged files with
+`git diff --cached --name-status`, then commit your model changes. Publish
+your branch with `git push -u origin "model/$MODEL"` and open a pull request
+with base `group7/project` and compare `model/<model_id>`. The
 editor confirms attribution, the causal and validation tests, an independent
 artifact reproduction, and runtime comparability before marking it ready.
-Inspect staged files and keep course originals, credentials, raw data and
-large artifacts local.
+Keep course originals, credentials, raw data and large artifacts local.
 
 ## 4. Integrate and release
 
-The editor merges accepted model branches, writes the comparison and
-synthesis, and records one peer review per model. Follow the
+The editor merges accepted model branches into `group7/project`, writes the
+comparison and synthesis, and records one peer review per model. Follow the
 [editor checklist](submission/editor/README.md). From the clean committed
 final branch, `make release` exports the combined code archive, report,
 slides, score table, notes and checksums to `artifacts/group7/`.

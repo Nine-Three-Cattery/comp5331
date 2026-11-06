@@ -3,6 +3,7 @@
 /third_party/
 /local/
 /artifacts/
+/output/
 outputs/
 *.pt
 *.pth

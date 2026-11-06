@@ -27,7 +27,8 @@ course schedule leaves less time, preserve the order of these gates.
    [review template](../templates/review.json). Record a reviewer distinct
    from the owner and SHA-256 of both `benchmark_audit.json` and
    `provenance.json`. Set each review field to true only when its evidence
-   is checked. Register the model as `ready` and merge the model branch.
+   is checked. Register the model as `ready` and merge the model branch into
+   `group7/project`.
 
 ## Assemble the submission
 
@@ -40,9 +41,9 @@ course schedule leaves less time, preserve the order of these gates.
   title, benchmark, model frames and synthesis should fit the scheduled
   presentation.
 - Run `make final-docs`, commit the reviewed source, then run `make release`
-  from a clean branch. The release command compiles the documents from the
-exported commit, so the PDFs and source archive represent the same tree.
-`artifacts/group7/` contains `code.zip`, `report.pdf`,
+  from a clean `group7/project` checkout. The release command compiles the
+  documents from the exported commit, so the PDFs and source archive
+  represent the same tree. `artifacts/group7/` contains `code.zip`, `report.pdf`,
   `slides.pdf`, `results.csv`, `speaker_notes.md`, `SOURCE_COMMIT` and
   `SHA256SUMS`. Attach the individually archived artifacts through the
   course's agreed storage location. Check the packaged docs against
