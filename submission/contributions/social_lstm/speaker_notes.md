@@ -1,28 +1,31 @@
-# Social-LSTM speaker notes
+# Social-LSTM: three-minute speaker notes
 
-Target: approximately 3 minutes at 120–130 words per minute. Three content slides, no cover. Presenter: WANG Yifan. The spoken script below has approximately 365 words. Figures and results are exploratory, not causal_v2 audited results.
+Presenter: WANG Yifan. Three content slides for the integrated group presentation. Spoken script: 376 words, approximately 3 minutes at 125 words per minute. Values below use the shared deterministic K=1 evaluation.
 
-## Slide 1 — 0:00–0:55
+## Slide 1 — 0:00–1:00
 
-My part is Social-LSTM, which adds information about nearby pedestrians to a recurrent trajectory predictor. The key idea comes from Alahi and colleagues: each pedestrian has a hidden state, and a spatial grid pools the hidden states of neighbors. This lets the next prediction depend on both individual motion and surrounding people.
+My part is Social-LSTM. Its central idea is to predict each pedestrian using both their own motion and information from nearby people. A recurrent network summarizes each person's history. A spatial grid then pools neighboring hidden states, so the next prediction can respond to the local crowd.
 
-Our model observes eight positions and predicts the next twelve. I implemented the pooling and recurrent prediction in PyTorch and ran five held-out scenes with three seeds, giving fifteen training runs. This implementation uses a Gaussian decoder with an additional residual-velocity connection. That is an adaptation, so I describe the results as an implementation study rather than an exact reproduction.
+For our group's deterministic comparison, I implemented a variant that observes eight positions and predicts one twelve-step future. It starts from a velocity estimated from the last three observed intervals and learns a recurrent correction. I train the complete predicted trajectory directly, without using the true future as the next input. This differs from the original paper's probabilistic decoder, and that adaptation is documented in the report.
 
-## Slide 2 — 0:55–1:55
+## Slide 2 — 1:00–2:00
 
-The main result is that best-sample accuracy and typical prediction error tell different stories. On our exploratory split, constant velocity has an ADE of about zero point five three meters. Social-LSTM's average error over twenty sampled paths is about zero point nine two meters. However, selecting the best of those twenty paths reduces the error to about zero point three five meters.
+The formal experiments use the same test trajectories as the other models: five held-out scenes, three training seeds, and six observation conditions. Each run selects its checkpoint using clean validation error. The test set never decides which checkpoint we keep.
 
-This means the model can generate a path close to the observed future, but many other samples drift away. The best-of-twenty number therefore does not show that our predictor is better than constant velocity for a single forecast. Robustness is also a limitation: with zero point two meters of observation noise, average ADE increases to about two point five five meters.
+On clean histories, our macro ADE is 0.607 meters, compared with 0.534 meters for constant velocity on exactly the same test windows. Constant velocity therefore remains the stronger aggregate baseline in this experiment. These are single-trajectory errors, so there is no best-of-twenty selection.
 
-## Slide 3 — 1:55–3:00
+The robustness experiments change only the target's history. Neighbor positions stay unchanged. With zero point two meters of observation noise, ADE is 1.128 meters. Removing the final two observations gives 0.761 meters. These conditions help reveal how strongly the model depends on an accurate estimate of recent motion.
 
-The turning example illustrates this gap. Some predictions follow the future more closely, while others diverge. Our diagnostics identified one possible mechanism: the decoder feeds a sampled displacement into the next velocity estimate, so an early disturbance can influence several later positions. Also, selecting a checkpoint using teacher-forced likelihood does not directly evaluate the quality of a complete rollout.
+## Slide 3 — 2:00–3:00
 
-A small control experiment did not solve the problem, so I am keeping that limitation explicit. The implementation and exploratory analysis are packaged, but the group's formal evaluation is still pending. It requires deterministic prediction, shared trajectory windows, and the same target-only perturbations as the other models. Until those checks pass, these numbers stay outside the common leaderboard. This gives us a reproducible starting point and a clear explanation of what needs validation before the final comparison.
+This figure shows the same turning pedestrian under three conditions, using the same checkpoint. The dark line is the observed input, the green line is the true future, and the orange line is our one predicted trajectory. This is a selected example, so the full tables remain the evidence for overall performance.
 
-## Sources and delivery notes
+I also checked that changing future coordinates cannot affect model inputs, that padding does not change predictions, and that all ninety prediction files match the shared evaluation contract. Runtime measurements use our Mac's MPS device and are reported separately from other hardware.
 
-- Alahi et al. (2016), Social LSTM: Human Trajectory Prediction in Crowded Spaces, https://doi.org/10.1109/CVPR.2016.110.
-- Numeric evidence: evidence/legacy_macro_summary.csv and the separate local diagnostic study, described in report.tex.
-- Show the complete trajectory legend. Do not describe the selected failure as representative.
-- Transition to the next owner after the last sentence. Rehearse once and trim the first-slide implementation detail if speaking slowly.
+The main contribution is an independently implemented social-pooling baseline with a complete, traceable evaluation. Its limitations include the deterministic forecast and the declared differences from the original paper. These results can now support the group's common comparison.
+
+## References and rehearsal
+
+Alahi et al. (2016), Social LSTM: Human Trajectory Prediction in Crowded Spaces. https://doi.org/10.1109/CVPR.2016.110.
+
+Evidence: results.csv; evidence/causal_macro_summary.csv; evidence/causal_constant_velocity.json; evidence/causal_qualitative_selection.json; benchmark_audit.json. Interface audit passed locally; editor and reference-environment review are separate.

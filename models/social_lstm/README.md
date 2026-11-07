@@ -1,36 +1,70 @@
-# Social-LSTM — pending shared contribution
+# Social-LSTM — deterministic K=1 causal_v2 interface
 
-Owner: WANG Yifan. **Status: pending. This is a legacy/exploratory K=20 implementation, not the registry's deterministic K=1 contribution and not a causal_v2 adapter.** Its results must not enter the common comparison. No shared registry, protocol or fixture is changed, and no shared audit receipt is claimed.
+Owner: WANG Yifan. **The deterministic K=1 causal_v2 matrix and local common audit are complete.** All 15 runs used the frozen 12-epoch budget and validation-only selection, and all 90 prediction bundles passed the shared interface/score audit. Registry/editor status remains pending for independent review, reference-environment reproduction and runtime comparison policy. No shared registry, contract or fixture was modified.
 
-This directory preserves the owner's independently written social-pooling model, Gaussian loss and old training/evaluation pipeline for inspection and reproduction. Model quality remains unresolved: sampled velocity residuals amplify innovations over the horizon; typical sampled error was worse than CV, and a one-fold anchored-skip control did not improve validation. Engineering checks do not establish faithful paper reproduction or a validated repair.
+Two distinct branches are retained:
 
-## Environment and artifact paths
+- `causal/`: independent deterministic social-grid recurrent predictor, common loader/corruption and neutral K=1 export; the branch for the registered shared comparison.
+- `legacy/`: preserved exploratory Gaussian K=20 pipeline, seeds11/22/33, different splits/corruption. Its numbers are excluded from the shared comparison and cannot be relabeled as K=1.
 
-Run from the repository root. Use a separate exploratory environment:
+## Shared K=1 design and frozen budget
+
+Eight observed metric positions predict twelve future positions at dt=.4s. Hidden64, embeddings32, grid4x4 in a 4m square, self excluded. Admit neighbors only if all eight observed positions exist and they come within6m of the target at any observed time after target corruption. Neighbor admission never uses future availability. All admitted actors roll forward jointly; only target labels supervise loss.
+
+The deterministic mean uses the fixed average of the final three observed displacement intervals plus a learned recurrent residual. It does not accumulate a sampled displacement into the next mean. There is no Gaussian sampling or teacher forcing. Training uses full closed-loop metric position MSE, Adam.001, weight decay.0001, clipping10, batch32, seeded actor-count bucketing without dropping windows. The formal default is12 epochs; the separate full-population ETH seed0 pilot uses1 epoch. Select lowest clean validation meanADE, with earlier epoch for exact ties. Keep the selected checkpoint fixed across all six conditions. The design record is `configs/causal_v2.json`.
+
+This is an **adapted deterministic Social-LSTM**, not an exact reproduction of the paper's Gaussian position model. Grid dimensions/hidden size and displacement anchor differ. A completed interface or a passed unit test does not establish good forecasting quality; report actual shared validation/test results and any limits.
+
+## Environment and paths
+
+Follow the repository benchmark SOP for the reference Linux/Python3.12/PyTorch2.14 environment and common dependencies. The available local exploratory environment is Python3.13/PyTorch2.11.0/NumPy2.4.4 on macOS arm64; this is an explicit environment deviation. The CLI records environment, device/chip and normalized process peak RSS. Local CPU/MPS timing must be labeled separately from reference-host evidence.
+
+To reproduce the recorded Mac environment, use Python 3.13.12 and install `models/social_lstm/requirements-causal-macos.txt` in a separate virtual environment. Do not mix those exact local pins with the different reference pins in one environment.
+
+Run commands below from the repository root, with an interpreter containing the shared `benchmark/requirements.txt` dependencies and PyTorch. CUDA, CPU and MPS devices can be passed explicitly. Do not infer that MPS is always faster. Fixed seeds do not guarantee bitwise-identical MPS training across runs or software versions. Deterministic K=1 describes the forecast rule (no sampling); saved-checkpoint replay and numeric tolerances should be used to assess reproduction.
 
 ```bash
-python3.13 -m venv models/social_lstm/.venv
-models/social_lstm/.venv/bin/python -m pip install -r models/social_lstm/requirements-legacy.txt
-```
-
-Below, `python` means that environment's interpreter. The old experiment used Python3.13, PyTorch2.11.0 and NumPy2.4.4; these differ from the shared Linux/Python3.12/PyTorch2.14.0 environment. CPU is the portable default. MPS is optional local exploration, not shared runtime evidence.
-
-Data, processed windows, checkpoints and predictions default to ignored `models/social_lstm/artifacts/legacy/`. Set `SOCIAL_LSTM_LEGACY_WORKDIR` to another local artifact root if necessary. Configs stay in this source directory. Do not point the override at the shared causal_v2 store or an immutable historical release.
-
-## Tests and smoke — no dataset needed
-
-```bash
+make benchmark PYTHON=python
 python -m unittest discover -s models/social_lstm/own_unit_tests -v
-python models/social_lstm/legacy/smoke.py
 ```
 
-Expected tag: `LEGACY_SMOKE_OK_NOT_SHARED_AUDIT`. Nine owner tests cover Gaussian NLL, grid isolation/gradient, metric oracles, causal missing fill, target-and-neighbor future-coordinate invariance, identity-metric/translation roundtrip and backward/inference shape. They test the actual legacy visible-history boundary, not an unimplemented shared adapter or the shared benchmark gate.
+The shared gate validates the unchanged data/manifests. The owner tests cover both branches; causal checks exercise actual target/neighbor future and stored-derivative invariance, future-presence invariance, exact target-only corruption/index seeds, causal fill, metric translation/roundtrip, deterministic K1, padding/batch isolation, grid boundaries/gradient, closed-loop backward and complete bucket coverage.
 
-## Download, prepare, train and predict
-
-The downloader needs `curl`; it fetches only six coordinate text files from a pinned release and checks every SHA256. It fetches no upstream model code, weight or paper PDF.
+## Full ETH pilot, prediction and formal matrix
 
 ```bash
+python models/social_lstm/causal/run.py pilot --runs artifacts/social_lstm/pilot/runs --device cpu
+make pilot MODEL=social_lstm RUNS=artifacts/social_lstm/pilot/runs PYTHON=python
+```
+
+`pilot` trains ETH seed0 for one epoch using full shared train/validation populations and exports the **entire** test manifest for all six conditions. It never uses a test subset as a shared pilot. Choose `--device mps` only on a supported local host; a runtime estimate comes from the actual pilot and training log, not an assumed GPU speed.
+
+The completed MPS ETH seed0 pilot used one full epoch: 35.18s, clean-validation ADE .46917m, process peakRSS769MiB. Its six full-test exports passed the common pilot audit. These local Mac measurements are not Linux reference-host timing. The formal12-epoch matrix has completed and passed the local shared audit. Reproduction command:
+
+```bash
+python models/social_lstm/causal/run.py formal --runs artifacts/social_lstm/formal/runs --device cpu
+make score MODEL=social_lstm RUNS=artifacts/social_lstm/formal/runs PYTHON=python
+make audit MODEL=social_lstm RUNS=artifacts/social_lstm/formal/runs PYTHON=python
+```
+
+The formal default is five folds x seeds0/1/2 x12 epochs, with six exports per selected model. Any pre-formal budget revision must be explicit in the command/config and documented before starting formal training. The output tree is `<runs>/<fold>/seed_<seed>/` with config, checkpoint selection/candidate table, selected checkpoint, training log/summary, and `evaluation/<tag>/predictions_test_<tag>.npz`.
+
+For one run or prediction on CPU from a selected checkpoint trained on another device:
+
+```bash
+python models/social_lstm/causal/run.py train --runs artifacts/social_lstm/formal/runs --fold eth --seed 0 --epochs 12 --device cpu
+python models/social_lstm/causal/run.py predict --runs artifacts/social_lstm/formal/runs --fold eth --seed 0 --device cpu
+python models/social_lstm/causal/run.py runtime --runs artifacts/social_lstm/formal/runs --fold eth --seed 0 --device cpu
+```
+
+`predict` writes all six common-schema bundles `[N,1,12,2]` in manifest order, with masks, original labels, records, loader identities, config hash and selected checkpoint hash. Deterministic sampling is absent; each row still records an integer sampling seed. `runtime` uses the exact ordered128-target fixture, four batches of32, three warmups and ten measurements, device synchronization and metric CPU output. Run it for every fold/seed on the agreed host/device. It records coupled deterministic prediction time and does not invent a Gaussian sampling stage. Training checkpoints and full predictions stay in ignored root `artifacts/`.
+
+## Legacy reproduction only
+
+The old environment is pinned in `requirements-legacy.txt`. Legacy artifacts default to ignored `models/social_lstm/artifacts/legacy/`; optionally set `SOCIAL_LSTM_LEGACY_WORKDIR` to another local directory. Do not point it at shared data or an immutable release.
+
+```bash
+python models/social_lstm/legacy/smoke.py
 python models/social_lstm/legacy/download_data.py
 python models/social_lstm/legacy/download_data.py --verify-only
 python models/social_lstm/legacy/data.py
@@ -38,22 +72,12 @@ python models/social_lstm/legacy/run.py train --scene eth --seed 11 --epochs 1 -
 python models/social_lstm/legacy/run.py evaluate --scene eth --seed 11 --tag _exploratory_pilot --conditions clean --limit 3 --device cpu
 ```
 
-`evaluate` is also the prediction/export command. The example is a three-window smoke export, marked `is_partial=true`; it is not the required full shared ETH seed0 pilot. Drop `--limit 3` for the full legacy ETH population and omit `--conditions clean` for all six legacy conditions. Bundles use `pred[K,N,12,2]`, not the shared schema.
+The legacy download uses curl, fetches only six pinned coordinate files and verifies SHA256. The limited export above is only a synthetic/partial workflow check, explicitly marked partial, and is not a common benchmark pilot. Full old reproduction uses `python models/social_lstm/legacy/reproduce.py --evaluation-device cpu`; full arrays are not committed.
 
-For the complete old five-fold, seeds11/22/33, 12-epoch workflow:
+The old residual sampled-velocity feedback amplified innovations; typical sampled error exceeded CV. A validation-only anchored control did not improve, so it was not a validated repair. That old experiment is separate from the new deterministic model and its future shared evidence.
 
-```bash
-python models/social_lstm/legacy/reproduce.py --evaluation-device cpu
-python models/social_lstm/legacy/diagnostics.py
-python models/social_lstm/legacy/verify_exports.py models/social_lstm/artifacts/legacy/runs/eth_seed11/evaluation/clean_predictions.npz
-```
+Read [contract_gaps.md](contract_gaps.md), [paper_reading_notes.md](paper_reading_notes.md), [independent_design.md](independent_design.md), [source_inventory.md](source_inventory.md) and [implementation_provenance.md](implementation_provenance.md). `reused_fragments.csv` is header-only: no copied upstream model code. Report, slides and three-minute notes live in `submission/contributions/social_lstm/`.
 
-With an artifact-root override, adjust the final export path accordingly. `reproduce.py` trains on CPU, evaluates on the requested device, and reuses matching completed runs. Interrupted runs restart from their seed. Run the small pilot first. This upload started no full retraining and contains no raw data, weights or full predictions.
+## Regenerate contribution evidence
 
-## Frozen exploratory settings and pending work
-
-Eight observed metric positions, twelve future positions, dt=.4s, no maps or fitted normalization. Hidden128, embeddings64, 8x8 social sum grid in a 4m square, correlated Gaussian displacement head, residual sampled-velocity mean, Adam .001, dropout .1, clipping10, 12 epochs and lowest clean-validation teacher-forced NLL checkpoint. Exact settings are in `configs/legacy.json`. K=20 and seeds11/22/33 are legacy choices. Asking the Gaussian sampler for one random path does not define the registered deterministic K=1 model.
-
-Read [contract_gaps.md](contract_gaps.md). Pending: deterministic K=1 design, shared loader/ordered IDs, target-only corruption and masks, shared bundle/evaluator, causal_v2 ETH seed0 pilot, formal seeds0/1/2, score/audit receipt and reference-host runtime. Old local timings are not the future shared GPU estimate.
-
-Read [paper_reading_notes.md](paper_reading_notes.md), [independent_design.md](independent_design.md), [source_inventory.md](source_inventory.md) and [implementation_provenance.md](implementation_provenance.md). The external-code table [reused_fragments.csv](reused_fragments.csv) is header-only: **no copied code** from upstream model repositories. Report, slides and three-minute notes are maintained in `submission/contributions/social_lstm/`.
+After formal scoring and all fifteen runtime measurements, run `python models/social_lstm/analysis/summarize.py` and `python models/social_lstm/analysis/figures.py`. These write lightweight macro, constant-velocity, runtime, crowd/turn and figure evidence under the matching contribution directory. The CV baseline uses the same clean test manifests and the common headline metric function. The qualitative selection rule is based on ground-truth turning among the fixed runtime IDs and is disclosed as descriptive, not representative.

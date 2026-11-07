@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "prediction_absolute_tolerance_m": 1e-05,
+  "scope": "Extracted release archive, saved ETH seed0 checkpoint, all six conditions on the same Mac MPS host. Not retraining or Linux reproduction.",
+  "archive_sha256": "00fafdea953781940a96731a076acde5f6104b1984a0a3e94786ee7739e258a8",
+  "comparisons": [
+    {
+      "condition": "clean_0",
+      "windows": 364,
+      "max_absolute_prediction_difference_m": 0.0,
+      "other_arrays_exact_equal": true
+    },
+    {
+      "condition": "missing_1",
+      "windows": 364,
+      "max_absolute_prediction_difference_m": 0.0,
+      "other_arrays_exact_equal": true
+    },
+    {
+      "condition": "missing_2",
+      "windows": 364,
+      "max_absolute_prediction_difference_m": 0.0,
+      "other_arrays_exact_equal": true
+    },
+    {
+      "condition": "noise_005",
+      "windows": 364,
+      "max_absolute_prediction_difference_m": 0.0,
+      "other_arrays_exact_equal": true
+    },
+    {
+      "condition": "noise_010",
+      "windows": 364,
+      "max_absolute_prediction_difference_m": 0.0,
+      "other_arrays_exact_equal": true
+    },
+    {
+      "condition": "noise_020",
+      "windows": 364,
+      "max_absolute_prediction_difference_m": 4.76837158203125e-07,
+      "other_arrays_exact_equal": true
+    }
+  ]
+}

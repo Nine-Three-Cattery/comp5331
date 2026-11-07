@@ -1,0 +1,452 @@
+[
+  {
+    "fold": "eth",
+    "seed": 0,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 870.28125,
+    "selected_epoch": 3,
+    "selected_val_ade": 0.46668711572569355,
+    "train_actor_count": {
+      "max": 58,
+      "median": 20.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 375.1393002499826
+  },
+  {
+    "fold": "eth",
+    "seed": 1,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 877.828125,
+    "selected_epoch": 2,
+    "selected_val_ade": 0.4650652004135802,
+    "train_actor_count": {
+      "max": 58,
+      "median": 20.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 438.8620536669623
+  },
+  {
+    "fold": "eth",
+    "seed": 2,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 877.828125,
+    "selected_epoch": 2,
+    "selected_val_ade": 0.4820671829679437,
+    "train_actor_count": {
+      "max": 58,
+      "median": 20.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 467.0203852079576
+  },
+  {
+    "fold": "hotel",
+    "seed": 0,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 895.359375,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.48858578339535635,
+    "train_actor_count": {
+      "max": 58,
+      "median": 21.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 454.49076412501745
+  },
+  {
+    "fold": "hotel",
+    "seed": 1,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 895.359375,
+    "selected_epoch": 3,
+    "selected_val_ade": 0.5017972312466786,
+    "train_actor_count": {
+      "max": 58,
+      "median": 21.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 470.4362577080028
+  },
+  {
+    "fold": "hotel",
+    "seed": 2,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 895.359375,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.5062541161497979,
+    "train_actor_count": {
+      "max": 58,
+      "median": 21.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 462.97673383296933
+  },
+  {
+    "fold": "univ",
+    "seed": 0,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 975.484375,
+    "selected_epoch": 5,
+    "selected_val_ade": 0.3701682773846378,
+    "train_actor_count": {
+      "max": 18,
+      "median": 7.0,
+      "p95": 14.0
+    },
+    "wall_seconds": 65.27450816601049
+  },
+  {
+    "fold": "univ",
+    "seed": 1,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 975.484375,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.36826212649298623,
+    "train_actor_count": {
+      "max": 18,
+      "median": 7.0,
+      "p95": 14.0
+    },
+    "wall_seconds": 58.330177334020846
+  },
+  {
+    "fold": "univ",
+    "seed": 2,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 975.484375,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.3689281328417693,
+    "train_actor_count": {
+      "max": 18,
+      "median": 7.0,
+      "p95": 14.0
+    },
+    "wall_seconds": 58.415979749988765
+  },
+  {
+    "fold": "zara1",
+    "seed": 0,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 975.484375,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.4968936484958618,
+    "train_actor_count": {
+      "max": 58,
+      "median": 21.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 423.9060753339436
+  },
+  {
+    "fold": "zara1",
+    "seed": 1,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 975.484375,
+    "selected_epoch": 3,
+    "selected_val_ade": 0.4877449624858524,
+    "train_actor_count": {
+      "max": 58,
+      "median": 21.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 383.7357475840254
+  },
+  {
+    "fold": "zara1",
+    "seed": 2,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 1022.828125,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.4857159033204555,
+    "train_actor_count": {
+      "max": 58,
+      "median": 21.0,
+      "p95": 41.0
+    },
+    "wall_seconds": 344.64611037494615
+  },
+  {
+    "fold": "zara2",
+    "seed": 0,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 1022.828125,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.5360674511168394,
+    "train_actor_count": {
+      "max": 58,
+      "median": 23.0,
+      "p95": 42.0
+    },
+    "wall_seconds": 374.9312340420438
+  },
+  {
+    "fold": "zara2",
+    "seed": 1,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 1022.828125,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.5395935670510165,
+    "train_actor_count": {
+      "max": 58,
+      "median": 23.0,
+      "p95": 42.0
+    },
+    "wall_seconds": 405.88157504203264
+  },
+  {
+    "fold": "zara2",
+    "seed": 2,
+    "completed_epochs": 12,
+    "environment": {
+      "cpu_threads": 1,
+      "cuda": null,
+      "cudnn": null,
+      "device": "mps",
+      "gpu": null,
+      "hardware_chip": "Apple M5",
+      "numpy": "2.4.4",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "python": "3.13.12",
+      "reference_environment_match": false,
+      "torch": "2.11.0"
+    },
+    "memory_boundary": "process-lifetime ru_maxrss, Darwin bytes / Linux KiB normalized to MiB; not GPU peak",
+    "peak_process_rss_mib": 1022.828125,
+    "selected_epoch": 1,
+    "selected_val_ade": 0.5391897465668473,
+    "train_actor_count": {
+      "max": 58,
+      "median": 23.0,
+      "p95": 42.0
+    },
+    "wall_seconds": 391.77159041701816
+  }
+]

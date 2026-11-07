@@ -1,18 +1,18 @@
 # Social-LSTM contribution — WANG Yifan
 
-Status: **pending**. This package contains an adapted independent implementation and exploratory evidence. It is not an audited causal_v2 release.
+The deterministic K=1 causal_v2 matrix is complete: 15 validation-selected runs, 90 prediction bundles, and a passed common interface/score audit on the recorded Mac environment. Registry status remains pending for group editor review and reference-environment reproduction; it no longer indicates missing local formal experiments.
 
-- `report.tex`: English subsection for the group technical report.
-- `slides.tex`: three frames following the shared Beamer theme.
-- `social_lstm_3min.pptx`: editable supplemental PowerPoint version.
-- `speaker_notes.md`: approximately three-minute English talk.
-- `evidence/`: explicitly legacy local summaries and selected qualitative example.
-- `results.csv`: shared schema, intentionally no formal result rows.
-- `provenance.json`: zero formal runs/bundles, with exploratory counts separated.
-- Model commands and attribution: `models/social_lstm/README.md` from repository root.
+- `report.tex`: English model subsection using shared metric macros.
+- `slides.tex`: three shared-theme Beamer frames.
+- `social_lstm_3min.pptx`: supplemental editable three-slide PowerPoint.
+- `speaker_notes.md`: approximately three-minute English script.
+- `results.csv`, `benchmark_audit.json`, `pilot_audit.json`: actual common-format results and audit receipts.
+- `evidence/causal_*`: current summaries, fixed-rule example, crowd/turn analysis and runtime.
+- `evidence/legacy_*`: historical K20 exploration, excluded from current results and comparisons.
+- `provenance.json`: archive hash, runtime boundaries, local environment and review limitations.
 
-The legacy study used seeds 11/22/33 and K=20. Group integration requires deterministic K=1, seeds 0/1/2, the shared manifests/loader, target-only perturbations, RMS-norm Energy Score, and formal audit. Do not map legacy values into shared metric macros or the comparison table. The registry remains pending.
+Code, exact commands and source attribution are under `models/social_lstm/` from the repository root. Run `python3 submission/build.py --preview social_lstm --check` to validate this contribution's data/provenance schema. The standard preview uses pdflatex/bibtex; local PDFs were rendered with Tectonic using the shared palette, theme and macros.
 
-`make check-docs` can check the existing assembled ready contributions. `make preview MODEL=social_lstm` is expected to reject missing formal results. The owner-only PDFs are layout previews and cannot replace that audit gate. The report PDF has two pages. The talk has three slides and a 371-word English script. Generated PDFs, datasets, checkpoints and full predictions are intentionally excluded from Git.
+The release archive named in provenance retains the checkpoint and full prediction data locally; generated PDFs, raw data and large artifacts are excluded from Git. Transfer that archive through the group's agreed storage before peer reproduction. Mac MPS timing starts from cached neutral histories and must be labeled separately from Linux/reference-hardware results.
 
-This section is intended to merge into the six-part report after editor review. Its present scientific conclusion is that sampling coverage and average error diverge, and rollout limitations remain unresolved. AI assistance contributed to implementation, diagnosis, packaging and draft writing; the owner must review the final assessed work and declarations.
+This is a declared deterministic adaptation of Social-LSTM, not an exact reproduction of the original Gaussian model. Forecast quality is reported as measured, including the constant-velocity comparison. AI assistance contributed to code, diagnosis and draft writing; the owner is responsible for reviewing the assessed work and disclosures.

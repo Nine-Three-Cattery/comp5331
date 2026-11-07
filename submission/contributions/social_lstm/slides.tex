@@ -1,40 +1,33 @@
-% Three content frames, approximately three minutes. Exploratory evidence only.
-\begin{frame}{Social-LSTM pools neighboring motion histories}
+\begin{frame}{Social pooling adds local motion context}
 \textcolor{Teal}{\large WANG Yifan \quad Social-LSTM}
-\medskip
 \begin{itemize}
-\item Eight observed positions predict twelve future positions.
-\item Each pedestrian has an LSTM. A spatial grid pools neighbors' hidden states.
-\item Our Gaussian decoder adds a residual-velocity connection.
+\item Eight observed positions predict one twelve-step future.
+\item A spatial grid pools neighbors' recurrent hidden states.
+\item Closed-loop training and clean-validation ADE select the model.
 \end{itemize}
-\medskip
-\textbf{Exploratory study:} 5 folds, 3 seeds, 15 training runs, 20 sampled paths.
+\textbf{Shared evaluation:} 5 folds, 3 seeds, 15 training runs, $K=1$.
 \par\medskip
-{\footnotesize\color{Muted}Alahi et al., CVPR 2016. Adapted implementation. Shared causal\_v2 evaluation remains pending.}
+{\footnotesize\color{Muted}Alahi et al., CVPR 2016. Declared deterministic adaptation. Local common-interface audit passed.}
 \end{frame}
-
-\begin{frame}{Best-of-20 coverage differs from typical error}
+\begin{frame}{Shared evaluation separates accuracy and robustness}
 \centering
 \begin{tabular}{lr}\toprule
-Exploratory clean metric & ADE (m) \\\midrule
-Constant velocity, one path & 0.534 \\
-Social-LSTM, mean error over 20 paths & 0.923 \\
-Social-LSTM, minimum error over 20 paths & 0.348 \\\bottomrule
+Predictor / input condition & ADE (m) \\\midrule
+Constant velocity, clean, $K=1$ & 0.534 \\
+Social-LSTM, clean, $K=1$ & \ModelMetric{social_lstm}{clean_0}{mean_ade_mean} \\
+Social-LSTM, target noise 0.20\,m & \ModelMetric{social_lstm}{noise_020}{mean_ade_mean} \\
+Social-LSTM, two missing positions & \ModelMetric{social_lstm}{missing_2}{mean_ade_mean} \\\bottomrule
 \end{tabular}
-\medskip
-\begin{itemize}
-\item Some samples approach the future, but average sample error stays high.
-\item At 0.20\,m history noise, mean ADE rises to 2.548\,m.
-\end{itemize}
-{\footnotesize\color{Muted}Equal-scene macros. Local protocol and all-context corruption. Not a shared model ranking.}
-\end{frame}
-
-\begin{frame}{Rollout diagnostics reveal accumulated drift}
-\centering
-\includegraphics[width=.97\linewidth]{contributions/social_lstm/evidence/legacy_hotel_turning.png}
-\par\smallskip
-\small Sampled velocity feeds forward. Closed-loop quality needs validation.
-
 \par\medskip
-{\footnotesize\color{Muted}Selected exploratory Hotel failure. A control retraining did not resolve the issue.}
+\small Constant velocity therefore remains the stronger aggregate baseline in this experiment.
+\par\medskip
+{\footnotesize\color{Muted}Identical shared test windows. Equal-scene macros, three seeds. One deterministic forecast per window.}
+\end{frame}
+\begin{frame}{A turning trajectory under target corruption}
+\centering
+\includegraphics[height=.51\textheight,keepaspectratio]{contributions/social_lstm/evidence/causal_turning.png}
+\par\smallskip
+\small Same checkpoint and future. Only target observations change.
+\par\medskip
+{\footnotesize\color{Muted}Selected Hotel seed-0 example from fixed runtime IDs. Descriptive, not representative.}
 \end{frame}
