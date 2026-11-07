@@ -21,8 +21,10 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT))
 from li_junhao_trajectronpp.independent_tpp.protocol import CONDITIONS, FOLDS, SEEDS, digest_json, sha256, write_json
+from li_junhao_trajectronpp.independent_tpp.data import load_split
 from models.social_stgcnn.export import export_condition, sample_batch
 from models.social_stgcnn.model import SocialSTGCNN, bivariate_nll, future_displacements
+from models.social_stgcnn.timing import timing_batch
 from models.social_stgcnn.windows import GraphWindows
 
 SETTINGS = HERE / "configs/experiment.json"
@@ -86,7 +88,7 @@ def fit(run, stage, fold, seed, data_root, device):
               "train_identity": train.identity, "val_identity": validation.identity,
               "environment": environment(device),
               "source_sha256": {n: sha256(HERE / n) for n in
-                                ("model.py", "windows.py", "export.py", "run.py", "configs/experiment.json")}}
+                                ("model.py", "windows.py", "export.py", "run.py", "timing.py", "configs/experiment.json")}}
     run.mkdir(parents=True, exist_ok=False)
     write_json(run / "config.json", config)
     x, y = dense_clean(train, device)
@@ -146,14 +148,14 @@ def synchronize(device):
 
 
 @torch.inference_mode()
-def measure_batch_sequence(model, dataset, indices, device):
+def measure_batch_sequence(model, store, records, device):
     measurements = []
     for rep in range(13):
         synchronize(device)
         begin = time.perf_counter()
         batches = []
-        for offset in range(0, len(indices), 32):
-            source = dataset.batch(indices[offset:offset + 32], include_future=False)
+        for offset in range(0, len(records), 32):
+            source = timing_batch(store, records[offset:offset + 32])
             batches.append({key: source[key].to(device) for key in ("positions", "agent_mask")})
         synchronize(device)
         prepared = time.perf_counter()
@@ -169,18 +171,20 @@ def measure_batch_sequence(model, dataset, indices, device):
                                  "end_to_end_ms": (completed-begin)*1000})
         del cpu_outputs, predictions
     return {
-        "window_ids": [dataset.records[i].window_id for i in indices], "targets": len(indices),
+        "window_ids": [r.window_id for r in records], "targets": len(records),
         "batch_size": 32, "sample_count": 20, "warmups": 3, "measured_repetitions": 10,
         "repetitions": measurements,
         "medians": {k: statistics.median(r[k] for r in measurements) for k in measurements[0]},
     }
 
 
-def time_model(run, model, dataset, fold, device, by_density):
-    lookup = {record.window_id: i for i, record in enumerate(dataset.records)}
+def time_model(run, model, store, dataset, fold, device, by_density):
+    lookup = {record.window_id: record for record in dataset.records}
     ids = json.loads((ROOT / "benchmark/fixtures/runtime_windows.json").read_text())[fold]
-    result = measure_batch_sequence(model, dataset, [lookup[uid] for uid in ids], device)
+    result = measure_batch_sequence(model, store, [lookup[uid] for uid in ids], device)
     result["environment"] = environment(device)
+    result["timing_source_sha256"] = sha256(HERE / "timing.py")
+    result["boundary"] = "In-memory neutral SceneStore and ordered target IDs through discovery of visible peers, graph-window assembly, prediction, sampling and CPU readback."
     if by_density:
         population = dataset.available_neighbors
         result["density"] = []
@@ -191,7 +195,7 @@ def time_model(run, model, dataset, fold, device, by_density):
             indices = np.flatnonzero(selected)
             row = {"available_neighbors_bin": label, "available_windows": len(indices), "timed_windows": 0}
             if len(indices) >= 32:
-                row.update(measure_batch_sequence(model, dataset, indices[:32], device))
+                row.update(measure_batch_sequence(model, store, [dataset.records[i] for i in indices[:32]], device))
                 row["timed_windows"] = 32
             result["density"].append(row)
     write_json(run / "runtime.json", result)
@@ -244,7 +248,8 @@ def main():
         fit(run, args.stage, args.fold, args.seed, args.data, device)
     if args.phase != "train":
         model, config, hashes = restore(run, device)
-        test = GraphWindows.from_split(args.fold, "test", args.data, max_neighbors=config["max_neighbors"])
+        neutral = load_split(args.fold, "test", str(args.data))
+        test = GraphWindows(neutral, max_neighbors=config["max_neighbors"])
         if args.phase in ("all", "export"):
             destination = args.export_to or run
             for tag, _, _ in CONDITIONS:
@@ -252,7 +257,7 @@ def main():
                     export_condition(model, test, destination, seed=args.seed, tag=tag,
                                      batch_size=config["export_batch_size"], device=device, run_hashes=hashes)
         if args.phase in ("all", "runtime"):
-            time_model(run, model, test, args.fold, device, args.stage == "formal" and args.seed == 0)
+            time_model(run, model, neutral, test, args.fold, device, args.stage == "formal" and args.seed == 0)
     if args.phase == "all":
         peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
         write_json(run / "execution.json", {
