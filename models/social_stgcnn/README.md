@@ -23,6 +23,7 @@ for fold in eth hotel univ zara1 zara2; do
 done
 make score MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/formal/runs PYTHON=python
 make audit MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/formal/runs PYTHON=python
+python -m models.social_stgcnn.retime --threads 2
 ```
 
 To replay a selected checkpoint without overwriting the original predictions:
