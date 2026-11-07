@@ -1,0 +1,132 @@
+{
+  "eth": {
+    "train": {
+      "legacy": 28022,
+      "group": 26961,
+      "common": 26961,
+      "legacy_only": 1061,
+      "group_only": 0,
+      "same_order": false
+    },
+    "val": {
+      "legacy": 2296,
+      "group": 3582,
+      "common": 2274,
+      "legacy_only": 22,
+      "group_only": 1308,
+      "same_order": false
+    },
+    "test": {
+      "legacy": 364,
+      "group": 364,
+      "common": 364,
+      "legacy_only": 0,
+      "group_only": 0,
+      "same_order": false
+    }
+  },
+  "hotel": {
+    "train": {
+      "legacy": 27377,
+      "group": 26287,
+      "common": 26287,
+      "legacy_only": 1090,
+      "group_only": 0,
+      "same_order": false
+    },
+    "val": {
+      "legacy": 2071,
+      "group": 3358,
+      "common": 2046,
+      "legacy_only": 25,
+      "group_only": 1312,
+      "same_order": false
+    },
+    "test": {
+      "legacy": 1197,
+      "group": 1197,
+      "common": 1197,
+      "legacy_only": 0,
+      "group_only": 0,
+      "same_order": false
+    }
+  },
+  "univ": {
+    "train": {
+      "legacy": 7575,
+      "group": 7396,
+      "common": 7396,
+      "legacy_only": 179,
+      "group_only": 0,
+      "same_order": false
+    },
+    "val": {
+      "legacy": 1277,
+      "group": 1801,
+      "common": 1267,
+      "legacy_only": 10,
+      "group_only": 534,
+      "same_order": false
+    },
+    "test": {
+      "legacy": 24334,
+      "group": 24334,
+      "common": 24334,
+      "legacy_only": 0,
+      "group_only": 0,
+      "same_order": false
+    }
+  },
+  "zara1": {
+    "train": {
+      "legacy": 26265,
+      "group": 25212,
+      "common": 25212,
+      "legacy_only": 1053,
+      "group_only": 0,
+      "same_order": false
+    },
+    "val": {
+      "legacy": 2087,
+      "group": 3379,
+      "common": 2067,
+      "legacy_only": 20,
+      "group_only": 1312,
+      "same_order": false
+    },
+    "test": {
+      "legacy": 2356,
+      "group": 2356,
+      "common": 2356,
+      "legacy_only": 0,
+      "group_only": 0,
+      "same_order": false
+    }
+  },
+  "zara2": {
+    "train": {
+      "legacy": 23777,
+      "group": 22800,
+      "common": 22800,
+      "legacy_only": 977,
+      "group_only": 0,
+      "same_order": false
+    },
+    "val": {
+      "legacy": 1825,
+      "group": 2584,
+      "common": 1802,
+      "legacy_only": 23,
+      "group_only": 782,
+      "same_order": false
+    },
+    "test": {
+      "legacy": 5910,
+      "group": 5910,
+      "common": 5910,
+      "legacy_only": 0,
+      "group_only": 0,
+      "same_order": false
+    }
+  }
+}
