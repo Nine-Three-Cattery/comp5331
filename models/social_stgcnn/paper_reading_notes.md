@@ -1,0 +1,21 @@
+# Social-STGCNN reading notes
+
+Abduallah Mohamed, Kun Qian, Mohamed Elhoseiny and Christian Claudel, “Social-STGCNN: A Social Spatio-Temporal Graph Convolutional Neural Network for Human Trajectory Prediction,” CVPR 2020, pp. 14424–14432. [Proceedings paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Mohamed_Social-STGCNN_A_Social_Spatio-Temporal_Graph_Convolutional_Neural_Network_for_Human_CVPR_2020_paper.pdf) · [arXiv v3](https://arxiv.org/abs/2002.11927v3)
+
+## What the paper specifies
+
+- Section 4.1 represents each observed person by a position in each frame. Equation 2 assigns reciprocal Euclidean distance to pairs with positive separation. A coincident pair gets zero. Section 4.2 adds an identity matrix and weights the two ends of each edge by their inverse square-root degrees. Equation 5 applies the resulting matrix to node features before their learned projection and activation.
+- The ST-GCNN encodes the graph history. The TXP-CNN uses time as its channel axis. The first convolution changes the number of channels from observed to forecast frames. The subsequent layers have residual connections. Table 1 selects one ST-GCNN and five TXP layers. Section 6 specifies PReLU, 128 examples per batch and 250 SGD epochs, with learning rates of 0.01 and 0.002 on either side of epoch 150.
+- Equation 1 gives a bivariate Gaussian position likelihood. Section 5 evaluates 20 draws over 12 future steps after eight observations spaced 0.4 s apart. Table 3 reports 7.6K parameters for the published model.
+
+## Choices for the target-window benchmark
+
+**Graph population.** One manifest row identifies one target. The graph contains this target and every other pedestrian with eight available observations. Edges are recomputed from the supplied positions after any target perturbation or causal fill. Sorting the neighbors by ID gives a consistent representation; the target-row aggregation is symmetric in their order. [Window construction](windows.py)
+
+**Spatial and temporal operators.** Subtract the last input target position from every visible node. The resulting metric coordinates keep pairwise distances and remove the scene origin from the network input. Compute degrees on the full selected group, including neighbor-to-neighbor edges. A single graph block only needs the target row for a target forecast. The block projects the two aggregated coordinates to five channels and applies a width-three convolution over observed time. PReLU follows each operation. [Model](model.py)
+
+**Extrapolator axes.** The paper discusses input pedestrian permutations and permutations at the TXP input separately. It gives no pedestrian ordering rule or full set of kernel dimensions. Here the five time-channel convolutions operate along the target's five latent feature coordinates. They have width three, with zero padding and scalar PReLUs. There is no convolution over pedestrian ID. Four residual additions follow the initial time expansion. A linear output maps the target features to five distribution parameters per future step. These choices give 2,208 trainable parameters. [Model](model.py)
+
+**Displacements and sampling.** The local likelihood uses each two-dimensional position increment, starting at the supplied target anchor. The two marginal log standard deviations are bounded to `[-5, 3]` and the correlation is `0.9999 * tanh(r)`. A triangular factor both evaluates the likelihood and generates correlated x/y noise. The twelve noise pairs are independent conditional on the observations. Integrating them induces dependence between future **positions**, since adjacent positions share earlier increments. Training averages the loss over the batch and horizon. Twenty sets of draws produce twenty paths in meters. The change from Equation 1's position likelihood and the numerical bounds are choices in this implementation. [Distribution and sampling](model.py)
+
+The shared folds, perturbations and clean-validation checkpoint rule govern the experiment. The depth and published ablation results motivate the architecture. Performance and runtime for this implementation require its own held-out predictions and timings. [Experiment design](independent_design.md)
