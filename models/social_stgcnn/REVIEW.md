@@ -50,3 +50,9 @@ make audit MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/formal/runs PYTHON=p
 ```
 
 The shared audit validates all 90 formal bundles against the rebuilt raw-derived windows and independently recomputes the six headline metrics in `submission/contributions/social_stgcnn/results.csv`. The selected-checkpoint replay and full audit answer different questions. The replay checks inference from saved weights. The full audit checks all stored forecasts and scores.
+
+To check the validation choice for every set of trained weights, run
+`python models/social_stgcnn/check_selection.py --runs artifacts/social_stgcnn/formal/runs --data data/causal_v2`.
+It re-evaluates clean validation trajectories with the full graph and a separate
+double-precision Gaussian likelihood, then compares the stored winning epoch
+and likelihood with the recorded candidates.

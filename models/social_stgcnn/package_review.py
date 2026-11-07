@@ -69,6 +69,7 @@ def package(project, artifacts, results, output):
     files[Path("REVIEW.md")] = Path(__file__).with_name("REVIEW.md")
     files[MODEL / "verify_review.py"] = Path(__file__).with_name("verify_review.py")
     files[MODEL / "retime.py"] = Path(__file__).with_name("retime.py")
+    files[MODEL / "check_selection.py"] = Path(__file__).with_name("check_selection.py")
     files[RESULTS] = results
     with results.open(newline="") as handle:
         rows = list(csv.DictReader(handle))
