@@ -1,0 +1,43 @@
+\subsection{Social-LSTM: social pooling and rollout behavior}
+\label{sec:social_lstm}
+\paragraph{Scope and status.}
+WANG Yifan implemented an adapted Social-LSTM and completed an exploratory five-fold study. The implementation, diagnostics and local evidence are available, but the contribution remains \textbf{pending} under the group's \texttt{causal\_v2} benchmark. All numbers in this subsection describe the separate exploratory study. They must not populate the group's audited comparison table.
+
+\paragraph{Architecture and attribution.}
+Social-LSTM models interactions by placing neighboring pedestrians' recurrent hidden states into a spatial grid and pooling them before the next recurrent update \cite{alahi2016social}. For target $i$, our grid aggregates $h_j^{t-1}$ over neighbors $j$ in each cell relative to the target. An embedding of this social tensor and an embedding of the pedestrian displacement enter an LSTM. A bivariate Gaussian output models the next displacement, and autoregressive rollout generates twelve future positions from eight observations at 0.4-second intervals. Hidden and embedding dimensions are 128 and 64. The grid contains $8\times8$ cells over a 4-meter neighborhood.
+
+Our implementation adds a residual-velocity connection: the displacement mean equals the previous displacement plus a learned residual. This is an implementation deviation, not a claim of exact reproduction of the paper. We independently implemented the model in PyTorch. The accompanying source inventory records external references and AI assistance, and the frozen Social-STGCNN dataset release supplies trajectory files rather than model code.
+
+\paragraph{Training and exploratory evaluation.}
+The local study used five held-out scenes and training seeds 11, 22 and 33, giving 15 runs. Each run trained for 12 epochs with Adam at learning rate $10^{-3}$ and dropout 0.1. Validation teacher-forced Gaussian negative log-likelihood selected checkpoints. We evaluated 20 sampled forecasts under clean histories, three Gaussian noise levels and two missing-suffix conditions, giving 90 model evaluations. Metrics first average within each scene, then equally across scenes, and finally report the mean and sample standard deviation across training seeds. These standard deviations describe seed variation, not confidence intervals.
+
+\begin{table}[ht]
+\centering\small
+\caption{Exploratory clean results in meters. Different sample summaries answer different questions. These are not shared benchmark scores.}
+\label{tab:social_lstm-legacy}
+\begin{tabular}{lrr}\toprule
+Predictor and summary & ADE & FDE \\\midrule
+Constant velocity, one path & 0.534 & 1.148 \\
+Social-LSTM, mean error over 20 paths & $0.923\pm0.019$ & $1.996\pm0.053$ \\
+Social-LSTM, minimum error over 20 paths & $0.348\pm0.011$ & $0.617\pm0.038$ \\\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation and robustness.}
+Best-of-20 accuracy indicates that some sampled paths approach the observed future, but typical sampled forecasts have higher error than constant velocity on this local split. The ADE of the average of 20 trajectories is 0.657\,m, which differs from averaging their individual ADE values. Thus, the minimum error cannot establish superior deterministic prediction. Clean per-scene mean ADE is 1.257, 0.813, 0.893, 0.861 and 0.791\,m for ETH, Hotel, Univ, Zara1 and Zara2. At noise standard deviation 0.20\,m, mean ADE increases to 2.548\,m. With two missing observations, it is 1.067\,m. Here corruption affected all available pedestrian contexts, unlike the group's target-only corruption. These results therefore describe local sensitivity and cannot support a cross-model robustness ranking.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.88\linewidth]{contributions/social_lstm/evidence/legacy_hotel_turning.png}
+\caption{A selected Hotel turning case from the exploratory study. This illustrates a failure mode and is not a representative sample or a shared fixed-ID benchmark example.}
+\label{fig:social_lstm-turning}
+\end{figure}
+
+\paragraph{Reproduction discrepancies and diagnostics.}
+The residual-velocity path carries sampling noise into later displacements. With a frozen residual function and independent displacement innovations of variance $\sigma^2$, endpoint variance after $T$ steps is $\sigma^2\sum_{r=1}^{T}r^2$, rather than $T\sigma^2$. At $T=12$ these factors are 650 and 12. This simplified calculation identifies a possible amplification mechanism, not a complete causal explanation of a learned recurrent model. A checkpoint diagnostic found that a 0.01\,m first-step perturbation changed selected final positions by about 0.114--0.118\,m. Teacher-forced likelihood is a valid autoregressive objective, but checkpoint selection did not measure closed-loop forecast quality. In addition, training's future stage excludes neighbors with incomplete future tracks while inference retains observation-complete neighbors. This creates a graph-distribution mismatch. A small anchored-control retraining did not improve validation error, so we do not claim that these issues have been resolved.
+
+\paragraph{Runtime and verification.}
+The study ran on a MacBook with CPU and Apple MPS support. At 32 pedestrians, local prediction timing was 5.78\,ms on CPU and 10.40\,ms on MPS for one path, versus 57.51 and 29.10\,ms for 20 paths. These are separate local measurements, not the shared 128-target runtime benchmark. Deterministic CPU/MPS predictions differed by less than $4\times10^{-6}$\,m in the diagnostic. Numerical checks support execution integrity, but do not establish paper fidelity or forecast quality.
+
+\paragraph{Remaining integration work.}
+The formal Social-LSTM entry requires deterministic $K=1$, seeds 0/1/2, the shared ordered manifests and loader, target-only corruption, shared RMS-norm Energy Score, standard timing, and complete hashes and audit receipts. The shared results file intentionally contains only its header. We retain the exploratory evidence separately and leave promotion to ready status until those runs and the owner audit pass. The current contribution supports discussion of social pooling and implementation limitations, but is not a finished six-model comparison entry.

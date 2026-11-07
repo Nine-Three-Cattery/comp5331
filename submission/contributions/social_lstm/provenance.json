@@ -1,0 +1,34 @@
+{
+  "protocol": "causal_v2",
+  "status": "pending",
+  "runs": 0,
+  "prediction_bundles": 0,
+  "artifact": {
+    "name": "",
+    "sha256": ""
+  },
+  "evidence": {},
+  "runtime_ms": {
+    "preprocessing_ms": null,
+    "prediction_sampling_ms": null,
+    "end_to_end_ms": null
+  },
+  "exploratory_study": {
+    "protocol": "legacy local protocol; not causal_v2",
+    "runs": 15,
+    "prediction_bundles": 90,
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "sample_count": 20,
+    "source": "evidence/legacy_macro_summary.csv",
+    "limitations": [
+      "Different ordered windows and seeds",
+      "All-context rather than target-only perturbations",
+      "Different Energy Score norm",
+      "Adapted residual-velocity implementation"
+    ]
+  }
+}

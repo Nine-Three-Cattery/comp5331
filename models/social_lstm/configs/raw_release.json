@@ -1,0 +1,48 @@
+{
+  "repository": "https://github.com/abduallahmohamed/Social-STGCNN",
+  "commit": "333d3a57b4d2705e129b21aefefa09c79b2b9ae1",
+  "files": [
+    {
+      "recording": "biwi_eth",
+      "scene": "eth",
+      "url": "https://raw.githubusercontent.com/abduallahmohamed/Social-STGCNN/333d3a57b4d2705e129b21aefefa09c79b2b9ae1/datasets/raw/all_data/biwi_eth.txt",
+      "sha256": "cf8d3fd342a15f409ebc2a1fc76b91a0f06390bd21f1e11410f3859331ab082b",
+      "rows": 5492
+    },
+    {
+      "recording": "biwi_hotel",
+      "scene": "hotel",
+      "url": "https://raw.githubusercontent.com/abduallahmohamed/Social-STGCNN/333d3a57b4d2705e129b21aefefa09c79b2b9ae1/datasets/raw/all_data/biwi_hotel.txt",
+      "sha256": "9caa771bb9153d6b809dd0916b6f86761b641e6bbb15e766c1de3133fbbb7fcf",
+      "rows": 6543
+    },
+    {
+      "recording": "students001",
+      "scene": "univ",
+      "url": "https://raw.githubusercontent.com/abduallahmohamed/Social-STGCNN/333d3a57b4d2705e129b21aefefa09c79b2b9ae1/datasets/raw/all_data/students001.txt",
+      "sha256": "a6d87f278d94136fe39b8be91555487a29ac77259ae403b9dba2d5c18caf7b5b",
+      "rows": 21813
+    },
+    {
+      "recording": "students003",
+      "scene": "univ",
+      "url": "https://raw.githubusercontent.com/abduallahmohamed/Social-STGCNN/333d3a57b4d2705e129b21aefefa09c79b2b9ae1/datasets/raw/all_data/students003.txt",
+      "sha256": "e25798b660634330aa89f8bb259425de720e84d0873902726c1d1f4ccff21d6c",
+      "rows": 17953
+    },
+    {
+      "recording": "crowds_zara01",
+      "scene": "zara1",
+      "url": "https://raw.githubusercontent.com/abduallahmohamed/Social-STGCNN/333d3a57b4d2705e129b21aefefa09c79b2b9ae1/datasets/raw/all_data/crowds_zara01.txt",
+      "sha256": "1147a1962a09abfb86f28c6cddcac862e095a0cf129b3016385b69eacdd09d85",
+      "rows": 5153
+    },
+    {
+      "recording": "crowds_zara02",
+      "scene": "zara2",
+      "url": "https://raw.githubusercontent.com/abduallahmohamed/Social-STGCNN/333d3a57b4d2705e129b21aefefa09c79b2b9ae1/datasets/raw/all_data/crowds_zara02.txt",
+      "sha256": "8a649d0f8c9ae75c87c4d23a85f892786b0aa30266e996c7be03e69dafff22ff",
+      "rows": 9722
+    }
+  ]
+}

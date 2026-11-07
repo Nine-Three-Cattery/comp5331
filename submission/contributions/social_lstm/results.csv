@@ -1,0 +1,1 @@
+protocol,fold,seed,condition,window_count,sample_count,manifest_hash,config_hash,checkpoint_sha256,prediction_sha256,min_ade_mean,min_fde_mean,mean_ade_mean,mean_fde_mean,energy_score_mean,sample_diversity_mean

@@ -1,0 +1,36 @@
+{
+  "device": "mps",
+  "hardware": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "processor": "arm",
+  "torch": "2.11.0",
+  "threads": 1,
+  "measurements": [
+    {
+      "people": 8,
+      "K": 20,
+      "median_seconds": 0.014721562969498336,
+      "p90_seconds": 0.017468766681849955,
+      "repeats": 10,
+      "warmup": 3,
+      "boundary": "observed tensor on device -> 20 joint future tensor on device; allocation/RNG included; data loading/metrics/export excluded"
+    },
+    {
+      "people": 16,
+      "K": 20,
+      "median_seconds": 0.017252936959266663,
+      "p90_seconds": 0.020721008093096314,
+      "repeats": 10,
+      "warmup": 3,
+      "boundary": "observed tensor on device -> 20 joint future tensor on device; allocation/RNG included; data loading/metrics/export excluded"
+    },
+    {
+      "people": 32,
+      "K": 20,
+      "median_seconds": 0.02909766702214256,
+      "p90_seconds": 0.02981067559449002,
+      "repeats": 10,
+      "warmup": 3,
+      "boundary": "observed tensor on device -> 20 joint future tensor on device; allocation/RNG included; data loading/metrics/export excluded"
+    }
+  ]
+}

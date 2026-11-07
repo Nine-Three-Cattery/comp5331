@@ -1,0 +1,30 @@
+{
+  "model.py": {
+    "sha256": "8ca5d83be816f7aed7d97212703ec7255822d8ea0c91e034309f91b2a6d7822e",
+    "origin": "owner-authored local exploratory implementation, source snapshot 2026-11-05"
+  },
+  "data.py": {
+    "sha256": "963850323a0aa528cec6087a1d2b74f0c48f15ae16f6fa22e88ea25c826941fe",
+    "origin": "owner-authored local exploratory implementation, source snapshot 2026-11-05"
+  },
+  "metrics.py": {
+    "sha256": "4d397df84f4660a352a195deb5f7e151f6a5940b44286db7974248de38267ea8",
+    "origin": "owner-authored local exploratory implementation, source snapshot 2026-11-05"
+  },
+  "run.py": {
+    "sha256": "42b897fee2e457de07b9155b7b2ffd5dbbab05b6ea685489c4813696be480b1a",
+    "origin": "owner-authored local exploratory implementation, source snapshot 2026-11-05"
+  },
+  "verify_exports.py": {
+    "sha256": "091f4e9b4f262e483494dd70c06fdbbeccc8920c2346f461f86e9ce3286d8259",
+    "origin": "owner-authored local exploratory implementation, source snapshot 2026-11-05"
+  },
+  "diagnostics.py": {
+    "sha256": "bd061c63373dfa94998a1f1e942417f242ca13d03e2c46b34dad679aaa924b57",
+    "origin": "owner-authored local exploratory implementation, source snapshot 2026-11-05"
+  },
+  "reproduce.py": {
+    "sha256": "51c9eeed94725659fda3e3647757f05743aeb1cb1323e23ea8de7c3c3dcc83a0",
+    "origin": "owner-authored local exploratory implementation, source snapshot 2026-11-05"
+  }
+}

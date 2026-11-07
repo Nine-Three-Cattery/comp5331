@@ -1,0 +1,40 @@
+% Three content frames, approximately three minutes. Exploratory evidence only.
+\begin{frame}{Social-LSTM pools neighboring motion histories}
+\textcolor{Teal}{\large WANG Yifan \quad Social-LSTM}
+\medskip
+\begin{itemize}
+\item Eight observed positions predict twelve future positions.
+\item Each pedestrian has an LSTM. A spatial grid pools neighbors' hidden states.
+\item Our Gaussian decoder adds a residual-velocity connection.
+\end{itemize}
+\medskip
+\textbf{Exploratory study:} 5 folds, 3 seeds, 15 training runs, 20 sampled paths.
+\par\medskip
+{\footnotesize\color{Muted}Alahi et al., CVPR 2016. Adapted implementation. Shared causal\_v2 evaluation remains pending.}
+\end{frame}
+
+\begin{frame}{Best-of-20 coverage differs from typical error}
+\centering
+\begin{tabular}{lr}\toprule
+Exploratory clean metric & ADE (m) \\\midrule
+Constant velocity, one path & 0.534 \\
+Social-LSTM, mean error over 20 paths & 0.923 \\
+Social-LSTM, minimum error over 20 paths & 0.348 \\\bottomrule
+\end{tabular}
+\medskip
+\begin{itemize}
+\item Some samples approach the future, but average sample error stays high.
+\item At 0.20\,m history noise, mean ADE rises to 2.548\,m.
+\end{itemize}
+{\footnotesize\color{Muted}Equal-scene macros. Local protocol and all-context corruption. Not a shared model ranking.}
+\end{frame}
+
+\begin{frame}{Rollout diagnostics reveal accumulated drift}
+\centering
+\includegraphics[width=.97\linewidth]{contributions/social_lstm/evidence/legacy_hotel_turning.png}
+\par\smallskip
+\small Sampled velocity feeds forward. Closed-loop quality needs validation.
+
+\par\medskip
+{\footnotesize\color{Muted}Selected exploratory Hotel failure. A control retraining did not resolve the issue.}
+\end{frame}
