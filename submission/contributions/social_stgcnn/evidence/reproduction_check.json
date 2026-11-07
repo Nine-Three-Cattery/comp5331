@@ -1,0 +1,76 @@
+{
+  "case": "formal/eth/seed_0/clean_0",
+  "comparison": {
+    "ground_truth": {
+      "different_values": 0,
+      "dtype": "float32",
+      "exact": true,
+      "max_absolute_difference_m": 0.0,
+      "shape": [
+        364,
+        12,
+        2
+      ]
+    },
+    "manifest_order": {
+      "exact": true
+    },
+    "metadata": {
+      "different_keys": [],
+      "exact": true
+    },
+    "observed": {
+      "different_values": 0,
+      "dtype": "float32",
+      "exact": true,
+      "max_absolute_difference_m": 0.0,
+      "shape": [
+        364,
+        8,
+        2
+      ]
+    },
+    "observed_mask": {
+      "different_values": 0,
+      "dtype": "bool",
+      "exact": true,
+      "shape": [
+        364,
+        8
+      ]
+    },
+    "records": {
+      "different_rows": 0,
+      "exact": true,
+      "rows": 364
+    },
+    "sample_budget": {
+      "exact": true
+    },
+    "samples": {
+      "different_values": 0,
+      "dtype": "float32",
+      "exact": true,
+      "max_absolute_difference_m": 0.0,
+      "shape": [
+        364,
+        20,
+        12,
+        2
+      ]
+    }
+  },
+  "environment": {
+    "architecture": "x86_64",
+    "cpu_threads": 2,
+    "numpy": "2.5.3",
+    "os": "Linux",
+    "pandas": "3.0.6",
+    "python": "3.12.3",
+    "torch": "2.14.0+cpu"
+  },
+  "numerical_source_commit": "2b2d57de6d5ff009f1388e1f0d9baf948e9db4ac",
+  "status": "passed",
+  "verified_bundles": 96,
+  "verified_files": 238
+}

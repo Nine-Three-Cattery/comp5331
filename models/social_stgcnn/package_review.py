@@ -81,6 +81,7 @@ def package(project, artifacts, results, output):
     # The published scores bind formal checkpoints and bundles. A new digest
     # over an unrelated run would not establish that it produced those scores.
     published = {}
+    pilot_entry = None
     for stage in ("pilot", "formal"):
         receipt_name = "pilot_audit.json" if stage == "pilot" else "benchmark_audit.json"
         receipt = json.loads((artifacts / receipt_name).read_text())
@@ -106,8 +107,12 @@ def package(project, artifacts, results, output):
                 raise ValueError(f"No validation-selected checkpoint for {relative}")
             for name, digest in config["source_sha256"].items():
                 if stage == "pilot" and name == "run.py":
-                    if digest != PILOT_RUN_SHA256:
-                        raise ValueError("Pilot entry point differs from its training and prediction revision")
+                    if digest == PILOT_RUN_SHA256:
+                        pilot_entry = (PILOT_COMMIT, digest)
+                    elif digest == sha256(project / MODEL / "run.py"):
+                        pilot_entry = (NUMERICAL_COMMIT, digest)
+                    else:
+                        raise ValueError("Unknown numerical entry point for this pilot")
                     continue
                 source_path = MODEL / name
                 if source_path in published and published[source_path] != digest:
@@ -145,7 +150,7 @@ def package(project, artifacts, results, output):
     inventory = {
         "protocol": protocol["VERSION"], "group_base_commit": GROUP_BASE,
         "numerical_source_commit": NUMERICAL_COMMIT, "benchmark_contract_sha256": contract,
-        "pilot_training_and_prediction_commit": PILOT_COMMIT, "pilot_run_py_sha256": PILOT_RUN_SHA256,
+        "pilot_training_and_prediction_commit": pilot_entry[0], "pilot_run_py_sha256": pilot_entry[1],
         "pilot_timing_commit": NUMERICAL_COMMIT,
         "matched_timing_driver_commit": "1987673",
         "raw_release_commit": runpy.run_path(str(project / SHARED / "scripts/fetch_causal_raw.py"))["COMMIT"],

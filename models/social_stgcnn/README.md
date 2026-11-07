@@ -23,7 +23,10 @@ for fold in eth hotel univ zara1 zara2; do
 done
 make score MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/formal/runs PYTHON=python
 make audit MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/formal/runs PYTHON=python
+cp artifacts/social_stgcnn/benchmark_audit.json submission/contributions/social_stgcnn/
 python -m models.social_stgcnn.retime --threads 2
+python models/social_stgcnn/check_selection.py --runs artifacts/social_stgcnn/formal/runs --data data/causal_v2
+python -m models.social_stgcnn.analyze --phase extract
 ```
 
 To replay a selected checkpoint without overwriting the original predictions:
@@ -41,3 +44,12 @@ python models/social_stgcnn/run.py formal --phase export --fold eth --seed 0 \
 - `run.py` owns training, validation selection, export and synchronized timing.
 - `configs/experiment.json` freezes the settings used for the pilot and formal matrix.
 - `own_unit_tests/` covers graph geometry, causality, distribution calculations and the export interface.
+- `analyze.py` pairs the formal outcomes and writes compact evidence; its render phase draws the figures from those tables alone. Rendering used Matplotlib 3.11.2.
+- `timing.py` constructs runtime inputs directly from the neutral store; `retime.py` measures all selected weights on one physical host. `check_selection.py` recomputes the winning validation likelihoods.
+- `package_review.py`, `verify_review.py` and `handoff.py` package the original forecasts, verify the extracted files and prepare the submission provenance. [Reviewer instructions](REVIEW.md)
+
+## Report and presentation
+
+The [contribution](../../submission/contributions/social_stgcnn/README.md) includes the 90-row score table, English subsection, three Beamer frames, a 379-word script and the individual contribution paragraph. The group build takes its totals directly from the scored CSV. After numerical extraction, use `python -m models.social_stgcnn.analyze --phase render` on a machine with Matplotlib, then `make preview MODEL=social_stgcnn`. To compile the isolated two-page report and three-slide deck with the same preambles, run `python models/social_stgcnn/preview.py`.
+
+The [review archive](https://github.com/Nine-Three-Cattery/comp5331/releases/download/social-stgcnn-causal-v2-review-v1/social_stgcnn_causal_v2_review.tar) is a private repository asset. Its external size and SHA-256 are in the [provenance record](../../submission/contributions/social_stgcnn/provenance.json). The reference experiment passed the six-condition pilot, the 90-bundle common audit and the fresh-checkout checkpoint replay.
