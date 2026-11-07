@@ -1,0 +1,14 @@
+{
+  "adversarial_weight": 0.05,
+  "batch_size": 128,
+  "epochs": 20,
+  "latent_dim": 8,
+  "learning_rate": 0.001,
+  "neighbor_limit": 12,
+  "neighbor_radius_m": 6.0,
+  "patience": 5,
+  "pilot_epochs": 2,
+  "sample_count": 20,
+  "threads": 2,
+  "variety_draws": 20
+}
