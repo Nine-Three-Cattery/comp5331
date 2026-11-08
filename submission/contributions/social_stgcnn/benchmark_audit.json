@@ -3,6 +3,6 @@
   "model": "social_stgcnn",
   "prediction_bundles": 90,
   "protocol": "causal_v2",
-  "results_sha256": "c57d1aa7616eac37aadabbb688462cee31a7c84d03a33998c54cb0c7538e0808",
+  "results_sha256": "8f3732e152605710f069977adac8e9c140188011b6bf2194251eb3e78095b7e2",
   "status": "passed"
 }

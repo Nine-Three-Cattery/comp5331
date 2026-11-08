@@ -1,4 +1,4 @@
 case,selection_rule,fold,seed,condition,k,window_id,runtime_fixture_index,available_and_used_neighbors,min_ade,min_fde,mean_ade,mean_fde,energy_score,sample_diversity
-fixed_eth,"Runtime fixture, zero-based index 64",eth,0,clean_0,20,eth:biwi_eth:171:801,64.0,2,1.6866311345286136,3.468882617574012,2.2472485583686983,4.889377042449734,2.31869706572826,0.686003727042097
-fixed_univ,"Runtime fixture, zero-based index 64",univ,0,clean_0,20,univ:students001:101:156,64.0,45,0.7130405887396248,1.5258862306240246,0.9784075745506116,2.331644537157177,1.0654260660014647,0.3216694561636811
-failure,Highest clean minADE@20 among all five held-out scenes at seed 0. Break exact ties by lexicographically smallest window ID.,univ,0,clean_0,20,univ:students003:434:519,,23,4.667132306354271,9.524103993867008,5.018485580782781,9.993133055030407,5.687452490885242,0.4972152835027126
+fixed_eth,"Runtime fixture, zero-based index 64",eth,0,clean_0,20,eth:biwi_eth:171:801,64.0,2,1.3279216784831027,2.7811459151106552,1.5440966779158345,3.4358198109562537,1.7077981649956562,0.2799057964194719
+fixed_univ,"Runtime fixture, zero-based index 64",univ,0,clean_0,20,univ:students001:101:156,64.0,45,0.2179071540851731,0.4153775568752064,0.5467589009245953,0.985068912884642,0.3143161100727165,0.6106753786109755
+failure,Highest clean minADE@20 among all five held-out scenes at seed 0. Break exact ties by lexicographically smallest window ID.,eth,0,clean_0,20,eth:biwi_eth:230:907,,4,4.7827158157292695,8.35778568200276,5.160411137813403,9.183489998262583,5.64826659226244,0.5310802073295383

@@ -1,113 +1,113 @@
-\subsection{Social-STGCNN with a target-only readout}
+\subsection{Social-STGCNN}
 \label{sec:social_stgcnn}
 
-\textbf{A graph of the observed crowd.}
-Each frame connects all pedestrians with eight visible positions, including
-those who disappear after observation. We use inverse spatial distances,
-zero weight for coincident pairs, unit self-loops and symmetric degree
-normalization~\cite{mohamed2020socialstgcnn}. One graph layer and one
-observed-time convolution encode the target. Five time-channel convolutions
-produce twelve bivariate Gaussian increments. We integrate twenty sampled
-sequences from the target's last input position.
+\textbf{A graph of pedestrian motion.}
+The paper defines its graph on pedestrian positions~\cite{mohamed2020socialstgcnn}.
+We follow the released network~\cite{mohamedstgcnncode}, which uses
+displacements between consecutive frames. For two different displacement
+vectors, the edge weight is the reciprocal of the distance between them.
+Identical vectors have zero edge weight. After adding unit self-loops, a graph
+convolution applies the symmetrically normalized Laplacian to projected node
+features. A temporal convolution and a residual path complete the encoder.
+Five extrapolation convolutions mix features across pedestrians in numeric ID
+order. The full network uses all 6,254 parameters active in the release.
+We sample a bivariate Gaussian displacement at each
+future step and sum the twelve increments from the target's last input position.
 
-Before any learned layer, each frame reduces to one weighted sum of centered positions.
-Consider a stationary target with two neighbors equally far away on opposite
-sides. Their contributions cancel whether both approach or both retreat.
-The released decoder~\cite{mohamedstgcnncode} convolves across features and
-pedestrians. Ours convolves across features alone and the full network has
-2,208 parameters, compared with about 7,600 in the paper. The released graph
-uses displacement differences and a normalized Laplacian. Our spatial graph
-follows the position kernel and normalized adjacency in the paper.
+\textbf{Training and verification.}
+Every peer present in all eight observed frames enters the graph, including
+those who subsequently leave. Only targets with future labels enter the loss.
+The authors' loader requires complete 20-frame tracks and at least two
+pedestrians. Our singleton scenes retain the residual path. We perturb target
+history before rounding positions to four decimals and differencing. SGD
+averaged up to 128 scene losses per update for 250 epochs. The checkpoint with
+the lowest clean-validation displacement negative log likelihood served all
+six conditions for its fold and seed. With our selected weights and the same
+random draws, the authors' network reproduced all 21,600 forecast coordinates
+in 45 cases at five fixed windows within $3.82\times10^{-6}$\,m.
 
-\textbf{Training and measurement.}
-SGD uses batches of 128 for 250 epochs, with a learning rate of 0.01 through
-epoch 150 and 0.002 thereafter. All six conditions use the checkpoint with
-the lowest clean-validation displacement negative log likelihood for that
-fold and seed. Changing target or neighbor futures leaves model inputs fixed.
-Perturbing target history changes its features and edges. The cached training
-path matches the full graph calculation, including the parameter gradients.
-
-\textbf{Coverage and typical error.}
-On clean histories, minADE and minFDE at twenty draws were
-\ModelMetric{social_stgcnn}{clean_0}{min_ade_mean} and
-\ModelMetric{social_stgcnn}{clean_0}{min_fde_mean}\,m. MeanADE and meanFDE
-were \ModelMetric{social_stgcnn}{clean_0}{mean_ade_mean} and
-\ModelMetric{social_stgcnn}{clean_0}{mean_fde_mean}\,m. Each minimum uses
-the observed future to select a draw for that metric. Re-scoring the same
-forecasts from one draw to twenty reduced minADE from 0.938 to 0.615\,m.
-MeanADE changed by less than 0.002\,m. The clean Energy Score was
-\ModelMetric{social_stgcnn}{clean_0}{energy_score_mean}\,m. The three
-seed-level meanADE macros had a standard deviation of 0.023\,m.
-The paper reports 0.44/0.75\,m with a different decoder, graph construction
-in the released code, and target population.
+\textbf{Clean forecasts.}
+We averaged three seeds within each holdout and weighted the five holdouts
+equally (Table~\ref{tab:social_stgcnn_scenes}). At 20 draws, minimum ADE and
+FDE were \ModelMetric{social_stgcnn}{clean_0}{min_ade_mean} and
+\ModelMetric{social_stgcnn}{clean_0}{min_fde_mean}\,m, with the best draw
+chosen separately for each metric. Mean ADE and FDE were
+\ModelMetric{social_stgcnn}{clean_0}{mean_ade_mean} and
+\ModelMetric{social_stgcnn}{clean_0}{mean_fde_mean}\,m. The Energy Score was
+\ModelMetric{social_stgcnn}{clean_0}{energy_score_mean}\,m and sample diversity was
+\ModelMetric{social_stgcnn}{clean_0}{sample_diversity_mean}\,m. The standard
+deviation of mean ADE across the three seed-level macros was 0.047\,m.
+Scoring the first 1, 5, 10 and 20 draws from the same forecasts reduced minimum
+ADE from 0.971 to 0.710, 0.639 and 0.583\,m. Mean ADE varied by less than
+0.001\,m. The published best-of-20 ADE and FDE were 0.44 and 0.75\,m
+on the authors' cohorts~\cite{mohamed2020socialstgcnn}.
 
 \begin{table}[H]
 \centering
-\caption{Clean ADE in meters, averaged over three seeds per held-out scene.
-The 34,161 distinct target windows include 24,334 from Univ.}
+\caption{Clean forecast errors in meters at \(K=20\). Each holdout receives
+equal weight in the overall result despite the different target-window counts.}
 \label{tab:social_stgcnn_scenes}
 \small
 \begin{tabular}{lrrrrr}
 \toprule
-Twenty draws & ETH & Hotel & Univ & Zara1 & Zara2 \\
+Holdout & Windows & minADE & meanADE & minFDE & meanFDE \\
 \midrule
-Minimum ADE & 1.053 & 0.523 & 0.620 & 0.437 & 0.442 \\
-Mean ADE    & 1.363 & 0.862 & 0.954 & 0.776 & 0.744 \\
+ETH   & 364    & 0.918 & 1.307 & 1.696 & 2.456 \\
+Hotel & 1,197  & 0.595 & 0.965 & 1.008 & 1.745 \\
+Univ  & 24,334 & 0.528 & 0.937 & 0.890 & 1.653 \\
+Zara1 & 2,356  & 0.468 & 0.865 & 0.795 & 1.586 \\
+Zara2 & 5,910  & 0.407 & 0.779 & 0.643 & 1.362 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{History corruption.}
-Relative to clean histories, 0.05, 0.10 and 0.20\,m Gaussian position noise
-raised meanADE by 0.062, 0.203 and 0.570\,m. Filling the last one or two
-observations by constant-velocity extrapolation raised it by 0.041 and
-0.095\,m. The 0.20\,m noise condition hurt more than the two-point gap on
-all five holdouts. Hotel had the largest noise penalty (0.760\,m), and
-Univ the smallest (0.200\,m). These differences pair the same target,
-checkpoint and draw stream across conditions.
+\textbf{Sensitivity to the target history.}
+With windows, checkpoints and random draws paired to clean, 0.05, 0.10 and
+0.20\,m position noise raised mean ADE by 0.027, 0.105 and 0.341\,m.
+Filling the last one or two observations by constant-velocity extrapolation
+raised it by 0.036 and 0.090\,m. Noise at 0.20\,m hurt more than the two-step
+gap on every holdout. The gap between those penalties was widest on Hotel
+(0.432 versus 0.046\,m) and narrowest on ETH (0.264 versus 0.230\,m).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=.87\linewidth,height=1.84in,keepaspectratio]{contributions/social_stgcnn/assets/paired_robustness.pdf}
-\caption{MeanADE change relative to clean input. Each open circle is a
-held-out scene after averaging three seeds. The diamond is the five-scene
-average. Only the target's observed history receives the perturbation.}
+\includegraphics[width=.84\linewidth,height=1.62in,keepaspectratio]{contributions/social_stgcnn/assets/paired_robustness.pdf}
+\caption{Paired changes in mean ADE from clean input. Each circle represents
+one holdout averaged over three seeds. Diamonds mark the five-holdout average.}
 \label{fig:social_stgcnn_robustness}
 \end{figure}
 
 \begin{samepage}
-\textbf{Where forecasts miss.}
-Most draws overshoot in both fixed examples (Figure~\ref{fig:social_stgcnn_paths}).
-The ETH pedestrian slows and turns. The Univ pedestrian ends 0.89\,m from the anchor.
-The largest clean minADE at seed
-zero occurs on a Univ reversal with 23 visible neighbors. The nearest of
-twenty endpoints misses by 9.52\,m.\par
+\textbf{A missed slowdown.}
+In the fixed ETH example, the pedestrian turned back past the anchor in \(x\),
+while all 20 draws continued forward. The fixed Univ pedestrian slowed, and the
+closest draw had an ADE of 0.218\,m. The largest clean minADE across all seed-0
+windows was 4.783\,m for ETH pedestrian 230 at anchor 907
+(Figure~\ref{fig:social_stgcnn_paths}). The target had advanced 6.50\,m in \(x\)
+during observation, then ended just 1.15\,m from the anchor. Every sampled
+endpoint lay 8.79--10.42\,m from the anchor. The closest endpoint missed the
+observed destination by 8.36\,m.\par
 \end{samepage}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=.96\linewidth,height=2.12in,keepaspectratio]{contributions/social_stgcnn/assets/trajectories.pdf}
-\caption{The first two windows were fixed before scoring and the third was selected by error.
-Each panel uses its own range with equal axis units and the last observation at the origin.}
+\includegraphics[width=.98\linewidth,height=1.78in,keepaspectratio]{contributions/social_stgcnn/assets/trajectories.pdf}
+\caption{Seed-0 clean trajectories. We fixed the ETH and Univ examples at
+index 64 of each runtime list before inspecting errors and selected the third
+by its minADE. Axes show meters from the last observation at equal \(x/y\)
+scale within each panel.}
 \label{fig:social_stgcnn_paths}
 \end{figure}
 
-\textbf{Crowd size, motion and cost.}
-Clean meanADE was 0.702\,m for 119 windows without neighbors and 1.005\,m for
-29,105 with eight or more. The former group covers four scenes. The latter
-includes all 24,334 Univ windows, so these groups differ in scene composition.
-In 95.8\% of windows the 99th percentile of sampled acceleration exceeded
-its fold's training threshold, giving folds equal weight.
-The mean absolute heading change was $45.0^\circ$, averaging first within each window.
-In 98.5\% of windows at least one sampled turn reached the fold's 95th
-percentile for training turns. Each window offers up to 220 turns over
-twenty draws. Both adjacent speeds must exceed 0.05\,m/s.
-For simultaneous targets sampled independently, a mean 88.6\% of draw indices
-had a pair pass closer than the fold's fifth-percentile training distance.
-
-On one two-thread Linux CPU allocation, median latency for 128 fixed targets
-was \ModelRuntime{social_stgcnn}{end_to_end_ms}\,ms. Preprocessing including
-neighbor discovery took \ModelRuntime{social_stgcnn}{preprocessing_ms}\,ms,
-and graph inference with sampling took \ModelRuntime{social_stgcnn}{prediction_sampling_ms}\,ms.
-For the first 32 eligible targets with eight or more neighbors, end-to-end
-time ranged from 6.47\,ms on Zara1 to 86.55\,ms on Univ.
+\textbf{Crowd size, turning and runtime.}
+Clean mean ADE was 0.987\,m with eight or more neighbors (29,105 windows,
+five holdouts) and 1.148\,m for isolated targets (119 windows, four holdouts).
+Univ had no isolated targets. Sampled steps turned by \(54.0^\circ\) on average
+when both speeds exceeded 0.05\,m/s. The within-window 99th percentile of
+acceleration exceeded the fold's training threshold in 99.2\% of windows.
+For independently sampled simultaneous targets, a mean 86.7\% of draw indices
+had a pair closer than the training fifth-percentile distance. On one
+two-thread CPU, end-to-end time for 128 targets in
+batches of 32 was \ModelRuntime{social_stgcnn}{end_to_end_ms}\,ms, the median
+of 15 run medians. Separate 32-target batches with at least eight neighbors
+ranged from 7.0\,ms on Zara1 to 53.6\,ms on Univ.

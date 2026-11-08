@@ -1,5 +1,8 @@
 {
+  "architecture": "released_full_scene",
+  "benchmark_contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
   "case": "formal/eth/seed_0/clean_0",
+  "checkpoint_sha256": "e334a2f3e7e2427502c8c8aa037414a682d0c197417e5bad10a3c100cec4560b",
   "comparison": {
     "ground_truth": {
       "different_values": 0,
@@ -60,17 +63,28 @@
       ]
     }
   },
+  "config_hash": "3886e2be5b520f897ed527b0c65ded2ad98baa12ce68f70f5acf89978252f61e",
   "environment": {
     "architecture": "x86_64",
-    "cpu_threads": 2,
+    "cpu_threads": 1,
     "numpy": "2.5.3",
     "os": "Linux",
     "pandas": "3.0.6",
     "python": "3.12.3",
     "torch": "2.14.0+cpu"
   },
-  "numerical_source_commit": "2b2d57de6d5ff009f1388e1f0d9baf948e9db4ac",
+  "numerical_source_commit": "db5a9efa71cdab397443eeb812d47c0014790295",
+  "original_prediction_sha256": "1e685e322dceb6e596859ea2fdd47e2159c52b1d578c3678a2ab6355b0bad9be",
+  "results_sha256": "8f3732e152605710f069977adac8e9c140188011b6bf2194251eb3e78095b7e2",
+  "scope": "fresh_source",
+  "source_sha256": {
+    "configs/experiment.json": "f1d0f978aefa49ae3384d3f9638b70f3f1be714dbf815c31235c428502b194ee",
+    "export.py": "9f47c599d62d598d789e09c9d541a8ba0d2ffd5c30ca5ff308aa5f48fe48e839",
+    "model.py": "4e408da1e88e40ac5b81a4302faded2af115f50a153cfe34a8bf6fa7f8036dde",
+    "run.py": "02b75c139295667cb8ef32f7e37b41fab07fbf60283f96fd3256777234b5f589",
+    "timing.py": "728b5233239b62e3d6891f8ee0bfb45bc5f522db19dcd1473c706591be2fae04",
+    "windows.py": "3dfd91fbeeb324f12cc7315c6ad477d64e990eb76d9552a6312c4e6e96e24de9"
+  },
   "status": "passed",
-  "verified_bundles": 96,
-  "verified_files": 238
+  "verified_bundles": 1
 }

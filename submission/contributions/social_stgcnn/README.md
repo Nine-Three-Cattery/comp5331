@@ -1,34 +1,32 @@
-# Social-STGCNN with a target-only readout · Zongmin Zhang
+# Social-STGCNN · Zongmin Zhang
 
-Every pedestrian visible for all eight observations enters the graph. The decoder receives one weighted sum of centered positions per frame and exports twenty future paths per target. The authors' released decoder retains a feature vector for every pedestrian and applies two-dimensional convolutions across the full embedding. The results below describe the target-readout variant on the group's five ETH/UCY holdouts. [Architecture and worked example](../../../models/social_stgcnn/paper_reading_notes.md#comparison-with-the-released-network-after-training)
-
-- [English report section](report.tex), [Beamer frames](slides.tex), [speaker notes](speaker_notes.md) and [individual contribution statement](contribution_statement.tex).
-- [Formal results](results.csv), [common audit receipt](benchmark_audit.json), [reproduction artifact and timing](provenance.json) and [analysis tables](evidence/).
-- [Independent implementation and run commands](../../../models/social_stgcnn/README.md), [paper and implementation differences](../../../models/social_stgcnn/paper_reading_notes.md) and [private archive verification](../../../models/social_stgcnn/REVIEW.md).
+This independent implementation reproduces the full-scene operators of Mohamed et al.'s public network. It keeps a feature vector for each pedestrian through the temporal decoder and exports twenty paths for each scored target. The implementation has 6,254 active parameters. The authors' module registers 7,563, including 1,309 in layers its forward pass skips. [Architecture and differences from the paper](../../../models/social_stgcnn/paper_reading_notes.md) · [Independent source and run commands](../../../models/social_stgcnn/README.md)
 
 ## Formal results
 
-Distances are in meters. Each row averages three seeds within a holdout, then weights the five holdouts equally. The experiment contains 34,161 distinct target windows. Each window receives twenty forecast draws.
+Distances are in meters. Each cell averages target windows within a run, three seeds per holdout, and then the five holdouts equally. The data contain 34,161 distinct test windows. Minimum ADE and minimum FDE select the best of twenty draws separately for each target.
 
-| Target history | minADE | minFDE | meanADE | meanFDE | Energy Score |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Clean | 0.615 | 1.081 | 0.940 | 1.739 | 0.830 |
-| Position noise, 0.05 m | 0.663 | 1.155 | 1.001 | 1.833 | 0.891 |
-| Position noise, 0.10 m | 0.783 | 1.342 | 1.143 | 2.051 | 1.034 |
-| Position noise, 0.20 m | 1.120 | 1.865 | 1.509 | 2.619 | 1.413 |
-| Last point missing | 0.652 | 1.131 | 0.981 | 1.793 | 0.870 |
-| Last two points missing | 0.702 | 1.189 | 1.035 | 1.853 | 0.922 |
+| Target history | minADE | minFDE | meanADE | meanFDE | Energy Score | Diversity |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Clean | 0.583 | 1.006 | 0.971 | 1.760 | 0.796 | 0.622 |
+| Gaussian noise, 0.05 m | 0.599 | 1.029 | 0.998 | 1.801 | 0.819 | 0.634 |
+| Gaussian noise, 0.10 m | 0.651 | 1.101 | 1.076 | 1.915 | 0.888 | 0.657 |
+| Gaussian noise, 0.20 m | 0.823 | 1.339 | 1.312 | 2.258 | 1.100 | 0.723 |
+| Last point missing | 0.614 | 1.051 | 1.007 | 1.808 | 0.832 | 0.622 |
+| Last two points missing | 0.662 | 1.110 | 1.061 | 1.872 | 0.884 | 0.623 |
 
-At twenty draws, best-sample ADE was 0.615 m and typical-sample ADE (mean over draws) was 0.940 m. The largest clean seed-zero minADE was 4.67 m on a pedestrian who reversed direction. The nearest sampled endpoint missed by 9.52 m.
+[Formal score table](results.csv) · [Scene, sampling, crowd, timing and motion results](evidence/) · [Matched ETH window across three input conditions](assets/shared_eth_case.pdf)
 
-## Verification and build
+## Evidence for review
 
-The ETH seed-zero pilot used two epochs, 26,961 training windows and the complete 364-target holdout under six conditions. Training, export and the initial timing pass took 34.43 seconds, with peak process RSS of 534,355,968 bytes. A subsequent timing check included visible-neighbor discovery from in-memory neutral positions. The final latency measurements use that boundary on one physical CPU node.
+The two-epoch ETH pilot covered 2,395 training scenes, 26,961 scored training targets and the full 364-target test manifest under all six conditions. The training, export and timing command took 38.14 seconds with a peak resident set of 443,060,224 bytes. The formal experiment trained fifteen fresh models for 250 epochs each. The winner among 51 clean-validation candidates ranged from epoch 95 to 250. Re-evaluation of all selected checkpoints with uncached graphs and a separate double-precision Gaussian likelihood reproduced the saved validation NLLs to within 6.0 × 10⁻⁸ nats per step. [Pilot receipt](evidence/pilot_audit.json) · [Selection check](evidence/selection_check.json)
 
-All fifteen formal runs used 250 epochs. Among 51 clean-validation candidates per run, the selected checkpoints ranged from epochs 80 to 250. Re-evaluating each saved checkpoint with uncached graphs and a separate double-precision Gaussian likelihood reproduced its recorded validation loss within 7.5 × 10⁻⁸ nats per target step. See the [selection replay](evidence/selection_check.json).
+The course model and the authors' code agreed on all-node outputs, active parameter gradients and batch-normalization state in six numerical cases, including a recorded ETH example. We also loaded each trained checkpoint into the authors' network and regenerated twenty forecast paths for one fixed target per holdout, using the same noise as the formal export. The 45 comparisons span three seeds and three conditions. The maximum difference across 21,600 coordinates was 3.82 × 10⁻⁶ m, below the prespecified tolerance of 0.0001 m. [Operator checks](evidence/source_parity.json) · [Trained reference comparison](evidence/trained_reference.json)
 
-During review, an owner-written calculation of min/mean ADE and FDE agreed with the shared score table on all 90 frozen bundles to within 8.9 × 10⁻¹⁶ m. On clean inputs the mean absolute turn between successive sampled steps was 0.785 rad (45.0°). In 98.5% of windows at least one sampled turn reached the fold-specific 95th percentile for training turns. This percentage uses the maximum over up to 220 turns per window. Folds receive equal weight. [Per-run values](evidence/review_metrics.csv) · [Definitions and reproduction](../../../models/social_stgcnn/REVIEW.md#review-additions-for-the-same-frozen-forecasts)
+The group evaluator independently rescored all 90 forecast bundles. A separate calculation of all four displacement columns had a maximum difference of 8.9 × 10⁻¹⁶ m. A fresh checkout reproduced all 174,720 clean ETH seed-zero forecast coordinates exactly, together with the masks, future labels and ordered target records. Unpacking the finished archive verified 256 listed files, including all 90 formal and six pilot bundles. [Group audit](benchmark_audit.json) · [Owner calculation and heading diagnostics](evidence/review_metrics.csv) · [Fresh-source replay](evidence/reproduction_check.json) · [Unpacked artifact replay](evidence/extracted_reproduction_check.json)
 
-A separate plot follows the Trajectron++ handoff's fixed ETH example, window `eth:biwi_eth:216:875`, at seed zero. Its three panels show clean input, 0.20 m noise and two missing observations for the same pedestrian. [Matched ETH plot](assets/shared_eth_case.pdf)
+## Report, talk and reproduction package
 
-Run `make preview MODEL=social_stgcnn` from the repository root to compile the group-formatted contributor preview. The editor controls integration in `submission/models.json`.
+[English report section](report.tex) · [Three Beamer frames](slides.tex) · [Speaker notes](speaker_notes.md) · [Individual contribution](contribution_statement.tex) · [Archive identity and runtime](provenance.json) · [Reviewer instructions](../../../models/social_stgcnn/REVIEW.md)
+
+`make preview MODEL=social_stgcnn` compiles the contribution in the shared group documents. The editor records the acceptance decision in the group registry. The [full-scene review release](https://github.com/Nine-Three-Cattery/comp5331/releases/tag/social-stgcnn-full-scene-causal-v2-review-v1) contains the standalone PDFs and the full numerical archive. The [earlier target-readout release](https://github.com/Nine-Three-Cattery/comp5331/releases/tag/social-stgcnn-causal-v2-review-v2) preserves the previous architecture and results.

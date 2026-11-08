@@ -1,55 +1,70 @@
 {
+  "architecture": "released_full_scene",
   "artifact": {
-    "bytes": 1075548160,
-    "name": "social_stgcnn_causal_v2_review.tar",
-    "sha256": "11e1212540fb2088e3610e342e0eee73b82a7a15a01cabc1c3964cff37d8e3c4",
-    "url": "https://github.com/Nine-Three-Cattery/comp5331/releases/download/social-stgcnn-causal-v2-review-v1/social_stgcnn_causal_v2_review.tar"
+    "bytes": 1077678080,
+    "name": "social_stgcnn_full_scene_causal_v2_review.tar",
+    "sha256": "d6c96463b69c435474d74fcb418ac393659c1f29903d6c430bfb853874dd5092",
+    "url": "https://github.com/Nine-Three-Cattery/comp5331/releases/download/social-stgcnn-full-scene-causal-v2-review-v1/social_stgcnn_full_scene_causal_v2_review.tar"
   },
   "checkpoint_replay": {
     "case": "formal/eth/seed_0/clean_0",
     "max_abs_forecast_difference_m": 0.0,
+    "receipt": "evidence/reproduction_check.json",
+    "scope": "fresh_source",
     "status": "passed"
+  },
+  "checkpoint_selection": {
+    "receipt": "evidence/selection_check.json",
+    "runs_passed": 15
   },
   "contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
   "evidence": {
-    "assets/clean_sampling.pdf": "2506f8497f2054f5932d603eb6eebefec3dd29a559feb85bd67dfd40fc46c2c2",
-    "assets/paired_robustness.pdf": "fed4fadd4dee0add25cfaade6c080893a9586f439a3904435efb96f44d1494e3",
-    "assets/shared_eth_case.pdf": "3879b0da914516258338af2bd19bf8639717fe02f939b3d8eff2f0fcc5c46bb1",
-    "assets/trajectories.pdf": "fb564ec64293da31d6692a9bc1a65f01009be0141f2cb73f361c747081eb27b6",
-    "evidence/case_paths.csv": "0143bcc70ed4fe761c99e478370f027a739053c1e68afeed66c0c62f389b11e0",
-    "evidence/case_selection.csv": "d6397b2c5c4345282869994fc5410e0010f81e5ecb4a44d634b5203fcb7ae036",
-    "evidence/diagnostics.csv": "c41c2d78caa5130a41e22f8986386b8d8c807091cc3f7ef653ecc9f8261542d9",
-    "evidence/macro_scores.csv": "6e8cdf37be10c6545481b54fae653c57ae33364b77c078fd888ded71f702f78d",
-    "evidence/neighbors.csv": "9ede07a20212cdb5bb055f5f09858673c582fa49704ca7ea5b566c62eb2ccb6e",
+    "assets/clean_sampling.pdf": "f25be574ddbbb74b77acfb3b305a94e6a3122b37f658b3fb157bc85577a71428",
+    "assets/paired_robustness.pdf": "0b32e0dc8ad846fbc7e3e3438a13d526f1f9252bdaf4ed619dc853088105a29f",
+    "assets/shared_eth_case.pdf": "d03fe836a0aa43b2c1c978ccd9afc03d483a5b9ace8e6d8f668209bdc812aedb",
+    "assets/trajectories.pdf": "fc5847ed44615d433f6e13ec16ed5b29157e21965191fc2a356c2e5c3dde27f1",
+    "evidence/case_paths.csv": "b68b85ab08b8b6466a384c1204d6bca352ebd241780a2a22f9e61debbaaa4912",
+    "evidence/case_selection.csv": "851d3e16367fd1c57c52b67b1a7977981ce365028f94d04659e74057ed204ad4",
+    "evidence/diagnostics.csv": "d5c1e3b02a547cc81669ecc6e77d492df7767cbf51dca4c98408e6a79a72577a",
+    "evidence/extracted_reproduction_check.json": "e7968145c3b2bae7f10f1221699c42d87fc648f45a819be735c4879957f7f5e7",
+    "evidence/macro_scores.csv": "78393717784ba24b417461b80c6109eb0f038467390e609696dbf5aae442595b",
+    "evidence/neighbors.csv": "393b17d399929652d1f0e64a00561b359d69b1b606b121a81039bffe5614d3a9",
     "evidence/pilot_audit.json": "bac0dd06f8d1abd6f1e1e0fb27c1265f555b6778d3beb935188b1a3c144ae5cf",
-    "evidence/reproduction_check.json": "7a42126081073837863dd2e3262ac475b432a5741c5cb81f74a675b195c47e97",
-    "evidence/review_metrics.csv": "2cac59195fc6d141d5b89c954d1d446861cff98675307663ef1ed1c2c2354468",
-    "evidence/runtime.csv": "ebfa83be21b47d83e5a07d562695387a5233ef5dd0673ba4b39fe838af0e4c6c",
-    "evidence/runtime_density.csv": "afb370440d935f72ce0f1a4d9dcf0122c2e55d8e9bbbdc2631c89be072077189",
-    "evidence/sample_budget.csv": "957f8087173b42138893a427fad51f21fb1a778f7658303b54a8bd211480cc39",
-    "evidence/scene_scores.csv": "f0d94ecec04f487cb38721bb072205ea72ded6a6c44c75cbe83b1f4a3b31ba9d",
-    "evidence/selection_check.json": "76b4527cb03f7b019b9130638907b1c7deadc2333cec24389888ab7204d3c093"
+    "evidence/reproduction_check.json": "60f919ec6f2de21e7a93e9c6c49256189ef4a4aa697ebe4347c423de015edfe7",
+    "evidence/review_metrics.csv": "b7f61f9f321f7e4948e1ae06ae4684ce188ee98a8ea0c401d0892d9c851aa8fb",
+    "evidence/runtime.csv": "73ecc84a711732fc75dd3728061595dfd0e7903605a1c3f6d6a703217ea054c6",
+    "evidence/runtime_density.csv": "fb995b75d4198d2f1f2df67127b076c8d2578ac656ee1ee5223116da2cc130b0",
+    "evidence/sample_budget.csv": "e6c6f899787e44a0200a403f6300af9828207b4a17b64c87f9b6e53654e28aa8",
+    "evidence/scene_scores.csv": "942f5b3a1b16168b3036b0255ced37963b809f6c4d9a2e7c9eed4001ad097847",
+    "evidence/selection_check.json": "f68047144da252f70ae660dec6b36e3c91fb74c7654338eb73beba72e8b7d760",
+    "evidence/shared_eth_case.csv": "02f8854f389b42445c13d8d0d57263ebfdccb8e0c76659c1074c953c7193b7e6",
+    "evidence/source_parity.json": "5681711b40cec54f78c6ffcc9f34d5af51ed0488ffb8e644f6639d7df1de6e98",
+    "evidence/trained_reference.json": "c432387b1b3d687b38bd7c240158143b0f849b5ace611cbd7bbf291d1c3a7d20"
   },
-  "group_base": "df016def5890898b70d372fb0e8e2bc142121330",
   "model": "social_stgcnn",
-  "numerical_revision": "2b2d57de6d5ff009f1388e1f0d9baf948e9db4ac",
+  "numerical_revision": "db5a9efa71cdab397443eeb812d47c0014790295",
   "owner": "Zongmin Zhang",
-  "parameters": 2208,
+  "parameters": 6254,
   "pilot_execution": {
-    "elapsed_seconds": 34.42784982919693,
+    "elapsed_seconds": 38.140084348618984,
     "peak_cuda_allocated_bytes": null,
-    "peak_rss_bytes": 534355968
+    "peak_rss_bytes": 443060224
   },
+  "pilot_prediction_bundles": 6,
   "prediction_bundles": 90,
-  "prespecified_analysis_revision": "9cb6ac43b8c13bfcc3e8d65de891030fc35b8b23",
   "protocol": "causal_v2",
-  "results_sha256": "c57d1aa7616eac37aadabbb688462cee31a7c84d03a33998c54cb0c7538e0808",
+  "reference_revision": "333d3a57b4d2705e129b21aefefa09c79b2b9ae1",
+  "results_sha256": "8f3732e152605710f069977adac8e9c140188011b6bf2194251eb3e78095b7e2",
   "runs": 15,
-  "runtime_design": "Median of fifteen run medians on one physical CPU host. Each run uses 128 registered targets in batches of 32, three warmups and ten measurements.",
+  "runtime_design": "Median of fifteen same-host run medians. Each run measures 128 registered targets in batches of 32, with three warmups and ten timed repetitions.",
   "runtime_environment": {
     "architecture": "x86_64",
     "cpu": "Genuine Intel(R) CPU 0000%@",
+    "cuda": "",
     "device": "cpu",
+    "driver": "",
+    "gpu": "",
+    "host": "Host 1",
     "numpy": "2.5.3",
     "os": "Linux",
     "python": "3.12.3",
@@ -57,9 +72,26 @@
     "torch": "2.14.0+cpu"
   },
   "runtime_ms": {
-    "end_to_end_ms": 59.66232530772686,
-    "prediction_sampling_ms": 13.546139001846313,
-    "preprocessing_ms": 46.134685166180134
+    "end_to_end_ms": 80.99441323429346,
+    "prediction_sampling_ms": 53.438601084053516,
+    "preprocessing_ms": 50.4900012165308
   },
-  "sample_count": 20
+  "sample_count": 20,
+  "source_parity": {
+    "fixture_count": 6,
+    "model_sha256": "4e408da1e88e40ac5b81a4302faded2af115f50a153cfe34a8bf6fa7f8036dde",
+    "passed": true,
+    "receipt": "evidence/source_parity.json"
+  },
+  "trained_reference": {
+    "absolute_coordinate_tolerance_m": 0.0001,
+    "cases": 45,
+    "failed": 0,
+    "max_abs_coordinate_error_m": 3.814697265625e-06,
+    "passed": 45,
+    "receipt": "evidence/trained_reference.json",
+    "runtime_fixture_index_zero_based": 64,
+    "upstream_revision": "333d3a57b4d2705e129b21aefefa09c79b2b9ae1"
+  },
+  "upstream_registered_parameters": 7563
 }
