@@ -56,6 +56,11 @@ python3.12 -m venv .venv-train
 Use `.venv-train/bin/python` for train/predict/runtime and `.venv/bin/python`
 for shared score/audit. Checkpoint weights are ordinary state dictionaries.
 
+Exact validated Linux dependency closures are in
+`requirements-linux-cuda.lock` and `requirements-linux-cpu.lock`. The A800
+pilot passed all six conditions; its lightweight evidence is in the matching
+submission folder. Formal training remains pending until all 15 runs finish.
+
 ## Design and evidence
 
 - [Paper equations and artifact discrepancies](paper_reading_notes.md)

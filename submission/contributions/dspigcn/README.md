@@ -3,6 +3,12 @@
 Owner: YAN Zhengyang. Code and reproducible commands:
 [`models/dspigcn`](../../../models/dspigcn/README.md).
 
+Linux benchmark and 11 owner tests passed. The current A800 two-epoch ETH
+pilot passed all six conditions (see `evidence/pilot_*`). Its epoch durations
+were 4.305 and 3.631 seconds, with peak allocated GPU memory 503,714,304 bytes.
+These pilot measurements are not formal accuracy results. The 15 formal fits
+are running with the registered 200-epoch budget.
+
 The report/deck sources use the shared metric macros; they become renderable
 after the complete audited matrix and figure generation. No placeholder
 numbers or paper-reported values are supplied as experimental results.
