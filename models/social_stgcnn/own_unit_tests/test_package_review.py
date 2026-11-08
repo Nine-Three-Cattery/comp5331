@@ -14,7 +14,7 @@ import numpy as np
 from models.social_stgcnn.package_review import PROJECT, SHARED, package
 from models.social_stgcnn.handoff import publish
 from models.social_stgcnn.verify_review import (
-    ARCHITECTURE, CASE, MODEL, NUMERICAL_FILES, PREFIX, REFERENCE, RUNS, verify_files,
+    ARCHITECTURE, CASE, MODEL, NUMERICAL_FILES, PREFIX, REFERENCE, RUNS, verify_files, verify_trained_reference,
 )
 
 
@@ -78,7 +78,7 @@ class ArchiveIdentityTests(unittest.TestCase):
                         if stage == "formal":
                             scored.append({"fold": fold, "seed": seed, "condition": tag,
                                            "prediction_sha256": sha256(output), "checkpoint_sha256": checkpoint_hash,
-                                           "config_hash": digest_config(config),
+                                           "config_hash": digest_config(config), "manifest_hash": metadata["manifest_hash"],
                                            **{key + "_mean": 0 for key in metrics}})
             write_csv(results, scored)
             result_hash = sha256(results)
@@ -88,6 +88,14 @@ class ArchiveIdentityTests(unittest.TestCase):
             write(artifacts / "source_parity.json", {"passed": True, "release": REFERENCE, "model_sha256": sources["model.py"],
                                                       "owner_active_parameters": 6254, "upstream_registered_parameters": 7563,
                                                       "cases": ["synthetic fixture"]})
+            fixed = json.loads((PROJECT / "benchmark/fixtures/runtime_windows.json").read_text())
+            trained = {"passed": True, "upstream_revision": REFERENCE, "runtime_fixture_index_zero_based": 64,
+                       "absolute_coordinate_tolerance_m": 1e-4, "samples_per_case": 20,
+                       "summary": {"cases": 45, "passed": 45, "failed": 0, "max_abs_coordinate_error_m": 1e-6},
+                       "cases": [{**row, "passed": True, "max_abs_coordinate_error_m": 1e-6,
+                                  "window_id": fixed[row["fold"]][64]} for row in scored
+                                 if row["condition"] in ("clean_0", "noise_020", "missing_2")]}
+            write(artifacts / "trained_reference.json", trained)
             write(artifacts / "selection_check.json", {"passed": True, "split": "val", "runs": validated,
                                                        "summary": {"runs_passed": 15}})
             write(artifacts / "fresh_source_reproduction_check.json", {
@@ -107,7 +115,8 @@ class ArchiveIdentityTests(unittest.TestCase):
             bundle = scratch / PREFIX
             inventory = verify_files(bundle, bundle)
             self.assertEqual((inventory["formal_bundles"], inventory["pilot_bundles"]), (90, 6))
-            for path in (MODEL / "check_reference.py", MODEL / "review_metrics.py", MODEL / "own_unit_tests/test_analysis.py",
+            for path in (MODEL / "check_reference.py", MODEL / "check_trained_reference.py", RUNS / "trained_reference.json",
+                         MODEL / "review_metrics.py", MODEL / "own_unit_tests/test_analysis.py",
                          SHARED / "scripts/analyze_independent_diagnostics.py", RUNS / "source_parity.json",
                          RUNS / "fresh_source_reproduction_check.json"):
                 self.assertTrue((bundle / path).is_file(), path)
@@ -131,6 +140,11 @@ class ArchiveIdentityTests(unittest.TestCase):
             self.assertEqual((provenance["parameters"], provenance["upstream_registered_parameters"]), (6254, 7563))
             self.assertEqual(provenance["checkpoint_replay"]["scope"], "fresh_source")
             self.assertEqual(provenance["numerical_revision"], commit)
+            self.assertEqual(provenance["trained_reference"]["max_abs_coordinate_error_m"], 1e-6)
+            self.assertEqual(json.loads((evidence / "trained_reference.json").read_text()), trained)
+            trained["cases"][0]["prediction_sha256"] = "different formal bundle"
+            with self.assertRaisesRegex(ValueError, "Trained reference case differs"):
+                verify_trained_reference(trained, {(row["fold"], row["seed"], row["condition"]): row for row in scored}, fixed)
 
             pilot_path = artifacts / "pilot/runs/eth/seed_0/config.json"
             pilot = json.loads(pilot_path.read_text())

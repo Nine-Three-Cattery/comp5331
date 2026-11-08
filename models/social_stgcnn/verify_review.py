@@ -25,7 +25,7 @@ ARCHITECTURE = "released_full_scene"
 REFERENCE = "333d3a57b4d2705e129b21aefefa09c79b2b9ae1"
 NUMERICAL_FILES = {"model.py", "windows.py", "export.py", "run.py", "timing.py", "configs/experiment.json"}
 RECEIPTS = ("pilot_audit.json", "benchmark_audit.json", "selection_check.json",
-            "source_parity.json", "fresh_source_reproduction_check.json")
+            "source_parity.json", "trained_reference.json", "fresh_source_reproduction_check.json")
 CASE = "formal/eth/seed_0/clean_0"
 CASE_BUNDLE = Path("evaluation/clean_0/predictions_test_clean_0.npz")
 
@@ -71,7 +71,26 @@ def pilot_checkpoint(path, *, config_hash, checkpoint, manifest_hash, kind, leve
     return meta["checkpoint_sha256"]
 
 
-def verify_supplemental(artifacts, scored, commit, sources, contract, result_hash):
+def verify_trained_reference(receipt, scored, runtime_windows):
+    """Bind each upstream reconstruction to its prespecified target and scored formal cell."""
+    expected = {key for key in scored if key[2] in ("clean_0", "noise_020", "missing_2")}
+    cases = {(row["fold"], row["seed"], row["condition"]): row for row in receipt["cases"]}
+    summary = receipt["summary"]
+    if (receipt["passed"] is not True or receipt["upstream_revision"] != REFERENCE
+            or receipt["runtime_fixture_index_zero_based"] != 64 or receipt["absolute_coordinate_tolerance_m"] != 1e-4
+            or receipt["samples_per_case"] != 20 or len(receipt["cases"]) != 45 or cases.keys() != expected
+            or (summary["cases"], summary["passed"], summary["failed"]) != (45, 45, 0)):
+        raise ValueError("Trained reference receipt must cover the 45 prespecified cases at the pinned revision")
+    for key, case in cases.items():
+        if (case["window_id"] != runtime_windows[key[0]][64] or case["passed"] is not True
+                or not 0 <= case["max_abs_coordinate_error_m"] <= receipt["absolute_coordinate_tolerance_m"]
+                or any(case[k] != scored[key][k] for k in ("prediction_sha256", "config_hash", "checkpoint_sha256", "manifest_hash"))):
+            raise ValueError(f"Trained reference case differs from the scored window, bundle or tolerance at {key}")
+    if summary["max_abs_coordinate_error_m"] != max(case["max_abs_coordinate_error_m"] for case in cases.values()):
+        raise ValueError("Trained reference maximum differs from its measured case errors")
+
+
+def verify_supplemental(artifacts, scored, commit, sources, contract, result_hash, runtime_windows):
     parity = read(artifacts / "source_parity.json")
     if (parity["passed"], parity["release"], parity["model_sha256"], parity["owner_active_parameters"],
             parity["upstream_registered_parameters"]) != (True, REFERENCE, sources["model.py"], 6254, 7563):
@@ -105,7 +124,9 @@ def verify_supplemental(artifacts, scored, commit, sources, contract, result_has
                    "manifest_order", "sample_budget")
     if any(replay["comparison"][key]["exact"] is not True for key in comparisons):
         raise ValueError("The fresh-source ETH replay differs from the archived predictions")
-    return parity, selection, replay
+    trained = read(artifacts / "trained_reference.json")
+    verify_trained_reference(trained, scored, runtime_windows)
+    return parity, selection, replay, trained
 
 
 def verify_files(bundle, source):
@@ -172,7 +193,8 @@ def verify_files(bundle, source):
                     raise ValueError(f"Pilot selected checkpoint differs for {name}")
     if bundles != {name for name in files if name.endswith(".npz")}:
         raise ValueError("Review must contain exactly 90 formal and six pilot forecasts")
-    verify_supplemental(artifacts, scored, commit, sources, contract, files[RESULTS.as_posix()])
+    verify_supplemental(artifacts, scored, commit, sources, contract, files[RESULTS.as_posix()],
+                        read(bundle / "benchmark/fixtures/runtime_windows.json"))
     return inventory
 
 

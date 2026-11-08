@@ -39,8 +39,9 @@ def publish(art, out, download_url):
     if download_url.split("?")[0].rsplit("/", 1)[-1] != archive["name"]:
         raise ValueError("The review asset URL must identify the packaged archive filename")
     sources = source_identity(read(art / "formal/runs/eth/seed_0/config.json"))
-    parity, selection, replay = verify_supplemental(art, scored, commit, sources,
-                                                   audit["contract_sha256"], results_hash)
+    parity, selection, replay, trained = verify_supplemental(
+        art, scored, commit, sources, audit["contract_sha256"], results_hash,
+        read(ROOT / "benchmark/fixtures/runtime_windows.json"))
     with (evidence / "review_metrics.csv").open(newline="") as stream:
         reviews = list(csv.DictReader(stream))
     by_cell = {(r["fold"], int(r["seed"]), r["condition"]): r for r in reviews}
@@ -63,7 +64,7 @@ def publish(art, out, download_url):
     # Use the replay that compared a fresh export of the frozen revision with
     # the original forecasts. This also replaces the earlier variant's receipt.
     for src, dst in (("pilot_audit.json", "pilot_audit.json"), ("source_parity.json", "source_parity.json"),
-                     ("selection_check.json", "selection_check.json"),
+                     ("selection_check.json", "selection_check.json"), ("trained_reference.json", "trained_reference.json"),
                      ("fresh_source_reproduction_check.json", "reproduction_check.json")):
         shutil.copyfile(art / src, evidence / dst)
     shutil.copyfile(art / "benchmark_audit.json", out / "benchmark_audit.json")
@@ -83,6 +84,9 @@ def publish(art, out, download_url):
         "pilot_execution": read(art / "pilot/runs/eth/seed_0/execution.json"),
         "source_parity": {"passed": parity["passed"], "fixture_count": len(parity["cases"]),
                           "model_sha256": parity["model_sha256"], "receipt": "evidence/source_parity.json"},
+        "trained_reference": {**trained["summary"], "runtime_fixture_index_zero_based": trained["runtime_fixture_index_zero_based"],
+                              "absolute_coordinate_tolerance_m": trained["absolute_coordinate_tolerance_m"],
+                              "upstream_revision": trained["upstream_revision"], "receipt": "evidence/trained_reference.json"},
         "checkpoint_selection": {"runs_passed": selection["summary"]["runs_passed"], "receipt": "evidence/selection_check.json"},
         "checkpoint_replay": {"case": replay["case"], "status": replay["status"], "scope": replay["scope"],
                               "max_abs_forecast_difference_m": replay["comparison"]["samples"]["max_absolute_difference_m"],

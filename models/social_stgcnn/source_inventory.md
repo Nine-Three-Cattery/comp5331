@@ -11,3 +11,5 @@
 | PyTorch, NumPy, pandas and Matplotlib | Runtime dependencies for learning, data handling and plots. The external reference check additionally uses NetworkX and SciPy for the authors' graph utility. |
 
 No copied code fragments or pretrained weights were used. The [reuse ledger](reused_fragments.csv) has no fragment entries. The group-owned helpers are called through their interfaces.
+
+The [trained reference comparison](check_trained_reference.py) loads the course checkpoints into the pinned external network for a small set of preselected windows. It reconstructs scene membership directly from the group's neutral store, regenerates the recorded random stream, and checks the exported positions in meters. All official-source executions are confined to the two reference checks.

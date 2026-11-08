@@ -63,7 +63,7 @@ def package(project, artifacts, results, output, numerical_revision):
     # The registry's display name belongs to the current review contribution.
     # The run configs record the numerical architecture and sample budget.
     files[Path("submission/models.json")] = PROJECT / "submission/models.json"
-    for name in ("README.md", "REVIEW.md", "check_reference.py", "check_selection.py", "review_metrics.py",
+    for name in ("README.md", "REVIEW.md", "check_reference.py", "check_trained_reference.py", "check_selection.py", "review_metrics.py",
                  "analyze.py", "retime.py", "package_review.py", "verify_review.py", "handoff.py",
                  "independent_design.md", "paper_reading_notes.md", "implementation_provenance.md",
                  "source_inventory.md", "reused_fragments.csv"):
@@ -127,7 +127,8 @@ def package(project, artifacts, results, output, numerical_revision):
                     if digest != published.setdefault(base / checkpoint, digest):
                         raise ValueError(f"Pilot identity differs at {relative}/{tag}")
 
-    parity, _, _ = verify_supplemental(artifacts, scores, commit, sources, contract, published[RESULTS])
+    runtime_windows = json.loads((project / "benchmark/fixtures/runtime_windows.json").read_text())
+    parity, _, _, _ = verify_supplemental(artifacts, scores, commit, sources, contract, published[RESULTS], runtime_windows)
     digests = {name.as_posix(): sha256(path) for name, path in files.items()}
     for name, expected_hash in published.items():
         if digests[name.as_posix()] != expected_hash:
