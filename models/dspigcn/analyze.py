@@ -143,6 +143,23 @@ def main():
                ['min_distance_mean','close_approach_rate']}))
     pd.DataFrame(diagnostics).to_csv(evidence/'diagnostics.csv',index=False)
     pd.DataFrame(spatial_diagnostics).to_csv(evidence/'spatial_diagnostics.csv',index=False)
+    selections = []
+    for fold in FOLDS:
+        for seed in range(3):
+            run = args.runs/fold/f'seed_{seed}'
+            selection = json.loads((run/'checkpoint_selection.json').read_text())
+            history = [json.loads(line) for line in (run/'training.jsonl').read_text().splitlines()]
+            if [r['epoch'] for r in history]!=list(range(1,201)):
+                raise ValueError(f'Incomplete or duplicate training history: {fold}/{seed}')
+            selected = selection['selected']
+            selections.append(dict(fold=fold,seed=seed,trained_epochs=len(history),
+                selected_epoch=selected['epoch'],validation_energy_score=selected['energy_score'],
+                validation_mean_ade=selected['mean_ade'],validation_candidates=len(selection['candidates']),
+                epoch_seconds_total=sum(r['epoch_seconds'] for r in history),
+                peak_cuda_bytes=max(r['peak_cuda_bytes'] or 0 for r in history),
+                peak_host_rss_bytes=max(r['peak_host_rss_bytes'] for r in history),
+                checkpoint_sha256=sha256(run/selected['checkpoint'])))
+    pd.DataFrame(selections).to_csv(evidence/'checkpoint_selection.csv',index=False)
     print('ANALYSIS_OK',flush=True)
 
 

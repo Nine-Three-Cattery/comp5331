@@ -34,8 +34,8 @@ def main():
             if sha256(ROOT/'models/dspigcn/dspigcn'/name)!=digest:
                 raise ValueError(f'Implementation changed after training: {name}')
         last = config_path.parent/'training.jsonl'
-        final = json.loads(last.read_text().splitlines()[-1])
-        if final['epoch'] != config['epochs'] or config['epochs'] != 200:
+        history = [json.loads(line) for line in last.read_text().splitlines()]
+        if config['epochs'] != 200 or [row['epoch'] for row in history]!=list(range(1,201)):
             raise ValueError('Formal runs must complete their registered 200 epochs')
     if len(list(args.runs.glob('*/seed_*/config.json')))!=15:
         raise ValueError('Expected fifteen formal runs')
