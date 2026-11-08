@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from independent_tpp.protocol import sha256, write_json
+from independent_tpp.data import load_split
+from dspigcn.data import GraphDataset
 
 FOLDS = ['eth','hotel','univ','zara1','zara2']
 CONDITIONS = ['clean_0','noise_005','noise_010','noise_020','missing_1','missing_2']
@@ -25,7 +27,11 @@ def bundle(runs, fold, tag):
 
 def trajectory(ax, data, index, title):
     observed, future, samples = (data[k][index] for k in ['observed','ground_truth','samples'])
-    ax.plot(observed[:,0], observed[:,1], 'o-', color='#27485e',ms=3,label='Observed')
+    mask = data['observed_mask'][index]
+    ax.plot(observed[mask,0], observed[mask,1], 'o-', color='#27485e',ms=3,label='Observed')
+    if not mask.all():
+        suffix = np.vstack((observed[mask][-1],observed[~mask]))
+        ax.plot(suffix[:,0],suffix[:,1],'o--',color='#27485e',mfc='white',ms=4,label='Causal fill')
     truth = np.vstack((observed[-1],future))
     ax.plot(truth[:,0],truth[:,1],color='#158572',lw=2,label='Future')
     for k, sample in enumerate(samples):
@@ -77,6 +83,7 @@ def main():
     fixed = json.loads((ROOT/'benchmark/fixtures/runtime_windows.json').read_text())
     examples = []
     for fold in FOLDS:
+        context = GraphDataset(load_split(fold,'test',str(ROOT/'data/causal_v2')))
         with np.load(bundle(args.runs,fold,'clean_0'),allow_pickle=False) as clean:
             records = [json.loads(str(x)) for x in clean['records']]
             indices = {r['window_id']:i for i,r in enumerate(records)}
@@ -94,11 +101,21 @@ def main():
             ax.legend(fontsize=8)
             fig.savefig(assets/f'failure_{fold}.png',dpi=180);plt.close(fig)
             for role,index in [('fixed',fixed_index),('largest_clean_mean_ade',worst)]:
+                truth = np.vstack((clean['observed'][index,-1],clean['ground_truth'][index]))
+                steps = np.diff(truth,axis=0)
+                lengths = np.linalg.norm(steps,axis=-1)
+                moving = (lengths[:-1]>1e-6)&(lengths[1:]>1e-6)
+                cosine = (steps[:-1]*steps[1:]).sum(-1)/np.maximum(lengths[:-1]*lengths[1:],1e-12)
+                turns = np.arccos(np.clip(cosine[moving],-1,1))
                 examples.append(dict(fold=fold,seed=0,role=role,window_id=records[index]['window_id'],
-                                     mean_ade=float(errors[index]),prediction_sha256=sha256(bundle(args.runs,fold,'clean_0'))))
+                                     mean_ade=float(errors[index]),truth_travel_m=float(lengths.sum()),
+                                     max_truth_heading_change_rad=float(turns.max()) if len(turns) else 0.,
+                                     visible_neighbor_count=context.inputs(index)['positions'].shape[1]-1,
+                                     prediction_sha256=sha256(bundle(args.runs,fold,'clean_0'))))
+        context.context.cache_clear()
     write_json(evidence/'examples.json',dict(selection='Fixed: first locked runtime ID. Failure: argmax clean meanADE, seed 0, all samples shown.',examples=examples))
     # Motion metrics have training-only thresholds; retain each run/condition.
-    diagnostics = []
+    diagnostics, spatial_diagnostics = [], []
     metric_root = ROOT/'artifacts/dspigcn/metrics'
     for row in results.itertuples(index=False):
         path = metric_root/row.fold/f'seed_{row.seed}'/row.condition/'summary.json'
@@ -106,7 +123,17 @@ def main():
             raise FileNotFoundError(f'Run make score first: {path}')
         values = json.loads(path.read_text())['overall']
         diagnostics.append(dict(fold=row.fold,seed=row.seed,condition=row.condition,**values))
+        spatial_path = path.with_name('spatial_consistency.csv')
+        try:
+            spatial = pd.read_csv(spatial_path)
+        except pd.errors.EmptyDataError:
+            spatial = pd.DataFrame()
+        spatial_diagnostics.append(dict(fold=row.fold,seed=row.seed,condition=row.condition,
+            simultaneous_anchor_count=len(spatial),
+            **{key:float(spatial[key].mean()) if len(spatial) else None for key in
+               ['min_distance_mean','close_approach_rate']}))
     pd.DataFrame(diagnostics).to_csv(evidence/'diagnostics.csv',index=False)
+    pd.DataFrame(spatial_diagnostics).to_csv(evidence/'spatial_diagnostics.csv',index=False)
     print('ANALYSIS_OK',flush=True)
 
 
