@@ -62,6 +62,25 @@ class CausalTests(unittest.TestCase):
         self.assertEqual(int(inputs[3].sum()), 2)
         self.assertFalse(bool(mask[:, -2:].any()))
 
+    def test_visible_neighbor_history_changes_the_forecast(self):
+        original = store(True)
+        changed = store(True)
+        neighbor = changed.tracks["eth", "source"]["2"]
+        for frame in range(7):
+            neighbor[frame][0] -= (7 - frame) * 0.25
+        original_index, changed_index = (HistoryIndex(item, 6, 12) for item in (original, changed))
+        target_index = np.array([0])
+        before, origin, observed, mask = original_index.pack(target_index)
+        after, changed_origin, changed_observed, changed_mask = changed_index.pack(target_index)
+        for left, right in ((origin, changed_origin), (observed, changed_observed), (mask, changed_mask)):
+            np.testing.assert_array_equal(left, right)
+        for slot in (0, 2, 3):
+            torch.testing.assert_close(before[slot], after[slot], rtol=0, atol=0)
+        self.assertTrue(bool(before[3][0, 0]))
+        self.assertFalse(torch.equal(before[1][0, 0], after[1][0, 0]))
+        latent, _ = scene_latents(original_index, 0, 20, 8)
+        self.assertFalse(torch.equal(self.model(*before, latent[:1]), self.model(*after, latent[:1])))
+
     def test_coordinate_round_trip_and_displacements(self):
         a, b = (HistoryIndex(store(False, shift), 6, 12) for shift in (0, 100))
         inputs, origin, _, _ = a.pack(self.indices)

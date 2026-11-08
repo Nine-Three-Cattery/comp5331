@@ -58,14 +58,16 @@ def audited_results():
     receipt = ARTIFACTS / AUDIT.name
     valid_audit(read_json(receipt), sha256(RESULTS))
     shutil.copyfile(receipt, AUDIT)
-    return pd.read_csv(RESULTS).set_index(["fold", "seed", "condition"], verify_integrity=True)
+    results = pd.read_csv(RESULTS).set_index(["fold", "seed", "condition"])
+    require(results.index.is_unique, "Duplicate fold, seed and condition in results")
+    return results
 
 
 def archive_filter(member):
     path = Path(member.name)
     if any(part.startswith(".") or part == "__pycache__" for part in path.parts):
         return None
-    if member.isfile() and path.suffix != ".tmp" and path.name != "provenance.json":
+    if member.isfile() and path.suffix != ".tmp" and path.name not in ("provenance.json", "reproduction_check.json"):
         member.uid = member.gid = 0
         member.uname = member.gname = ""
         return member
@@ -132,10 +134,16 @@ def package(results):
         "validation_logs_sha256": {relative(path): sha256(path) for path in logs if path.is_file()},
         "raw_release_sha256": read_json(RAW_LOCK),
         "references_sha256": sha256(REFERENCES),
+        "owner_source_sha256": {
+            relative(path): sha256(path) for path in sorted(OWNER.rglob("*"))
+            if path.is_file() and "__pycache__" not in path.parts and not path.name.startswith(".")
+        },
         "evidence": {str(path.relative_to(CONTRIBUTION)): sha256(path)
                      for path in (AUDIT, RESULTS, CONTRIBUTION / "analysis.tex", CONTRIBUTION / "report.tex",
                                   CONTRIBUTION / "slides.tex", CONTRIBUTION / "speaker_notes.md",
-                                  *sorted(EVIDENCE.glob("*.csv")), *sorted(ASSETS.glob("*.pdf")))},
+                                  CONTRIBUTION / "proposal_checklist.md",
+                                  *sorted(EVIDENCE.glob("*.csv")), *sorted(EVIDENCE.glob("*.json")),
+                                  *sorted(ASSETS.glob("*.pdf")))},
         "assistance": ("Generative AI assisted with paper synthesis, model and experiment code, experiment execution, "
                        "analysis, and drafting the report, slides and speaker notes."),
     }
@@ -189,6 +197,9 @@ def verify(artifact, provenance):
     require(found_results is not None and found_audit is not None, "Missing archived results or audit receipt")
     valid_audit(found_audit, all_hashes[csv_name])
     require(all_hashes.get(relative(REFERENCES)) == provenance["references_sha256"], "Bibliography hash mismatch")
+    for name, digest in provenance["owner_source_sha256"].items():
+        require(all_hashes.get(name) == digest, f"Archived owner source mismatch for {name}")
+        require(sha256(ROOT / name) == digest, f"Working source differs from the archive for {name}")
     for name, key in (("pilot_audit.json", "audit_sha256"), ("pilot/runs/eth/seed_0/execution.json", "execution_sha256")):
         require(all_hashes.get(relative(ARTIFACTS / name)) == provenance["pilot"][key], f"Pilot hash mismatch for {name}")
     for name, digest in provenance["validation_logs_sha256"].items():
@@ -245,8 +256,16 @@ def rescore(artifact, provenance):
         run_prefixes = (relative(FORMAL) + "/", relative(ARTIFACTS / "pilot/runs") + "/")
         with tarfile.open(artifact, "r|gz") as archive:
             for member in archive:
-                if member.name == relative(RESULTS) or member.name.startswith(run_prefixes):
+                if member.name == relative(RESULTS) or member.name.startswith((*run_prefixes, relative(OWNER) + "/")):
                     archive.extract(member, checkout, filter="data")
+        subprocess.run([sys.executable, "-m", "unittest", "discover", "-s",
+                        "models/social_gan/own_unit_tests"], cwd=checkout, check=True)
+        subprocess.run([sys.executable, "models/social_gan/run.py", "formal", "--replay", "eth", "0"],
+                       cwd=checkout, check=True)
+        subprocess.run([sys.executable, "models/social_gan/run.py", "pilot", "--runs",
+                        "artifacts/social_gan/retrain_check/runs"], cwd=checkout, check=True)
+        subprocess.run([sys.executable, "models/social_gan/check_training.py"], cwd=checkout, check=True)
+        subprocess.run([sys.executable, "models/social_gan/check_metrics.py"], cwd=checkout, check=True)
         for pilot in (True, False):
             runs = relative(ARTIFACTS / "pilot/runs") if pilot else relative(FORMAL)
             command = [sys.executable, "benchmark/validate.py", "social_gan", "--runs", runs]
@@ -257,7 +276,7 @@ def rescore(artifact, provenance):
         require(verified == read_json(AUDIT), "Extracted formal audit differs from the review copy")
         pilot = checkout / relative(ARTIFACTS / "pilot_audit.json")
         require(sha256(pilot) == provenance["pilot"]["audit_sha256"], "Extracted pilot audit differs")
-        write_json(ARTIFACTS / "reproduction_check.json", {
+        receipt = {
             "status": "passed",
             "base_commit": provenance["base_commit"],
             "artifact_sha256": provenance["artifact"]["sha256"],
@@ -265,7 +284,13 @@ def rescore(artifact, provenance):
             "results_sha256": verified["results_sha256"],
             "formal_bundles": verified["prediction_bundles"],
             "pilot_bundles": read_json(pilot)["prediction_bundles"],
-        })
+            "archived_source_tests": "passed",
+            "archived_source_replay": "eth/seed_0, all six conditions, exact arrays and metadata",
+            "archived_source_training": "Fresh two-epoch pilot, exact selected tensors and all six exports",
+            "independent_metrics": "90 bundles, six headline scores",
+        }
+        write_json(ARTIFACTS / "reproduction_check.json", receipt)
+        write_json(CONTRIBUTION / "reproduction_check.json", receipt)
     print("OWNER_REPRODUCTION_OK extracted pilot and formal bundles scored with the pinned group benchmark")
 
 

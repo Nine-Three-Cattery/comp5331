@@ -29,3 +29,13 @@ The ETH seed 0 pilot completed both epochs and exported the full six
 conditions in 10.1 s with a peak process RSS of 468 MiB, excluding the
 separate timing pass and benchmark audit. The pilot receipt and exact
 measurements are part of the local reproduction archive.
+
+The proposal review corrected the runtime boundary to rebuild target
+histories and the visible-neighbor index from neutral coordinates inside
+every timed repetition. All fifteen runs were remeasured serially. Their
+prediction bundles and headline accuracy results are unchanged.
+An independent NumPy calculation checked 540 headline values across the
+90 formal bundles; the largest absolute discrepancy was below 1e-15.
+A fresh two-epoch pilot reproduced all 22 selected parameter tensors,
+the validation records and all six export arrays and metadata exactly.
+The review package repeats these checks using its archived source.

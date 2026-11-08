@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OWNER = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "li_junhao_trajectronpp"))
 
-from independent_tpp.data import load_split
+from independent_tpp.data import SceneStore, load_split
 from independent_tpp.protocol import CONDITIONS, FOLDS, SEEDS, digest_json, sha256, write_json
 from data import HistoryIndex, draw_scene_latent, scene_latents
 from model import Discriminator, Generator, train_batch
@@ -179,13 +179,15 @@ def measure(fold, seed, run):
     config = json.loads((run / "config.json").read_text())
     torch.set_num_threads(config["threads"])
     model = load_model(config, run / "selected.pt")
-    test = index_split(fold, "test", config)
-    by_id = {row.window_id: i for i, row in enumerate(test.store.manifests)}
+    store = load_split(fold, "test", DATA)
+    by_id = {row.window_id: row for row in store.manifests}
     ids = json.loads(RUNTIME_WINDOWS.read_text())[fold]
-    batches = list(grouped(np.array([by_id[window_id] for window_id in ids]), 32))
+    runtime_store = SceneStore(store.tracks, [by_id[window_id] for window_id in ids], store.identity)
+    batches = list(grouped(np.arange(len(ids)), 32))
     measurements = []
     for repetition in range(13):
         start = time.perf_counter()
+        test = HistoryIndex(runtime_store, config["neighbor_radius_m"], config["neighbor_limit"])
         prepared = [test.pack(batch)[:2] for batch in batches]
         ready = time.perf_counter()
         # Generate exactly the draws required by the timing fixture.
@@ -213,8 +215,11 @@ def measure(fold, seed, run):
         "fold": fold, "seed": seed, "windows": len(ids), "batch_size": 32,
         "sample_count": config["sample_count"], "warmups": 3,
         "environment": environment(config), "repetitions": measurements,
-        "boundary": "In-memory observed histories to metric NumPy arrays. "
-                    "One-time history indexing and I/O are excluded.",
+        "boundary": "In-memory neutral positions to metric NumPy arrays. Each repetition includes "
+                    "target history assembly, visible-neighbor indexing, neighbor selection, "
+                    "centering, tensor conversion, sampled decoding and metric integration. "
+                    "Neutral file loading and model loading are outside the measured interval.",
+        "runtime_protocol": "neutral_positions_v2",
     })
 
 

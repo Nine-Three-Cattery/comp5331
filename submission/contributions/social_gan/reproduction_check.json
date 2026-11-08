@@ -1,0 +1,13 @@
+{
+  "archived_source_replay": "eth/seed_0, all six conditions, exact arrays and metadata",
+  "archived_source_tests": "passed",
+  "archived_source_training": "Fresh two-epoch pilot, exact selected tensors and all six exports",
+  "artifact_sha256": "5561bcbc44de43ff1be5eec8ed27e0964171a3668498cd46711b5b4dbe6a5135",
+  "base_commit": "df016def5890898b70d372fb0e8e2bc142121330",
+  "contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
+  "formal_bundles": 90,
+  "independent_metrics": "90 bundles, six headline scores",
+  "pilot_bundles": 6,
+  "results_sha256": "763f4ffc86a0306483b185bb3bf3df3de42f2e36afaf17b14a4b3a35d82de55d",
+  "status": "passed"
+}

@@ -61,3 +61,31 @@ constant-velocity residual, applies a target-level discriminator and
 uses the smaller budget above. Both training variety draws and test draws
 are 20. The group data, checkpoint rule and aggregation differ from
 those used for the published headline scores.
+
+## Paper-to-code map
+
+| Paper component | Independent implementation | Verification and boundary |
+|---|---|---|
+| Section 3.3: recurrent trajectory encoder | `model.py:Generator.encode` and `displacements` | Shared encoder for target and neighbors; only visible coordinates enter `data.py:HistoryIndex.pack`. Future removal and poisoned cached derivatives leave predictions unchanged. |
+| Sections 3.3–3.4: relative-position MLP and symmetric pool | `Generator.pair`, `Generator.encode` | Componentwise maximum over valid messages. Tests permute neighbors, retain negative messages and inject NaNs in padding. This implementation limits the pool to twelve visible neighbors within 6 m. |
+| Section 3.3: latent initialization and recurrent generator | `Generator.context`, `Generator.decode`, `to_world` | Eight Gaussian dimensions, autoregressive twelve-step decoding, round-trip to metric coordinates. The constant-velocity residual is an explicit addition to the paper's architecture. |
+| Sections 3.2–3.3: recurrent discriminator and adversarial objective | `Discriminator.forward`, `train_batch` | Scores the full target history and future. Tests verify detached discriminator inputs and generator gradients through a frozen discriminator. Scene-wide joint discrimination is outside this implementation. |
+| Section 3.5: best-of-many variety objective | `train_batch` | Selects the lowest full-trajectory squared error among twenty draws, independently for each target. A fixture distinguishes this winner from the best endpoint. The winning trajectory norm is divided by the square root of twelve. |
+| Section 4: training and held-out evaluation | `run.py:train`, `validation_score`, `export` | Uses the group's locked five holdouts and three seeds, clean validation selection and six test conditions. The batch size, epoch budget, splits and checkpoint criterion differ from the paper. |
+| Multiple sampled futures | `data.py:draw_scene_latent`, `scene_latents`; `run.py:export` | Test draws are reproducible and shared across simultaneous targets and conditions. The group uses K=20, with first-K analysis of the saved draws for K=1,5,10,20. |
+
+For target `i`, candidate `k` and twelve future positions, training chooses
+`k_i = argmin_k sum_t ||prediction[i,k,t] - truth[i,t]||²`. The variety term
+is the batch mean of `sqrt(sum_t ||prediction[i,k_i,t] - truth[i,t]||² / 12)`.
+It is a full-trajectory RMS position error, rather than mean ADE or an
+endpoint-only error. If `d` is the discriminator logit, its loss is
+`0.5 * mean(softplus(-d_real) + softplus(d_fake))`. The generator adds
+`0.05 * mean(softplus(-d_fake))` using the first unselected draw. All twenty
+candidates participate in winner selection; only the winner and first
+draw need decoder activation storage during generator backpropagation.
+
+The causal context is computed once at the observation anchor. This model
+does not jointly update the future social context of all pedestrians. Its
+close-approach diagnostics therefore measure an outcome of aligned sampled
+paths; neither the architecture nor these experiments establish collision
+avoidance or calibrated uncertainty.

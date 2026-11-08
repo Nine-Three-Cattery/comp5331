@@ -1,0 +1,96 @@
+{
+  "bundles": {
+    "clean_0": {
+      "arrays_and_metadata": "exact",
+      "fields": [
+        "ground_truth",
+        "metadata",
+        "observed",
+        "observed_mask",
+        "records",
+        "samples"
+      ],
+      "reference_sha256": "0e4f637639318b0f7d7c10aab4e8a753cbdc5d25743c6f01be4c0368a1826327"
+    },
+    "missing_1": {
+      "arrays_and_metadata": "exact",
+      "fields": [
+        "ground_truth",
+        "metadata",
+        "observed",
+        "observed_mask",
+        "records",
+        "samples"
+      ],
+      "reference_sha256": "8d7740ca30f4866b038ecd0af124a08aab7d6323866e3cd466ce56f93003a811"
+    },
+    "missing_2": {
+      "arrays_and_metadata": "exact",
+      "fields": [
+        "ground_truth",
+        "metadata",
+        "observed",
+        "observed_mask",
+        "records",
+        "samples"
+      ],
+      "reference_sha256": "ebe59d9f448602ebbb351e2cf882d148937e056c4d5788703892edc712639f6c"
+    },
+    "noise_005": {
+      "arrays_and_metadata": "exact",
+      "fields": [
+        "ground_truth",
+        "metadata",
+        "observed",
+        "observed_mask",
+        "records",
+        "samples"
+      ],
+      "reference_sha256": "90211176596626839d040e20acb464fda77f3357dae8401f2a4cf7bada0a760e"
+    },
+    "noise_010": {
+      "arrays_and_metadata": "exact",
+      "fields": [
+        "ground_truth",
+        "metadata",
+        "observed",
+        "observed_mask",
+        "records",
+        "samples"
+      ],
+      "reference_sha256": "2155b440d01a5483bcbe19b28d7dc3b01d18565df38306ff2ce7cb9bb1ac7e8e"
+    },
+    "noise_020": {
+      "arrays_and_metadata": "exact",
+      "fields": [
+        "ground_truth",
+        "metadata",
+        "observed",
+        "observed_mask",
+        "records",
+        "samples"
+      ],
+      "reference_sha256": "85b060b627eb08582e6fcc913e860f829de1c063c288c34ac6970b1c5ccef9fa"
+    }
+  },
+  "epochs": 2,
+  "fold": "eth",
+  "identity_sha256": {
+    "checkpoint_selection.json": "a03ed13afad78d751c91cd88262dc9378504cb140fabee97616dfab01c8caa8f",
+    "config.json": "5bde57d21c7a8cb5f7be7858055b325957edcf57cb75b4aa2e136ba80866c359",
+    "selected.pt": "fcea5bb4aebb0821d78c49c7a2329ce9197e78748ab487ae6b90be8b024c6f58"
+  },
+  "model": "social_gan",
+  "profile": "pilot",
+  "scope": "Exact training and export replay in the recorded local environment.",
+  "seed": 0,
+  "selected_state_tensors": 22,
+  "source_sha256": {
+    "check_training.py": "9d31d3807bc2c1b7edba39e407789fe5ecbb8dd7cd996484c7da6c0782d5e172",
+    "config.json": "8e9ea1c2237c13375c8d30de5ec207a5fb6910ead18577746b72676c6d4f1e8b",
+    "data.py": "31ca5e562c69da376158a8ef967aabda7792551d48a9a4869577c5618ea8dd9d",
+    "model.py": "f6c03662142e1fc8d33f6120f912737a24b95e5e39347e294a4198ca4b39e652",
+    "run.py": "2a8329a82a04e0ac04a39ce6e21a2a9ef5f46943353263e3360b7ecbb40d6f99"
+  },
+  "status": "passed"
+}

@@ -44,6 +44,7 @@ a closer best match here, even though mean error rose across the benchmark.
 The Univ panel shows the clean example with the largest best-of-twenty
 error for seed zero. The pedestrian almost reverses direction. Even
 the closest draw misses by 4.69 meters on average over the forecast.
-The runtime underneath covers twenty paths each for 128 targets on
-the local CPU. I'll hand over to Zongmin for Social-STGCNN and its
+The runtime underneath includes history and neighbor preprocessing, then
+twenty paths each for 128 targets on the local CPU. I'll hand over to
+Zongmin for Social-STGCNN and its
 spatiotemporal graph.

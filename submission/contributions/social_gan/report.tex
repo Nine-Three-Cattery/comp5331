@@ -20,6 +20,13 @@ a real or a generated future. The generator minimizes the RMS error
 of the closest of twenty training draws plus a weighted adversarial
 loss. The neighborhood limit, residual decoder, target discriminator
 and shorter training budget are features of this implementation.
+The encoder and decoder have 16 and 32 hidden units, with a 16-dimensional
+motion embedding and eight Gaussian latent dimensions. The generator loss
+uses an adversarial weight of 0.05. Adam uses a learning rate of 0.001,
+batch size 128 and gradient clipping at norm 5 for the generator.
+We allow 20 epochs and stop after five without validation improvement.
+The paper uses batch size 64 and 200 epochs. Our experiment evaluates
+these core components under the group protocol with the stated adaptations.
 
 \paragraph{Verification.}
 We selected one checkpoint per fold and seed by clean validation Energy
@@ -30,7 +37,10 @@ futures and changed cached derivatives without changing the inputs or
 forecasts. Coordinate round-trip and isolated-target tests passed. The
 shared audit checked 90 bundles against the ordered manifests, and a
 local replay regenerated the six ETH seed 0 forecasts from its formal
-checkpoint.
+checkpoint. An independently written NumPy evaluator also checked
+all six headline metrics for every formal bundle against the CSV, after
+passing analytic one-draw and two-draw fixtures. A fresh two-epoch pilot
+training reproduced the selected model and forecasts in the local environment.
 
 \paragraph{Clean forecasts.}
 With \(K=20\), the best path after seeing the future averaged
@@ -48,20 +58,21 @@ folds, the largest within-fold seed standard deviation for minADE was
 \centering
 \small
 \caption{Clean Social-GAN errors and sample diversity in meters at \(K=20\).
-Each fold row averages three training seeds. The last row weights folds equally.}
+ADE cells show the mean and sample standard deviation across three training seeds.
+Other cells show seed means. The last row weights folds equally within each seed.}
 \label{tab:social_gan:clean}
 \begin{tabular}{lrrrrrr}
 \toprule
 Holdout & minADE & minFDE & meanADE & meanFDE & Energy & Diversity \\
 \midrule
-ETH & \SocialGanInsight{ETHMinADE} & \SocialGanInsight{ETHMinFDE} & \SocialGanInsight{ETHMeanADE} & \SocialGanInsight{ETHMeanFDE} & \SocialGanInsight{ETHEnergy} & \SocialGanInsight{ETHDiversity} \\
-Hotel & \SocialGanInsight{HotelMinADE} & \SocialGanInsight{HotelMinFDE} & \SocialGanInsight{HotelMeanADE} & \SocialGanInsight{HotelMeanFDE} & \SocialGanInsight{HotelEnergy} & \SocialGanInsight{HotelDiversity} \\
-Univ & \SocialGanInsight{UnivMinADE} & \SocialGanInsight{UnivMinFDE} & \SocialGanInsight{UnivMeanADE} & \SocialGanInsight{UnivMeanFDE} & \SocialGanInsight{UnivEnergy} & \SocialGanInsight{UnivDiversity} \\
-Zara1 & \SocialGanInsight{Zara1MinADE} & \SocialGanInsight{Zara1MinFDE} & \SocialGanInsight{Zara1MeanADE} & \SocialGanInsight{Zara1MeanFDE} & \SocialGanInsight{Zara1Energy} & \SocialGanInsight{Zara1Diversity} \\
-Zara2 & \SocialGanInsight{Zara2MinADE} & \SocialGanInsight{Zara2MinFDE} & \SocialGanInsight{Zara2MeanADE} & \SocialGanInsight{Zara2MeanFDE} & \SocialGanInsight{Zara2Energy} & \SocialGanInsight{Zara2Diversity} \\
+ETH & \(\SocialGanInsight{ETHMinADE}\pm\SocialGanInsight{ETHMinADESD}\) & \SocialGanInsight{ETHMinFDE} & \(\SocialGanInsight{ETHMeanADE}\pm\SocialGanInsight{ETHMeanADESD}\) & \SocialGanInsight{ETHMeanFDE} & \SocialGanInsight{ETHEnergy} & \SocialGanInsight{ETHDiversity} \\
+Hotel & \(\SocialGanInsight{HotelMinADE}\pm\SocialGanInsight{HotelMinADESD}\) & \SocialGanInsight{HotelMinFDE} & \(\SocialGanInsight{HotelMeanADE}\pm\SocialGanInsight{HotelMeanADESD}\) & \SocialGanInsight{HotelMeanFDE} & \SocialGanInsight{HotelEnergy} & \SocialGanInsight{HotelDiversity} \\
+Univ & \(\SocialGanInsight{UnivMinADE}\pm\SocialGanInsight{UnivMinADESD}\) & \SocialGanInsight{UnivMinFDE} & \(\SocialGanInsight{UnivMeanADE}\pm\SocialGanInsight{UnivMeanADESD}\) & \SocialGanInsight{UnivMeanFDE} & \SocialGanInsight{UnivEnergy} & \SocialGanInsight{UnivDiversity} \\
+Zara1 & \(\SocialGanInsight{Zara1MinADE}\pm\SocialGanInsight{Zara1MinADESD}\) & \SocialGanInsight{Zara1MinFDE} & \(\SocialGanInsight{Zara1MeanADE}\pm\SocialGanInsight{Zara1MeanADESD}\) & \SocialGanInsight{Zara1MeanFDE} & \SocialGanInsight{Zara1Energy} & \SocialGanInsight{Zara1Diversity} \\
+Zara2 & \(\SocialGanInsight{Zara2MinADE}\pm\SocialGanInsight{Zara2MinADESD}\) & \SocialGanInsight{Zara2MinFDE} & \(\SocialGanInsight{Zara2MeanADE}\pm\SocialGanInsight{Zara2MeanADESD}\) & \SocialGanInsight{Zara2MeanFDE} & \SocialGanInsight{Zara2Energy} & \SocialGanInsight{Zara2Diversity} \\
 \midrule
-Macro & \ModelMetric{social_gan}{clean_0}{min_ade_mean} & \ModelMetric{social_gan}{clean_0}{min_fde_mean} &
-\ModelMetric{social_gan}{clean_0}{mean_ade_mean} & \ModelMetric{social_gan}{clean_0}{mean_fde_mean} &
+Macro & \(\SocialGanInsight{MacroMinADE}\pm\SocialGanInsight{MacroMinADESD}\) & \ModelMetric{social_gan}{clean_0}{min_fde_mean} &
+\(\SocialGanInsight{MacroMeanADE}\pm\SocialGanInsight{MacroMeanADESD}\) & \ModelMetric{social_gan}{clean_0}{mean_fde_mean} &
 \ModelMetric{social_gan}{clean_0}{energy_score_mean} & \ModelMetric{social_gan}{clean_0}{sample_diversity_mean} \\
 \bottomrule
 \end{tabular}
@@ -88,7 +99,9 @@ the aggregate meanADE increased.
 In the largest clean minADE failure in Univ at seed 0, even the closest
 draw missed by \SocialGanInsight{FailureMinADE}\,m. The net direction
 of the recorded future differed from the observed history by
-\(\SocialGanInsight{FailureHeading}^{\circ}\) (Figure~\ref{fig:social_gan:paths}).
+\(\SocialGanInsight{FailureHeading}^{\circ}\). That scene time contains
+\SocialGanInsight{FailureCoTargets} evaluation targets. This case shows a missed
+direction change in a multi-person scene (Figure~\ref{fig:social_gan:paths}).
 
 \begin{figure}[H]
 \centering
@@ -103,12 +116,49 @@ the clean window with the largest minADE in that holdout and seed.}
 On clean input, \SocialGanInsight{CleanSpeedViolationPct}\% of windows
 had a forecast speed 99th percentile above the fold's training threshold.
 The close-approach rate was \SocialGanInsight{CleanCloseApproachPct}\%,
-averaged over draws and scene times with multiple targets. This pairs
+averaged over draws and scene times with multiple targets.
+For each draw, a close approach means that at least one pair passes below
+the fold's training-derived distance threshold at some forecast step.
+More pairs create more opportunities to trigger that diagnostic. This pairs
 equal sample indices across target-specific forecasts. The median of run
 medians was \ModelRuntime{social_gan}{end_to_end_ms}\,ms
 per 128 targets on an Apple M5 Pro CPU with two PyTorch threads
 (\ModelRuntime{social_gan}{preprocessing_ms}\,ms for preprocessing and
 \ModelRuntime{social_gan}{prediction_sampling_ms}\,ms for prediction and sampling).
-Timing starts after one-time history indexing and ends at metric CPU
-output. The results describe the complete model, with pooling, the
+Each timing repetition includes constructing the target histories and
+indexing eligible neighbors from in-memory neutral positions. It then
+selects neighbors, centers inputs, creates tensors and samples forecasts,
+ending at metric CPU output. We use batch size 32, three warmups and ten
+measured repetitions per fold and seed. File and model loading precede
+measurement. The results describe the complete model, with pooling, the
 residual connection and the adversarial objective evaluated together.
+
+
+\begin{table}[H]
+\centering
+\small
+\caption{Motion and proximity diagnostics in percent. Motion columns count
+windows whose forecast 99th percentile exceeds the training 99th percentile.
+The proximity column counts scene-time draws with any pair below the
+training pair-distance 5th percentile, then averages seeds and folds.}
+\label{tab:social_gan:motion}
+\begin{tabular}{lrrrr}
+\toprule
+Input & Speed & Acceleration & Jerk & Proximity \\
+\midrule
+Clean & \SocialGanInsight{clean_0speed} & \SocialGanInsight{clean_0acceleration} & \SocialGanInsight{clean_0jerk} & \SocialGanInsight{clean_0proximity} \\
+Noise 0.05 m & \SocialGanInsight{noise_005speed} & \SocialGanInsight{noise_005acceleration} & \SocialGanInsight{noise_005jerk} & \SocialGanInsight{noise_005proximity} \\
+Noise 0.10 m & \SocialGanInsight{noise_010speed} & \SocialGanInsight{noise_010acceleration} & \SocialGanInsight{noise_010jerk} & \SocialGanInsight{noise_010proximity} \\
+Noise 0.20 m & \SocialGanInsight{noise_020speed} & \SocialGanInsight{noise_020acceleration} & \SocialGanInsight{noise_020jerk} & \SocialGanInsight{noise_020proximity} \\
+Missing 1 & \SocialGanInsight{missing_1speed} & \SocialGanInsight{missing_1acceleration} & \SocialGanInsight{missing_1jerk} & \SocialGanInsight{missing_1proximity} \\
+Missing 2 & \SocialGanInsight{missing_2speed} & \SocialGanInsight{missing_2acceleration} & \SocialGanInsight{missing_2jerk} & \SocialGanInsight{missing_2proximity} \\
+\bottomrule
+\end{tabular}
+\end{table}
+The close-approach rate decreases under stronger input noise while the
+position errors increase. The forecast samples cover a different region
+of space, which changes the frequency of close pairs. These measures
+describe different aspects of the same predictions. The experiment
+supports conclusions about forecast error and the stated diagnostics
+within the group protocol. Separate ablations would be needed to attribute
+an improvement to pooling or adversarial training alone.
