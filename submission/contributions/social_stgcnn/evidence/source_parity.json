@@ -178,6 +178,39 @@
         "parameter_gradients": 0.0,
         "batchnorm_buffers": 0.0
       }
+    },
+    {
+      "case": "recorded_eth_frames_2860_3050",
+      "node_order": [
+        0,
+        1,
+        2
+      ],
+      "agents": 3,
+      "geometry_max_abs": {
+        "increments": 0.0,
+        "laplacian": 0.0
+      },
+      "eval_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      },
+      "distribution_max_abs": {
+        "loss": 0.0,
+        "loss_gradient": 5.587935447692871e-09,
+        "sample_paths_common_anchor_m": 1.9073486328125e-06,
+        "sample_paths_after_known_anchor_shift_m": 1.9073486328125e-06
+      },
+      "train_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      }
     }
   ],
   "passed": true

@@ -37,7 +37,7 @@ def external_modules(path):
     if subprocess.check_output([*git, "rev-parse", "HEAD"], text=True).strip() != RELEASE:
         raise ValueError(f"Reference checkout must be at {RELEASE}")
     subprocess.run([*git, "diff", "--quiet", "HEAD", "--", "model.py", "utils.py", "metrics.py",
-                    "train.py", "test.py"], check=True)
+                    "train.py", "test.py", "datasets/eth/test/biwi_eth.txt"], check=True)
     modules = []
     for name in ("model", "utils", "metrics"):
         spec = importlib.util.spec_from_file_location(f"release_{name}", path / f"{name}.py")
@@ -66,6 +66,20 @@ def source_fixture(utils):
         dataset = utils.TrajectoryDataset(folder, obs_len=8, pred_len=12)
     if len(dataset) != 1:
         raise AssertionError("The external fixture must contain one 20-frame scene")
+    return torch.from_numpy(world), dataset[0]
+
+
+def recorded_eth_fixture(utils, reference):
+    """First 20 consecutive release ETH frames with three complete trajectories."""
+    rows = np.loadtxt(reference / "datasets/eth/test/biwi_eth.txt")
+    rows = rows[(rows[:, 0] >= 2860) & (rows[:, 0] <= 3050)]
+    with TemporaryDirectory() as folder:
+        np.savetxt(Path(folder) / "eth.txt", rows, fmt="%.10f", delimiter="\t")
+        dataset = utils.TrajectoryDataset(folder, obs_len=8, pred_len=12)
+    ids = [51, 52, 56]
+    world = np.stack([rows[rows[:, 1] == agent, 2:4] for agent in ids], axis=1)
+    if len(dataset) != 1 or world.shape != (20, 3, 2):
+        raise AssertionError("Unexpected released ETH fixture population")
     return torch.from_numpy(world), dataset[0]
 
 
@@ -174,7 +188,7 @@ def main():
     torch.use_deterministic_algorithms(True)
     release, utils, metrics = external_modules(args.reference)
     world, example = source_fixture(utils)
-    absolute, _, relative, _, _, _, dataset_v, dataset_a, future, _ = example
+    absolute, _, relative = example[:3]
     # The released dataset requires at least two agents; its graph utility
     # squeezes away the node dimension for a singleton supplied directly.
     try:
@@ -193,12 +207,16 @@ def main():
                "singleton_scope": singleton_note, "cases": []}
     cases = {"full_numeric_order": [0, 1, 2, 3], "full_permuted_order": [2, 0, 3, 1],
              "moving_pair": [3, 1], "equal_motion_pair": [0, 1], "singleton": [0]}
-    for name, order in cases.items():
+    inputs = [(name, order, world, example) for name, order in cases.items()]
+    real_world, real_example = recorded_eth_fixture(utils, args.reference)
+    inputs.append(("recorded_eth_frames_2860_3050", [0, 1, 2], real_world, real_example))
+    for name, order, world, example in inputs:
+        absolute, _, relative, _, _, _, dataset_v, dataset_a, future, _ = example
         graph_order = order if len(order) > 1 else [order[0], order[0]]
         ref_v, ref_a = utils.seq_to_graph(absolute[graph_order], relative[graph_order])
         n = len(order)
         ref_v, ref_a = ref_v[:, :n], ref_a[:, :n, :n]
-        if name == "full_numeric_order":
+        if name in ("full_numeric_order", "recorded_eth_frames_2860_3050"):
             compare(ref_v, dataset_v, atol=0, rtol=0)
             compare(ref_a, dataset_a, atol=0, rtol=0)
         observed = world[:8, order].unsqueeze(0)
@@ -216,7 +234,7 @@ def main():
     receipt["passed"] = True
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(receipt, indent=2, allow_nan=False) + "\n")
-    print(f"REFERENCE_PARITY_OK cases={len(cases)} release={RELEASE} output={args.out}")
+    print(f"REFERENCE_PARITY_OK cases={len(inputs)} release={RELEASE} output={args.out}")
 
 
 if __name__ == "__main__":

@@ -9,15 +9,17 @@ import sys
 
 import torch
 from torch.distributions import MultivariateNormal
+import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from li_junhao_trajectronpp.independent_tpp.data import load_split
 from li_junhao_trajectronpp.independent_tpp.protocol import FOLDS, SEEDS, PREDICTION_HORIZON, write_json
+from models.social_stgcnn.export import raw_for_batch
 from models.social_stgcnn.run import ARTIFACTS, SETTINGS, restore
 from models.social_stgcnn.timing import timing_batch
 
 
-# The trainer evaluates a float32 density and rounds each minibatch mean.
+# The trainer evaluates a float32 density and rounds each scene's per-target mean.
 # The replay evaluates and sums individual log densities in float64.
 NLL_TOLERANCE = 2e-5
 
@@ -47,21 +49,21 @@ def replay_nll(model, store, batch_size):
     for start in range(0, len(store.manifests), batch_size):
         rows = store.manifests[start:start + batch_size]
         batch = timing_batch(store, rows)
-        raw = model(batch["positions"], batch["agent_mask"]).double()
+        raw = raw_for_batch(model, batch, torch.device("cpu")).double()
 
-        # Read anchor plus 12 futures in the same float32 world-coordinate
-        # representation as the registered labels, then difference in float64.
-        world = [[store.state(row.scene_key, row.target_id, row.anchor + offset)[:2].tolist()
-                  for offset in range(PREDICTION_HORIZON + 1)] for row in rows]
-        steps = torch.tensor(world, dtype=torch.float32).double().diff(dim=1)
-        sx, sy = raw[..., 2:4].clamp(-5, 3).exp().unbind(-1)
-        rho = 0.9999 * raw[..., 4].tanh()
+        # Reconstruct the released label transform independently from the raw
+        # neutral target positions, including the last observed position.
+        world = np.asarray([[store.state(row.scene_key, row.target_id, row.anchor + offset)[:2]
+                             for offset in range(PREDICTION_HORIZON + 1)] for row in rows], dtype=np.float64)
+        steps = torch.from_numpy(np.diff(np.around(world, decimals=4), axis=1).astype(np.float32)).double()
+        sx, sy = raw[..., 2:4].exp().unbind(-1)
+        rho = raw[..., 4].tanh()
         scale = raw.new_zeros((*raw.shape[:-1], 2, 2))
         scale[..., 0, 0] = sx
         scale[..., 1, 0] = sy * rho
-        scale[..., 1, 1] = sy * (1 - rho.square()).sqrt()
+        scale[..., 1, 1] = sy / raw[..., 4].cosh()
         density = MultivariateNormal(raw[..., :2], scale_tril=scale)
-        total -= density.log_prob(steps).sum().item()
+        total -= density.log_prob(steps).clamp_min(math.log(1e-20)).sum().item()
     value = total / (len(store.manifests) * PREDICTION_HORIZON)
     if not math.isfinite(value):
         raise ValueError("Replayed validation NLL is non-finite")
