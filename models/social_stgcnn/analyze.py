@@ -29,6 +29,9 @@ CONTRIBUTION = ROOT / "submission/contributions/social_stgcnn"
 CASE_SEED = 0
 CASE_INDEX = 64
 FIXED_CASES = {"eth": "eth:biwi_eth:171:801", "univ": "univ:students001:101:156"}
+SHARED_ETH_CASE = "eth:biwi_eth:216:875"
+SHARED_ETH_CONDITIONS = (("clean_0", "clean", "Clean"), ("noise_020", "noise", "Noise 0.20 m"),
+                         ("missing_2", "missing", "Missing two (dashed = causal fill)"))
 FAILURE_RULE = (
     "Highest clean minADE@20 among all five held-out scenes at seed 0. "
     "Break exact ties by lexicographically smallest window ID."
@@ -86,22 +89,63 @@ def spatial_diagnostics(folder):
             "close_approach_fraction": spatial.close_approach_rate.mean()}
 
 
+def trajectory_points(observed, future, samples):
+    paths = [("observed", None, -7, observed), ("truth", None, 1, future)]
+    paths.extend(("sample", draw, 1, points) for draw, points in enumerate(samples))
+    for path, draw, first_step, points in paths:
+        for step, xy in enumerate(points, start=first_step):
+            yield {"path": path, "draw": draw, "step": step, "x_m": float(xy[0]), "y_m": float(xy[1])}
+
+
 def case_rows(name, rule, window_id, index, fold, counts, clean, observed, future, samples):
     record = {"case": name, "selection_rule": rule, "fold": fold, "seed": CASE_SEED,
               "condition": "clean_0", "k": 20, "window_id": window_id,
               "runtime_fixture_index": CASE_INDEX if name.startswith("fixed_") else None,
               "available_and_used_neighbors": int(counts[index]),
               **clean.loc[window_id, SCORES].to_dict()}
-    paths = []
-    def append(path_type, draw, points, first_step):
-        for step, xy in enumerate(points, start=first_step):
-            paths.append({"case": name, "window_id": window_id, "path": path_type, "draw": draw,
-                          "step": step, "x_m": float(xy[0]), "y_m": float(xy[1])})
-    append("observed", None, observed[index], -7)
-    append("truth", None, future[index], 1)
-    for draw, points in enumerate(samples[index]):
-        append("sample", draw, points, 1)
+    paths = [{"case": name, "window_id": window_id, **point}
+             for point in trajectory_points(observed[index], future[index], samples[index])]
     return record, paths
+
+
+def shared_eth_case(run, windows, reference):
+    """Extract the group's fixed ETH pedestrian under three target-history conditions."""
+    from li_junhao_trajectronpp.independent_tpp.protocol import sha256
+
+    matches = [(i, row) for i, row in enumerate(windows.records) if row.window_id == SHARED_ETH_CASE]
+    if len(matches) != 1:
+        raise ValueError(f"Expected one {SHARED_ETH_CASE} in the ETH test manifest")
+    index, row = matches[0]
+    scene, source, target, anchor = SHARED_ETH_CASE.split(":")
+    if (*row.scene_key, row.target_id, str(row.values["anchor_t"])) != (scene, source, target, anchor):
+        raise ValueError("Shared ETH manifest ID and its source fields disagree")
+    base = {"fold": "eth", "seed": CASE_SEED, "window_id": row.window_id, "source_file": source,
+            "target_id": target, "anchor_t": int(anchor), "manifest_index": index, "coordinate_unit": "meter"}
+    points = []
+    for tag, kind, _ in SHARED_ETH_CONDITIONS:
+        path = run / "evaluation" / tag / f"predictions_test_{tag}.npz"
+        score = reference.loc[("eth", CASE_SEED, tag)]
+        if sha256(path) != score["prediction_sha256"] or score["manifest_hash"] != windows.identity["manifest_hash"]:
+            raise ValueError(f"Scored bundle or test manifest differs for the shared ETH case in {tag}")
+        with np.load(path, allow_pickle=False) as bundle:
+            record = json.loads(str(bundle["records"][index]))
+            expected = {"window_id": row.window_id, "scene_id": scene, "scene_name": row.values["scene_name"],
+                        "source_file": source, "target_id": target, "scene_t": row.anchor, "anchor_t": int(anchor),
+                        "fold": "eth", "split": "test", "seed": CASE_SEED, "condition": kind,
+                        "coordinate_unit": "meter", "sample_count": 20}
+            if any(record[k] != v for k, v in expected.items()):
+                raise ValueError(f"Wrong source record for the shared ETH case in {tag}")
+            observed, mask = bundle["observed"][index], bundle["observed_mask"][index]
+            truth, samples = bundle["ground_truth"][index], bundle["samples"][index]
+            if not np.array_equal(truth, windows.future[index]):
+                raise ValueError(f"Ground truth differs from the shared ETH test window in {tag}")
+            visible_steps = 6 if tag == "missing_2" else 8
+            if not np.array_equal(mask, np.arange(8) < visible_steps) or samples.shape != (20, 12, 2):
+                raise ValueError(f"Unexpected history mask or forecast budget for the shared ETH case in {tag}")
+            for point in trajectory_points(observed, truth, samples):
+                flag = bool(mask[point["step"] + 7]) if point["path"] == "observed" else None
+                points.append({**base, "condition": tag, **point, "is_observed": flag})
+    return pd.DataFrame(points).astype({"draw": "Int64", "is_observed": "boolean"})
 
 
 def clean_evidence(run, fold, seed, clean, counts, reference):
@@ -193,6 +237,8 @@ def numeric_tables(runs, metrics, data, results):
     host_labels, thresholds = {}, {}
     for fold in FOLDS:
         windows = GraphWindows.from_split(fold, "test", data)
+        if fold == "eth":
+            shared_eth = shared_eth_case(runs / fold / f"seed_{CASE_SEED}", windows, reference)
         ids = pd.Index([row.window_id for row in windows.records], name="window_id")
         counts = windows.available_neighbors
         bins = np.digitize(counts, [1, 4, 8])
@@ -249,6 +295,7 @@ def numeric_tables(runs, metrics, data, results):
         "diagnostics": diag, "runtime": summarize_runtime(runtime), "runtime_density": pd.DataFrame(density),
         "case_selection": pd.DataFrame([record for record, _ in selected]),
         "case_paths": pd.DataFrame([row for _, paths in selected for row in paths]),
+        "shared_eth_case": shared_eth,
     }
 
 
@@ -358,6 +405,33 @@ def render_cases(plt, evidence, assets):
     save_figure(plt, fig, assets / "trajectories.pdf")
 
 
+def shared_eth_panels(table):
+    if not table.window_id.eq(SHARED_ETH_CASE).all() or not table.seed.eq(CASE_SEED).all():
+        raise ValueError("Unexpected window or seed in the shared ETH case table")
+    conditions = []
+    xy = ["x_m", "y_m"]
+    sample_steps = pd.MultiIndex.from_product([range(20), range(1, 13)])
+    for tag, _, label in SHARED_ETH_CONDITIONS:
+        frame = table.loc[table.condition == tag]
+        obs = frame.loc[frame.path == "observed"].set_index("step", verify_integrity=True).loc[range(-7, 1)]
+        truth = frame.loc[frame.path == "truth"].set_index("step", verify_integrity=True).loc[range(1, 13)]
+        draws = frame.loc[frame.path == "sample"].set_index(["draw", "step"], verify_integrity=True).loc[sample_steps]
+        conditions.append((label, {"observed": obs[xy].to_numpy()[None], "ground_truth": truth[xy].to_numpy()[None],
+                                   "samples": draws[xy].to_numpy().reshape(1, 20, 12, 2),
+                                   "observed_mask": obs.is_observed.to_numpy(dtype=bool)[None],
+                                   "by_id": {SHARED_ETH_CASE: 0}}))
+    return conditions
+
+
+def render_shared_eth_case(evidence, assets):
+    """Reuse the group's single-scale plotting convention from compact metric coordinates."""
+    from li_junhao_trajectronpp.scripts.generate_failure_analysis import plot_conditions
+
+    table = pd.read_csv(evidence / "shared_eth_case.csv", dtype={"draw": "Int64", "is_observed": "boolean"})
+    fixed = pd.DataFrame({"window_id": [SHARED_ETH_CASE]})
+    plot_conditions("eth", fixed, shared_eth_panels(table), assets / "shared_eth_case.pdf")
+
+
 def render(out):
     import matplotlib
     matplotlib.use("Agg")
@@ -368,6 +442,7 @@ def render(out):
     render_sampling(plt, evidence, assets)
     render_robustness(plt, evidence, assets)
     render_cases(plt, evidence, assets)
+    render_shared_eth_case(evidence, assets)
 
 
 def main():

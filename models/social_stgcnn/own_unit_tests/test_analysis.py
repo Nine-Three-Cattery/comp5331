@@ -3,19 +3,69 @@
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from types import SimpleNamespace
 import unittest
 
 import numpy as np
 import pandas as pd
 
 from models.social_stgcnn.analyze import (
-    MOTION, NEIGHBOR_BINS, SCORES, STAGES, clean_evidence, runtime_row,
-    scored_windows, summarize_runs, summarize_runtime,
+    MOTION, NEIGHBOR_BINS, SCORES, SHARED_ETH_CASE, SHARED_ETH_CONDITIONS, STAGES, clean_evidence, runtime_row,
+    scored_windows, shared_eth_case, shared_eth_panels, summarize_runs, summarize_runtime,
 )
 from models.social_stgcnn.review_metrics import displacement_errors, heading_rows
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_matched_eth_table_preserves_draws_fill_and_source_identity(self):
+        from li_junhao_trajectronpp.independent_tpp.data import WindowRecord
+        from li_junhao_trajectronpp.independent_tpp.protocol import sha256
+
+        record = dict(window_id=SHARED_ETH_CASE, scene_id="eth", source_file="biwi_eth", scene_name="eth__biwi_eth__test",
+                      target_id="216", scene_t=875, anchor_t=875, fold="eth", split="test", seed=0,
+                      coordinate_unit="meter", sample_count=20)
+        decoy = {**record, "window_id": "eth:biwi_eth:5:70", "target_id": "5", "scene_t": 70, "anchor_t": 70}
+        truth = np.arange(48, dtype=np.float32).reshape(2, 12, 2)
+        samples = np.arange(2 * 20 * 12 * 2, dtype=np.float32).reshape(2, 20, 12, 2)
+        windows = SimpleNamespace(records=[WindowRecord(decoy), WindowRecord(record)], future=truth.copy(),
+                                  identity={"manifest_hash": "fixture"})
+        with TemporaryDirectory() as tmp:
+            run = Path(tmp)
+            reference = []
+            for number, (tag, kind, _) in enumerate(SHARED_ETH_CONDITIONS):
+                folder = run / "evaluation" / tag
+                folder.mkdir(parents=True)
+                path = folder / f"predictions_test_{tag}.npz"
+                masks = np.ones((2, 8), dtype=bool)
+                if kind == "missing":
+                    masks[:, -2:] = False
+                payload = {"observed": np.full((2, 8, 2), number), "ground_truth": truth,
+                           "samples": samples + number, "observed_mask": masks,
+                           "records": np.array([json.dumps({**r, "condition": kind}) for r in (decoy, record)])}
+                np.savez(path, **payload)
+                reference.append(dict(fold="eth", seed=0, condition=tag, prediction_sha256=sha256(path),
+                                      manifest_hash="fixture"))
+            reference = pd.DataFrame(reference).set_index(["fold", "seed", "condition"])
+            table = shared_eth_case(run, windows, reference)
+            self.assertEqual(len(table), 3 * (8 + 12 + 20 * 12))
+            self.assertEqual(table.manifest_index.unique().tolist(), [1])
+            self.assertEqual(table.coordinate_unit.unique().tolist(), ["meter"])
+            panels = shared_eth_panels(table.sample(frac=1, random_state=4))
+            for number, (_, bundle) in enumerate(panels):
+                np.testing.assert_array_equal(bundle["samples"][0], samples[1] + number)
+                np.testing.assert_array_equal(bundle["ground_truth"][0], truth[1])
+                np.testing.assert_array_equal(bundle["observed_mask"][0], np.arange(8) < (6 if number == 2 else 8))
+
+            # A scored bundle can still be paired with a wrong source row or another future.
+            payload["records"][1] = json.dumps({**record, "source_file": "other", "condition": "missing"})
+            np.savez(path, **payload)
+            reference.loc[("eth", 0, "missing_2"), "prediction_sha256"] = sha256(path)
+            with self.assertRaisesRegex(ValueError, "Wrong source record"):
+                shared_eth_case(run, windows, reference)
+            windows.future[1, 0, 1] += 1
+            with self.assertRaisesRegex(ValueError, "Ground truth differs"):
+                shared_eth_case(run, windows, reference)
+
     def test_owner_displacement_scores_choose_ade_and_fde_winners_separately(self):
         truth = np.zeros((2, 12, 2))
         draws = np.zeros((2, 20, 12, 2))
