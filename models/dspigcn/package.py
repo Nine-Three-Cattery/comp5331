@@ -8,6 +8,8 @@ import tarfile
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'li_junhao_trajectronpp'))
+sys.path.insert(0,str(ROOT/'benchmark'))
+from contract import fingerprint
 from independent_tpp.protocol import sha256, write_json
 import pandas as pd
 
@@ -19,10 +21,15 @@ def main():
     args = parser.parse_args()
     contribution = ROOT/'submission/contributions/dspigcn'
     audit = json.loads((ROOT/'artifacts/dspigcn/benchmark_audit.json').read_text())
-    if audit['status']!='passed' or audit['prediction_bundles']!=90 or audit['results_sha256']!=sha256(contribution/'results.csv'):
+    if (audit['model']!='dspigcn' or audit['protocol']!='causal_v2' or audit['status']!='passed'
+            or audit['prediction_bundles']!=90 or audit['contract_sha256']!=fingerprint()
+            or audit['results_sha256']!=sha256(contribution/'results.csv')):
         raise ValueError('Run the formal shared audit before packaging')
+    registered = json.loads((ROOT/'models/dspigcn/configs/formal.json').read_text())
     for config_path in args.runs.glob('*/seed_*/config.json'):
         config = json.loads(config_path.read_text())
+        if any(config[key]!=value for key,value in registered.items()):
+            raise ValueError(f'Run differs from the registered formal config: {config_path}')
         for name,digest in config['implementation_hashes'].items():
             if sha256(ROOT/'models/dspigcn/dspigcn'/name)!=digest:
                 raise ValueError(f'Implementation changed after training: {name}')
@@ -41,7 +48,7 @@ def main():
         for path in (ROOT/directory).rglob('*'):
             if (not path.is_file() or '__pycache__' in path.parts or '.pytest_cache' in path.parts
                     or 'build' in path.parts or path.name.startswith('._')
-                    or path.name=='provenance.json'):
+                    or path==contribution/'provenance.json'):
                 continue
             files.append((path,path.relative_to(ROOT).as_posix()))
     for path in args.runs.rglob('*'):

@@ -15,12 +15,12 @@
 \includegraphics[width=0.94\linewidth]{contributions/dspigcn/assets/robustness.png}
 \small Clean meanADE: \ModelMetric{dspigcn}{clean_0}{mean_ade_mean}\,m;
 minADE: \ModelMetric{dspigcn}{clean_0}{min_ade_mean}\,m.
-Equal scene weights; bars show variation across three seeds.
+Equal scene weights; error bars show variation across three seeds.
 \end{frame}
 
 \begin{frame}{Physical regularization does not guarantee safe samples}
 \centering
-\includegraphics[width=0.96\linewidth]{contributions/dspigcn/assets/fixed_eth.png}
+\includegraphics[width=0.96\linewidth,height=4.6cm,keepaspectratio]{contributions/dspigcn/assets/fixed_eth.png}
 \small Fixed ETH example, seed 0; all 20 samples shown.
 Runtime: \ModelRuntime{dspigcn}{end_to_end_ms}\,ms per 128 targets.
 Close approaches and ensemble scores remain diagnostics, not safety or

@@ -2,11 +2,13 @@
 """Produce fold/seed summaries and auditable fixed/failure trajectory figures."""
 import argparse
 import json
+import os
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'li_junhao_trajectronpp'))
+os.environ.setdefault('MPLCONFIGDIR', str(ROOT/'artifacts/dspigcn/matplotlib'))
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -40,7 +42,7 @@ def trajectory(ax, data, index, title):
     mean = samples.mean(0)
     ax.plot(mean[:,0],mean[:,1],color='#c05b36',lw=1.5,label='Sample mean')
     ax.set_title(title,fontsize=10)
-    ax.set_xlabel('x (m)');ax.set_ylabel('y (m)');ax.set_aspect('equal',adjustable='datalim')
+    ax.set_xlabel('x (m)');ax.set_ylabel('y (m)');ax.set_aspect('equal',adjustable='box')
     ax.grid(alpha=0.15)
 
 
@@ -90,12 +92,19 @@ def main():
             fixed_index = indices[fixed[fold][0]]
             errors = np.linalg.norm(clean['samples']-clean['ground_truth'][:,None],axis=-1).mean((1,2))
             worst = int(errors.argmax())
-            fig,axes = plt.subplots(1,3,figsize=(10,3.6),layout='constrained')
+            fig,axes = plt.subplots(1,3,figsize=(10,3.6),layout='constrained',sharex=True,sharey=True)
             for ax,tag in zip(axes,['clean_0','noise_020','missing_2']):
                 with np.load(bundle(args.runs,fold,tag),allow_pickle=False) as data:
                     trajectory(ax,data,fixed_index,fold.upper()+' / '+tag.replace('_',' '))
-            axes[0].legend(fontsize=7,loc='best')
-            fig.savefig(assets/f'fixed_{fold}.png',dpi=180);plt.close(fig)
+            legend = {}
+            for ax in axes:
+                handles,labels = ax.get_legend_handles_labels()
+                legend.update(zip(labels,handles))
+            fig.legend(legend.values(),legend.keys(),loc='outside lower center',ncol=5,fontsize=8)
+            xlim,ylim = axes[0].get_xlim(),axes[0].get_ylim()
+            height = np.clip(2.9*(ylim[1]-ylim[0])/max(xlim[1]-xlim[0],1e-6)+1.,2.3,4.8)
+            fig.set_size_inches(10,float(height))
+            fig.savefig(assets/f'fixed_{fold}.png',dpi=180,bbox_inches='tight',pad_inches=0.04);plt.close(fig)
             fig,ax = plt.subplots(figsize=(5,4),layout='constrained')
             trajectory(ax,clean,worst,f'{fold.upper()} largest meanADE: {errors[worst]:.3f} m')
             ax.legend(fontsize=8)

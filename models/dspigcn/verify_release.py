@@ -36,23 +36,30 @@ def main():
     ]
     for command in commands:
         subprocess.run(command,cwd=ROOT,check=True)
-    # Replay real ETH seed-0 inference from the archived weights in a separate
-    # output tree; original bundles stay immutable. Compare all six conditions.
-    reference = ROOT/'artifacts/dspigcn/formal/runs/eth/seed_0'
+    # Replay every archived checkpoint into a separate output tree. Validate all
+    # 90 bundles, not just a pilot or a convenient holdout. Originals stay intact.
+    reference = ROOT/'artifacts/dspigcn/formal/runs'
     with tempfile.TemporaryDirectory(prefix='dspigcn-replay-') as scratch:
-        run = Path(scratch)/'runs/eth/seed_0'
-        run.mkdir(parents=True)
-        for name in ['config.json','checkpoint_selection.json','best.pt']:
-            shutil.copyfile(reference/name,run/name)
+        replay_root = Path(scratch)/'runs'
+        for config in reference.glob('*/seed_*/config.json'):
+            source = config.parent
+            destination = replay_root/source.relative_to(reference)
+            destination.mkdir(parents=True)
+            selected = json.loads((source/'checkpoint_selection.json').read_text())['selected']['checkpoint']
+            for name in ['config.json','checkpoint_selection.json',selected]:
+                shutil.copyfile(source/name,destination/name)
         subprocess.run([args.prediction_python,str(ROOT/'models/dspigcn/run.py'),'predict',
-                        '--runs',str(Path(scratch)/'runs'),'--folds','eth','--seeds','0',
-                        '--device',args.device],cwd=ROOT,check=True)
-        for original in sorted((reference/'evaluation').glob('*/*.npz')):
-            replay = run/original.relative_to(reference)
+                        '--runs',str(replay_root),'--device',args.device],cwd=ROOT,check=True)
+        originals = sorted(reference.glob('*/seed_*/evaluation/*/*.npz'))
+        if len(originals)!=90:
+            raise ValueError('Expected all ninety original prediction bundles')
+        for original in originals:
+            replay = replay_root/original.relative_to(reference)
             with np.load(original,allow_pickle=False) as expected, np.load(replay,allow_pickle=False) as actual:
                 np.testing.assert_allclose(actual['samples'],expected['samples'],rtol=1e-5,atol=1e-5)
                 for key in ['ground_truth','observed','observed_mask','records','metadata']:
                     np.testing.assert_array_equal(actual[key],expected[key])
+        print('CHECKPOINT_REPLAY_OK checkpoints=15 prediction_bundles=90')
     print('EXTRACTED_RELEASE_VERIFIED',len(ledger),'files')
 
 
