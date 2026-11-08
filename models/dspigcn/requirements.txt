@@ -1,0 +1,6 @@
+# Training: choose a CUDA-compatible torch build; shared CPU scoring uses 2.14.0.
+torch==2.14.0
+numpy==2.5.3
+pandas==3.0.6
+matplotlib==3.11.2
+pytest==9.2.0

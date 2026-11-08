@@ -1,0 +1,80 @@
+\subsection{DSPIGCN}
+\label{sec:dspigcn}
+\paragraph{Implementation and independence.}
+YAN Zhengyang's implementation follows the dual-stream architecture of
+Guo et al.~\cite{guo2026dspigcn}. Separate displacement and velocity branches
+combine four-head temporal attention, a symmetrically normalized graph
+convolution and a residual causal temporal convolution. Four-layer decoders
+produce bivariate Gaussian position parameters and velocities. A four-layer
+convolutional network estimates a degree-four polynomial, whose analytic
+derivative couples the two branches. The loss combines Gaussian negative
+log-likelihood, squared reconstruction error and the position/velocity
+physical residual, with physics weight 0.1. All model, loss, trainer and
+sampler code was written for this project with acknowledged Codex assistance;
+only the group's neutral loader, corruption and evaluator are shared.
+
+\paragraph{Registered departures.}
+The implementation uses target-centered metric positions, seconds-based
+velocities, a 3 m history-only neighbor filter, and residual initialization
+around the last observed velocity. Gaussian means represent displacement
+from the forecast origin rather than per-step increments. Polynomial
+coefficients are rescaled from normalized time to physical seconds before
+differentiation. Algorithm 2 is implemented as a stratified equal-weight
+mixture over forecast times, followed by nearest-unused-anchor assignment.
+The consulted public reference differs from the paper in reconstruction and
+sampling; our source notes identify the exact version and discrepancies.
+These choices preclude claiming exact reproduction of the published scores.
+
+\paragraph{Verification and selection.}
+The target and neighbor feature tests change future coordinates, future
+neighbor availability and supplied derivative columns without changing model
+inputs. Additional checks cover metric round trips, derivative units,
+polynomial gradients, analytic likelihood, graph padding/permutation,
+seeded sample conservation and optimization through all branches. The formal
+configuration specifies all five holdouts, seeds 0--2, 200 SGD epochs and
+batch size 128. Checkpoints are selected every ten epochs using clean
+validation Energy Score, then mean ADE and earlier epoch. One selected
+checkpoint generates all six conditions; no test result enters selection.
+
+\paragraph{Accuracy, robustness and distribution.}
+At $K=20$, the macro meanADE is
+\ModelMetric{dspigcn}{clean_0}{mean_ade_mean}\,m and minADE is
+\ModelMetric{dspigcn}{clean_0}{min_ade_mean}\,m. The corresponding meanFDE and
+minFDE are \ModelMetric{dspigcn}{clean_0}{mean_fde_mean}\,m and
+\ModelMetric{dspigcn}{clean_0}{min_fde_mean}\,m. The ensemble Energy Score is
+\ModelMetric{dspigcn}{clean_0}{energy_score_mean}\,m. Each scene receives equal
+macro weight; the accompanying evidence retains per-fold and seed variation.
+Noise of 0.20 m changes meanADE by
+\ModelMeanADEChange{dspigcn}{noise_020}\,m; hiding the last two observations
+changes it by \ModelMeanADEChange{dspigcn}{missing_2}\,m.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.94\linewidth]{contributions/dspigcn/assets/robustness.png}
+\caption{DSPIGCN accuracy and ensemble score across the six registered
+conditions. Bars average equally over held-out scenes and seeds. Error bars
+show sample standard deviation of the three per-seed scene macro averages.}
+\label{fig:dspigcn-robustness}
+\end{figure}
+
+\paragraph{Motion, failure cases and runtime.}
+The contribution evidence includes training-threshold motion diagnostics,
+paired condition differences and both fixed examples and explicitly selected
+largest-error cases. The fixed cases use the first locked runtime identifier
+per fold, independently of model errors. All 20 trajectories are shown.
+Measured end-to-end runtime for the prescribed 128-target, batch-32 workload
+is \ModelRuntime{dspigcn}{end_to_end_ms}\,ms (median of run medians). Graph
+preprocessing and coupled network/sampling time are retained separately.
+Training uses a CUDA-12.8-compatible PyTorch environment; common scoring uses
+the prescribed CPU environment. Hardware-specific timing must be reported
+separately unless other owners are measured on the same host and device.
+
+\paragraph{Limits.}
+The physical loss regularizes means, not every sample; it does not guarantee
+collision avoidance. Greedy anchor assignment makes trajectories dependent
+and alters their marginals, so the Energy Score is an ensemble diagnostic,
+not proof of calibrated uncertainty. Overlapping test windows are correlated;
+seed standard deviations quantify training variability rather than population
+confidence intervals. Architectural explanations remain hypotheses without
+controlled ablations. Full-run evidence and editor review are required before
+this pending contribution can be accepted into the final comparison.

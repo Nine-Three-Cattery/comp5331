@@ -1,0 +1,7 @@
+# A800 host exposes CUDA 12.8 compatibility; preserve the host driver.
+# Install torch from https://download.pytorch.org/whl/cu128 first.
+torch==2.7.0+cu128
+numpy==2.5.3
+pandas==3.0.6
+matplotlib==3.11.2
+pytest==9.2.0
