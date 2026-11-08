@@ -1,0 +1,184 @@
+{
+  "release": "333d3a57b4d2705e129b21aefefa09c79b2b9ae1",
+  "model_sha256": "4e408da1e88e40ac5b81a4302faded2af115f50a153cfe34a8bf6fa7f8036dde",
+  "torch": "2.2.1",
+  "numpy": "1.26.4",
+  "networkx": "2.8.8",
+  "scipy": "1.11.4",
+  "sample_count": 20,
+  "comparison_tolerances": {
+    "atol": 3e-06,
+    "rtol": 3e-05,
+    "increments_exact": true,
+    "sample_atol_m": 5e-06
+  },
+  "upstream_registered_parameters": 7563,
+  "owner_active_parameters": 6254,
+  "singleton_scope": "Upstream singleton graph utility raises IndexError. A disconnected identical-motion pair supplies the one-node graph; the released neural network accepts the preserved singleton dimensions.",
+  "cases": [
+    {
+      "case": "full_numeric_order",
+      "node_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "agents": 4,
+      "geometry_max_abs": {
+        "increments": 0.0,
+        "laplacian": 0.0
+      },
+      "eval_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      },
+      "distribution_max_abs": {
+        "loss": 2.384185791015625e-07,
+        "loss_gradient": 5.587935447692871e-09,
+        "sample_paths_common_anchor_m": 1.9073486328125e-06,
+        "sample_paths_after_known_anchor_shift_m": 1.9073486328125e-06
+      },
+      "train_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      }
+    },
+    {
+      "case": "full_permuted_order",
+      "node_order": [
+        2,
+        0,
+        3,
+        1
+      ],
+      "agents": 4,
+      "geometry_max_abs": {
+        "increments": 0.0,
+        "laplacian": 0.0
+      },
+      "eval_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      },
+      "distribution_max_abs": {
+        "loss": 0.0,
+        "loss_gradient": 5.587935447692871e-09,
+        "sample_paths_common_anchor_m": 1.0132789611816406e-06,
+        "sample_paths_after_known_anchor_shift_m": 1.9073486328125e-06
+      },
+      "train_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      }
+    },
+    {
+      "case": "moving_pair",
+      "node_order": [
+        3,
+        1
+      ],
+      "agents": 2,
+      "geometry_max_abs": {
+        "increments": 0.0,
+        "laplacian": 0.0
+      },
+      "eval_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      },
+      "distribution_max_abs": {
+        "loss": 2.384185791015625e-07,
+        "loss_gradient": 7.450580596923828e-09,
+        "sample_paths_common_anchor_m": 1.9073486328125e-06,
+        "sample_paths_after_known_anchor_shift_m": 1.9073486328125e-06
+      },
+      "train_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      }
+    },
+    {
+      "case": "equal_motion_pair",
+      "node_order": [
+        0,
+        1
+      ],
+      "agents": 2,
+      "geometry_max_abs": {
+        "increments": 0.0,
+        "laplacian": 0.0
+      },
+      "eval_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      },
+      "distribution_max_abs": {
+        "loss": 4.76837158203125e-07,
+        "loss_gradient": 1.4901161193847656e-08,
+        "sample_paths_common_anchor_m": 9.5367431640625e-07,
+        "sample_paths_after_known_anchor_shift_m": 1.9073486328125e-06
+      },
+      "train_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 0.0,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      }
+    },
+    {
+      "case": "singleton",
+      "node_order": [
+        0
+      ],
+      "agents": 1,
+      "geometry_max_abs": {
+        "increments": 0.0,
+        "laplacian": 0.0
+      },
+      "eval_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 1.4551915228366852e-11,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      },
+      "distribution_max_abs": {
+        "loss": 9.5367431640625e-07,
+        "loss_gradient": 2.2351741790771484e-08,
+        "sample_paths_common_anchor_m": 9.5367431640625e-07,
+        "sample_paths_after_known_anchor_shift_m": 9.5367431640625e-07
+      },
+      "train_max_abs": {
+        "output": 0.0,
+        "input_gradient": 0.0,
+        "laplacian_gradient": 9.5367431640625e-07,
+        "parameter_gradients": 0.0,
+        "batchnorm_buffers": 0.0
+      }
+    }
+  ],
+  "passed": true
+}

@@ -1,176 +1,161 @@
+"""Numerical fixtures for the full-scene release operators."""
+
 import math
 import unittest
 
 import torch
 
 from models.social_stgcnn.model import (
-    SocialSTGCNN,
-    bivariate_nll,
-    future_displacements,
-    normalized_adjacency,
-    sample_world,
+    SocialSTGCNN, bivariate_nll, future_displacements, release_displacements, sample_world, scene_geometry,
 )
 
 
-def observed_tracks():
-    t = torch.arange(8, dtype=torch.float32)
-    target = torch.stack((2 + t / 4, 1 + t / 8), dim=-1)
-    oncoming = torch.stack((5 - t / 4, 2 + t / 16), dim=-1)
-    crossing = torch.stack((1 + t / 8, 4 - t / 4), dim=-1)
-    return torch.stack((target, oncoming, crossing), dim=1).unsqueeze(0)
+class GeometryTests(unittest.TestCase):
+    def test_increment_graph_has_self_loops_and_zero_weight_for_equal_motion(self):
+        expected_steps = torch.zeros(1, 8, 3, 2, dtype=torch.float64)
+        expected_steps[:, 1, 1:, 0] = 2.
+        expected_steps[:, 2, 1:, 0] = 4.
+        expected_steps[:, 3:, :, 1] = .25
+        starts = torch.tensor([[-8., 0.], [1., 9.], [5., -4.]], dtype=torch.float64)
+        positions = starts + expected_steps.cumsum(dim=1)
+        steps, graph = scene_geometry(positions)
+        torch.testing.assert_close(steps, expected_steps.float())
+        torch.testing.assert_close(graph[:, 0], torch.zeros_like(graph[:, 0]), rtol=0, atol=0)
+        torch.testing.assert_close(graph[:, 3:], torch.zeros_like(graph[:, 3:]), rtol=0, atol=0)
+        for t, distance in ((1, 2.), (2, 4.)):
+            center, neighbor = 1 + 2 / distance, 1 + 1 / distance
+            edge = -1 / (distance * math.sqrt(center * neighbor))
+            expected = torch.tensor([
+                [1 - 1 / center, edge, edge],
+                [edge, 1 - 1 / neighbor, 0.],
+                [edge, 0., 1 - 1 / neighbor],
+            ])
+            torch.testing.assert_close(graph[0, t], expected)
+        shifted_steps, shifted_graph = scene_geometry(positions + torch.tensor([30., -11.]))
+        torch.testing.assert_close(shifted_steps, steps, rtol=0, atol=0)
+        torch.testing.assert_close(shifted_graph, graph, rtol=0, atol=0)
+
+    def test_four_decimal_rounding_precedes_difference_and_float32_conversion(self):
+        positions = torch.full((1, 8, 1, 2), 100000.12344, dtype=torch.float64)
+        positions[:, 1:, 0, 0] = 100000.12346
+        steps, graph = scene_geometry(positions)
+        self.assertEqual(steps.dtype, torch.float32)
+        self.assertEqual(graph.shape, (1, 8, 1, 1))
+        self.assertEqual(graph.count_nonzero().item(), 0)
+        self.assertAlmostEqual(steps[0, 1, 0, 0].item(), .0001, places=9)
+        torch.testing.assert_close(release_displacements(positions[:, 1:], positions[:, 0]), steps[:, 1:])
+        self.assertAlmostEqual(future_displacements(positions[:, 1:], positions[:, 0])[0, 0, 0, 0].item(),
+                               .00002, places=9)
 
 
-class GraphForecastTests(unittest.TestCase):
+class FullSceneTests(unittest.TestCase):
     def setUp(self):
         torch.manual_seed(5331)
         self.model = SocialSTGCNN()
 
-    def test_per_frame_graph_degree_coincidence_and_padding(self):
-        positions = torch.tensor([[
-            [[0., 0.], [2., 0.], [2., 0.], [float("nan"), 0.]],
-            [[0., 0.], [4., 0.], [4., 0.], [0., 0.]],
-        ]])
-        mask = torch.tensor([[True, True, True, False]])
-        actual = normalized_adjacency(positions, mask)
-        for t, distance in enumerate((2, 4)):
-            target_degree, neighbor_degree = 1 + 2 / distance, 1 + 1 / distance
-            edge = 1 / (distance * math.sqrt(target_degree * neighbor_degree))
-            expected = torch.tensor([
-                [1 / target_degree, edge, edge, 0],
-                [edge, 1 / neighbor_degree, 0, 0],
-                [edge, 0, 1 / neighbor_degree, 0],
-                [0, 0, 0, 0],
-            ])
-            torch.testing.assert_close(actual[0, t], expected)
+    def test_single_person_and_batched_full_scene_shapes(self):
+        self.model.eval()
+        for agents in (1, 3, 11):
+            positions = torch.randn(2, 8, agents, 2, dtype=torch.float64)
+            steps, graph = scene_geometry(positions)
+            batched = self.model.full_scene(steps, graph)
+            self.assertEqual(batched.shape, (2, 12, agents, 5))
+            self.assertTrue(batched.isfinite().all())
+            for i in range(2):
+                alone = self.model(steps[i:i + 1], graph[i:i + 1])
+                torch.testing.assert_close(batched[i], alone[0])
+        # With one pedestrian the graph branch has a zero Laplacian.
+        steps, graph = scene_geometry(torch.randn(1, 8, 1, 2, dtype=torch.float64))
+        self.assertGreater((self.model(steps, graph) - self.model(steps * 0, graph)).abs().max().item(), 1e-5)
 
-    def test_masked_slots_order_and_world_translation(self):
-        observed = observed_tracks()
-        mask = torch.ones(1, 3, dtype=torch.bool)
-        raw = self.model(observed, mask)
-        padded = torch.cat((observed, torch.full((1, 8, 4, 2), float("nan"))), dim=2)
-        padded_mask = torch.tensor([[True, True, True, False, False, False, False]])
-        torch.testing.assert_close(self.model(padded, padded_mask), raw, atol=0, rtol=0)
+    def test_decoder_uses_other_agents_even_without_graph_messages(self):
+        self.model.eval()
+        steps = torch.randn(1, 8, 4, 2)
+        graph = torch.zeros(1, 8, 4, 4)
+        before = self.model(steps, graph)
+        changed = steps.clone()
+        changed[0, 1:, 1, 0] += 1
+        after = self.model(changed, graph)
+        # Agent zero never changed. With L=0 only TXP can carry the effect
+        # from agent one's temporal embedding to agent zero's output.
+        self.assertGreater((before[:, :, 0] - after[:, :, 0]).abs().max().item(), 1e-5)
 
-        order = [0, 2, 1]
-        torch.testing.assert_close(self.model(observed[:, :, order], mask[:, order]), raw)
-        offset = torch.tensor([13., -9.])
-        shifted = self.model(observed + offset, mask)
-        torch.testing.assert_close(shifted, raw, atol=0, rtol=0)
-        noise = torch.randn(1, 20, 12, 2, generator=torch.Generator().manual_seed(27))
-        paths = sample_world(raw, observed[:, -1, 0], noise)
-        shifted_paths = sample_world(shifted, observed[:, -1, 0] + offset, noise)
-        torch.testing.assert_close(shifted_paths, paths + offset)
-        self.assertEqual(paths.shape, (1, 20, 12, 2))
-        self.assertTrue(paths.isfinite().all())
+    def test_agent_beyond_seven_neighbors_contributes_through_the_full_graph(self):
+        self.model.eval()
+        positions = torch.randn(1, 8, 12, 2, dtype=torch.float64)
+        first = self.model(*scene_geometry(positions))
+        positions[:, 1:, -1, 1] += torch.linspace(.5, 4., 7)
+        changed = self.model(*scene_geometry(positions))
+        self.assertGreater((first[:, :, 0] - changed[:, :, 0]).abs().max().item(), 1e-5)
 
-    def test_target_readout_cancels_mirrored_approaches(self):
-        # A stationary target sees the same target messages for a symmetric
-        # approach and retreat. This is a limitation of the registered readout.
-        approaching = torch.zeros(1, 8, 3, 2)
-        distance = torch.linspace(4., .5, 8)
-        approaching[0, :, 1, 0] = distance
-        approaching[0, :, 2, 0] = -distance
-        mask = torch.ones(1, 3, dtype=torch.bool)
-        for scene in (approaching, approaching.flip(1)):
-            messages = self.model.graph_messages(scene, mask)
-            # Degree sums are accumulated in float64 with different neighbor orders.
-            torch.testing.assert_close(messages, torch.zeros_like(messages), atol=1e-14, rtol=0)
+    def test_storage_order_across_both_time_feature_reshapes(self):
+        model = self.model.eval().double()
+        # Route positive, labelled scalars through the input bypass and the
+        # centre pixels of the first and last convolutions. All residual
+        # refinements then reduce to the identity.
+        with torch.no_grad():
+            for parameter in model.parameters():
+                parameter.zero_()
+            model.bypass_norm.weight.fill_(math.sqrt(1 + model.bypass_norm.eps))
+            for channel in range(5):
+                model.bypass_projection.weight[channel, 0, 0, 0] = channel + 1
+            for channel in range(12):
+                model.expand.weight[channel, channel % 8, 1, 1] = 1
+                model.readout.weight[channel, channel, 1, 1] = 1
+        steps = torch.arange(1, 49, dtype=torch.float64).reshape(1, 8, 3, 2)
+        actual = model(steps, steps.new_zeros(1, 8, 3, 3))
+        expected = torch.empty_like(actual)
+        for parameter in range(5):
+            for time in range(12):
+                output_channel, feature = divmod(parameter * 12 + time, 5)
+                encoder_channel, observed_time = divmod((output_channel % 8) * 5 + feature, 8)
+                expected[:, time, :, parameter] = (encoder_channel + 1) * steps[:, observed_time, :, 0]
+        torch.testing.assert_close(actual, expected, rtol=1e-13, atol=1e-13)
 
-    def test_visible_neighbor_motion_reaches_the_target(self):
-        observed = observed_tracks()
-        changed = observed.clone()
-        # Reverse a neighbor's x motion while keeping its last position,
-        # the complete target history, and all other tracks the same.
-        changed[:, :, 1, 0] = 2 * observed[:, -1:, 1, 0] - observed[:, :, 1, 0]
-        mask = torch.ones(1, 3, dtype=torch.bool)
-        original, changed_raw = self.model(observed, mask), self.model(changed, mask)
-        self.assertGreater((original - changed_raw).abs().max().item(), 1e-5)
-        mask[:, 1] = False
-        torch.testing.assert_close(self.model(observed, mask), self.model(changed, mask), atol=0, rtol=0)
-
-    def test_cached_full_graph_matches_training_and_uses_distant_peer(self):
-        target = observed_tracks()[:, :, :1]
-        tracks = torch.cat([target + torch.tensor([float(j), .3*j]) for j in range(12)], dim=2)
-        mask = torch.ones(1, 12, dtype=torch.bool)
-        cache = self.model.graph_messages(tracks, mask).detach()
-        direct = self.model(tracks, mask)
-        cached = self.model.from_messages(cache)
-        torch.testing.assert_close(direct, cached, rtol=0, atol=0)
-        params = tuple(self.model.parameters())
-        direct_grad = torch.autograd.grad(direct.square().sum(), params)
-        cached_grad = torch.autograd.grad(cached.square().sum(), params)
-        for a, b in zip(direct_grad, cached_grad):
-            torch.testing.assert_close(a, b, rtol=0, atol=0)
-        # Moving the twelfth node must reach the target; there is no top-k truncation.
-        moved = tracks.clone()
-        moved[:, :7, 11, 1] += torch.linspace(4., 1., 7)
-        self.assertGreater((self.model(moved, mask)-direct).abs().max().item(), 1e-5)
-
-    def test_batched_loss_gradients_include_real_neighbors_and_exclude_padding(self):
-        observed = observed_tracks().repeat(2, 1, 1, 1).requires_grad_()
-        mask = torch.tensor([[True, True, True], [True, False, False]])
-        origin = observed[:, -1, 0].detach()
-        step = torch.tensor([[.25, .125], [-.5, .25]])
-        times = torch.arange(1, 13)[:, None]
-        future = origin[:, None] + times * step[:, None]
-        increments = future_displacements(future, origin)
-        torch.testing.assert_close(increments, step[:, None].expand(-1, 12, -1))
-        raw = self.model(observed, mask)
-        self.assertEqual(raw.shape, (2, 12, 5))
-        loss = bivariate_nll(raw, increments)
+    def test_training_reaches_every_registered_parameter(self):
+        self.assertEqual(sum(value.numel() for value in self.model.parameters()), 6254)
+        steps, graph = scene_geometry(torch.randn(2, 8, 4, 2, dtype=torch.float64))
+        raw = self.model(steps, graph)
+        loss = bivariate_nll(raw, torch.rand(2, 12, 4, 2))
         loss.backward()
         self.assertTrue(loss.isfinite())
-        for parameter in self.model.parameters():
-            self.assertTrue(parameter.grad.isfinite().all())
-        self.assertTrue(observed.grad.isfinite().all())
-        self.assertGreater(observed.grad[0, :, 1:].abs().sum().item(), 0)
-        self.assertEqual(observed.grad[1, :, 1:].count_nonzero().item(), 0)
+        for name, parameter in self.model.named_parameters():
+            self.assertIsNotNone(parameter.grad, name)
+            self.assertTrue(parameter.grad.isfinite().all(), name)
 
 
 class DistributionTests(unittest.TestCase):
-    def test_analytic_bivariate_density(self):
+    def test_analytic_density_and_released_floor(self):
         raw = torch.zeros(2, 12, 5, dtype=torch.float64)
-        unit_loss = bivariate_nll(raw, torch.zeros(2, 12, 2, dtype=torch.float64))
-        self.assertAlmostEqual(unit_loss.item(), math.log(2 * math.pi), places=12)
-
-        # z=(1,-2) with known marginal scales and correlation.
+        zero = torch.zeros(2, 12, 2, dtype=raw.dtype)
+        self.assertAlmostEqual(bivariate_nll(raw, zero).item(), math.log(2 * math.pi), places=12)
         rho = .6
-        raw[..., :2] = torch.tensor([.25, -.5], dtype=raw.dtype)
-        raw[..., 2] = math.log(2)
-        raw[..., 3] = math.log(.5)
-        raw[..., 4] = math.atanh(rho / (1 - 1e-4))
-        target = torch.tensor([2.25, -1.5], dtype=raw.dtype).expand(2, 12, 2)
-        expected = math.log(2 * math.pi * 2 * .5 * math.sqrt(1 - rho**2))
-        expected += (1**2 + (-2)**2 - 2 * rho * 1 * (-2)) / (2 * (1 - rho**2))
+        raw[..., 0], raw[..., 1] = .25, -.5
+        raw[..., 2], raw[..., 3], raw[..., 4] = math.log(2), math.log(.5), math.atanh(rho)
+        target = zero + torch.tensor([2.25, -1.5], dtype=raw.dtype)
+        expected = math.log(2 * math.pi * math.sqrt(1 - rho**2)) + (5 + 4 * rho) / (2 * (1 - rho**2))
         self.assertAlmostEqual(bivariate_nll(raw, target).item(), expected, places=12)
+        raw.requires_grad_()
+        floored = bivariate_nll(raw, target + 1000)
+        self.assertAlmostEqual(floored.item(), -math.log(1e-20), places=12)
+        floored.backward()
+        self.assertEqual(raw.grad.count_nonzero().item(), 0)
 
-    def test_correlated_draws_and_integration_from_each_origin(self):
+    def test_correlated_draws_and_integration_from_original_metric_origin(self):
         raw = torch.zeros(2, 12, 5, dtype=torch.float64)
         raw[..., 0], raw[..., 1] = .25, -.5
-        raw[..., 2], raw[..., 3] = math.log(2), math.log(.5)
-        raw[..., 4] = math.atanh(.6 / (1 - 1e-4))
-        noise = torch.zeros((2, 20, 12, 2), dtype=raw.dtype)
+        raw[..., 2], raw[..., 3], raw[..., 4] = math.log(2), math.log(.5), math.atanh(.6)
+        noise = torch.zeros(2, 20, 12, 2, dtype=raw.dtype)
         noise[:, 1, :, 0] = 1
         noise[:, 2, :, 1] = 1
-        origin = torch.tensor([[1., 4.], [-2., .5]], dtype=raw.dtype)
+        origin = torch.tensor([[1.000023, 4.], [-2., .5]], dtype=raw.dtype)
         paths = sample_world(raw, origin, noise)
+        self.assertEqual(paths.shape, (2, 20, 12, 2))
         times = torch.arange(1, 13, dtype=raw.dtype)[:, None]
         for k, step in enumerate(((.25, -.5), (2.25, -.2), (.25, -.1))):
             expected = origin[:, None] + times * torch.tensor(step, dtype=raw.dtype)
             torch.testing.assert_close(paths[:, k], expected)
         torch.testing.assert_close(future_displacements(paths[:, 0], origin), raw[..., :2])
-
-    def test_extreme_scale_and_correlation_logits_are_finite(self):
-        raw = torch.zeros(2, 12, 5)
-        raw[:, :, 2], raw[:, :, 3] = -1000, 1000
-        raw[0, :, 4], raw[1, :, 4] = -1000, 1000
-        raw.requires_grad_()
-        loss = bivariate_nll(raw, torch.full((2, 12, 2), .25))
-        loss.backward()
-        self.assertTrue(loss.isfinite())
-        self.assertTrue(raw.grad.isfinite().all())
-        paths = sample_world(raw.detach(), torch.zeros(2, 2), torch.ones(2, 20, 12, 2))
-        self.assertTrue(paths.isfinite().all())
 
 
 if __name__ == "__main__":

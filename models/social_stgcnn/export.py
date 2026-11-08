@@ -10,7 +10,7 @@ import torch
 from li_junhao_trajectronpp.independent_tpp.protocol import (
     CONDITIONS, DT, OBSERVATION_POINTS, PREDICTION_HORIZON,
 )
-from .model import sample_world
+from .model import sample_world, scene_geometry
 from .windows import GraphWindows
 
 
@@ -22,15 +22,40 @@ def sampling_seed(training_seed: int, batch_ordinal: int) -> int:
     return 100003 * training_seed + batch_ordinal
 
 
+def raw_for_batch(model, batch, device):
+    """Run equal-width complete scenes and recover [B,12,5] in requested target order."""
+    positions = batch["positions"].to(device)
+    widths = batch["agent_mask"].sum(1).to(device)
+    graph_index = batch["graph_index"].to(device)
+    target_slot = batch["target_index"].to(device)
+    target_width = widths[graph_index]
+    selected = None
+    for width in widths.unique().tolist():
+        graphs = torch.where(widths == width)[0]
+        # The release decoder reshapes the entire scene; padding cannot enter the network.
+        increments, laplacian = scene_geometry(positions[graphs, :, :width].contiguous())
+        raw = model.full_scene(increments, laplacian)
+        targets = torch.where(target_width == width)[0]
+        local_graph = torch.searchsorted(graphs, graph_index[targets])
+        if selected is None:
+            selected = raw.new_empty((len(graph_index), PREDICTION_HORIZON, 5))
+        selected[targets] = raw[local_graph, :, target_slot[targets]]
+    return selected
+
+
+def target_history(batch):
+    return batch["positions"][batch["graph_index"], :, batch["target_index"]]
+
+
 @torch.inference_mode()
 def sample_batch(model, batch, sampling_seed: int, device):
     """Sample twenty world-space paths on `device` with the model in evaluation mode."""
-    positions = batch["positions"].to(device)
-    raw = model(positions, batch["agent_mask"].to(device))
+    raw = raw_for_batch(model, batch, device)
     generator = torch.Generator(device="cpu").manual_seed(sampling_seed)
-    noise = torch.randn((len(positions), SAMPLE_COUNT, PREDICTION_HORIZON, 2),
+    noise = torch.randn((len(raw), SAMPLE_COUNT, PREDICTION_HORIZON, 2),
                         dtype=raw.dtype, device="cpu", generator=generator)
-    return sample_world(raw, positions[:, -1, 0], noise.to(device))
+    origin = target_history(batch)[:, -1].to(device=device, dtype=raw.dtype)
+    return sample_world(raw, origin, noise.to(device))
 
 
 def export_condition(model, dataset: GraphWindows, run_dir: Path, *, seed: int, tag: str,
@@ -69,7 +94,7 @@ def export_condition(model, dataset: GraphWindows, run_dir: Path, *, seed: int, 
         if forecast.shape != samples[start:stop].shape or not np.isfinite(forecast).all():
             raise ValueError(f"Invalid forecasts in {tag} at manifest index {start}")
         samples[start:stop] = forecast
-        observed[start:stop] = batch["positions"][:, :, 0].numpy()
+        observed[start:stop] = target_history(batch).numpy()
         masks[start:stop] = batch["observed_mask"].numpy()
         for row in dataset.records[start:stop]:
             record = {**row.values, **common, "target_id": row.target_id, "sampling_seed": batch_seed}

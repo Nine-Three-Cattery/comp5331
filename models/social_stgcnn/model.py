@@ -1,4 +1,4 @@
-"""Target-window Social-STGCNN and its bivariate displacement distribution."""
+"""Full-scene Social-STGCNN with the operators executed by the CVPR release."""
 
 import math
 
@@ -10,109 +10,124 @@ OBSERVATION_STEPS = 8
 FORECAST_STEPS = 12
 
 
-def normalized_adjacency(positions: Tensor, agent_mask: Tensor) -> Tensor:
-    """Build one symmetric graph per frame. Padded rows and columns are zero."""
-    valid = agent_mask[:, None, :]
-    positions = positions.masked_fill(~valid[..., None], 0)
-    separation = positions.unsqueeze(-2) - positions.unsqueeze(-3)
-    distance = torch.linalg.vector_norm(separation, dim=-1)
-    connected = valid.unsqueeze(-1) & valid.unsqueeze(-2) & (distance > 0)
-    weights = distance.masked_fill(~connected, 1).reciprocal().masked_fill(~connected, 0)
-    weights = weights + torch.diag_embed(agent_mask.to(positions.dtype))[:, None]
-    # Real vertices have a self-loop, so only padding has degree below one.
-    inverse_root = weights.sum(dim=-1).clamp_min(1).rsqrt()
-    return weights * inverse_root.unsqueeze(-1) * inverse_root.unsqueeze(-2)
+def release_displacements(positions: Tensor, origin: Tensor) -> Tensor:
+    """Apply the release's four-decimal world-coordinate transform before differencing.
+
+    Supply the neutral coordinates in float64 to retain their source precision.
+    The node increment features and supervised responses are float32.
+    """
+    sequence = torch.cat((origin[:, None], positions), dim=1).to(torch.float64)
+    return torch.diff(torch.round(sequence, decimals=4), dim=1).to(torch.float32)
+
+
+def scene_geometry(positions: Tensor) -> tuple[Tensor, Tensor]:
+    """Return observed increments and normalized Laplacians for unpadded [B,8,A,2] scenes."""
+    if positions.ndim != 4 or positions.shape[1] != OBSERVATION_STEPS or positions.shape[-1] != 2:
+        raise ValueError("positions must have shape [batch, 8, real agents, 2]")
+    increments = release_displacements(positions, positions[:, 0])
+    difference = increments.unsqueeze(-2) - increments.unsqueeze(-3)
+    squared_distance = difference.square().sum(dim=-1)
+    distinct = squared_distance > 0
+    # The release constructs its normalized Laplacian in double precision
+    # after measuring separation between the input displacements.
+    separation = squared_distance.double().masked_fill(~distinct, 1)
+    weights = separation.rsqrt().masked_fill(~distinct, 0)
+    weights = weights + torch.eye(positions.shape[2], device=positions.device, dtype=weights.dtype)
+    degree = weights.sum(dim=-1)
+    inverse_root = degree.rsqrt()
+    laplacian = (torch.diag_embed(degree) - weights) * inverse_root.unsqueeze(-1) * inverse_root.unsqueeze(-2)
+    return increments, laplacian.to(increments.dtype)
 
 
 class SocialSTGCNN(nn.Module):
-    """Map metric history [B,8,A,2] and a complete-history mask [B,A] to [B,12,5]."""
+    """Run a single ST-GCNN and the five active TXP-CNN convolutions on complete scenes.
+
+    Each batch member must have the same real number and consistent ordering
+    of agents across its eight observations. Padded agents change the output
+    because the decoder convolves across consecutive agent slots.
+    """
 
     def __init__(self) -> None:
         super().__init__()
-        width = 5
-        self.spatial = nn.Linear(2, width)
-        self.spatial_activation = nn.PReLU()
-        self.temporal = nn.Conv1d(width, width, kernel_size=3, padding=1)
-        self.temporal_activation = nn.PReLU()
+        channels = 5
+        self.message_projection = nn.Conv2d(2, channels, 1)
+        self.graph_norm = nn.BatchNorm2d(channels)
+        self.graph_activation = nn.PReLU()
+        self.temporal_filter = nn.Conv2d(channels, channels, (3, 1), padding=(1, 0))
+        self.temporal_norm = nn.BatchNorm2d(channels)
+        self.bypass_projection = nn.Conv2d(2, channels, 1)
+        self.bypass_norm = nn.BatchNorm2d(channels)
+        self.block_activation = nn.PReLU()
 
-        # After the graph block, time becomes channels. Convolutions run
-        # along feature coordinates; no kernel slides across pedestrian IDs.
-        self.expand_time = nn.Sequential(
-            nn.Conv1d(OBSERVATION_STEPS, FORECAST_STEPS, kernel_size=3, padding=1),
-            nn.PReLU(),
+        self.expand = nn.Conv2d(OBSERVATION_STEPS, FORECAST_STEPS, 3, padding=1)
+        self.expand_activation = nn.PReLU()
+        self.refinements = nn.ModuleList(
+            nn.Conv2d(FORECAST_STEPS, FORECAST_STEPS, 3, padding=1) for _ in range(3)
         )
-        self.refine_time = nn.ModuleList(
-            nn.Sequential(
-                nn.Conv1d(FORECAST_STEPS, FORECAST_STEPS, kernel_size=3, padding=1),
-                nn.PReLU(),
-            )
-            for _ in range(4)
-        )
-        self.distribution = nn.Linear(width, 5)
+        self.refinement_activations = nn.ModuleList(nn.PReLU() for _ in self.refinements)
+        self.readout = nn.Conv2d(FORECAST_STEPS, FORECAST_STEPS, 3, padding=1)
 
-    @staticmethod
-    def graph_messages(observed: Tensor, agent_mask: Tensor) -> Tensor:
-        """Compute the full graph's target row before any learned operation."""
-        if observed.ndim != 4 or observed.shape[1] != OBSERVATION_STEPS or observed.shape[-1] != 2:
-            raise ValueError("observed must have shape [batch, 8, agents, 2]")
-        if agent_mask.dtype != torch.bool or agent_mask.shape != (observed.shape[0], observed.shape[2]):
-            raise ValueError("agent_mask must be a boolean [batch, agents] tensor")
+    def full_scene(self, increments: Tensor, laplacian: Tensor) -> Tensor:
+        """Map [B,8,A,2] increments and [B,8,A,A] Laplacians to [B,12,A,5] parameters."""
+        if increments.ndim != 4 or increments.shape[1] != OBSERVATION_STEPS or increments.shape[-1] != 2:
+            raise ValueError("increments must have shape [batch, 8, real agents, 2]")
+        batch, frames, agents, _ = increments.shape
+        if laplacian.shape != (batch, frames, agents, agents):
+            raise ValueError("laplacian must match the observed batch, frames and real agents")
 
-        # Accumulate the geometric reduction in double precision before
-        # rounding to the network dtype; graph width varies between batches.
-        coordinates = observed.to(torch.float64)
-        origin = coordinates[:, -1, 0]
-        centered = (coordinates - origin[:, None, None]).masked_fill(~agent_mask[:, None, :, None], 0)
-        adjacency = normalized_adjacency(centered, agent_mask)
-        # A single graph layer and a nodewise decoder need only row zero,
-        # but each neighbor's degree still comes from the full scene graph.
-        return (adjacency[:, :, 0, :, None] * centered).sum(dim=2).to(observed.dtype)
+        motion = increments.permute(0, 3, 1, 2)
+        projected = self.message_projection(motion).transpose(1, 2)  # [B,8,5,A]
+        messages = (projected @ laplacian).transpose(1, 2).contiguous()
+        filtered = self.graph_activation(self.graph_norm(messages))
+        filtered = self.temporal_norm(self.temporal_filter(filtered))
+        bypass = self.bypass_norm(self.bypass_projection(motion))
+        encoded = self.block_activation(filtered + bypass)
 
-    def from_messages(self, target_messages: Tensor) -> Tensor:
-        """Apply every trainable layer to the eight target messages."""
-        spatial = self.spatial_activation(self.spatial(target_messages))
-        temporal = self.temporal_activation(self.temporal(spatial.transpose(1, 2)))
-        hidden = self.expand_time(temporal.transpose(1, 2))
-        for refine in self.refine_time:
-            hidden = hidden + refine(hidden)
-        return self.distribution(hidden)
+        # Both changes of shape in the released extrapolator reinterpret
+        # contiguous storage. A time/feature transpose produces a different model.
+        latent_width = encoded.shape[1]
+        time_channels = encoded.contiguous().reshape(batch, frames, latent_width, agents)
+        forecast = self.expand_activation(self.expand(time_channels))
+        for convolution, activation in zip(self.refinements, self.refinement_activations):
+            forecast = forecast + activation(convolution(forecast))
+        forecast = self.readout(forecast)
+        parameters = forecast.contiguous().reshape(batch, latent_width, FORECAST_STEPS, agents)
+        return parameters.permute(0, 2, 3, 1)
 
-    def forward(self, observed: Tensor, agent_mask: Tensor) -> Tensor:
-        return self.from_messages(self.graph_messages(observed, agent_mask))
+    def forward(self, increments: Tensor, laplacian: Tensor) -> Tensor:
+        return self.full_scene(increments, laplacian)
 
 
 def future_displacements(future_world: Tensor, origin: Tensor) -> Tensor:
-    """Return increments in metres. The first one starts at the visible target anchor."""
+    """Form future increments in metres starting at the supplied final observation."""
     return torch.diff(future_world, dim=1, prepend=origin[:, None])
 
 
-def _gaussian_parameters(raw: Tensor) -> tuple[Tensor, Tensor, Tensor, Tensor]:
-    mean = raw[..., :2]
-    log_scale = raw[..., 2:4].clamp(-5, 3)
-    correlation = (1 - 1e-4) * raw[..., 4].tanh()
-    conditional_scale = ((1 - correlation) * (1 + correlation)).sqrt()
-    return mean, log_scale, correlation, conditional_scale
+def _correlation(raw: Tensor) -> tuple[Tensor, Tensor]:
+    logit = raw[..., 4]
+    # For rho=tanh(logit), sqrt(1-rho^2) equals 1/cosh(logit).
+    # The logarithmic form preserves this scale when tanh rounds to one.
+    log_conditional_scale = math.log(2) - torch.logaddexp(logit, -logit)
+    return logit.tanh(), log_conditional_scale
 
 
 def bivariate_nll(raw: Tensor, target_steps: Tensor) -> Tensor:
-    """Mean joint x/y negative log likelihood across targets and future frames."""
-    mean, log_scale, correlation, conditional_scale = _gaussian_parameters(raw)
-    standardized = (target_steps - mean) * (-log_scale).exp()
-    x = standardized[..., 0]
-    conditional_y = (standardized[..., 1] - correlation * x) / conditional_scale
-    return (
-        math.log(2 * math.pi)
-        + log_scale.sum(dim=-1)
-        + conditional_scale.log()
-        + 0.5 * (x.square() + conditional_y.square())
-    ).mean()
+    """Average the released Gaussian NLL, with its density floor of 1e-20."""
+    correlation, log_conditional_scale = _correlation(raw)
+    log_scales = raw[..., 2:4]
+    normalized = (target_steps - raw[..., :2]) * (-log_scales).exp()
+    first = normalized[..., 0]
+    second = (normalized[..., 1] - correlation * first) * (-log_conditional_scale).exp()
+    loss = (math.log(2 * math.pi) + log_scales.sum(dim=-1) + log_conditional_scale
+            + (first.square() + second.square()) / 2)
+    return loss.clamp_max(-math.log(1e-20)).mean()
 
 
 def sample_world(raw: Tensor, origin: Tensor, noise: Tensor) -> Tensor:
-    """Turn independent standard normals [B,K,12,2] into metric target paths."""
-    mean, log_scale, correlation, conditional_scale = _gaussian_parameters(raw)
+    """Transform independent normals [B,K,12,2] into target paths in world metres."""
+    correlation, log_conditional_scale = _correlation(raw)
     x = noise[..., 0]
-    y = correlation[:, None] * x + conditional_scale[:, None] * noise[..., 1]
+    y = correlation[:, None] * x + log_conditional_scale[:, None].exp() * noise[..., 1]
     standard_steps = torch.stack((x, y), dim=-1)
-    increments = mean[:, None] + log_scale[:, None].exp() * standard_steps
+    increments = raw[:, None, :, :2] + raw[:, None, :, 2:4].exp() * standard_steps
     return origin[:, None, None] + increments.cumsum(dim=2)

@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT))
 from li_junhao_trajectronpp.independent_tpp.protocol import CONDITIONS, FOLDS, SEEDS, digest_json, sha256, write_json
 from li_junhao_trajectronpp.independent_tpp.data import load_split
 from models.social_stgcnn.export import export_condition, sample_batch
-from models.social_stgcnn.model import SocialSTGCNN, bivariate_nll, future_displacements
+from models.social_stgcnn.model import SocialSTGCNN, bivariate_nll, scene_geometry
 from models.social_stgcnn.timing import timing_batch
 from models.social_stgcnn.windows import GraphWindows
 
@@ -53,29 +53,55 @@ def environment(device):
             "gpu": gpu, "cuda": torch.version.cuda, "driver": driver}
 
 
-def dense_clean(windows, device):
-    """Cache the exact parameter-free target messages for the clean split."""
-    messages, steps = [], []
-    for start in range(0, len(windows), 64):
-        batch = windows.batch(np.arange(start, min(start + 64, len(windows))))
-        pos = batch["positions"]
-        messages.append(SocialSTGCNN.graph_messages(pos, batch["agent_mask"]))
-        steps.append(future_displacements(batch["future"], pos[:, -1, 0]))
-    return torch.cat(messages).to(device), torch.cat(steps).to(device)
+def clean_scene_cache(windows, device):
+    """Only the input geometry is fixed. All pedestrian features remain trainable."""
+    scenes = []
+    for scene in windows.clean_scenes():
+        increments, laplacian = scene_geometry(scene.positions.unsqueeze(0))
+        scenes.append((increments.to(device), laplacian.to(device),
+                       scene.target_slots.to(device), scene.future_steps.to(device)))
+    return scenes
+
+
+def scene_loss(model, scene):
+    increments, laplacian, slots, truth = scene
+    full_prediction = model.full_scene(increments, laplacian)
+    predictions = full_prediction[0].index_select(1, slots).transpose(0, 1)
+    return bivariate_nll(predictions, truth)
 
 
 @torch.inference_mode()
-def validation_nll(model, split, batch_size):
-    messages, steps = split
-    total = torch.zeros((), dtype=torch.float64, device=messages.device)
+def validation_nll(model, scenes):
+    """Each eligible target has equal weight in the checkpoint criterion."""
     model.eval()
-    for start in range(0, len(messages), batch_size):
-        batch = slice(start, start + batch_size)
-        total += bivariate_nll(model.from_messages(messages[batch]), steps[batch]).double() * len(steps[batch])
-    value = total.item() / len(messages)
+    total = 0.0
+    targets = 0
+    for scene in scenes:
+        count = len(scene[2])
+        total += scene_loss(model, scene).item() * count
+        targets += count
+    value = total / targets
     if not np.isfinite(value):
         raise FloatingPointError("Non-finite validation NLL")
     return value
+
+
+def train_epoch(model, optimizer, scenes, order, batch_size):
+    """Normalize features within each scene and average scene losses per SGD update."""
+    model.train()
+    total = 0.0
+    for start in range(0, len(order), batch_size):
+        indices = order[start:start + batch_size]
+        optimizer.zero_grad(set_to_none=True)
+        for index in indices:
+            loss = scene_loss(model, scenes[index])
+            (loss / len(indices)).backward()
+            total += loss.item()
+        optimizer.step()
+    mean = total / len(order)
+    if not np.isfinite(mean):
+        raise FloatingPointError("Non-finite training NLL")
+    return mean
 
 
 def fit(run, stage, fold, seed, data_root, device):
@@ -84,15 +110,17 @@ def fit(run, stage, fold, seed, data_root, device):
     train = GraphWindows.from_split(fold, "train", data_root, max_neighbors=neighbors)
     validation = GraphWindows.from_split(fold, "val", data_root, max_neighbors=neighbors)
     epochs = settings[f"{stage}_epochs"]
+    run.mkdir(parents=True, exist_ok=False)
+    train_scenes = clean_scene_cache(train, device)
+    val_scenes = clean_scene_cache(validation, device)
     config = {**settings, "fold": fold, "seed": seed, "stage": stage, "epochs": epochs,
               "train_identity": train.identity, "val_identity": validation.identity,
+              "training_population": {"scene_anchors": len(train_scenes), "targets": len(train)},
+              "validation_population": {"scene_anchors": len(val_scenes), "targets": len(validation)},
               "environment": environment(device),
               "source_sha256": {n: sha256(HERE / n) for n in
                                 ("model.py", "windows.py", "export.py", "run.py", "timing.py", "configs/experiment.json")}}
-    run.mkdir(parents=True, exist_ok=False)
     write_json(run / "config.json", config)
-    x, y = dense_clean(train, device)
-    val = dense_clean(validation, device)
     del train, validation
     torch.manual_seed(seed)
     model = SocialSTGCNN().to(device)
@@ -109,21 +137,11 @@ def fit(run, stage, fold, seed, data_root, device):
         for epoch in range(1, epochs + 1):
             if epoch == 151:
                 optimizer.param_groups[0]["lr"] = settings["learning_rate_after_epoch_150"]
-            model.train()
-            order = torch.randperm(len(x), generator=shuffle).to(device)
-            accumulated = torch.zeros((), dtype=torch.float64, device=device)
-            for ix in order.split(batch_size):
-                optimizer.zero_grad(set_to_none=True)
-                loss = bivariate_nll(model.from_messages(x[ix]), y[ix])
-                loss.backward()
-                torch.nn.utils.clip_grad_norm_(model.parameters(), settings["max_grad_norm"],
-                                               error_if_nonfinite=True)
-                optimizer.step()
-                accumulated += loss.detach().double() * len(ix)
-            train_nll = accumulated.item() / len(x)
+            order = torch.randperm(len(train_scenes), generator=shuffle).tolist()
+            train_nll = train_epoch(model, optimizer, train_scenes, order, batch_size)
             val_nll = None
             if epoch == 1 or epoch == epochs or epoch % settings["validation_interval"] == 0:
-                val_nll = validation_nll(model, val, batch_size)
+                val_nll = validation_nll(model, val_scenes)
                 candidates.append({"epoch": epoch, "validation_nll": val_nll})
                 if val_nll < best:
                     best = val_nll
@@ -156,7 +174,7 @@ def measure_batch_sequence(model, store, records, device):
         batches = []
         for offset in range(0, len(records), 32):
             source = timing_batch(store, records[offset:offset + 32])
-            batches.append({key: source[key].to(device) for key in ("positions", "agent_mask")})
+            batches.append({key: source[key].to(device) for key in ("positions", "agent_mask", "graph_index", "target_index")})
         synchronize(device)
         prepared = time.perf_counter()
         predictions = [sample_batch(model, batch, 1009 * rep + i, device) for i, batch in enumerate(batches)]

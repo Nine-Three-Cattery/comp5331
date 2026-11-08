@@ -1,4 +1,4 @@
-"""Build clean runtime inputs directly from in-memory neutral trajectories."""
+"""Discover full scene histories on demand from in-memory neutral coordinates."""
 
 from collections.abc import Iterable
 
@@ -7,35 +7,37 @@ import torch
 
 from li_junhao_trajectronpp.independent_tpp.data import SceneStore, WindowRecord
 from li_junhao_trajectronpp.independent_tpp.protocol import OBSERVATION_POINTS
+from .windows import graph_layout, observation_batch
 
 
-def timing_batch(store: SceneStore, records: Iterable[WindowRecord]) -> dict[str, torch.Tensor]:
-    """Discover complete histories inside this batch and put each target first."""
-    groups = {}
-    graphs = []
-    for row in records:
-        key = (row.scene_key, row.anchor)
-        if key not in groups:
-            frames = range(row.anchor - OBSERVATION_POINTS + 1, row.anchor + 1)
-            histories = {}
-            for person, track in sorted(store.tracks[row.scene_key].items()):
-                if all(frame in track for frame in frames):
-                    histories[person] = np.asarray([track[frame][:2] for frame in frames], dtype=np.float32)
-            groups[key] = histories
-
-        histories = groups[key]
-        target = row.target_id
-        ordered = [histories[target]]
-        ordered.extend(history for person, history in histories.items() if person != target)
-        graphs.append(np.stack(ordered, axis=1))
-
-    if not graphs:
+def timing_batch(store: SceneStore, records: Iterable[WindowRecord], condition="clean", level=0.0,
+                 seed=0, *, manifest_indices=None) -> dict[str, torch.Tensor]:
+    """Discover each scene's visible agents during timing and apply the target corruption."""
+    records = list(records)
+    if not records:
         raise ValueError("A timing batch needs at least one manifest target")
-    max_agents = max(graph.shape[1] for graph in graphs)
-    positions = np.zeros((len(graphs), OBSERVATION_POINTS, max_agents, 2), dtype=np.float32)
-    agent_mask = np.zeros((len(graphs), max_agents), dtype=bool)
-    for i, graph in enumerate(graphs):
-        agents = graph.shape[1]
-        positions[i, :, :agents] = graph
-        agent_mask[i, :agents] = True
-    return {"positions": torch.from_numpy(positions), "agent_mask": torch.from_numpy(agent_mask)}
+    keys = [(r.scene_key, r.anchor) for r in records]
+    scene_keys = sorted(set(keys))
+    group_id = {key: i for i, key in enumerate(scene_keys)}
+    scenes, slots = [], []
+    for scene_key, anchor in scene_keys:
+        frames = range(anchor + 1 - OBSERVATION_POINTS, anchor + 1)
+        tracks = store.tracks[scene_key]
+        visible = [person for person in sorted(tracks, key=int) if all(t in tracks[person] for t in frames)]
+        slots.append({person: i for i, person in enumerate(visible)})
+        scenes.append(np.asarray([[tracks[person][t][:2] for person in visible] for t in frames], dtype=np.float64))
+
+    requested = np.asarray([group_id[key] for key in keys], dtype=np.intp)
+    target_slots = [slots[g][row.target_id] for g, row in zip(requested, records)]
+    groups, graph_index = graph_layout(requested, condition)
+    widths = np.asarray([scenes[g].shape[1] for g in groups], dtype=np.intp)
+    positions = np.zeros((len(groups), OBSERVATION_POINTS, widths.max(), 2), dtype=np.float64)
+    for j, g in enumerate(groups):
+        positions[j, :, :widths[j]] = scenes[g]
+    if manifest_indices is None:
+        if condition == "clean":
+            manifest_indices = range(len(records))  # The clean transformation draws no random numbers.
+        else:
+            lookup = {r.window_id: i for i, r in enumerate(store.manifests)}
+            manifest_indices = [lookup[r.window_id] for r in records]
+    return observation_batch(positions, widths, graph_index, target_slots, manifest_indices, condition, level, seed)
