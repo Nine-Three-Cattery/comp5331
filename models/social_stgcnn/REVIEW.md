@@ -1,15 +1,15 @@
-# Reproduce the Social-STGCNN review artifact
+# Reproduce the full-scene Social-STGCNN experiment
 
-This private course artifact contains the 15 validation-selected formal checkpoints, 90 original test bundles, the ETH seed-0 pilot and its six bundles, both group audit receipts and the formal score table. Each run includes its training configuration, per-epoch likelihoods, checkpoint selection table, hardware timings and resource record. `inventory.json` binds these files to their SHA-256 digests. The contribution's published `provenance.json` records the SHA-256 of the completed archive.
+The full-scene archive contains the 15 selected formal checkpoints, 90 formal forecast bundles, the ETH pilot and its six bundles, the training and scoring source, the score table, and the review evidence. `inventory.json` identifies the numerical Git revision and the files in the archive. The contribution's `provenance.json` identifies the exact archive and its download location. The [earlier target-readout release](https://github.com/Nine-Three-Cattery/comp5331/releases/tag/social-stgcnn-causal-v2-review-v2) uses a different network and has its own weights and scores.
 
-## Extract and prepare the data
+## Rebuild the group data
 
-Use a Linux x86-64 CPU host with Python 3.12. Compare the first command's digest with the contribution's published archive digest before extracting. Run the following from the directory containing the archive.
+Use a fresh directory and the Linux x86-64 CPU environment from the group SOP. The published archive digest is in the contribution's `provenance.json`.
 
 ```bash
-sha256sum social_stgcnn_causal_v2_review.tar
-tar -xf social_stgcnn_causal_v2_review.tar
-cd social_stgcnn_causal_v2_review
+sha256sum social_stgcnn_full_scene_causal_v2_review.tar
+tar -xf social_stgcnn_full_scene_causal_v2_review.tar
+cd social_stgcnn_full_scene_causal_v2_review
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
@@ -17,75 +17,34 @@ python -m pip install -r benchmark/requirements.txt
 make benchmark PYTHON=python
 ```
 
-The shared target fetches six coordinate files from its pinned raw release, rebuilds the 15 ordered manifests and derives motion thresholds from each training split. It prints `BENCHMARK_OK` after checking the locked identities and common evaluator fixture. The raw source digests are in `li_junhao_trajectronpp/configs/causal_v2_raw_sha256.json`. Manifest hashes and counts are in `benchmark/fixtures/manifests.json`.
+The benchmark fetches the pinned six raw files, reconstructs time-disjoint train and validation splits, checks every ordered manifest and computes fold-specific thresholds on training data. The pilot and formal results share the protocol fingerprint printed after `BENCHMARK_OK`.
 
-## Replay a selected checkpoint
-
-```bash
-python models/social_stgcnn/verify_review.py \
-  --receipt artifacts/social_stgcnn/reproduction_check.json
-```
-
-The verifier checks the inventoried files and scored run identities, loads the formal ETH seed-0 selected checkpoint, and exports `clean_0` to a temporary directory. It uses the archived thread count and batch size. It compares all 20 sampled trajectories per target, ground truth, input history, mask, ordered records, manifest window IDs and metadata. The JSON receipt gives the number of different numeric entries and the maximum absolute position difference in meters. An exact replay reports `passed`. Differences produce a nonzero exit and their measurements remain in the receipt.
-
-The formal training, forecasts and timing used `2b2d57de6d5ff009f1388e1f0d9baf948e9db4ac`. Pilot training and all six pilot forecasts used `c37d1211104d9c125775bd4c7b5044083c04c1f1`. The team reran the pilot timing at the formal revision to include on-demand window and neighbor discovery. The pilot's `runtime.json` contains that measurement. Its configuration retains the original `run.py` digest. The model, window builder and exporter are identical across these two revisions. `inventory.json` records both revisions. The shared project base is `df016def5890898b70d372fb0e8e2bc142121330`.
-
-All fifteen reported formal timings use the same physical CPU node. The driver from revision `1987673` calls the frozen timing routine with the selected checkpoints and records the three stage boundaries. To remeasure on a new host, run `python -m models.social_stgcnn.retime --threads 2` on a separate extracted copy. The CPU, software and thread count accompany each measurement.
-
-The prespecified analyses of the scored outputs are versioned separately at `9cb6ac43b8c13bfcc3e8d65de891030fc35b8b23`. To run with a fresh Git export, use a clone of the group repository containing the formal revision. From the extracted review directory with the environment active, run the following. Set `REVIEW_REPO` to the clone's directory.
+## Reproduce results from the archive
 
 ```bash
-mkdir -p ../social_stgcnn_clean_source
-git -C "$REVIEW_REPO" archive 2b2d57de6d5ff009f1388e1f0d9baf948e9db4ac | tar -x -C ../social_stgcnn_clean_source
-make -C ../social_stgcnn_clean_source benchmark PYTHON="$(command -v python)"
-python models/social_stgcnn/verify_review.py --source ../social_stgcnn_clean_source \
-  --receipt artifacts/social_stgcnn/fresh_source_reproduction_check.json
-```
-
-## Recheck the entire published score table
-
-```bash
-make pilot MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/pilot/runs PYTHON=python
+python models/social_stgcnn/verify_review.py --receipt artifacts/social_stgcnn/reviewer_replay.json
 make audit MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/formal/runs PYTHON=python
+python models/social_stgcnn/check_selection.py --runs artifacts/social_stgcnn/formal/runs --data data/causal_v2 \
+    --out artifacts/social_stgcnn/reviewer_selection.json
+python -m models.social_stgcnn.review_metrics --out artifacts/social_stgcnn/reviewer_metrics.csv
 ```
 
-The shared audit validates all 90 formal bundles against the rebuilt raw-derived windows and independently recomputes the six headline metrics in `submission/contributions/social_stgcnn/results.csv`. The selected-checkpoint replay and full audit answer different questions. The replay checks inference from saved weights. The full audit checks all stored forecasts and scores.
+The replay checks file and benchmark identities, then re-exports the selected ETH seed-zero clean forecast. It checks all 364 targets and all twenty sampled paths, along with observed histories, masks, ground truth and record order. The shared audit independently calculates all six headline scores for every formal condition. The checkpoint check reads all training epochs, identifies the winner among the 51 recorded candidates in each run, and re-evaluates each selected model on uncached validation scenes using a separate double-precision likelihood. It preserves the published density floor. The owner's displacement check computes min/mean ADE and FDE from the exported coordinates. The turning diagnostic uses the shared moving-step threshold of 0.05 m/s and the training 95th percentile. A reported window can have up to 220 eligible turns across twenty draws.
 
-To check the validation choice for every set of trained weights, run
-`python models/social_stgcnn/check_selection.py --runs artifacts/social_stgcnn/formal/runs --data data/causal_v2`.
-It re-evaluates clean validation trajectories with the full graph and a separate
-double-precision Gaussian likelihood, then compares the stored winning epoch
-and likelihood with the recorded candidates.
+For the complete per-window motion and spatial tables run `make score MODEL=social_stgcnn RUNS=artifacts/social_stgcnn/formal/runs PYTHON=python` in a separate extracted copy. Then use `python -m models.social_stgcnn.analyze --phase extract`. With Matplotlib installed, `python -m models.social_stgcnn.analyze --phase render` draws the figures from the resulting small tables. The matched ETH plot uses pedestrian 216 at anchor 875, the same seed-zero example as the group reference handoff.
 
-## Review additions for the same frozen forecasts
+## Compare the actual reference operators
 
-The first release contains the training, inference and shared scoring sources. The later architecture comparison, owner-written ADE/FDE calculation and turning analysis are on the model branch. From that checkout, export `EXTRACTED` as the path to the extracted review directory with its rebuilt data and use its Python environment:
+This optional check uses the authors' complete checkout solely as a test oracle. It loads the pinned code and dataset, initializes matched test weights, compares every predicted node, and checks input and parameter gradients, normalization state, a floored Gaussian likelihood and fixed-noise sampled paths. The raw forecast comparison uses the two reshapes and final axis order implemented by the authors. The receipt records the smaller standalone environment used with the historical NetworkX API. From the group source or the extracted archive:
 
 ```bash
-"$EXTRACTED/.venv/bin/python" -m models.social_stgcnn.review_metrics \
-  --runs "$EXTRACTED/artifacts/social_stgcnn/formal/runs" --data "$EXTRACTED/data/causal_v2" \
-  --out "$EXTRACTED/review_metrics.csv"
+python3.11 -m venv .oracle-env
+.oracle-env/bin/python -m pip install torch==2.2.1 numpy==1.26.4 scipy==1.11.4 pandas==2.3.3 networkx==2.8.8 tqdm
+mkdir -p local
+git clone https://github.com/abduallahmohamed/Social-STGCNN.git local/authors-social-stgcnn
+git -C local/authors-social-stgcnn checkout --detach 333d3a57b4d2705e129b21aefefa09c79b2b9ae1
+.oracle-env/bin/python models/social_stgcnn/check_reference.py --reference local/authors-social-stgcnn \
+    --out artifacts/social_stgcnn/reviewer_source_parity.json
 ```
 
-The group evaluator passed its known-distance fixture before formal training. The owner's separate implementation was added during review. Its tests include the same half-exact, half-one-meter fixture and a case where the ADE and FDE winners differ. The resulting table covers all 90 fold, seed and condition combinations. Heading change is the absolute wrapped angle between successive forecast displacements. The group excludes pairs with either speed at or below 0.05 m/s, averages eligible angles within a target window, and gives windows equal weight. A window reaches its fold's 95th-percentile training threshold if any of its sampled turns reaches it. A window with no eligible turns contributes zero. [Review table](../../submission/contributions/social_stgcnn/evidence/review_metrics.csv)
-
-The group can also compare the same ETH pedestrian and observed segment across models. The matched figure uses seed zero and the middle chronological ETH window in the accepted Trajectron++ plotting script. It is a separate review example from the two clean windows fixed before training. [Matched ETH figure](../../submission/contributions/social_stgcnn/assets/shared_eth_case.pdf)
-
-With Matplotlib installed, regenerate the figure from the model checkout:
-
-```python
-import os
-from pathlib import Path
-from li_junhao_trajectronpp.scripts.generate_failure_analysis import (
-    fixed_examples, load_bundle, plot_conditions, prediction_path,
-)
-
-archive = Path(os.environ["EXTRACTED"])
-run = archive / "artifacts/social_stgcnn/formal/runs/eth/seed_0"
-cases = fixed_examples(archive / "data/causal_v2", "eth")
-case = cases.loc[cases.selection == "fixed_1"]
-assert case.window_id.tolist() == ["eth:biwi_eth:216:875"]
-conditions = [("Clean", "clean_0"), ("Noise 0.20 m", "noise_020"), ("Missing two", "missing_2")]
-bundles = [(label, load_bundle(prediction_path(run, tag))) for label, tag in conditions]
-plot_conditions("eth", case, bundles, archive / "shared_eth_case.pdf")
-```
+The six cases include a recorded ETH sequence with three pedestrians. The release's loader excludes a lone pedestrian and its graph helper removes the singleton axis. For the course singleton case we check the single-node Laplacian and run the authors' neural operators with that dimension retained. Formal training and export use only the independent model and the group data.
