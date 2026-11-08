@@ -23,7 +23,7 @@ future-derived features or test statistics are used.
 
 ## Network and departures
 
-Two independent 64-channel streams each use an embedding, four-head temporal
+Two independent 64-channel streams each use a two-layer embedding, four-head temporal
 attention with a residual LayerNorm, symmetric GCN, and a causal kernel-three
 TCN with residual/dropout 0.1. Attention can use all eight observed points;
 these all precede the forecast. The two four-affine-layer MLP heads produce

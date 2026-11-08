@@ -40,7 +40,7 @@ def polynomial(coefficients, times):
 class Stream(nn.Module):
     def __init__(self, width, dropout):
         super().__init__()
-        self.embed = nn.Linear(2, width)
+        self.embed = nn.Sequential(nn.Linear(2, width), nn.ReLU(), nn.Linear(width, width))
         self.attention = nn.MultiheadAttention(width, 4, dropout=dropout, batch_first=True)
         self.graph = nn.Linear(width, width)
         self.temporal = nn.Conv1d(width, width, kernel_size=3)
