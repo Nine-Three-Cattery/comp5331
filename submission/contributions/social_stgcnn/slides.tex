@@ -1,6 +1,6 @@
 \begingroup
 \setbeamertemplate{frame footer}{Zongmin Zhang}
-\begin{frame}{Visible pedestrians form a graph at each observed step}
+\begin{frame}{The decoder reads one target from the crowd graph}
 \begin{columns}[c,onlytextwidth]
 \column{.43\textwidth}
 \centering
@@ -21,12 +21,12 @@ Before degree normalization, a neighbor one meter away has twice the
 edge weight of a neighbor two meters away.
 \medskip
 
-One graph layer encodes all eight observed frames. Five temporal
-extrapolation layers predict the distribution of the next twelve
-displacements.
+Each frame contributes one weighted position sum for the target. The
+published decoder retains a feature vector for every pedestrian.
 \medskip
 
-Each input produces \textbf{20 sampled paths} in meters.
+Five temporal convolutions predict distributions for twelve displacements.
+We sample \textbf{20 paths} per target.
 \end{columns}
 \end{frame}
 

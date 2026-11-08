@@ -63,6 +63,19 @@ class GraphForecastTests(unittest.TestCase):
         self.assertEqual(paths.shape, (1, 20, 12, 2))
         self.assertTrue(paths.isfinite().all())
 
+    def test_target_readout_cancels_mirrored_approaches(self):
+        # A stationary target sees the same target messages for a symmetric
+        # approach and retreat. This is a limitation of the registered readout.
+        approaching = torch.zeros(1, 8, 3, 2)
+        distance = torch.linspace(4., .5, 8)
+        approaching[0, :, 1, 0] = distance
+        approaching[0, :, 2, 0] = -distance
+        mask = torch.ones(1, 3, dtype=torch.bool)
+        for scene in (approaching, approaching.flip(1)):
+            messages = self.model.graph_messages(scene, mask)
+            # Degree sums are accumulated in float64 with different neighbor orders.
+            torch.testing.assert_close(messages, torch.zeros_like(messages), atol=1e-14, rtol=0)
+
     def test_visible_neighbor_motion_reaches_the_target(self):
         observed = observed_tracks()
         changed = observed.clone()

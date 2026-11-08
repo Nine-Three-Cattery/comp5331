@@ -56,3 +56,36 @@ To check the validation choice for every set of trained weights, run
 It re-evaluates clean validation trajectories with the full graph and a separate
 double-precision Gaussian likelihood, then compares the stored winning epoch
 and likelihood with the recorded candidates.
+
+## Review additions for the same frozen forecasts
+
+The first release contains the training, inference and shared scoring sources. The later architecture comparison, owner-written ADE/FDE calculation and turning analysis are on the model branch. From that checkout, export `EXTRACTED` as the path to the extracted review directory with its rebuilt data and use its Python environment:
+
+```bash
+"$EXTRACTED/.venv/bin/python" -m models.social_stgcnn.review_metrics \
+  --runs "$EXTRACTED/artifacts/social_stgcnn/formal/runs" --data "$EXTRACTED/data/causal_v2" \
+  --out "$EXTRACTED/review_metrics.csv"
+```
+
+The group evaluator passed its known-distance fixture before formal training. The owner's separate implementation was added during review. Its tests include the same half-exact, half-one-meter fixture and a case where the ADE and FDE winners differ. The resulting table covers all 90 fold, seed and condition combinations. Heading change is the absolute wrapped angle between successive forecast displacements. The group excludes pairs with either speed at or below 0.05 m/s, averages eligible angles within a target window, and gives windows equal weight. A window reaches its fold's 95th-percentile training threshold if any of its sampled turns reaches it. A window with no eligible turns contributes zero. [Review table](../../submission/contributions/social_stgcnn/evidence/review_metrics.csv)
+
+The group can also compare the same ETH pedestrian and observed segment across models. The matched figure uses seed zero and the middle chronological ETH window in the accepted Trajectron++ plotting script. It is a separate review example from the two clean windows fixed before training. [Matched ETH figure](../../submission/contributions/social_stgcnn/assets/shared_eth_case.pdf)
+
+With Matplotlib installed, regenerate the figure from the model checkout:
+
+```python
+import os
+from pathlib import Path
+from li_junhao_trajectronpp.scripts.generate_failure_analysis import (
+    fixed_examples, load_bundle, plot_conditions, prediction_path,
+)
+
+archive = Path(os.environ["EXTRACTED"])
+run = archive / "artifacts/social_stgcnn/formal/runs/eth/seed_0"
+cases = fixed_examples(archive / "data/causal_v2", "eth")
+case = cases.loc[cases.selection == "fixed_1"]
+assert case.window_id.tolist() == ["eth:biwi_eth:216:875"]
+conditions = [("Clean", "clean_0"), ("Noise 0.20 m", "noise_020"), ("Missing two", "missing_2")]
+bundles = [(label, load_bundle(prediction_path(run, tag))) for label, tag in conditions]
+plot_conditions("eth", case, bundles, archive / "shared_eth_case.pdf")
+```

@@ -1,36 +1,31 @@
-\subsection{Social-STGCNN}
+\subsection{Social-STGCNN with a target-only readout}
 \label{sec:social_stgcnn}
 
 \textbf{A graph of the observed crowd.}
-For each target, we connect pedestrians visible throughout its eight-frame history.
-An edge between distinct positions has weight equal to the reciprocal of their
-distance in meters. Coincident positions have zero off-diagonal weight. Adding
-a unit self-loop and normalizing by the degrees of both endpoints gives one
-graph per frame \cite{mohamed2020socialstgcnn}. A single graph convolution and
-an observed-time convolution encode the target. Five time-channel convolutions
-then produce twelve bivariate Gaussian distributions in one pass. We sample
-twenty sequences of position increments and integrate each from the target's
-last input position.
+Each frame connects all pedestrians with eight visible positions, including
+those who disappear after observation. We use inverse spatial distances,
+zero weight for coincident pairs, unit self-loops and symmetric degree
+normalization~\cite{mohamed2020socialstgcnn}. One graph layer and one
+observed-time convolution encode the target. Five time-channel convolutions
+produce twelve bivariate Gaussian increments. We integrate twenty sampled
+sequences from the target's last input position.
 
-The implementation keeps every pedestrian with eight visible positions,
-including neighbors who disappear immediately after the final observation.
-We compute the target row of the full normalized graph and apply the temporal
-decoder to that target's features. This order-independent readout has 2,208
-trainable parameters. The published network reports about 7,600. The spatial
-graph follows the paper's position kernel and symmetric normalization; the
-authors' released evaluation code also integrates relative forecasts but
-uses a different graph representation. These choices specify the variant
-evaluated here.
+Before any learned layer, each frame reduces to one weighted sum of centered positions.
+Consider a stationary target with two neighbors equally far away on opposite
+sides. Their contributions cancel whether both approach or both retreat.
+The released decoder~\cite{mohamedstgcnncode} convolves across features and
+pedestrians. Ours convolves across features alone and the full network has
+2,208 parameters, compared with about 7,600 in the paper. The released graph
+uses displacement differences and a normalized Laplacian. Our spatial graph
+follows the position kernel and normalized adjacency in the paper.
 
 \textbf{Training and measurement.}
-Stochastic gradient descent uses batches of 128 for 250 epochs. The learning
-rate falls from 0.01 to 0.002 after epoch 150. Each fold and seed selects one
-checkpoint using the lowest clean-validation displacement negative log likelihood.
-All six test conditions reuse that checkpoint. Perturbing the target changes
-its graph edges as well as its node features. Both target and neighbor inputs
-are built exclusively from visible positions. A numerical fixture compares
-the cached training path with the full graph calculation, including gradients
-of every learned parameter.
+SGD uses batches of 128 for 250 epochs, with a learning rate of 0.01 through
+epoch 150 and 0.002 thereafter. All six conditions use the checkpoint with
+the lowest clean-validation displacement negative log likelihood for that
+fold and seed. Changing target or neighbor futures leaves model inputs fixed.
+Perturbing target history changes its features and edges. The cached training
+path matches the full graph calculation, including the parameter gradients.
 
 \textbf{Coverage and typical error.}
 On clean histories, minADE and minFDE at twenty draws were
@@ -43,9 +38,8 @@ forecasts from one draw to twenty reduced minADE from 0.938 to 0.615\,m.
 MeanADE changed by less than 0.002\,m. The clean Energy Score was
 \ModelMetric{social_stgcnn}{clean_0}{energy_score_mean}\,m. The three
 seed-level meanADE macros had a standard deviation of 0.023\,m.
-The published Social-STGCNN table gives 0.44/0.75\,m under the authors'
-protocol. Our smaller decoder, spatial graph and locked target population
-limit a direct comparison with that table.
+The paper reports 0.44/0.75\,m with a different decoder, graph construction
+in the released code, and target population.
 
 \begin{table}[H]
 \centering
@@ -81,6 +75,7 @@ average. Only the target's observed history receives the perturbation.}
 \label{fig:social_stgcnn_robustness}
 \end{figure}
 
+\begin{samepage}
 \textbf{Where forecasts miss.}
 The two fixed seed-zero examples in Figure~\ref{fig:social_stgcnn_paths}
 show different kinds of overshoot. The ETH pedestrian slows and changes
@@ -88,7 +83,8 @@ direction. The Univ pedestrian ends 0.89\,m from the last observed point.
 Most sampled paths carry the earlier motion forward.
 We also selected the window with the highest clean minADE at seed zero.
 This Univ pedestrian reversed direction with 23 visible neighbors. The
-closest endpoint among all twenty draws still missed by 9.52\,m.
+closest endpoint among all twenty draws still missed by 9.52\,m.\par
+\end{samepage}
 
 \begin{figure}[H]
 \centering
@@ -107,6 +103,10 @@ covers four scenes, while the latter includes all 24,334 Univ windows.
 Crowd size and scene composition vary together. On clean inputs, the
 within-window 99th percentile of sampled acceleration exceeded its
 training-derived threshold in 95.8\% of windows after equal-fold aggregation.
+The mean absolute heading change was $45.0^\circ$, averaging first within each window.
+In 98.5\% of windows at least one sampled turn reached the fold's 95th
+percentile for training turns. Each window offers up to 220 turns over
+twenty draws. Both adjacent speeds must exceed 0.05\,m/s.
 For groups of contemporaneous targets, the minimum pair distance over the
 twelve steps fell below the fold's training fifth-percentile distance in
 a mean fraction of 0.886 of draw indices. These proximity statistics

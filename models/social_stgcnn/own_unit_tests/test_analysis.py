@@ -12,9 +12,37 @@ from models.social_stgcnn.analyze import (
     MOTION, NEIGHBOR_BINS, SCORES, STAGES, clean_evidence, runtime_row,
     scored_windows, summarize_runs, summarize_runtime,
 )
+from models.social_stgcnn.review_metrics import displacement_errors, heading_rows
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_owner_displacement_scores_choose_ade_and_fde_winners_separately(self):
+        truth = np.zeros((2, 12, 2))
+        draws = np.zeros((2, 20, 12, 2))
+        draws[0, :10, -1] = [3., 4.]
+        draws[0, 10:, :-1] = [3., 4.]
+        draws[1, :, :, 1] = 2.
+        scores = displacement_errors(draws, truth)
+        for key, expected in {"min_ade": 29/24, "min_fde": 1., "mean_ade": 2.25, "mean_fde": 2.25}.items():
+            self.assertAlmostEqual(scores[key], expected)
+        # The group's reference example has half the draws exactly one meter away.
+        draws[:] = 0
+        draws[:, 10:, :, 0] = 1.
+        for count, start, expected in ((20, 0, (0., .5)), (1, 10, (1., 1.))):
+            scores = displacement_errors(draws[:, start:start + count], truth)
+            for distance in ("ade", "fde"):
+                self.assertEqual(scores["min_" + distance], expected[0])
+                self.assertEqual(scores["mean_" + distance], expected[1])
+
+    def test_shared_heading_definition_on_one_right_angle(self):
+        steps = np.zeros((1, 20, 12, 2))
+        steps[:, :, :6, 0] = 1.
+        steps[:, :, 6:, 1] = 1.
+        bundle = {"observed": np.zeros((1, 8, 2)), "samples": steps.cumsum(axis=2)}
+        values = heading_rows(bundle, None, np.pi / 4, "eth", 0, "clean_0")
+        self.assertAlmostEqual(values["turn_rate_mean_mean"], np.pi / 22)
+        self.assertEqual(values["turn_violation_rate_mean"], 1.)
+
     def test_pair_by_id_and_reject_missing_target(self):
         with TemporaryDirectory() as temporary:
             directory = Path(temporary)

@@ -1,6 +1,6 @@
 # Social-STGCNN
 
-**Owner:** Zongmin Zhang. This pedestrian-only implementation uses the Group 7 `causal_v2` windows and exports 20 forecasts per target. The [paper notes](paper_reading_notes.md) and [experiment design](independent_design.md) explain the graph, distribution and registered training budget. See the [source inventory](source_inventory.md) for attribution.
+**Owner:** Zongmin Zhang. This target-readout variant uses the Group 7 `causal_v2` windows and exports 20 forecasts per target. Each observed frame contributes one target-centered graph summary to the decoder. The authors' released decoder retains features for all pedestrians. [Paper and architecture notes](paper_reading_notes.md) · [Registered experiment](independent_design.md) · [Attribution](source_inventory.md)
 
 ## Reproduce a run
 
@@ -46,10 +46,11 @@ python models/social_stgcnn/run.py formal --phase export --fold eth --seed 0 \
 - `own_unit_tests/` covers graph geometry, causality, distribution calculations and the export interface.
 - `analyze.py` pairs the formal outcomes and writes compact evidence; its render phase draws the figures from those tables alone. Rendering used Matplotlib 3.11.2.
 - `timing.py` constructs runtime inputs directly from the neutral store; `retime.py` measures all selected weights on one physical host. `check_selection.py` recomputes the winning validation likelihoods.
+- `review_metrics.py` calculates ADE and FDE independently from the 90 frozen bundles and applies the group's heading diagnostic. Run `python -m models.social_stgcnn.review_metrics` after preparing the bundles and shared data. This analysis was added after the formal run.
 - `package_review.py`, `verify_review.py` and `handoff.py` package the original forecasts, verify the extracted files and prepare the submission provenance. [Reviewer instructions](REVIEW.md)
 
 ## Report and presentation
 
-The [contribution](../../submission/contributions/social_stgcnn/README.md) includes the 90-row score table, English subsection, three Beamer frames, a 379-word script and the individual contribution paragraph. The group build takes its totals directly from the scored CSV. After numerical extraction, use `python -m models.social_stgcnn.analyze --phase render` on a machine with Matplotlib, then `make preview MODEL=social_stgcnn`. To compile the isolated two-page report and three-slide deck with the same preambles, run `python models/social_stgcnn/preview.py`.
+The [contribution](../../submission/contributions/social_stgcnn/README.md) includes the 90-row score table, English subsection, three Beamer frames, a 377-word script and the individual contribution paragraph. The group build takes its totals directly from the scored CSV. After numerical extraction, use `python -m models.social_stgcnn.analyze --phase render` on a machine with Matplotlib, then `make preview MODEL=social_stgcnn`. To compile the standalone report and three-slide deck with the same preambles, run `python models/social_stgcnn/preview.py`.
 
 The [review archive](https://github.com/Nine-Three-Cattery/comp5331/releases/download/social-stgcnn-causal-v2-review-v1/social_stgcnn_causal_v2_review.tar) is a private repository asset. Its external size and SHA-256 are in the [provenance record](../../submission/contributions/social_stgcnn/provenance.json). The reference experiment passed the six-condition pilot, the 90-bundle common audit and the fresh-checkout checkpoint replay.

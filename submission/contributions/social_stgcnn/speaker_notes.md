@@ -1,8 +1,8 @@
 # Social-STGCNN · Zongmin Zhang
 
-## Frame 1 · Visible pedestrians form a graph at each observed step
+## Frame 1 · The decoder reads one target from the crowd graph
 
-The rust dot is the person whose path we want to predict. Suppose one neighbor is a meter away and another is two meters away. The nearer one gets twice the raw edge weight. We then normalize using the degree at both ends of each edge. I build a graph like this for each of the eight observed frames. Every pedestrian visible throughout those frames has a place in the graph. More than twenty-three thousand training windows in the ETH holdout had at least eight neighbors. Preparing the registered 128 targets from stored coordinates took about forty-six milliseconds on our two-thread CPU. The network learns how to turn these eight graph summaries into twelve future displacements. For each target I draw twenty paths, starting all of them at the last input position.
+The rust dot is the person whose path we want to predict. A neighbor one meter away gets twice the raw weight of one two meters away. We then normalize using the degree at both ends of each edge. Everyone visible throughout the eight frames enters the graph. In my version, the decoder sees one weighted sum of positions for the target at each frame. Imagine two neighbors walking toward a stationary person from opposite sides. If they stay equally far away, their contributions cancel. The same thing happens if they walk apart. The authors' decoder keeps a feature vector for every pedestrian. With the smaller decoder, I draw twenty paths from the target's last position. Preparing 128 targets from stored coordinates took about forty-six milliseconds on our two-thread CPU.
 
 ## Frame 2 · Twenty draws reduce best-sample ADE by 0.32 m
 

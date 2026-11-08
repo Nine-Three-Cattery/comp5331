@@ -14,6 +14,7 @@
   "evidence": {
     "assets/clean_sampling.pdf": "2506f8497f2054f5932d603eb6eebefec3dd29a559feb85bd67dfd40fc46c2c2",
     "assets/paired_robustness.pdf": "fed4fadd4dee0add25cfaade6c080893a9586f439a3904435efb96f44d1494e3",
+    "assets/shared_eth_case.pdf": "3879b0da914516258338af2bd19bf8639717fe02f939b3d8eff2f0fcc5c46bb1",
     "assets/trajectories.pdf": "fb564ec64293da31d6692a9bc1a65f01009be0141f2cb73f361c747081eb27b6",
     "evidence/case_paths.csv": "0143bcc70ed4fe761c99e478370f027a739053c1e68afeed66c0c62f389b11e0",
     "evidence/case_selection.csv": "d6397b2c5c4345282869994fc5410e0010f81e5ecb4a44d634b5203fcb7ae036",
@@ -22,6 +23,7 @@
     "evidence/neighbors.csv": "9ede07a20212cdb5bb055f5f09858673c582fa49704ca7ea5b566c62eb2ccb6e",
     "evidence/pilot_audit.json": "bac0dd06f8d1abd6f1e1e0fb27c1265f555b6778d3beb935188b1a3c144ae5cf",
     "evidence/reproduction_check.json": "7a42126081073837863dd2e3262ac475b432a5741c5cb81f74a675b195c47e97",
+    "evidence/review_metrics.csv": "2cac59195fc6d141d5b89c954d1d446861cff98675307663ef1ed1c2c2354468",
     "evidence/runtime.csv": "ebfa83be21b47d83e5a07d562695387a5233ef5dd0673ba4b39fe838af0e4c6c",
     "evidence/runtime_density.csv": "afb370440d935f72ce0f1a4d9dcf0122c2e55d8e9bbbdc2631c89be072077189",
     "evidence/sample_budget.csv": "957f8087173b42138893a427fad51f21fb1a778f7658303b54a8bd211480cc39",
