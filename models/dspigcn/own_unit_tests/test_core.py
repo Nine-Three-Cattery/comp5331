@@ -51,13 +51,16 @@ def test_round_trip_and_derivative_units():
 
 
 def test_polynomial_matches_analytic_and_autograd():
-    coeff = torch.tensor([[[1.,-2.],[2.,3.],[3.,0.],[0.,0.],[0.,0.]]], dtype=torch.float64)
+    coeff = torch.tensor([[[1.,-2.],[2.,3.],[3.,0.],[0.1,0.],[0.05,-0.1]]], dtype=torch.float64)
     times = torch.tensor([0.,0.4,2.,4.8], dtype=torch.float64, requires_grad=True)
     position, velocity = polynomial(coeff, times)
-    torch.testing.assert_close(position[0,:,0], 1+2*times+3*times**2)
-    torch.testing.assert_close(velocity[0,:,0], 2+6*times)
-    derivative = torch.autograd.grad(position[0,:,0].sum(), times)[0]
+    torch.testing.assert_close(position[0,:,0], 1+2*times+3*times**2+0.1*times**3+0.05*times**4)
+    torch.testing.assert_close(velocity[0,:,0], 2+6*times+0.3*times**2+0.2*times**3)
+    torch.testing.assert_close(velocity[0,:,1], 3-0.4*times**3)
+    derivative = torch.autograd.grad(position[0,:,0].sum(), times, retain_graph=True)[0]
     torch.testing.assert_close(derivative, velocity[0,:,0])
+    derivative_y = torch.autograd.grad(position[0,:,1].sum(), times)[0]
+    torch.testing.assert_close(derivative_y, velocity[0,:,1])
 
 
 def test_graph_known_weights_and_padding():
