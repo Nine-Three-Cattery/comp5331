@@ -80,3 +80,11 @@ must not compare runtime across dissimilar hardware as an architecture effect.
 Large raw data, reference checkouts, weights, predictions and release archives
 stay under ignored `data/`, `local/` or `artifacts/`. English contribution
 sources belong to `submission/contributions/dspigcn/`.
+
+## Supplemental candidate experiments
+
+The isolated [candidate variant](provisional_variant/README.md) preserves an
+additional implementation and its 15-fit / 90-row local experiment matrix. Its
+`dspigcn_candidate` namespace can coexist with this registered model, and its
+inference bridge accepts this model's graph batches. Those saved experiments use
+a different protocol and must remain outside the common causal_v2 result table.

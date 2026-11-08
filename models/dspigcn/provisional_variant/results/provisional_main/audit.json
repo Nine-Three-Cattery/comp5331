@@ -1,0 +1,175 @@
+{
+  "passed": true,
+  "runs": 15,
+  "conditions": 90,
+  "checks": "checkpoint/config/validation selection, populations, source data when supplied, corruptions, all accuracy/motion metrics and per-trajectory tables",
+  "matrix_checks": "combined CSV, matching runtime budgets/hardware, all example/failure figures",
+  "details": [
+    {
+      "directory": "outputs/provisional_main/eth/seed_0",
+      "scene": "eth",
+      "seed": 0,
+      "conditions": 6,
+      "windows": 904,
+      "trajectories": 2614,
+      "source_data_verified": true,
+      "test_set_id": "8c0bee95cb63bc8e6ef563d1462e146af87e5064789524dd5204ef1a0fcd539d",
+      "checkpoint_sha256": "84a9943b857a0e34813004c0070594a682f5545372ad033d64d30be941696298"
+    },
+    {
+      "directory": "outputs/provisional_main/eth/seed_1",
+      "scene": "eth",
+      "seed": 1,
+      "conditions": 6,
+      "windows": 904,
+      "trajectories": 2614,
+      "source_data_verified": true,
+      "test_set_id": "8c0bee95cb63bc8e6ef563d1462e146af87e5064789524dd5204ef1a0fcd539d",
+      "checkpoint_sha256": "b1a865fcef805000ca65d2641d6dd9dc6ac4a459c026ef3175456c6e761aecef"
+    },
+    {
+      "directory": "outputs/provisional_main/eth/seed_2",
+      "scene": "eth",
+      "seed": 2,
+      "conditions": 6,
+      "windows": 904,
+      "trajectories": 2614,
+      "source_data_verified": true,
+      "test_set_id": "8c0bee95cb63bc8e6ef563d1462e146af87e5064789524dd5204ef1a0fcd539d",
+      "checkpoint_sha256": "d06bbe7b6a8db1236f3d3a9753fbf54ac30113b1d50983004087c92db75d3fd5"
+    },
+    {
+      "directory": "outputs/provisional_main/hotel/seed_0",
+      "scene": "hotel",
+      "seed": 0,
+      "conditions": 6,
+      "windows": 445,
+      "trajectories": 1197,
+      "source_data_verified": true,
+      "test_set_id": "3d7ca6f6afedcd617dcb9d697aa42ea21c66c582a25b6c053f2679e4040d2d71",
+      "checkpoint_sha256": "c1a6f26fe5e24ee08f3c9ec2c4e81836ba2ebc1f82e2fbbae19468a5bdf04cd7"
+    },
+    {
+      "directory": "outputs/provisional_main/hotel/seed_1",
+      "scene": "hotel",
+      "seed": 1,
+      "conditions": 6,
+      "windows": 445,
+      "trajectories": 1197,
+      "source_data_verified": true,
+      "test_set_id": "3d7ca6f6afedcd617dcb9d697aa42ea21c66c582a25b6c053f2679e4040d2d71",
+      "checkpoint_sha256": "9ef871a23a45708def987b3ba30eb26150b0c9660f81f773b22e9826b163a45d"
+    },
+    {
+      "directory": "outputs/provisional_main/hotel/seed_2",
+      "scene": "hotel",
+      "seed": 2,
+      "conditions": 6,
+      "windows": 445,
+      "trajectories": 1197,
+      "source_data_verified": true,
+      "test_set_id": "3d7ca6f6afedcd617dcb9d697aa42ea21c66c582a25b6c053f2679e4040d2d71",
+      "checkpoint_sha256": "fff10913bb5a32aa49ec308dc4de10e077c0305c82a2d1515c45d2c0f0cecf66"
+    },
+    {
+      "directory": "outputs/provisional_main/univ/seed_0",
+      "scene": "univ",
+      "seed": 0,
+      "conditions": 6,
+      "windows": 947,
+      "trajectories": 24334,
+      "source_data_verified": true,
+      "test_set_id": "36aa3a74f2a4cb1406f4894f941a14bf105e7ee477f02121342eb13c3d10a247",
+      "checkpoint_sha256": "89d454b1f186648f3e7662f3bf776b0a3531089631f32845ebf4edc6b7bdf4a6"
+    },
+    {
+      "directory": "outputs/provisional_main/univ/seed_1",
+      "scene": "univ",
+      "seed": 1,
+      "conditions": 6,
+      "windows": 947,
+      "trajectories": 24334,
+      "source_data_verified": true,
+      "test_set_id": "36aa3a74f2a4cb1406f4894f941a14bf105e7ee477f02121342eb13c3d10a247",
+      "checkpoint_sha256": "c07c0e88836537a39dc6ed5f5106f2043d1b0feab86654ba570705dfd2cc8893"
+    },
+    {
+      "directory": "outputs/provisional_main/univ/seed_2",
+      "scene": "univ",
+      "seed": 2,
+      "conditions": 6,
+      "windows": 947,
+      "trajectories": 24334,
+      "source_data_verified": true,
+      "test_set_id": "36aa3a74f2a4cb1406f4894f941a14bf105e7ee477f02121342eb13c3d10a247",
+      "checkpoint_sha256": "48db85112a77bdf4bb83155111eab29f91d751da1f60fa2826964a4c690fbad1"
+    },
+    {
+      "directory": "outputs/provisional_main/zara1/seed_0",
+      "scene": "zara1",
+      "seed": 0,
+      "conditions": 6,
+      "windows": 686,
+      "trajectories": 2214,
+      "source_data_verified": true,
+      "test_set_id": "84653f6d0f8f4766359eb7523a2baf532237201bf6866ccdb78aec935784ec0c",
+      "checkpoint_sha256": "2a3e2803ec95a17d6714834eea078ab6321f16772af116f94c4b11cd8007fff2"
+    },
+    {
+      "directory": "outputs/provisional_main/zara1/seed_1",
+      "scene": "zara1",
+      "seed": 1,
+      "conditions": 6,
+      "windows": 686,
+      "trajectories": 2214,
+      "source_data_verified": true,
+      "test_set_id": "84653f6d0f8f4766359eb7523a2baf532237201bf6866ccdb78aec935784ec0c",
+      "checkpoint_sha256": "307502433cf7249ac387763054a5190a65a6f147f0df1f9190f2b056523ad9dd"
+    },
+    {
+      "directory": "outputs/provisional_main/zara1/seed_2",
+      "scene": "zara1",
+      "seed": 2,
+      "conditions": 6,
+      "windows": 686,
+      "trajectories": 2214,
+      "source_data_verified": true,
+      "test_set_id": "84653f6d0f8f4766359eb7523a2baf532237201bf6866ccdb78aec935784ec0c",
+      "checkpoint_sha256": "3114251b27f06ca8ea3648835cff8ad7aa0db791ef036364d6fbb23dad5f446b"
+    },
+    {
+      "directory": "outputs/provisional_main/zara2/seed_0",
+      "scene": "zara2",
+      "seed": 0,
+      "conditions": 6,
+      "windows": 992,
+      "trajectories": 5721,
+      "source_data_verified": true,
+      "test_set_id": "f1f1e5e985156b2ea36cf04f374000a815d828bdb624be6348eaac244390a897",
+      "checkpoint_sha256": "5ede703359861219149f0334a6be28b4e9cba4d5071ace9a78db6f435e8a3cd1"
+    },
+    {
+      "directory": "outputs/provisional_main/zara2/seed_1",
+      "scene": "zara2",
+      "seed": 1,
+      "conditions": 6,
+      "windows": 992,
+      "trajectories": 5721,
+      "source_data_verified": true,
+      "test_set_id": "f1f1e5e985156b2ea36cf04f374000a815d828bdb624be6348eaac244390a897",
+      "checkpoint_sha256": "e4941a610aa82f130f8a7b5415c6630bff7cc7e3be139a9369a05a49f2a45cbe"
+    },
+    {
+      "directory": "outputs/provisional_main/zara2/seed_2",
+      "scene": "zara2",
+      "seed": 2,
+      "conditions": 6,
+      "windows": 992,
+      "trajectories": 5721,
+      "source_data_verified": true,
+      "test_set_id": "f1f1e5e985156b2ea36cf04f374000a815d828bdb624be6348eaac244390a897",
+      "checkpoint_sha256": "e71c9a770be78af0d0d5397c8af98c19ebd9fc21ed60526692b4f6f6a11f865d"
+    }
+  ],
+  "team_protocol_verified": false
+}
