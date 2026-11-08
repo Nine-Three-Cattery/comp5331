@@ -77,46 +77,37 @@ average. Only the target's observed history receives the perturbation.}
 
 \begin{samepage}
 \textbf{Where forecasts miss.}
-The two fixed seed-zero examples in Figure~\ref{fig:social_stgcnn_paths}
-show different kinds of overshoot. The ETH pedestrian slows and changes
-direction. The Univ pedestrian ends 0.89\,m from the last observed point.
-Most sampled paths carry the earlier motion forward.
-We also selected the window with the highest clean minADE at seed zero.
-This Univ pedestrian reversed direction with 23 visible neighbors. The
-closest endpoint among all twenty draws still missed by 9.52\,m.\par
+Most draws overshoot in both fixed examples (Figure~\ref{fig:social_stgcnn_paths}).
+The ETH pedestrian slows and turns. The Univ pedestrian ends 0.89\,m from the anchor.
+The largest clean minADE at seed
+zero occurs on a Univ reversal with 23 visible neighbors. The nearest of
+twenty endpoints misses by 9.52\,m.\par
 \end{samepage}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=.96\linewidth,height=2.12in,keepaspectratio]{contributions/social_stgcnn/assets/trajectories.pdf}
-\caption{The first two windows were fixed before formal scoring. The last
-panel was selected by error. Coordinates are centered on the last observed
-position, with equal horizontal and vertical units within each panel.
-The panels have separate axis ranges.}
+\caption{The first two windows were fixed before scoring and the third was selected by error.
+Each panel uses its own range with equal axis units and the last observation at the origin.}
 \label{fig:social_stgcnn_paths}
 \end{figure}
 
 \textbf{Crowd size, motion and cost.}
-Clean meanADE was 0.702\,m for the 119 windows without a visible neighbor
-and 1.005\,m for the 29,105 windows with at least eight. The former group
-covers four scenes, while the latter includes all 24,334 Univ windows.
-Crowd size and scene composition vary together. On clean inputs, the
-within-window 99th percentile of sampled acceleration exceeded its
-training-derived threshold in 95.8\% of windows after equal-fold aggregation.
+Clean meanADE was 0.702\,m for 119 windows without neighbors and 1.005\,m for
+29,105 with eight or more. The former group covers four scenes. The latter
+includes all 24,334 Univ windows, so these groups differ in scene composition.
+In 95.8\% of windows the 99th percentile of sampled acceleration exceeded
+its fold's training threshold, giving folds equal weight.
 The mean absolute heading change was $45.0^\circ$, averaging first within each window.
 In 98.5\% of windows at least one sampled turn reached the fold's 95th
 percentile for training turns. Each window offers up to 220 turns over
 twenty draws. Both adjacent speeds must exceed 0.05\,m/s.
-For groups of contemporaneous targets, the minimum pair distance over the
-twelve steps fell below the fold's training fifth-percentile distance in
-a mean fraction of 0.886 of draw indices. These proximity statistics
-combine independently sampled targets.
+For simultaneous targets sampled independently, a mean 88.6\% of draw indices
+had a pair pass closer than the fold's fifth-percentile training distance.
 
-On one two-thread Linux CPU allocation, the median end-to-end latency per
-128 fixed targets was \ModelRuntime{social_stgcnn}{end_to_end_ms}\,ms.
-Median preprocessing took \ModelRuntime{social_stgcnn}{preprocessing_ms}\,ms,
-including discovery of visible neighbors. Graph inference and sampling
-took \ModelRuntime{social_stgcnn}{prediction_sampling_ms}\,ms. For
-the first 32 eligible targets with at least eight neighbors, end-to-end
-time ranged from 6.47\,ms on Zara1 to 86.55\,ms on Univ. The runtime
-tables retain the individual folds, populations and measurement boundaries.
+On one two-thread Linux CPU allocation, median latency for 128 fixed targets
+was \ModelRuntime{social_stgcnn}{end_to_end_ms}\,ms. Preprocessing including
+neighbor discovery took \ModelRuntime{social_stgcnn}{preprocessing_ms}\,ms,
+and graph inference with sampling took \ModelRuntime{social_stgcnn}{prediction_sampling_ms}\,ms.
+For the first 32 eligible targets with eight or more neighbors, end-to-end
+time ranged from 6.47\,ms on Zara1 to 86.55\,ms on Univ.
