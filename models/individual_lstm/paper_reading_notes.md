@@ -1,0 +1,3 @@
+# Reading notes
+
+Alahi et al. (CVPR 2016, Social LSTM) distinguish individual history from explicit social pooling. The course's individual baseline deliberately omits pooling and uses deterministic coordinate regression, not their probabilistic model. Gupta et al. (CVPR 2018, Social GAN) use meter-space 8/12 predictions and Euclidean ADE/FDE on ETH/UCY. Their least-squares linear regressor differs from our last-two-position CV sanity check. No paper baseline is claimed to be exactly reproduced. Use the group's locked manifests rather than matching a literature table by modifying the test set.

@@ -1,0 +1,3 @@
+# Implementation provenance
+
+Codex prepared the original deterministic baseline and the causal_v2 adapter, executed the experiments and generated the analysis at Lu Yichong's request. This is not a claim of unaided student authorship. No public model-core, training or evaluator snippets were copied. model.py is the existing owner baseline; fit/export/runtime are owner-specific. Group-owned loader, protocol and scoring functions are imported directly as required. The checkpoint, split, configuration and prediction hashes are bound in the common result table. This local numerical audit does not confer editor approval or make a cross-hardware speed comparison valid.

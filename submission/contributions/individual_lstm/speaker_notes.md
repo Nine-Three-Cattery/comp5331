@@ -1,0 +1,3 @@
+1. Both baselines see exactly the target history. CV extends the final step. The encoder-decoder can use earlier displacements and still returns only one trajectory.
+2. Read the paired clean and noisy ADE and FDE rows. The test population and noise are matched. The CV seed labels identify the noise realization; CV has no training seed or fitted weights. Interpret the pattern before proposing a mechanism.
+3. The group's numerical receipt checks the interface and scores, not editor approval. Runtime requires the same hardware before comparing speed. The next owner can now compare a social model on these same windows.

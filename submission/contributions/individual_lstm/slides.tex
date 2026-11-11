@@ -1,0 +1,18 @@
+\begin{frame}{A history-only baseline predicts one future}
+\framesubtitle{Individual LSTM and the constant-velocity control}
+Eight metric positions yield seven displacements. A target-only encoder and
+autoregressive decoder predict twelve future steps. No neighbor, map or future
+derivative enters either predictor. Both methods have $K=1$.
+\end{frame}
+
+\begin{frame}{The comparison uses matched observations}
+\framesubtitle{Shared five-fold, three-seed benchmark}
+\input{contributions/individual_lstm/evidence/paired_frame.tex}
+\end{frame}
+
+\begin{frame}{A faster device is not a fairer timing comparison}
+\framesubtitle{Scope of the local evidence}
+The common audit recomputes six scores for each of 90 bundles. Timing uses the
+locked 128 targets, batch 32, three warmups and ten repetitions. Our CPU timings
+are reported separately from another model's GPU timings.
+\end{frame}
