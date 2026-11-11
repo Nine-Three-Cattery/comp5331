@@ -1,0 +1,40 @@
+{
+  "absolute_tolerance": 1e-08,
+  "contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
+  "fixture_expected": {
+    "K1": {
+      "energy_score": 1.4142135623730951,
+      "mean_ade": 1.0,
+      "mean_fde": 2.0,
+      "min_ade": 1.0,
+      "min_fde": 2.0,
+      "sample_diversity": 0.0
+    },
+    "K2": {
+      "energy_score": 0.49301207456817275,
+      "mean_ade": 1.25,
+      "mean_fde": 1.0,
+      "min_ade": 1.0,
+      "min_fde": 0.0,
+      "sample_diversity": 2.5495097567963922
+    }
+  },
+  "max_absolute_difference": {
+    "energy_score": 6.661338147750939e-16,
+    "mean_ade": 4.440892098500626e-16,
+    "mean_fde": 8.881784197001252e-16,
+    "min_ade": 2.220446049250313e-16,
+    "min_fde": 4.440892098500626e-16,
+    "sample_diversity": 5.551115123125783e-16
+  },
+  "metric_values_compared": 540,
+  "model": "social_gan",
+  "prediction_bundles": 90,
+  "protocol": "causal_v2",
+  "relative_tolerance": 1e-07,
+  "results_sha256": "763f4ffc86a0306483b185bb3bf3df3de42f2e36afaf17b14a4b3a35d82de55d",
+  "source_sha256": "85c904e35db99ef673b03a6e110a9f4d3ff1ff0694647df1af57f8ff0f651170",
+  "status": "passed",
+  "trajectories_scored": 12297960,
+  "windows_scored": 614898
+}
