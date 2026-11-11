@@ -1,0 +1,137 @@
+[
+  {
+    "scene": "eth",
+    "seed": 0,
+    "completed_epochs": 31,
+    "selected_epoch": 16,
+    "training_seconds": 56.1577818619553,
+    "preprocessing_seconds": 2.6089336110744625,
+    "parameters": 237422
+  },
+  {
+    "scene": "eth",
+    "seed": 1,
+    "completed_epochs": 42,
+    "selected_epoch": 27,
+    "training_seconds": 72.98788056103513,
+    "preprocessing_seconds": 2.94594032689929,
+    "parameters": 237422
+  },
+  {
+    "scene": "eth",
+    "seed": 2,
+    "completed_epochs": 49,
+    "selected_epoch": 34,
+    "training_seconds": 85.61945712193847,
+    "preprocessing_seconds": 1.9951549011748284,
+    "parameters": 237422
+  },
+  {
+    "scene": "hotel",
+    "seed": 0,
+    "completed_epochs": 38,
+    "selected_epoch": 23,
+    "training_seconds": 77.98493988695554,
+    "preprocessing_seconds": 2.2151365960016847,
+    "parameters": 237422
+  },
+  {
+    "scene": "hotel",
+    "seed": 1,
+    "completed_epochs": 25,
+    "selected_epoch": 10,
+    "training_seconds": 50.0819696970284,
+    "preprocessing_seconds": 1.7721270699985325,
+    "parameters": 237422
+  },
+  {
+    "scene": "hotel",
+    "seed": 2,
+    "completed_epochs": 43,
+    "selected_epoch": 28,
+    "training_seconds": 102.52741309814155,
+    "preprocessing_seconds": 2.1439899972174317,
+    "parameters": 237422
+  },
+  {
+    "scene": "univ",
+    "seed": 0,
+    "completed_epochs": 59,
+    "selected_epoch": 44,
+    "training_seconds": 115.40171116613783,
+    "preprocessing_seconds": 1.2185101190116256,
+    "parameters": 237422
+  },
+  {
+    "scene": "univ",
+    "seed": 1,
+    "completed_epochs": 39,
+    "selected_epoch": 24,
+    "training_seconds": 76.22174029401504,
+    "preprocessing_seconds": 2.2338087710086256,
+    "parameters": 237422
+  },
+  {
+    "scene": "univ",
+    "seed": 2,
+    "completed_epochs": 61,
+    "selected_epoch": 46,
+    "training_seconds": 116.08404289581813,
+    "preprocessing_seconds": 2.668041634140536,
+    "parameters": 237422
+  },
+  {
+    "scene": "zara1",
+    "seed": 0,
+    "completed_epochs": 48,
+    "selected_epoch": 33,
+    "training_seconds": 98.49792882590555,
+    "preprocessing_seconds": 3.7497743610292673,
+    "parameters": 237422
+  },
+  {
+    "scene": "zara1",
+    "seed": 1,
+    "completed_epochs": 61,
+    "selected_epoch": 46,
+    "training_seconds": 116.90083389310166,
+    "preprocessing_seconds": 2.665179313160479,
+    "parameters": 237422
+  },
+  {
+    "scene": "zara1",
+    "seed": 2,
+    "completed_epochs": 40,
+    "selected_epoch": 25,
+    "training_seconds": 80.30312634794973,
+    "preprocessing_seconds": 2.2911408559884876,
+    "parameters": 237422
+  },
+  {
+    "scene": "zara2",
+    "seed": 0,
+    "completed_epochs": 69,
+    "selected_epoch": 54,
+    "training_seconds": 135.34196236007847,
+    "preprocessing_seconds": 1.9528789629694074,
+    "parameters": 237422
+  },
+  {
+    "scene": "zara2",
+    "seed": 1,
+    "completed_epochs": 58,
+    "selected_epoch": 43,
+    "training_seconds": 112.6741541819647,
+    "preprocessing_seconds": 3.039920873939991,
+    "parameters": 237422
+  },
+  {
+    "scene": "zara2",
+    "seed": 2,
+    "completed_epochs": 50,
+    "selected_epoch": 35,
+    "training_seconds": 102.2277977350168,
+    "preprocessing_seconds": 2.861964052077383,
+    "parameters": 237422
+  }
+]

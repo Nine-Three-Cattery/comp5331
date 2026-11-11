@@ -1,0 +1,75 @@
+{
+  "protocol": "causal_v2",
+  "folds": {
+    "eth": {
+      "train": {
+        "sha256": "9dc79ae81a1b04017dbc7ba113a023cd9336ba886bbca2884c07a44b8df38faf",
+        "window_count": 26961
+      },
+      "val": {
+        "sha256": "bc6955fbcac64d20d5a62a44906d5f699e75028cab391b1a6356ba0a1b8d7bc6",
+        "window_count": 3582
+      },
+      "test": {
+        "sha256": "64f7a9b0c97a258099a5b52acac41ad593d4d480b9768fe3c9f7770cbe8519a0",
+        "window_count": 364
+      }
+    },
+    "hotel": {
+      "train": {
+        "sha256": "94c224f68019016c79fe7efda661b5cd51b6c95657b47a92c6a29de687ce60f1",
+        "window_count": 26287
+      },
+      "val": {
+        "sha256": "084afa1df38bfb625bf20a44dfb0a6d88c68d775ba5cbe9e40e3a39715b2b560",
+        "window_count": 3358
+      },
+      "test": {
+        "sha256": "d6fd63b3cc8a7c32da91f5b02a5abbfee0c965163291a93915667853c877f8af",
+        "window_count": 1197
+      }
+    },
+    "univ": {
+      "train": {
+        "sha256": "afb7ef5cf589320572d4ccef5280336939507b2b120432b1d80d066049b7d58e",
+        "window_count": 7396
+      },
+      "val": {
+        "sha256": "a17a1c8a3175fa26c458d25d75144eb8a1a5585642e25357f9857eb6a2eb32af",
+        "window_count": 1801
+      },
+      "test": {
+        "sha256": "5500a86f47c04e9cb3271dc3c9bd2c6bafadbae4d261f47b9d97fa1733b4bf8e",
+        "window_count": 24334
+      }
+    },
+    "zara1": {
+      "train": {
+        "sha256": "274ef82bb4cf5b2bcdc5bff726314d0a73c17ecc87a3e2a708ab90334f4ee119",
+        "window_count": 25212
+      },
+      "val": {
+        "sha256": "1fcbb585eeb07dee351c5f689d90aa60b4448fa6c10c5f2a383ebfdce9e094c7",
+        "window_count": 3379
+      },
+      "test": {
+        "sha256": "827264516c3b44f9d58f27566203019c4c0198213adb3667975c65c3101a230c",
+        "window_count": 2356
+      }
+    },
+    "zara2": {
+      "train": {
+        "sha256": "741884fe0b38e8a5691a76b774ffbcd2e5bd966e07d1c996bd68054676a4eabd",
+        "window_count": 22800
+      },
+      "val": {
+        "sha256": "6f7d7e6ee3b7a6387624488fbbe3a526a1625162f3306c9df0c6771039e2b942",
+        "window_count": 2584
+      },
+      "test": {
+        "sha256": "cf4f82d3d49e2c795483ced40f1f83e977010c10b524460c0b3745dfe28f9671",
+        "window_count": 5910
+      }
+    }
+  }
+}

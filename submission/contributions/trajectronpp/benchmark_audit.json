@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
+  "model": "trajectronpp",
+  "prediction_bundles": 90,
+  "protocol": "causal_v2",
+  "results_sha256": "e79db64599fd0c22dd1ec652df99a87753afec1ab0d373e84c29c9d36b17a35a",
+  "status": "passed"
+}

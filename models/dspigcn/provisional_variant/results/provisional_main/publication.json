@@ -1,0 +1,48 @@
+{
+  "kind": "supplemental_candidate_publication",
+  "protocol": "dspigcn-provisional-v1",
+  "registered_protocol": "causal_v2",
+  "eligible_for_common_comparison": false,
+  "base_commit": "782673df33ad093c14bb94179921761d7c73a73d",
+  "candidate_fits": 15,
+  "candidate_evaluation_rows": 90,
+  "candidate_audit_passed": true,
+  "paper_equations_reviewed": true,
+  "paper_equivalence_claimed": false,
+  "namespace": "dspigcn_candidate",
+  "candidate_tests": {
+    "passed": 18,
+    "failed": 0
+  },
+  "existing_model_smoke": {
+    "passed": 10,
+    "environment_failures": 1,
+    "reason": "Python 3.10 lacks hashlib.file_digest; existing workflow documents Python 3.12",
+    "existing_executable_code_changed": false
+  },
+  "original_experiment_archive": {
+    "file": "zhengyang_dspigcn_experiments.tar",
+    "bytes": 1596702720,
+    "sha256": "4b8ce5c00227244995d53ef2be95229419ec9da9176d4ca311d26960d67b6b43"
+  },
+  "unchanged_numerical_source_sha256": {
+    "model.py": "36a6615f934ee02560d0e9d1ef375a5e0dcad2f50ace5af1ea98633e6f686665",
+    "losses.py": "73cde2964c8eaee38dfc85488cd544bf5cfc9a315c9daa00e11d5009b23993e5",
+    "data.py": "8c0c615f0d7296bdf0a52d33136b76b050ce59eb63892044a2a6c033c5acca7e",
+    "sampling.py": "03c3b74e090419299f9b449025d340fe03e8063d74d868d83cd1b88920d8ab7c",
+    "evaluation.py": "a6d364d51f80018df8812b16fde715b6a0593343652f074628eee6bc398357ce"
+  },
+  "changes_from_local_package": [
+    "isolated package/CLI namespace",
+    "group observation-batch adapter",
+    "integration regression",
+    "paper/protocol review and publication documentation"
+  ],
+  "assistance": "Prepared with OpenAI Codex assistance; see docs/THIRD_PARTY.md",
+  "published_wheel_checkpoint_replay": {
+    "installed_namespace": "dspigcn_candidate",
+    "passed": true,
+    "scope": "eth seed 0 first clean window, CUDA, existing trained checkpoint",
+    "max_absolute_difference": 0.0
+  }
+}

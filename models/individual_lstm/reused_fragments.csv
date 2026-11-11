@@ -1,0 +1,2 @@
+source_url,source_version,source_file_or_lines,content,license,destination,reason
+local-owner-module,module1-v1,trajpred/models.py,unchanged original AI-assisted owner baseline,coursework,models/individual_lstm/model.py,keep architecture fixed while aligning measurement

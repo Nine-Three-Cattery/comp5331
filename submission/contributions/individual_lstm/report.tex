@@ -1,0 +1,32 @@
+\subsection{Individual LSTM and the constant-velocity check}
+\label{sec:individual_lstm}
+The deterministic baseline encodes seven observed displacements with a 32-unit
+LSTM and rolls out twelve increments with a separate recurrent decoder. A linear
+head returns displacements; summation from the last visible or causally filled
+position restores metric coordinates. It sees neither neighbors nor privileged
+derivatives. The supplementary constant-velocity (CV) model repeats the last
+observed displacement. Neither produces multiple futures.
+
+Weights were trained from scratch on the locked manifests with Adam and squared
+position error. Early stopping used clean validation ADE only (40-epoch ceiling,
+eight-epoch patience). Future and neighbor mutations leave the input and output
+unchanged. The common audit checked 90 prediction bundles. Implementation and
+alignment were AI-assisted; the shared group loader and evaluator are referenced
+in the owner provenance.
+
+\paragraph{Accuracy and robustness.}
+Table~\ref{tab:individual_lstm_matched} compares paired inputs and a single
+prediction from each baseline. The reported numbers are equal-fold means after
+averaging seeds. The dispersion across seeds describes training and, for noisy
+conditions, the prescribed corruption draws; it is not an independent-window
+confidence interval.
+
+\input{contributions/individual_lstm/evidence/paired_table.tex}
+
+The two-point CV estimate gives the last observed displacement full influence
+over every forecast step. That makes position noise especially consequential.
+The deterministic LSTM can use the rest of the visible history, but cannot
+respond to an unobserved change of destination or to a neighbor's motion.
+We do not interpret the best of twenty Trajectron++ samples as a single
+deterministic forecast. CPU runtime is device-specific and is excluded from any
+cross-device speed ranking.

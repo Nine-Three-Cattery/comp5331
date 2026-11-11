@@ -1,0 +1,260 @@
+{
+  "artifact": {
+    "name": "COMP5331_SocialGAN_causal_v2.tar.gz",
+    "sha256": "5561bcbc44de43ff1be5eec8ed27e0964171a3668498cd46711b5b4dbe6a5135"
+  },
+  "assistance": "Generative AI assisted with paper synthesis, model and experiment code, experiment execution, analysis, and drafting the report, slides and speaker notes.",
+  "base_commit": "df016def5890898b70d372fb0e8e2bc142121330",
+  "evidence": {
+    "analysis.tex": "1757c80de6c05b864cdbac892257598dc783298e8424a61ac9b6b33bdcab5ca5",
+    "assets/paired_robustness.pdf": "bf6027209d900bc84ea450eade2b36437819b44167a3ccac905f13996759ee95",
+    "assets/sampling.pdf": "2491bbc21613b8def57fb03c8b257403107954b0e059f51be5ea2d1fc8c6e037",
+    "assets/trajectory_examples.pdf": "0e16c2f8b44dce2c4322917b62efee25ddd09debea899b0fc5c022b4759b0c5a",
+    "benchmark_audit.json": "ac65f0e414ecf3b215a3f2e204135a8c2c1ac212142cc6b356a0589918616ecd",
+    "evidence/clean_by_fold.csv": "f9dcffb64ac6491c43ffa907422d9225332eb42124eb978e4a7ed438d283b9ae",
+    "evidence/independent_metrics.json": "5c844e2e2d6884660ed0389d3e18b65d891884d9cc3323d135e1b2cdf46c278b",
+    "evidence/motion_spatial.csv": "2f967471e2e0ba86759926f3d64fc0753f4a0554f9fba5428248d9d65d0d4707",
+    "evidence/motion_spatial_macro.csv": "226c52bddd7058e3377ad9a981481d09d8a5fd46d9b03f8ecde223f2eed82ef4",
+    "evidence/paired_robustness.csv": "36aeba3eb2ef29f1a8aed105fde7e08660feeef9ca74fd13d46cda8de6de51af",
+    "evidence/runtime_cpu.csv": "2c879dbd93e45f52969a70a6264385ebcb8e97d3d797f8394c96654ed5ca1f92",
+    "evidence/sample_budget.csv": "20280aca4f57a09ccb0de26d6f32ea978db54f13b28c1c14b53b069066170fa9",
+    "evidence/sample_budget_runs.csv": "bb1c9b9508d54063e5bf9c625717f39a50da12b57528644b21f94ee3d3045e98",
+    "evidence/training_reproduction.json": "6b7d28226938f0183e67ddae19db8ce3996052b17045cee63a714fac725e9e63",
+    "evidence/trajectory_examples.csv": "e005307972a9bd502ad5e2803ea677f9e10d84dcd7227a773faf9d9303490ad4",
+    "proposal_checklist.md": "ba815467e8e66ad3c4843602126756e5605325f5a846a2f1013cf43fb5219194",
+    "report.tex": "b4f3180bc8587774e0341f382bad58acee5a5b06ac7bee262d5ef25a8cb798d9",
+    "results.csv": "763f4ffc86a0306483b185bb3bf3df3de42f2e36afaf17b14a4b3a35d82de55d",
+    "slides.tex": "882eb04ace2b391d5463abe37cc7dc7c4704b786ae84b76a6856e1974c30ee87",
+    "speaker_notes.md": "a9c644e32c7798ea1e74ccbbbcb1702ba17605abc9f50e053f871df2c0a0143f"
+  },
+  "owner_source_sha256": {
+    "models/social_gan/README.md": "72fa32887874325426f6d981220135e6e23dcce13af8b739aafbd3ad07423ded",
+    "models/social_gan/analysis.py": "c7c9f12f8853b825c593d47474728a4ffb192f07d1f9e96e8aa1a172e129dcb9",
+    "models/social_gan/check_metrics.py": "85c904e35db99ef673b03a6e110a9f4d3ff1ff0694647df1af57f8ff0f651170",
+    "models/social_gan/check_training.py": "9d31d3807bc2c1b7edba39e407789fe5ecbb8dd7cd996484c7da6c0782d5e172",
+    "models/social_gan/config.json": "8e9ea1c2237c13375c8d30de5ec207a5fb6910ead18577746b72676c6d4f1e8b",
+    "models/social_gan/data.py": "31ca5e562c69da376158a8ef967aabda7792551d48a9a4869577c5618ea8dd9d",
+    "models/social_gan/handoff.py": "637584e23898606f2fd4555c4a2aa0dd483862fe15c0f6f5d7d4478af8cbd5cc",
+    "models/social_gan/implementation_provenance.md": "1118a8db4fbd310e418c838ddd070d940d4ad6d8f0c5ddd88ddf87295a9355e9",
+    "models/social_gan/independent_design.md": "d49708dbee8026c5a42025a347a68b5e93b8da495e8b1dd46ac35fcff87af234",
+    "models/social_gan/model.py": "f6c03662142e1fc8d33f6120f912737a24b95e5e39347e294a4198ca4b39e652",
+    "models/social_gan/own_unit_tests/test_causal.py": "a94281bac93ecd7cd251826b0f844be0290180227a18feba521bada219b0f1ea",
+    "models/social_gan/own_unit_tests/test_model.py": "3fa76227e87153ee56dd965c596146f125f37f7d748fdbef241039e52a62f93a",
+    "models/social_gan/paper_reading_notes.md": "16530aa231fd968b633d423fb7495d27e88c6b0565bea440521e69d2a8199ddd",
+    "models/social_gan/requirements-macos-arm64.lock": "df806658f16c5f29e098dccfd1d65af76fb091d879d4c54f7674052ce5f05c96",
+    "models/social_gan/requirements.txt": "1a6019b114057747ac7e7718709c34da92cd9086d0c3fd0ce4f86e1193421fc7",
+    "models/social_gan/reused_fragments.csv": "52af1a4f65544ed2be0ac16e2507c0ab96b9aa593b49618b3d15c100da30a67c",
+    "models/social_gan/run.py": "2a8329a82a04e0ac04a39ce6e21a2a9ef5f46943353263e3360b7ecbb40d6f99",
+    "models/social_gan/source_inventory.md": "efc8ecb93fdf8fcdb60ee1f1efdaaa6730f04e7656afa650347cf3cba12defba"
+  },
+  "pilot": {
+    "audit_sha256": "a4233e3cdfcb0f2350d0a6cf59328849f3d45a92d3ff759fcd35ccc5ce956943",
+    "execution": {
+      "elapsed_seconds": 10.10473187500611,
+      "environment": {
+        "architecture": "arm64",
+        "device": "cpu",
+        "hardware": "Apple M5 Pro",
+        "numpy": "2.5.3",
+        "python": "3.14.7",
+        "system": "Darwin",
+        "system_release": "25.6.0",
+        "threads": 2,
+        "torch": "2.14.0"
+      },
+      "peak_rss_mib": 468.4375
+    },
+    "execution_sha256": "a576560c0e659f82edb510e186f4997cbd37f708dac9e84adbb9ca5905335206"
+  },
+  "prediction_bundles": 90,
+  "protocol": "causal_v2",
+  "raw_release_sha256": {
+    "biwi_eth.txt": "cf8d3fd342a15f409ebc2a1fc76b91a0f06390bd21f1e11410f3859331ab082b",
+    "biwi_hotel.txt": "9caa771bb9153d6b809dd0916b6f86761b641e6bbb15e766c1de3133fbbb7fcf",
+    "crowds_zara01.txt": "1147a1962a09abfb86f28c6cddcac862e095a0cf129b3016385b69eacdd09d85",
+    "crowds_zara02.txt": "8a649d0f8c9ae75c87c4d23a85f892786b0aa30266e996c7be03e69dafff22ff",
+    "students001.txt": "a6d87f278d94136fe39b8be91555487a29ac77259ae403b9dba2d5c18caf7b5b",
+    "students003.txt": "e25798b660634330aa89f8bb259425de720e84d0873902726c1d1f4ccff21d6c"
+  },
+  "references_sha256": "b66644b88ca635c97111a9093bf152c09c852059dc37ff257b78f19f8540ad36",
+  "runs": 15,
+  "runtime_comparability": "Compare timing only with measurements taken on the same host and device.",
+  "runtime_environments": {
+    "eth/seed_0": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "eth/seed_1": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "eth/seed_2": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "hotel/seed_0": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "hotel/seed_1": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "hotel/seed_2": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "univ/seed_0": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "univ/seed_1": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "univ/seed_2": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "zara1/seed_0": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "zara1/seed_1": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "zara1/seed_2": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "zara2/seed_0": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "zara2/seed_1": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    },
+    "zara2/seed_2": {
+      "architecture": "arm64",
+      "device": "cpu",
+      "hardware": "Apple M5 Pro",
+      "numpy": "2.5.3",
+      "python": "3.14.7",
+      "system": "Darwin",
+      "system_release": "25.6.0",
+      "threads": 2,
+      "torch": "2.14.0"
+    }
+  },
+  "runtime_ms": {
+    "end_to_end_ms": 12.80481248977594,
+    "prediction_sampling_ms": 10.991728995577432,
+    "preprocessing_ms": 1.7703955090837553
+  },
+  "validation_logs_sha256": {
+    "artifacts/social_gan/formal/audit.log": "5bd0a1a913f9b70d9b708303a6d8b085fa7d9f8716fde65b58443f54f380e964",
+    "artifacts/social_gan/formal/replay.log": "59e65a76f33a44cf0814df5ebb99f63b5cb82bdeee835c0a04577ab3e17ee6fd",
+    "artifacts/social_gan/model_smoke.log": "b61b01975d7c060b1cb2185b3d0a31fc3e5bc488ef6fa96bf388b682adca7d4f",
+    "artifacts/social_gan/pilot/gate.log": "39bbd0aace4b8939121fd428bf7a7a9e5fbdd74fa32387e57fe41542c10b86dd"
+  }
+}

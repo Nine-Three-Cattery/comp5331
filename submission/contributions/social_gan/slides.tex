@@ -1,0 +1,53 @@
+\input{contributions/social_gan/analysis.tex}
+
+\begin{frame}{Social-GAN pools observed neighbors before decoding}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}
+\textcolor{Teal}{\bfseries Observed context}\par\smallskip
+One LSTM encodes the target and each visible neighbor. A learned max pool
+summarizes neighbor motion and relative position at the anchor.
+\column{.46\textwidth}
+\textcolor{Teal}{\bfseries Sampled futures}\par\smallskip
+A Gaussian draw initializes the decoder with that context. The decoder
+adds a learned correction to constant velocity over 12 steps.
+\end{columns}
+\bigskip
+\begin{block}{Two training signals}
+An LSTM discriminator scores real and generated trajectories.
+The variety loss updates the closest of 20 draws for each target.
+\end{block}
+\vfill
+{\scriptsize\color{Muted}Cheung Alan Pak To\hfill Gupta et al., CVPR 2018}
+\end{frame}
+
+\begin{frame}{More draws improve the best match}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{.58\textwidth}
+\includegraphics[width=\linewidth]{contributions/social_gan/assets/sampling.pdf}
+\column{.38\textwidth}
+\textcolor{Teal}{\bfseries Clean ADE at \(K=20\)}\par\smallskip
+\ModelMetric{social_gan}{clean_0}{min_ade_mean}\,m minimum\par
+\ModelMetric{social_gan}{clean_0}{mean_ade_mean}\,m mean\par
+\medskip
+The minimum uses the recorded future to pick a draw. The mean describes
+the expected error of a uniformly chosen draw.\par
+\medskip
+0.20\,m input noise changed meanADE by
+\ModelMeanADEChange{social_gan}{noise_020}\,m.
+\end{columns}
+\vfill
+{\scriptsize\color{Muted}Cheung Alan Pak To\hfill Five holdouts, three seeds}
+\end{frame}
+
+\begin{frame}{Twenty samples can still miss a trajectory}
+\centering
+\includegraphics[width=.92\linewidth,height=4.65cm,keepaspectratio]{contributions/social_gan/assets/trajectory_examples.pdf}\par
+\smallskip
+{\small Same ETH window and draws on the left. Worst clean Univ window at seed 0 on the right.}\par
+\vfill
+\raggedright
+{\scriptsize\color{Muted}Cheung Alan Pak To\hfill
+\ModelRuntime{social_gan}{end_to_end_ms}\,ms per 128 targets on Apple M5 Pro CPU}
+\end{frame}

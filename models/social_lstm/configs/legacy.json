@@ -1,0 +1,33 @@
+{
+  "protocol_status": "LEGACY EXPLORATORY ONLY; not causal_v2; shared contribution pending",
+  "hidden": 128,
+  "embedding": 64,
+  "grid": 8,
+  "neighborhood": 4.0,
+  "dropout": 0.1,
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "gradient_clip": 10.0,
+  "epochs": 12,
+  "max_people": 96,
+  "seeds": [
+    11,
+    22,
+    33
+  ],
+  "samples": 20,
+  "conditions": [
+    "clean",
+    "noise_0.05",
+    "noise_0.10",
+    "noise_0.20",
+    "missing_1",
+    "missing_2"
+  ],
+  "corruption_seed": 20261105,
+  "prediction_seed": 53031,
+  "cpu_threads": 1,
+  "close_approach_radius_m": 0.2,
+  "experiment_status": "legacy_exploratory_not_causal_v2"
+}

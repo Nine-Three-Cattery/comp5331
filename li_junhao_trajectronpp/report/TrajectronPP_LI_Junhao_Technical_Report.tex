@@ -1,0 +1,229 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,booktabs,tabularx,graphicx,enumitem,xcolor,hyperref}
+\graphicspath{{../outputs/causal_v2/runs/figures/}{../outputs/causal_v2/results/}}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\input{causal_results.tex}
+\title{Trajectron++ on ETH/UCY\\\large Independent Pedestrian Forecasting with Causal Inputs}
+\author{LI Junhao \quad COMP5331 Group 7}
+\date{Fall 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report presents the independent Trajectron++ contribution to the Group 7
+comparison of six pedestrian forecasting models. The trajectory-only model
+uses graph context, a discrete conditional variational autoencoder, and a
+velocity integrator. We removed look-ahead through derived motion features
+and verified that changes after the prediction anchor leave inputs and
+forecasts invariant. The corrected matrix contains 15 independently trained
+fold--seed runs, 90 test bundles, and \TestWindows{} unique test windows.
+Clean scene-macro minADE, minFDE, and Energy Score are \CleanMinADE{} m,
+\CleanMinFDE{} m, and \CleanEnergy{} m, respectively. The evaluation reports
+the full sampling and robustness profile with traceable inputs, selected
+checkpoints, and a model-independent evaluator.
+\end{abstract}
+
+\section{Task and scope}
+Given eight metric positions per target at 0.4 s intervals and eligible
+neighbor histories, forecast twelve positions over the following 4.8 s.
+The output is twenty equally weighted trajectories per target. This is the
+pedestrian, trajectory-only interpretation of Trajectron++\cite{tpp}.
+It uses ETH, Hotel, Univ, Zara1 and Zara2\cite{eth,ucy}. The independent
+implementation and shared interfaces address Raymond's requirements for
+independent model development, common data and metrics, documented deviations,
+and reproducible comparison. Results here describe one model contribution.
+The group ranking requires matching evidence from the five other owners.
+
+\section{Independent model}
+At each historical step the target uses relative position, velocity divided by
+two, and acceleration. Each neighbor must have all eight history points.
+The graph masks each pedestrian edge outside 3 m of the target and sums states
+within the single edge type. Target and edge LSTMs encode the histories.
+An attention module acts over the available edge type, and the resulting
+context parameterizes a categorical prior over 25 latent classes.
+
+During training, a bidirectional future-position encoder supplies the CVAE
+posterior. The loss combines normalized velocity negative log likelihood and
+a KL term with annealing and a 0.07 floor. An autoregressive GRU predicts the
+mean, scales and correlation of a bivariate Gaussian velocity at each step.
+At inference the model samples the prior and decoder with history-only
+context. The single integrator computes
+\[
+ \hat p_{t+h}=p_t^{\mathrm{filled}} + 0.4\sum_{j=1}^{h} \hat v_{t+j},
+\]
+where velocity is restored to meters per second before integration. This
+produces position sequences in the original metric frame. Neighbor interactions
+enter through historical context. Individual forecast samples carry no joint
+collision constraint.
+
+\section{Causal input and experimental design}
+\paragraph{Leakage correction.}
+The earlier pipeline computed centered derivatives along complete tracks and
+then sliced windows. The velocity at the anchor could include the first future
+point and the acceleration could include the second. The corrected adapter
+derives target and neighbor motion inside each observed window with backward
+differences. The first velocity and first two accelerations are zero.
+The training velocity labels use the true anchor and future position
+differences and have a separate path from inference. Cache entries bind the
+causal protocol to the input file and ordered manifest hashes.
+
+\paragraph{Verification.}
+For every condition the regression changes future target or neighbor
+positions while holding history fixed. The feature tensors and same-seed
+predictions must remain exactly equal. The data audit also checks all
+\CachedWindows{} cached windows against immediate construction, rejects a
+legacy cache, and checks all 15 split manifests against the locked original
+ordering. The former outputs are archived separately from this matrix.
+
+\paragraph{Splits and selection.}
+Hold out one of five scenes for testing and use temporal development splits
+within the remaining sources. The boundary excludes 20 steps on either side
+of the 80\% split point. All runs use seeds 0, 1 and 2, Adam at $10^{-3}$,
+gradient clipping at 1, 100 epochs and training batches of 256.
+Evaluate the epoch 10 through 100 checkpoints at intervals of ten on clean
+validation data with $K=20$. Select the smallest Energy Score, then smaller
+meanADE, then earlier epoch. Freeze the selection before any test prediction.
+
+\paragraph{Perturbations.}
+Conditions are clean, Gaussian position noise at 0.05, 0.10 and 0.20 m, and
+missing the last one or two target observations. Missing values are filled
+with constant velocity estimated from the two latest visible points.
+Noise is applied to the target history only and sampled by NumPy
+\texttt{RandomState} using $100003s + 1009i$ for training seed $s$ and zero-based
+manifest row $i$. Coordinates are traversed in time order, x before y.
+Neighbor positions remain available up to the anchor. Future labels are
+identical across conditions. Exported masks distinguish measured and filled
+positions.
+
+\section{Evaluation and results}
+For sample $k$, ADE averages Euclidean position error over twelve steps and
+FDE measures endpoint error. Min metrics independently minimize each error
+over $K=20$ samples. Mean metrics average over the twenty samples.
+Energy Score uses the root-mean-square Euclidean distance over a trajectory
+and subtracts half the average distance over distinct sample pairs from the
+average sample-to-truth distance\cite{energy}. Diversity reports that mean
+pair distance. Lower displacement error or Energy Score is preferred.
+Diversity describes spread and has no universal optimum.
+
+Compute metrics per window, average within each held-out fold and seed, then
+average the three seeds within each fold and give each fold equal weight.
+This prevents the large Univ fold from dominating the headline result.
+Seed standard deviations are reported per fold. Paired perturbation changes
+are computed within folds and the bootstrap resamples the five folds, rather
+than treating overlapping windows as independent. Intervals are descriptive.
+
+\begin{table}[htbp]
+\centering
+\caption{Clean holdout results in meters. The minADE standard deviation is across three training seeds.}
+\begin{tabular}{lrrrrrr}
+\toprule
+Held-out & Windows & minADE & SD & minFDE & meanADE & ES \\
+\midrule
+\FoldRows
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Equal-weight fold macro results in meters. Lower error and ES are preferred. Div. denotes sample diversity.}
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & minADE & minFDE & meanADE & meanFDE & ES & Div. \\
+\midrule
+\ConditionRows
+\bottomrule
+\end{tabular}
+\end{table}
+
+For clean inputs the gap between minADE (\CleanMinADE{} m) and meanADE
+(\CleanMeanADE{} m) indicates that sample coverage and typical sampled error
+describe different aspects of the forecast. The paired meanADE differences
+for 0.20 m noise and two missing observations are \NoiseMeanDelta{} m and
+\MissingMeanDelta{} m, with 95\% scene bootstrap intervals of
+\NoiseMeanInterval{} m and \MissingMeanInterval{} m, respectively.
+These changes describe the registered target-history corruption and fill
+protocol. The same clean sample stream yields \OneSampleADE{} m with its
+first trajectory and \CleanMinADE{} m best-of-twenty. The sample-budget table
+also reports the intermediate budgets of five and ten.
+
+\section{Motion, proximity and failure cases}
+The evaluator derives predicted speed, acceleration and jerk from the last
+input position and predicted positions. For each fold, the 99th percentiles
+of training-track motion define diagnostic thresholds. A window is flagged
+when the 99th percentile across its sampled motion exceeds the threshold.
+The clean macro flag fractions are \CleanSpeed{} for speed, \CleanAccel{}
+for acceleration, and \CleanJerk{} for jerk. Heading diagnostics exclude
+steps below 0.05 m/s. Turning strata use ground-truth future heading and
+density strata use anchor-time neighbors, solely for post-hoc analysis.
+
+For each frame with at least two eligible targets, the evaluator matches
+equal sample indices, takes the minimum separation over target pairs and
+forecast times, and counts how often it falls below the training fifth
+percentile of contemporaneous separation. The clean macro close-approach
+fraction is \CleanClose{}. Equal-index matching is a descriptive construction
+over separately sampled forecasts. Its fraction is neither a calibrated
+joint collision probability nor a physical safety guarantee.
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{eth_presentation.png}
+ \caption{Fixed ETH example, seed 0. Black shows observations, dashed black
+ shows causal fill, orange shows the ground truth, and blue shows twenty
+ predicted trajectories and endpoints. Panels share their coordinate scale.}
+\end{figure}
+
+The archive provides fixed cases from each source and failure selections for
+large clean error, deterioration under 0.20 m noise, deterioration with two
+missing steps, and simultaneous motion flags. The largest clean meanADE case
+in the seed-0 failure list has meanADE \FailureADE{} m on \FailureFold{}.
+This rule exposes difficult windows alongside the fixed examples. The
+qualitative plots complement the scene-level summaries and do not isolate
+effects attributable to specific architecture components.
+
+\section{Runtime and reproducibility}
+Use the first 128 target windows of each held-out manifest with batch 32 and
+twenty samples. For each selected model, warm up three times and measure ten
+repetitions with CUDA synchronization at stage boundaries. Preprocessing
+starts with in-memory neutral positions and includes window and graph
+construction, collation and transfer to the GPU. Inference includes encoding,
+sampling, decoding and metric integration. Total time also includes CPU
+readback. Disk I/O and one-time model or data loading are outside the timed
+boundary. The median across 15 per-run medians is \RuntimePre{} ms
+preprocessing, \RuntimePred{} ms inference with sampling, and \RuntimeTotal{}
+ms end to end. Hardware and per-repetition data are included with the archive.
+
+The prediction index resolves each output to a fold, seed, condition, ordered
+manifest hash, configuration hash, selected checkpoint hash and sample count.
+The README includes locked data acquisition, environment setup, metric
+fixtures, prediction, evaluation, matrix and report commands. The independent
+path uses no upstream model, trainer or evaluator at runtime. The reference
+code was consulted for algorithm details and pedestrian hyperparameters.
+
+\section{Deviations and limits}
+The paper supports multiple agent types, semantic maps and optional
+ego-agent plan conditioning. This implementation uses one pedestrian edge
+type, complete neighbor histories, a hard radius mask and trajectory inputs.
+Window-local normalization and differentiation, the velocity NLL training
+objective, and sampled integration are implementation choices. Group 7
+specifies its own split, perturbations and $K=20$ budget. Published numbers
+therefore provide context under their original protocol. Our benchmark covers
+five scenes, so the results characterize these holdouts and the declared
+perturbations.
+
+\begin{thebibliography}{9}
+\small
+\setlength{\itemsep}{0pt}
+\bibitem{tpp} T. Salzmann, B. Ivanovic, P. Chakravarty, and M. Pavone.
+Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous
+Data. ECCV, 2020. \href{https://arxiv.org/abs/2001.03093}{Paper}.
+\bibitem{eth} S. Pellegrini, A. Ess, K. Schindler, and L. Van Gool.
+You'll Never Walk Alone: Modeling Social Behavior for Multi-target Tracking.
+ICCV, 2009.
+\bibitem{ucy} A. Lerner, Y. Chrysanthou, and D. Lischinski. Crowds by
+Example. Computer Graphics Forum, 26(3), 2007.
+\bibitem{energy} T. Gneiting and A. E. Raftery. Strictly Proper Scoring Rules,
+Prediction, and Estimation. JASA, 102(477), 2007.
+\href{https://doi.org/10.1198/016214506000001437}{DOI}.
+\end{thebibliography}
+\end{document}

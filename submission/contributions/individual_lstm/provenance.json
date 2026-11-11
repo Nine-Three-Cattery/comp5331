@@ -1,0 +1,24 @@
+{
+  "protocol": "causal_v2",
+  "runs": 15,
+  "prediction_bundles": 90,
+  "artifact": {
+    "name": "COMP5331_IndividualLSTM_causal_v2.tar.gz",
+    "sha256": "58ae6207f044c23dbcb3f0b5fbf86c0468fb085d58f61872717ac8357a07d2a0"
+  },
+  "base_commit": "df016def5890898b70d372fb0e8e2bc142121330",
+  "runtime_ms": {
+    "preprocessing_ms": 0.3488538786768913,
+    "prediction_sampling_ms": 1.7875623889267445,
+    "end_to_end_ms": 2.155374735593796
+  },
+  "evidence": {
+    "results.csv": "8a46d0da01529f3f052def7f642bd1dd8429e808b951ca35e39b73dbe442714e",
+    "benchmark_audit.json": "8f10ca99fb94f39d03d6604a46b400870543860673a5027e664ccc7455c1e8e2",
+    "cv_supplement.csv": "fcf43f53da9847edf7bb12bb3a79a2755ce1be8189e886502e07869ef11c2b16",
+    "runtime_cpu.csv": "eb83db734c1df54f57d28904abf4464b19728edfaa0bda9776b585f9e8704352",
+    "macro_comparison.csv": "cec5997a2cb30a825eb55b790672310858ed1289c6592d5cd38b76c49220a006"
+  },
+  "environment": "Apple M5 CPU, macOS arm64, two threads; Linux reference-host confirmation pending",
+  "assistance": "AI-assisted owner implementation and experiment execution"
+}

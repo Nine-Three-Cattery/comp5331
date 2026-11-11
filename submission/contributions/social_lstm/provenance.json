@@ -1,0 +1,58 @@
+{
+  "protocol": "causal_v2",
+  "runs": 15,
+  "prediction_bundles": 90,
+  "sample_count": 1,
+  "status": "interface_audited_locally_editor_review_pending",
+  "artifact": {
+    "name": "Social_LSTM_WANG_Yifan_causal_v2.tar.gz",
+    "sha256": "00fafdea953781940a96731a076acde5f6104b1984a0a3e94786ee7739e258a8",
+    "storage": "local delivery artifact; not committed to Git",
+    "bytes": 105967424
+  },
+  "evidence": {
+    "benchmark_audit.json": "85d6f8d21f3b2f8704298e704437b2556f338048126b850ae1e025b37008c691",
+    "evidence/causal_clean_accuracy.pdf": "33b9f72ff49445de38c34e466cf35ed83dcf8311017c0d042890d7dceb9e04e0",
+    "evidence/causal_constant_velocity.json": "23e1d3b4ce6327db47c8c759c979f8e7d461671855b82ca71d35611d6c3ab9dc",
+    "evidence/causal_macro_summary.csv": "d423f9766236fcb28b21e96dca616a6503dfbb89f91d1234913dc95c90623e2c",
+    "evidence/causal_motion_strata.json": "ee746e46febbade1b68ce8f3ba8933fc741b2461af2d43a780fed6e591fca0b7",
+    "evidence/causal_qualitative_selection.json": "9cd2a9cc9af525ee08e033ac624f397d55af4e2a9c1560fecc00c1dca4705c4c",
+    "evidence/causal_robustness.pdf": "57616b582bf072c9bcb7db18aa499f23964dfd2e66408d4f14705e10ee50b724",
+    "evidence/causal_runtime.json": "78eec3327d3b67a7ff0e249f45a2f1f9349759195d320efc0ba6bd780281c2bf",
+    "evidence/causal_training_summary.json": "5fda28883f0c512a484c1ffa5b82b981b0e548fa13a761dd6d5df06e575cb5b8",
+    "evidence/causal_turning.pdf": "783c6a8ce5e7ac129b0b6b0606a6e26c1a82c1d24fac8f7b4eed33feadf6f986",
+    "evidence/causal_turning.png": "50b935eb8ec86c51d0972e9f62044e3df21831e2137ee28ced4d283b9e862b36",
+    "pilot_audit.json": "b3a3c7390c5c306260d0845b703b019114696afbdb9ecda11ab76f5e868cb3b2",
+    "results.csv": "4b334372e5a3e80a5840318b5f8abd24a4e21d737ba6521eeaae7889bbf0fc64",
+    "evidence/causal_reproduction.json": "0d165d9433a02940bb2b5a8288d52dba1296db6b7aac2b42365b1f7c13b28a9a"
+  },
+  "runtime_ms": {
+    "preprocessing_ms": 2.538876371302952,
+    "prediction_sampling_ms": 44.86847366206348,
+    "end_to_end_ms": 48.43005979976927
+  },
+  "runtime_aggregation": "Median of10 repetitions per fold/seed, then equal mean over15 runs; each repetition is128 ordered targets, batch32, after3 warmups. MPS-specific, not cross-hardware comparable.",
+  "environment": {
+    "cpu_threads": 1,
+    "cuda": null,
+    "cudnn": null,
+    "device": "mps",
+    "gpu": null,
+    "hardware_chip": "Apple M5",
+    "numpy": "2.4.4",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.13.12",
+    "reference_environment_match": false,
+    "torch": "2.11.0"
+  },
+  "reference_environment_match": false,
+  "editor_review_required": [
+    "independence and causal/validation review",
+    "reference Linux environment reproduction",
+    "runtime comparison policy",
+    "release artifact transfer to agreed group storage"
+  ],
+  "legacy_evidence": "Preserved separately; excluded from results.csv and shared metric macros."
+}

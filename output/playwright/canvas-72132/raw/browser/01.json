@@ -1,7 +1,0 @@
-{
-  "url": "http://www.cse.ust.hk/~raywong",
-  "error": "### Error\nError: page.evaluate: TypeError: Cannot read properties of null (reading 'cloneNode')\n    at eval (eval at evaluate (:370:30), <anonymous>:3:25)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n",
-  "status": "error",
-  "requested_url": "http://www.cse.ust.hk/~raywong",
-  "kind": "external"
-}

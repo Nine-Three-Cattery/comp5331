@@ -1,0 +1,74 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,booktabs,graphicx,tikz}
+\usetheme[progressbar=frametitle,numbering=fraction,sectionpage=none]{metropolis}
+\input{palette.tex}
+\input{common.tex}
+\setbeamersize{text margin left=0.85cm,text margin right=0.85cm}
+\setbeamercolor{normal text}{fg=Ink,bg=white}
+\setbeamercolor{palette primary}{fg=white,bg=Ink}
+\setbeamercolor{alerted text}{fg=Rust}
+\setbeamercolor{progress bar}{fg=Teal,bg=Rule}
+\setbeamercolor{title separator}{fg=Teal}
+\setbeamertemplate{navigation symbols}{}
+
+\begin{document}
+\begin{frame}[plain,noframenumbering]{}
+\noindent
+{\small\color{Teal}\bfseries COMP5331 GROUP 7 \hfill FALL 2026\par}
+\vspace{0.9cm}
+{\bfseries\fontsize{29}{33}\selectfont Pedestrian trajectory\\forecasting\par}
+\vspace{0.15cm}
+{\color{Teal}\rule{0.94\linewidth}{0.9pt}\par}
+\vspace{0.22cm}
+{\large Six independent implementations on ETH/UCY\par}
+\vspace{0.65cm}
+{\small\color{Muted}\SubmissionStatus\par}
+\end{frame}
+
+\begin{frame}{All models receive the same observed windows}
+\begin{tikzpicture}[x=0.64cm,y=0.64cm]
+\fill[Wash,rounded corners=3pt] (-.5,-.65) rectangle (19.7,1.50);
+\draw[Rule,line width=1pt] (0,0) -- (19,0);
+\foreach \x in {0,...,7}{\fill[Teal] (\x,0) circle (2.2pt);}
+\foreach \x in {8,...,19}{\fill[Ink!55] (\x,0) circle (2.2pt);}
+\draw[Teal,thick] (7.5,-.40) -- (7.5,1.12);
+\node[Teal,anchor=west,font=\small\bfseries] at (0,.74) {8 observed};
+\node[Ink,anchor=west,font=\small\bfseries] at (8,.74) {12 forecast};
+\node[Muted,anchor=east,font=\scriptsize] at (19,.74) {$\Delta t=0.4$\,s};
+\end{tikzpicture}
+
+\medskip
+\begin{columns}[T,onlytextwidth]
+\column{.31\textwidth}
+\textcolor{Teal}{\bfseries Generalization}\par\smallskip
+Five held-out scenes and three seeds. Select checkpoints on validation.
+\column{.31\textwidth}
+\textcolor{Teal}{\bfseries Robustness}\par\smallskip
+Compare target-only position noise and missing-suffix conditions.
+\column{.31\textwidth}
+\textcolor{Teal}{\bfseries Distribution}\par\smallskip
+Separate typical error from best-of-\(K\). Report sample budget and Energy Score.
+\end{columns}
+\end{frame}
+
+\input{generated/model-slides.tex}
+
+\begin{frame}{Clean results are reported at explicit sample budgets}
+\centering
+\small
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & \(K\) & minADE & minFDE & meanADE & meanFDE & ES \\
+\midrule
+\input{generated/comparison-rows.tex}
+\end{tabular}
+
+\vspace{0.28cm}
+
+{\footnotesize\color{Muted}Equal-weight holdout means in meters. Read minimum error at the stated \(K\).}
+\end{frame}
+
+\IfFileExists{editor/slides_synthesis.tex}{\input{editor/slides_synthesis.tex}}{}
+\end{document}

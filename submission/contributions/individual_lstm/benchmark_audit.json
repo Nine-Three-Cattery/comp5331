@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
+  "model": "individual_lstm",
+  "prediction_bundles": 90,
+  "protocol": "causal_v2",
+  "results_sha256": "8a46d0da01529f3f052def7f642bd1dd8429e808b951ca35e39b73dbe442714e",
+  "status": "passed"
+}

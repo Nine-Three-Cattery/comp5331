@@ -1,0 +1,30 @@
+{
+  "status": "15 formal runs and90 bundles passed local common audit; editor/reference-environment review pending",
+  "protocol": "causal_v2",
+  "model_name": "Social-LSTM-deterministic-causal-v2",
+  "sample_count": 1,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "model_config": {
+    "hidden": 64,
+    "embedding": 32,
+    "grid": 4,
+    "neighborhood": 4.0
+  },
+  "neighbor_admission": "observation-complete and within6m at any observed time after target corruption",
+  "baseline": "fixed mean of final three observed displacement intervals",
+  "loss": "closed-loop target metric position MSE",
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "gradient_clip": 10.0,
+  "batch_size": 32,
+  "batching": "seeded actor-count bucket256 shuffle; no dropped indices",
+  "pilot_epochs": 1,
+  "formal_default_epochs": 12,
+  "selection": "minimum clean validation meanADE; earlier epoch tie-break",
+  "purpose": "frozen design record; CLI defaults encode values, not a separate runtime override file"
+}
