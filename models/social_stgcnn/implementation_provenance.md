@@ -1,0 +1,7 @@
+# Implementation provenance
+
+Zongmin Zhang owns the Social-STGCNN contribution for COMP5331 Group 7. The model, full-scene adapter, training loop, exporter and independent displacement calculation were written for this project. The paper and the pinned authors' sources provided algorithmic specifications. Training and formal inference use the group implementation and initialize its weights from scratch. Two separate numerical comparisons load the authors' network. One uses deliberately matched test weights to check the graph, full forward pass and derivatives. The other inserts the course checkpoints into the authors' network and compares its sampled world coordinates against 45 preselected stored outputs. [Source inventory](source_inventory.md) · [Fragment ledger](reused_fragments.csv) · [Reference check](check_reference.py)
+
+The earlier target-readout experiment and its follow-up review identified the missing pedestrian dimension in that decoder. The full-scene architecture and training contract were specified before the new formal runs. The original variant remains versioned with its own checkpoints and results. [Full-scene design](independent_design.md) · [Previous review](https://github.com/Nine-Three-Cattery/comp5331/releases/tag/social-stgcnn-causal-v2-review-v2)
+
+Generative AI assistance was used for paper and code interpretation, implementation, reference comparisons, testing, experiment execution, analysis, and drafting the report and presentation. Group editors review the evidence and decide whether to accept the contribution.

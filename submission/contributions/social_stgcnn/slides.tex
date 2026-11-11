@@ -1,0 +1,52 @@
+\begingroup
+\setbeamertemplate{frame footer}{Zongmin Zhang}
+\begin{frame}{The decoder keeps all pedestrians in the scene}
+\begin{columns}[c,onlytextwidth]
+\column{.46\textwidth}
+\centering
+\begin{tikzpicture}[x=1.12cm,y=1.12cm]
+\coordinate (a) at (0.28,1.42);
+\coordinate (b) at (2.36,1.42);
+\coordinate (c) at (1.32,0.04);
+\draw[Rule,thick] (a)--(c)--(b);
+\fill[Rust] (a) circle (3pt) node[above left,font=\scriptsize]{Target};
+\fill[Teal] (b) circle (3pt) node[above,font=\scriptsize]{Same step};
+\fill[Teal] (c) circle (3pt) node[below,font=\scriptsize]{Opposite step};
+\draw[-stealth,Rust,very thick] (a)--++(.48,0);
+\draw[-stealth,Teal,very thick] (b)--++(.48,0);
+\draw[-stealth,Teal,very thick] (c)--++(-.48,0);
+\end{tikzpicture}
+\par{\scriptsize\color{Muted}Arrows show one observed displacement.}
+\column{.52\textwidth}
+In the released graph, two identical steps have zero edge weight. Opposite
+steps of 0.25\,m have a raw weight of $1/0.50 = 2$\,m$^{-1}$.
+\medskip
+
+The graph block passes every pedestrian's features to the temporal decoder.
+We select the target after the decoder has predicted twelve displacement
+distributions for each person.
+\end{columns}
+\end{frame}
+
+\begin{frame}{Best-sample ADE falls from 0.971 to 0.583 m}
+\centering
+\includegraphics[width=.95\linewidth,height=.65\textheight,keepaspectratio]{contributions/social_stgcnn/assets/clean_sampling.pdf}
+\par\smallskip
+\begin{minipage}{.94\linewidth}
+\small With all twenty paths, meanADE is
+\textbf{\ModelMetric{social_stgcnn}{clean_0}{mean_ade_mean}\,m}.
+The four budgets use the same forecasts. Each held-out scene has equal weight.
+\end{minipage}
+\end{frame}
+
+\begin{frame}{All twenty forecasts overshot the target in one ETH window}
+\centering
+\includegraphics[width=.97\linewidth,height=.64\textheight,keepaspectratio]{contributions/social_stgcnn/assets/trajectories.pdf}
+\par\smallskip
+\begin{minipage}{.94\linewidth}
+\small The right panel had the largest clean minADE at seed zero
+(\textbf{4.783\,m}). The closest forecast endpoint missed the true endpoint by
+\textbf{8.358\,m}.
+\end{minipage}
+\end{frame}
+\endgroup

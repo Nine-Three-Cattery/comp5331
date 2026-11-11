@@ -1,0 +1,23 @@
+{
+  "model": "social_stgcnn",
+  "architecture": "released_full_scene",
+  "reference_revision": "333d3a57b4d2705e129b21aefefa09c79b2b9ae1",
+  "protocol": "causal_v2",
+  "max_neighbors": null,
+  "sample_count": 20,
+  "batch_size": 128,
+  "export_batch_size": 128,
+  "optimizer": "SGD",
+  "learning_rate": 0.01,
+  "learning_rate_after_epoch_150": 0.002,
+  "batch_unit": "complete observed scenes, equal scene weight per optimizer update",
+  "position_decimals_for_displacements": 4,
+  "loss_density_floor": 1e-20,
+  "agent_order": "ascending numeric pedestrian ID within each scene and anchor",
+  "supervision": "all eligible manifest targets in the full observed scene",
+  "batch_normalization": "one unpadded scene per training forward",
+  "formal_epochs": 250,
+  "pilot_epochs": 2,
+  "validation_interval": 5,
+  "selection": "Lowest mean per-step bivariate displacement NLL on the clean validation split among epoch 1, each fifth epoch and the last epoch; retain the earlier epoch on a tie."
+}

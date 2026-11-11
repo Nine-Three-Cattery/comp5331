@@ -1,0 +1,17 @@
+fold,seed,host,batch_size,k,condition,os,architecture,cpu,threads,python,numpy,torch,device,gpu,cuda,driver,scope,targets_per_run,warmups,measured_repetitions_per_run,runs,preprocessing_ms,prediction_sampling_ms,end_to_end_ms
+eth,0,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,50.4900012165308,58.144270442426205,108.65564830601215
+eth,1,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,51.102813333272934,58.830504305660725,109.75582432001829
+eth,2,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,49.90506172180176,58.17303713411093,108.00352599471807
+hotel,0,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,53.10020875185728,27.683242224156857,80.76497167348862
+hotel,1,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,53.70173417031765,28.112848289310932,81.83334022760391
+hotel,2,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,52.87969019263983,28.123924508690834,80.99441323429346
+univ,0,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,111.8824053555727,155.2498722448945,267.37730018794537
+univ,1,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,111.87824606895447,156.3077662140131,268.30751076340675
+univ,2,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,112.0128333568573,159.4930524006486,271.64824958890676
+zara1,0,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,14.708546921610832,39.23453949391842,53.97580377757549
+zara1,1,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,14.46614135056734,39.112549275159836,53.59716806560755
+zara1,2,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,14.66023363173008,39.6698797121644,54.319536313414574
+zara2,0,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,25.600608438253403,53.20648197084665,78.7624642252922
+zara2,1,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,26.32385678589344,53.438601084053516,79.77931573987007
+zara2,2,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,run,128,3,10,1,26.16046741604805,53.69351990520954,80.06376214325428
+all,,Host 1,32,20,clean_0,Linux,x86_64,Genuine Intel(R) CPU 0000%@,2,3.12.3,2.5.3,2.14.0+cpu,cpu,,,,host_median_of_run_medians,128,3,10,15,50.4900012165308,53.438601084053516,80.99441323429346
