@@ -1,0 +1,42 @@
+[
+  {
+    "scene": "eth",
+    "meanADE": 3.85827374458313,
+    "window_index": 568,
+    "scene_id": "biwi_eth.txt:9387",
+    "pedestrians": 1,
+    "largest_target_heading_change_degrees": 0.0
+  },
+  {
+    "scene": "hotel",
+    "meanADE": 2.516568422317505,
+    "window_index": 355,
+    "scene_id": "biwi_hotel.txt:14991",
+    "pedestrians": 1,
+    "largest_target_heading_change_degrees": 36.79212951660156
+  },
+  {
+    "scene": "univ",
+    "meanADE": 1.1604039669036865,
+    "window_index": 471,
+    "scene_id": "students003.txt:460",
+    "pedestrians": 20,
+    "largest_target_heading_change_degrees": 63.946414947509766
+  },
+  {
+    "scene": "zara1",
+    "meanADE": 1.7444064617156982,
+    "window_index": 331,
+    "scene_id": "crowds_zara01.txt:4130",
+    "pedestrians": 2,
+    "largest_target_heading_change_degrees": 25.12225341796875
+  },
+  {
+    "scene": "zara2",
+    "meanADE": 2.2999749183654785,
+    "window_index": 144,
+    "scene_id": "crowds_zara02.txt:1850",
+    "pedestrians": 1,
+    "largest_target_heading_change_degrees": 25.434326171875
+  }
+]

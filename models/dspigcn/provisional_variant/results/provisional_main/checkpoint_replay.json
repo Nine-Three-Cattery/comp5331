@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "scope": "First clean window of each of all 15 checkpoints, CUDA, starting with CUBLAS_WORKSPACE_CONFIG unset",
+  "records": [
+    {
+      "scene": "eth",
+      "seed": 0,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "eth",
+      "seed": 1,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "eth",
+      "seed": 2,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "hotel",
+      "seed": 0,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "hotel",
+      "seed": 1,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "hotel",
+      "seed": 2,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "univ",
+      "seed": 0,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "univ",
+      "seed": 1,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "univ",
+      "seed": 2,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "zara1",
+      "seed": 0,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "zara1",
+      "seed": 1,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "zara1",
+      "seed": 2,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "zara2",
+      "seed": 0,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "zara2",
+      "seed": 1,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    },
+    {
+      "scene": "zara2",
+      "seed": 2,
+      "window": "000000.npz",
+      "max_absolute_difference": 0.0
+    }
+  ]
+}
