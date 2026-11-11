@@ -1,0 +1,68 @@
+{
+  "definition": "Last observed two-position displacement extrapolation; shared clean ordered test manifests; K1; common headline metric function",
+  "folds": [
+    {
+      "fold": "eth",
+      "manifest_hash": "64f7a9b0c97a258099a5b52acac41ad593d4d480b9768fe3c9f7770cbe8519a0",
+      "window_count": 364,
+      "min_ade": 1.075458084736318,
+      "min_fde": 2.281890086014349,
+      "mean_ade": 1.075458084736318,
+      "mean_fde": 2.281890086014349,
+      "energy_score": 1.3006408570457053,
+      "sample_diversity": 0.0
+    },
+    {
+      "fold": "hotel",
+      "manifest_hash": "d6fd63b3cc8a7c32da91f5b02a5abbfee0c965163291a93915667853c877f8af",
+      "window_count": 1197,
+      "min_ade": 0.3193555616127136,
+      "min_fde": 0.6141975687444705,
+      "mean_ade": 0.3193555616127136,
+      "mean_fde": 0.6141975687444705,
+      "energy_score": 0.3721351256671317,
+      "sample_diversity": 0.0
+    },
+    {
+      "fold": "univ",
+      "manifest_hash": "5500a86f47c04e9cb3271dc3c9bd2c6bafadbae4d261f47b9d97fa1733b4bf8e",
+      "window_count": 24334,
+      "min_ade": 0.5241898177518572,
+      "min_fde": 1.1650966532255773,
+      "mean_ade": 0.5241898177518572,
+      "mean_fde": 1.1650966532255773,
+      "energy_score": 0.648804882910053,
+      "sample_diversity": 0.0
+    },
+    {
+      "fold": "zara1",
+      "manifest_hash": "827264516c3b44f9d58f27566203019c4c0198213adb3667975c65c3101a230c",
+      "window_count": 2356,
+      "min_ade": 0.4272228661429228,
+      "min_fde": 0.9523768385183055,
+      "mean_ade": 0.4272228661429228,
+      "mean_fde": 0.9523768385183055,
+      "energy_score": 0.5288984875816329,
+      "sample_diversity": 0.0
+    },
+    {
+      "fold": "zara2",
+      "manifest_hash": "cf4f82d3d49e2c795483ced40f1f83e977010c10b524460c0b3745dfe28f9671",
+      "window_count": 5910,
+      "min_ade": 0.3239369619450163,
+      "min_fde": 0.72441437474732,
+      "mean_ade": 0.3239369619450163,
+      "mean_fde": 0.72441437474732,
+      "energy_score": 0.40288536644733963,
+      "sample_diversity": 0.0
+    }
+  ],
+  "macro": {
+    "min_ade": 0.5340326584377656,
+    "min_fde": 1.1475951042500045,
+    "mean_ade": 0.5340326584377656,
+    "mean_fde": 1.1475951042500045,
+    "energy_score": 0.6506729439303724,
+    "sample_diversity": 0.0
+  }
+}

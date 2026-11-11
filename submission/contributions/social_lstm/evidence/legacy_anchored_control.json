@@ -1,0 +1,25 @@
+{
+  "status": "single fold and seed, validation-only diagnostic; not a replacement benchmark",
+  "fold": "hotel",
+  "seed": 11,
+  "epochs": 12,
+  "selection": "minimum validation teacher-forced NLL",
+  "original_epoch": 10,
+  "anchored_epoch": 12,
+  "original": {
+    "mean_ADE": 0.8464545112004122,
+    "mean_FDE": 1.8356108988648012,
+    "min_ADE": 0.3142282178793643,
+    "min_FDE": 0.5658470188274323,
+    "energy_score": 1.9370984025470295,
+    "diversity_RMS": 0.9930874609327477
+  },
+  "anchored": {
+    "mean_ADE": 0.923855306302483,
+    "mean_FDE": 2.0638880642763797,
+    "min_ADE": 0.45237931880676213,
+    "min_FDE": 0.8734583788949157,
+    "energy_score": 2.596205275058851,
+    "diversity_RMS": 0.8208186203874489
+  }
+}

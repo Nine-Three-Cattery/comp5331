@@ -1,0 +1,8 @@
+{
+  "fold": "hotel",
+  "seed": 0,
+  "window_id": "hotel:biwi_hotel:106:480",
+  "manifest_index": 126,
+  "turn_degrees": 27.12307984248166,
+  "rule": "Largest observed-to-late-future direction change among fixed runtime128 IDs with both speeds >= .3m/s. Uses truth only for descriptive example selection, never checkpoint selection. Not representative."
+}

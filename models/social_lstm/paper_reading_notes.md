@@ -1,0 +1,9 @@
+# Paper reading notes
+
+Alahi et al., *Social LSTM: Human Trajectory Prediction in Crowded Spaces*, CVPR2016, DOI [10.1109/CVPR.2016.110](https://doi.org/10.1109/CVPR.2016.110). The social tensor, position-estimation equations and inference section informed the independently implemented models. No paper PDF or upstream source checkout is committed.
+
+The paper couples per-pedestrian recurrent states through recipient-centered sum pooling of neighbors' previous hidden vectors. Position and social embeddings feed recurrent updates; self is excluded. It describes hidden128, embedding64, 8x8 pooling and a five-parameter correlated Gaussian position head, future NLL, RMSprop.003 and synthetic hyperparameter selection. At inference predicted positions replace true future coordinates in recurrence and social grid.
+
+The current `causal/` model is deliberately deterministic K1 to match the registry: hidden64, embedding32, grid4x4 in a metric4m square, fixed history-average displacement plus learned residual, closed-loop target MSE and Adam.001. Eight observed metric positions and twelve future points at dt.4 remain. These are substantive documented adaptations, so results must not be presented as exact reproduction of the original Gaussian model/table.
+
+The preserved `legacy/` implementation uses Gaussian displacement NLL and sampled-velocity residual feedback. That feedback creates an acceleration-noise integration path absent from the paper's explicit mean formula. Teacher-forced conditional NLL can still be a valid autoregressive joint likelihood; good NLL alone does not certify free-running errors. Best-of20 also has a different budget from K1. Neither the legacy experiment nor an unsuccessful one-fold anchored control validates the new deterministic model before its own shared evaluation.

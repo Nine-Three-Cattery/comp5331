@@ -1,0 +1,429 @@
+{
+  "definitions": {
+    "turning": "Observed last3-interval mean and future final3-interval mean directions differ >=30deg, both speeds >=.3m/s",
+    "five_plus_neighbors": ">=5 observation-complete actors within6m at any history step; group membership history-only",
+    "interpretation": "Descriptive unpaired subsets, different scene and trajectory composition; not causal attribution of interaction or turning effects."
+  },
+  "rows": [
+    {
+      "fold": "eth",
+      "seed": 0,
+      "group": "turning",
+      "count": 56,
+      "ade_mean": 1.6633989810943604
+    },
+    {
+      "fold": "eth",
+      "seed": 0,
+      "group": "other_motion",
+      "count": 308,
+      "ade_mean": 0.8593078255653381
+    },
+    {
+      "fold": "eth",
+      "seed": 0,
+      "group": "five_plus_neighbors",
+      "count": 87,
+      "ade_mean": 1.074338674545288
+    },
+    {
+      "fold": "eth",
+      "seed": 0,
+      "group": "fewer_neighbors",
+      "count": 277,
+      "ade_mean": 0.9543309211730957
+    },
+    {
+      "fold": "eth",
+      "seed": 1,
+      "group": "turning",
+      "count": 56,
+      "ade_mean": 1.6570936441421509
+    },
+    {
+      "fold": "eth",
+      "seed": 1,
+      "group": "other_motion",
+      "count": 308,
+      "ade_mean": 0.8543943762779236
+    },
+    {
+      "fold": "eth",
+      "seed": 1,
+      "group": "five_plus_neighbors",
+      "count": 87,
+      "ade_mean": 1.1011526584625244
+    },
+    {
+      "fold": "eth",
+      "seed": 1,
+      "group": "fewer_neighbors",
+      "count": 277,
+      "ade_mean": 0.9391711950302124
+    },
+    {
+      "fold": "eth",
+      "seed": 2,
+      "group": "turning",
+      "count": 56,
+      "ade_mean": 1.5736428499221802
+    },
+    {
+      "fold": "eth",
+      "seed": 2,
+      "group": "other_motion",
+      "count": 308,
+      "ade_mean": 0.838078498840332
+    },
+    {
+      "fold": "eth",
+      "seed": 2,
+      "group": "five_plus_neighbors",
+      "count": 87,
+      "ade_mean": 1.0063316822052002
+    },
+    {
+      "fold": "eth",
+      "seed": 2,
+      "group": "fewer_neighbors",
+      "count": 277,
+      "ade_mean": 0.9339398145675659
+    },
+    {
+      "fold": "hotel",
+      "seed": 0,
+      "group": "turning",
+      "count": 5,
+      "ade_mean": 0.9186433553695679
+    },
+    {
+      "fold": "hotel",
+      "seed": 0,
+      "group": "other_motion",
+      "count": 1192,
+      "ade_mean": 0.4673730134963989
+    },
+    {
+      "fold": "hotel",
+      "seed": 0,
+      "group": "five_plus_neighbors",
+      "count": 527,
+      "ade_mean": 0.4921448826789856
+    },
+    {
+      "fold": "hotel",
+      "seed": 0,
+      "group": "fewer_neighbors",
+      "count": 670,
+      "ade_mean": 0.4512559175491333
+    },
+    {
+      "fold": "hotel",
+      "seed": 1,
+      "group": "turning",
+      "count": 5,
+      "ade_mean": 0.8646465539932251
+    },
+    {
+      "fold": "hotel",
+      "seed": 1,
+      "group": "other_motion",
+      "count": 1192,
+      "ade_mean": 0.5179697275161743
+    },
+    {
+      "fold": "hotel",
+      "seed": 1,
+      "group": "five_plus_neighbors",
+      "count": 527,
+      "ade_mean": 0.5363579392433167
+    },
+    {
+      "fold": "hotel",
+      "seed": 1,
+      "group": "fewer_neighbors",
+      "count": 670,
+      "ade_mean": 0.5060933828353882
+    },
+    {
+      "fold": "hotel",
+      "seed": 2,
+      "group": "turning",
+      "count": 5,
+      "ade_mean": 0.9319968223571777
+    },
+    {
+      "fold": "hotel",
+      "seed": 2,
+      "group": "other_motion",
+      "count": 1192,
+      "ade_mean": 0.4890578091144562
+    },
+    {
+      "fold": "hotel",
+      "seed": 2,
+      "group": "five_plus_neighbors",
+      "count": 527,
+      "ade_mean": 0.5130447149276733
+    },
+    {
+      "fold": "hotel",
+      "seed": 2,
+      "group": "fewer_neighbors",
+      "count": 670,
+      "ade_mean": 0.4734960198402405
+    },
+    {
+      "fold": "univ",
+      "seed": 0,
+      "group": "turning",
+      "count": 4237,
+      "ade_mean": 1.0316270589828491
+    },
+    {
+      "fold": "univ",
+      "seed": 0,
+      "group": "other_motion",
+      "count": 20097,
+      "ade_mean": 0.6411486268043518
+    },
+    {
+      "fold": "univ",
+      "seed": 0,
+      "group": "five_plus_neighbors",
+      "count": 24203,
+      "ade_mean": 0.7098571062088013
+    },
+    {
+      "fold": "univ",
+      "seed": 0,
+      "group": "fewer_neighbors",
+      "count": 131,
+      "ade_mean": 0.5763108730316162
+    },
+    {
+      "fold": "univ",
+      "seed": 1,
+      "group": "turning",
+      "count": 4237,
+      "ade_mean": 0.9469975829124451
+    },
+    {
+      "fold": "univ",
+      "seed": 1,
+      "group": "other_motion",
+      "count": 20097,
+      "ade_mean": 0.5135394930839539
+    },
+    {
+      "fold": "univ",
+      "seed": 1,
+      "group": "five_plus_neighbors",
+      "count": 24203,
+      "ade_mean": 0.5890383720397949
+    },
+    {
+      "fold": "univ",
+      "seed": 1,
+      "group": "fewer_neighbors",
+      "count": 131,
+      "ade_mean": 0.5842491984367371
+    },
+    {
+      "fold": "univ",
+      "seed": 2,
+      "group": "turning",
+      "count": 4237,
+      "ade_mean": 0.9526233673095703
+    },
+    {
+      "fold": "univ",
+      "seed": 2,
+      "group": "other_motion",
+      "count": 20097,
+      "ade_mean": 0.5424636602401733
+    },
+    {
+      "fold": "univ",
+      "seed": 2,
+      "group": "five_plus_neighbors",
+      "count": 24203,
+      "ade_mean": 0.6141019463539124
+    },
+    {
+      "fold": "univ",
+      "seed": 2,
+      "group": "fewer_neighbors",
+      "count": 131,
+      "ade_mean": 0.5728967785835266
+    },
+    {
+      "fold": "zara1",
+      "seed": 0,
+      "group": "turning",
+      "count": 191,
+      "ade_mean": 1.0095573663711548
+    },
+    {
+      "fold": "zara1",
+      "seed": 0,
+      "group": "other_motion",
+      "count": 2165,
+      "ade_mean": 0.48586779832839966
+    },
+    {
+      "fold": "zara1",
+      "seed": 0,
+      "group": "five_plus_neighbors",
+      "count": 976,
+      "ade_mean": 0.54161536693573
+    },
+    {
+      "fold": "zara1",
+      "seed": 0,
+      "group": "fewer_neighbors",
+      "count": 1380,
+      "ade_mean": 0.5189222693443298
+    },
+    {
+      "fold": "zara1",
+      "seed": 1,
+      "group": "turning",
+      "count": 191,
+      "ade_mean": 0.8909800052642822
+    },
+    {
+      "fold": "zara1",
+      "seed": 1,
+      "group": "other_motion",
+      "count": 2165,
+      "ade_mean": 0.48607349395751953
+    },
+    {
+      "fold": "zara1",
+      "seed": 1,
+      "group": "five_plus_neighbors",
+      "count": 976,
+      "ade_mean": 0.5370568633079529
+    },
+    {
+      "fold": "zara1",
+      "seed": 1,
+      "group": "fewer_neighbors",
+      "count": 1380,
+      "ade_mean": 0.5060571432113647
+    },
+    {
+      "fold": "zara1",
+      "seed": 2,
+      "group": "turning",
+      "count": 191,
+      "ade_mean": 0.9480038285255432
+    },
+    {
+      "fold": "zara1",
+      "seed": 2,
+      "group": "other_motion",
+      "count": 2165,
+      "ade_mean": 0.4804982841014862
+    },
+    {
+      "fold": "zara1",
+      "seed": 2,
+      "group": "five_plus_neighbors",
+      "count": 976,
+      "ade_mean": 0.543899655342102
+    },
+    {
+      "fold": "zara1",
+      "seed": 2,
+      "group": "fewer_neighbors",
+      "count": 1380,
+      "ade_mean": 0.5003634095191956
+    },
+    {
+      "fold": "zara2",
+      "seed": 0,
+      "group": "turning",
+      "count": 340,
+      "ade_mean": 1.07089364528656
+    },
+    {
+      "fold": "zara2",
+      "seed": 0,
+      "group": "other_motion",
+      "count": 5570,
+      "ade_mean": 0.3829948306083679
+    },
+    {
+      "fold": "zara2",
+      "seed": 0,
+      "group": "five_plus_neighbors",
+      "count": 4838,
+      "ade_mean": 0.40879541635513306
+    },
+    {
+      "fold": "zara2",
+      "seed": 0,
+      "group": "fewer_neighbors",
+      "count": 1072,
+      "ade_mean": 0.48473238945007324
+    },
+    {
+      "fold": "zara2",
+      "seed": 1,
+      "group": "turning",
+      "count": 340,
+      "ade_mean": 1.0395395755767822
+    },
+    {
+      "fold": "zara2",
+      "seed": 1,
+      "group": "other_motion",
+      "count": 5570,
+      "ade_mean": 0.3810930848121643
+    },
+    {
+      "fold": "zara2",
+      "seed": 1,
+      "group": "five_plus_neighbors",
+      "count": 4838,
+      "ade_mean": 0.4079590439796448
+    },
+    {
+      "fold": "zara2",
+      "seed": 1,
+      "group": "fewer_neighbors",
+      "count": 1072,
+      "ade_mean": 0.4686812460422516
+    },
+    {
+      "fold": "zara2",
+      "seed": 2,
+      "group": "turning",
+      "count": 340,
+      "ade_mean": 1.0705161094665527
+    },
+    {
+      "fold": "zara2",
+      "seed": 2,
+      "group": "other_motion",
+      "count": 5570,
+      "ade_mean": 0.36007779836654663
+    },
+    {
+      "fold": "zara2",
+      "seed": 2,
+      "group": "five_plus_neighbors",
+      "count": 4838,
+      "ade_mean": 0.38656386733055115
+    },
+    {
+      "fold": "zara2",
+      "seed": 2,
+      "group": "fewer_neighbors",
+      "count": 1072,
+      "ade_mean": 0.4658701717853546
+    }
+  ]
+}
