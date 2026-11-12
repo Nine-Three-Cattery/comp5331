@@ -56,6 +56,7 @@ def trajectory(ax, data, index, title):
     ax.set_title(title,fontsize=10)
     ax.set_xlabel('x (m)');ax.set_ylabel('y (m)');ax.set_aspect('equal',adjustable='box')
     ax.grid(alpha=0.15)
+    return samples, future
 
 
 def main():
@@ -95,7 +96,7 @@ def main():
         ax.set_ylabel('meters');ax.set_title(title+' (K=20)')
     fig.savefig(assets/'robustness.png',dpi=180);plt.close(fig)
     fixed = json.loads((ROOT/'benchmark/fixtures/runtime_windows.json').read_text())
-    examples = []
+    examples, fixed_conditions = [], []
     for fold in FOLDS:
         context = GraphDataset(load_split(fold,'test',str(ROOT/'data/causal_v2')))
         with np.load(bundle(args.runs,fold,'clean_0'),allow_pickle=False) as clean:
@@ -107,7 +108,10 @@ def main():
             fig,axes = plt.subplots(1,3,figsize=(10,3.6),layout='constrained',sharex=True,sharey=True)
             for ax,tag in zip(axes,['clean_0','noise_020','missing_2']):
                 with np.load(bundle(args.runs,fold,tag),allow_pickle=False) as data:
-                    trajectory(ax,data,fixed_index,fold.upper()+' / '+tag.replace('_',' '))
+                    paths, target = trajectory(ax, data, fixed_index, fold.upper()+' / '+tag.replace('_',' '))
+                    fixed_conditions.append(dict(fold=fold, seed=0, condition=tag,
+                                                 window_id=records[fixed_index]['window_id'],
+                                                 **displacement_scores(paths[None], target[None])))
             legend = {}
             for ax in axes:
                 handles,labels = ax.get_legend_handles_labels()
@@ -136,6 +140,7 @@ def main():
         context.context.cache_clear()
     write_json(evidence/'examples.json',dict(selection='Fixed: first locked runtime ID. Failure: argmax clean meanADE, seed 0, all samples shown.',examples=examples))
     # Motion metrics have training-only thresholds; retain each run/condition.
+    pd.DataFrame(fixed_conditions).to_csv(evidence/'fixed_condition_scores.csv', index=False)
     diagnostics, spatial_diagnostics, review = [], [], []
     turns = {fold: training_thresholds(load_split(fold, 'train', str(ROOT/'data/causal_v2')))['turn_threshold_rad']
              for fold in FOLDS}
