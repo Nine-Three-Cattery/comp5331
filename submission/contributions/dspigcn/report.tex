@@ -36,45 +36,22 @@ batch size 128. Checkpoints are selected every ten epochs using clean
 validation Energy Score, then mean ADE and earlier epoch. One selected
 checkpoint generates all six conditions; no test result enters selection.
 
-\paragraph{Accuracy, robustness and distribution.}
-At $K=20$, the macro meanADE is
-\ModelMetric{dspigcn}{clean_0}{mean_ade_mean}\,m and minADE is
-\ModelMetric{dspigcn}{clean_0}{min_ade_mean}\,m. The corresponding meanFDE and
-minFDE are \ModelMetric{dspigcn}{clean_0}{mean_fde_mean}\,m and
-\ModelMetric{dspigcn}{clean_0}{min_fde_mean}\,m. The ensemble Energy Score is
-\ModelMetric{dspigcn}{clean_0}{energy_score_mean}\,m. Each scene receives equal
-macro weight; the accompanying evidence retains per-fold and seed variation.
-Noise of 0.20 m changes meanADE by
-\ModelMeanADEChange{dspigcn}{noise_020}\,m; hiding the last two observations
-changes it by \ModelMeanADEChange{dspigcn}{missing_2}\,m.
+\paragraph{Accuracy and robustness.}
+Each of the 34,161 target windows receives 20 sampled paths. On clean inputs,
+minADE and minFDE were \ModelMetric{dspigcn}{clean_0}{min_ade_mean} and
+\ModelMetric{dspigcn}{clean_0}{min_fde_mean}\,m. The corresponding mean errors
+were \ModelMetric{dspigcn}{clean_0}{mean_ade_mean} and \ModelMetric{dspigcn}{clean_0}{mean_fde_mean}\,m.
+The Energy Score was \ModelMetric{dspigcn}{clean_0}{energy_score_mean}\,m.
+The clean mean ADE ranged from 0.602 m on ZARA2 to 1.200 m on ETH. Each holdout has equal weight. Mean ADE was 2.716 m with 0.20 m target-history noise and 0.912 m after filling two missing observations.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.94\linewidth]{contributions/dspigcn/assets/robustness.png}
-\caption{DSPIGCN accuracy and ensemble score across the six registered
-conditions. Bars average equally over held-out scenes and seeds. Error bars
-show sample standard deviation of the three per-seed scene macro averages.}
+\includegraphics[width=.91\linewidth,height=2.05in,keepaspectratio]{contributions/dspigcn/assets/robustness.png}
+\caption{DSPIGCN across the six common conditions. Bars give equal-weight scene means and error bars give the standard deviation of three seed means.}
 \label{fig:dspigcn-robustness}
 \end{figure}
 
-\paragraph{Motion, failure cases and runtime.}
-The contribution evidence includes training-threshold motion diagnostics,
-paired condition differences and both fixed examples and explicitly selected
-largest-error cases. The fixed cases use the first locked runtime identifier
-per fold, independently of model errors. All 20 trajectories are shown.
-Measured end-to-end runtime for the prescribed 128-target, batch-32 workload
-is \ModelRuntime{dspigcn}{end_to_end_ms}\,ms (median of run medians). Graph
-preprocessing and coupled network/sampling time are retained separately.
-Training uses a CUDA-12.8-compatible PyTorch environment; common scoring uses
-the prescribed CPU environment. Hardware-specific timing must be reported
-separately unless other owners are measured on the same host and device.
-
-\paragraph{Limits.}
-The physical loss regularizes means, not every sample; it does not guarantee
-collision avoidance. Greedy anchor assignment makes trajectories dependent
-and alters their marginals, so the Energy Score is an ensemble diagnostic,
-not proof of calibrated uncertainty. Overlapping test windows are correlated;
-seed standard deviations quantify training variability rather than population
-confidence intervals. Architectural explanations remain hypotheses without
-controlled ablations. Full-run evidence and editor review are required before
-this pending contribution can be accepted into the final comparison.
+\paragraph{Motion, examples and runtime.}
+Clean sampled steps changed direction by 76.0 degrees on average. Each adjacent step had to exceed 0.05 m/s to enter this calculation. The largest clean mean ADE at seed zero was 5.539 m on ETH, where the target had 2 visible neighbors. The five fixed examples were chosen from the shared runtime list before the errors were inspected. On the fixed ETH window, mean ADE was 0.989 m with clean observations, 0.974 m with noise and 3.703 m with two missing observations.
+The within-window 99th percentile of predicted acceleration exceeded its training threshold in 99.6\% of clean windows and 100.0\% with 0.20 m position noise. These percentages give each holdout equal weight.
+End-to-end latency was \ModelRuntime{dspigcn}{end_to_end_ms}\,ms for 128 targets on NVIDIA GeForce RTX 4090, using the median of 15 run medians. This measurement includes visible-neighbor discovery, prediction, anchor sampling and transfer to the CPU. The physical loss constrains the predicted means during training. Its contribution to accuracy would require a separate ablation. The sampler assigns anchors without replacement, so its twenty trajectories are dependent. The Energy Score summarizes this ensemble; the standard deviations across three seeds describe variation between fits.

@@ -19,6 +19,7 @@ def main():
     parser.add_argument('--prediction-python',default=sys.executable,
                         help='Interpreter matching the saved training/inference environment')
     parser.add_argument('--device',choices=['cpu','cuda'],default='cpu')
+    parser.add_argument('--receipt', type=Path, help='Write the outcome of the extracted replay as JSON')
     args = parser.parse_args()
     ledger = json.loads((ROOT/'release_manifest.json').read_text())
     for name,expected in ledger.items():
@@ -39,6 +40,8 @@ def main():
     # Replay every archived checkpoint into a separate output tree. Validate all
     # 90 bundles, not just a pilot or a convenient holdout. Originals stay intact.
     reference = ROOT/'artifacts/dspigcn/formal/runs'
+    coordinates = 0
+    largest_difference = 0.0
     with tempfile.TemporaryDirectory(prefix='dspigcn-replay-') as scratch:
         replay_root = Path(scratch)/'runs'
         for config in reference.glob('*/seed_*/config.json'):
@@ -56,11 +59,23 @@ def main():
         for original in originals:
             replay = replay_root/original.relative_to(reference)
             with np.load(original,allow_pickle=False) as expected, np.load(replay,allow_pickle=False) as actual:
-                np.testing.assert_allclose(actual['samples'],expected['samples'],rtol=1e-5,atol=1e-5)
+                generated, saved = actual['samples'], expected['samples']
+                np.testing.assert_allclose(generated, saved, rtol=1e-5, atol=1e-5)
+                coordinates += saved.size
+                largest_difference = max(largest_difference, float(np.max(np.abs(generated - saved))))
                 for key in ['ground_truth','observed','observed_mask','records','metadata']:
                     np.testing.assert_array_equal(actual[key],expected[key])
         print('CHECKPOINT_REPLAY_OK checkpoints=15 prediction_bundles=90')
     print('EXTRACTED_RELEASE_VERIFIED',len(ledger),'files')
+    if args.receipt:
+        summary = dict(status='passed', protocol='causal_v2', verified_files=len(ledger),
+                       checkpoints=len(list(reference.glob('*/seed_*/checkpoint_selection.json'))),
+                       prediction_bundles=len(originals), coordinates_checked=coordinates,
+                       max_abs_coordinate_difference_m=largest_difference, rtol=1e-5, atol_m=1e-5,
+                       exact_fields=['ground_truth','observed','observed_mask','records','metadata'],
+                       device=args.device)
+        args.receipt.parent.mkdir(parents=True, exist_ok=True)
+        args.receipt.write_text(json.dumps(summary, indent=2, sort_keys=True) + '\n')
 
 
 if __name__=='__main__':

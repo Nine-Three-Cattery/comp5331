@@ -10,19 +10,17 @@
 3 m history context and residual initialization. No copied model core.
 \end{frame}
 
-\begin{frame}{Typical-sample error complements best-of-20 accuracy}
+\begin{frame}{Twenty paths cover a range of outcomes}
 \centering
-\includegraphics[width=0.94\linewidth]{contributions/dspigcn/assets/robustness.png}
-\small Clean meanADE: \ModelMetric{dspigcn}{clean_0}{mean_ade_mean}\,m;
-minADE: \ModelMetric{dspigcn}{clean_0}{min_ade_mean}\,m.
-Equal scene weights; error bars show variation across three seeds.
+\includegraphics[width=.93\linewidth,height=.62\textheight,keepaspectratio]{contributions/dspigcn/assets/robustness.png}\par
+\small On clean histories the best draw has ADE
+\ModelMetric{dspigcn}{clean_0}{min_ade_mean}\,m. Averaging all draws gives
+\ModelMetric{dspigcn}{clean_0}{mean_ade_mean}\,m. The five holdouts have equal weight.
 \end{frame}
 
-\begin{frame}{Physical regularization does not guarantee safe samples}
+\begin{frame}{One ETH pedestrian under three observation conditions}
 \centering
-\includegraphics[width=0.96\linewidth,height=4.6cm,keepaspectratio]{contributions/dspigcn/assets/fixed_eth.png}
-\small Fixed ETH example, seed 0; all 20 samples shown.
-Runtime: \ModelRuntime{dspigcn}{end_to_end_ms}\,ms per 128 targets.
-Close approaches and ensemble scores remain diagnostics, not safety or
-calibration guarantees.
+\includegraphics[width=.96\linewidth,height=.60\textheight,keepaspectratio]{contributions/dspigcn/assets/fixed_eth.png}\par
+\small Each panel shows the same target, weights and twenty random draws.
+Only the target's eight observed positions are perturbed or filled.
 \end{frame}

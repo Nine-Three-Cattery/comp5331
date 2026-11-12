@@ -3,11 +3,12 @@
 import argparse
 import json
 import os
+from operator import itemgetter
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT/'li_junhao_trajectronpp'))
+sys.path[:0] = [str(ROOT/'li_junhao_trajectronpp'), str(ROOT/'li_junhao_trajectronpp'/'scripts')]
 os.environ.setdefault('MPLCONFIGDIR', str(ROOT/'artifacts/dspigcn/matplotlib'))
 import matplotlib
 matplotlib.use('Agg')
@@ -17,14 +18,25 @@ import pandas as pd
 from independent_tpp.protocol import sha256, write_json
 from independent_tpp.data import load_split
 from dspigcn.data import GraphDataset
+from analyze_independent_diagnostics import heading_rows, training_thresholds
 
 FOLDS = ['eth','hotel','univ','zara1','zara2']
 CONDITIONS = ['clean_0','noise_005','noise_010','noise_020','missing_1','missing_2']
 METRICS = ['min_ade_mean','min_fde_mean','mean_ade_mean','mean_fde_mean','energy_score_mean','sample_diversity_mean']
 
 
-def bundle(runs, fold, tag):
-    return runs/fold/'seed_0'/'evaluation'/tag/f'predictions_test_{tag}.npz'
+def bundle(runs, fold, tag, seed=0):
+    return runs/fold/f'seed_{seed}'/'evaluation'/tag/f'predictions_test_{tag}.npz'
+
+
+def displacement_scores(samples, truth):
+    """Select ADE and FDE winners per target, then average over targets."""
+    offsets = np.subtract(samples, truth[:, None], dtype=np.float64)
+    distance = np.hypot(offsets[..., 0], offsets[..., 1])
+    ade = distance.mean(axis=2)
+    fde = distance[..., -1]
+    return dict(min_ade_mean=ade.min(axis=1).mean(), min_fde_mean=fde.min(axis=1).mean(),
+                mean_ade_mean=ade.mean(axis=1).mean(), mean_fde_mean=fde.mean(axis=1).mean())
 
 
 def trajectory(ax, data, index, title):
@@ -44,6 +56,7 @@ def trajectory(ax, data, index, title):
     ax.set_title(title,fontsize=10)
     ax.set_xlabel('x (m)');ax.set_ylabel('y (m)');ax.set_aspect('equal',adjustable='box')
     ax.grid(alpha=0.15)
+    return samples, future
 
 
 def main():
@@ -83,7 +96,7 @@ def main():
         ax.set_ylabel('meters');ax.set_title(title+' (K=20)')
     fig.savefig(assets/'robustness.png',dpi=180);plt.close(fig)
     fixed = json.loads((ROOT/'benchmark/fixtures/runtime_windows.json').read_text())
-    examples = []
+    examples, fixed_conditions = [], []
     for fold in FOLDS:
         context = GraphDataset(load_split(fold,'test',str(ROOT/'data/causal_v2')))
         with np.load(bundle(args.runs,fold,'clean_0'),allow_pickle=False) as clean:
@@ -95,7 +108,10 @@ def main():
             fig,axes = plt.subplots(1,3,figsize=(10,3.6),layout='constrained',sharex=True,sharey=True)
             for ax,tag in zip(axes,['clean_0','noise_020','missing_2']):
                 with np.load(bundle(args.runs,fold,tag),allow_pickle=False) as data:
-                    trajectory(ax,data,fixed_index,fold.upper()+' / '+tag.replace('_',' '))
+                    paths, target = trajectory(ax, data, fixed_index, fold.upper()+' / '+tag.replace('_',' '))
+                    fixed_conditions.append(dict(fold=fold, seed=0, condition=tag,
+                                                 window_id=records[fixed_index]['window_id'],
+                                                 **displacement_scores(paths[None], target[None])))
             legend = {}
             for ax in axes:
                 handles,labels = ax.get_legend_handles_labels()
@@ -124,9 +140,26 @@ def main():
         context.context.cache_clear()
     write_json(evidence/'examples.json',dict(selection='Fixed: first locked runtime ID. Failure: argmax clean meanADE, seed 0, all samples shown.',examples=examples))
     # Motion metrics have training-only thresholds; retain each run/condition.
-    diagnostics, spatial_diagnostics = [], []
+    pd.DataFrame(fixed_conditions).to_csv(evidence/'fixed_condition_scores.csv', index=False)
+    diagnostics, spatial_diagnostics, review = [], [], []
+    turns = {fold: training_thresholds(load_split(fold, 'train', str(ROOT/'data/causal_v2')))['turn_threshold_rad']
+             for fold in FOLDS}
     metric_root = ROOT/'artifacts/dspigcn/metrics'
     for row in results.itertuples(index=False):
+        with np.load(bundle(args.runs, row.fold, row.condition, row.seed), allow_pickle=False) as data:
+            samples = data['samples']
+            scores = displacement_scores(samples, data['ground_truth'])
+            expected_scores = [getattr(row, key) for key in scores]
+            actual_scores = np.array(list(scores.values()))
+            np.testing.assert_allclose(actual_scores, expected_scores, rtol=0, atol=1e-7,
+                                       err_msg=f'{row.fold}/{row.seed}/{row.condition}')
+            heading = heading_rows({'samples': samples, 'observed': data['observed']}, None,
+                                   turns[row.fold], row.fold, row.seed, row.condition)
+            review.append(dict(fold=row.fold, seed=row.seed, condition=row.condition, windows=len(samples),
+                               **scores, max_score_difference_m=np.abs(actual_scores - expected_scores).max(),
+                               training_turn_p95_rad=turns[row.fold],
+                               mean_abs_heading_change_rad=heading['turn_rate_mean_mean'],
+                               windows_reaching_turn_threshold_fraction=heading['turn_violation_rate_mean']))
         path = metric_root/row.fold/f'seed_{row.seed}'/row.condition/'summary.json'
         if not path.exists():
             raise FileNotFoundError(f'Run make score first: {path}')
@@ -143,7 +176,9 @@ def main():
                ['min_distance_mean','close_approach_rate']}))
     pd.DataFrame(diagnostics).to_csv(evidence/'diagnostics.csv',index=False)
     pd.DataFrame(spatial_diagnostics).to_csv(evidence/'spatial_diagnostics.csv',index=False)
+    pd.DataFrame(review).to_csv(evidence/'review_metrics.csv', index=False)
     selections = []
+    ranking = itemgetter('energy_score', 'mean_ade', 'epoch')
     for fold in FOLDS:
         for seed in range(3):
             run = args.runs/fold/f'seed_{seed}'
@@ -152,6 +187,12 @@ def main():
             if [r['epoch'] for r in history]!=list(range(1,201)):
                 raise ValueError(f'Incomplete or duplicate training history: {fold}/{seed}')
             selected = selection['selected']
+            candidates = [r for r in history if 'energy_score' in r]
+            if [r['epoch'] for r in candidates] != list(range(10, 201, 10)):
+                raise ValueError(f'Unexpected clean-validation schedule: {fold}/{seed}')
+            if ([ranking(r) for r in candidates] != [ranking(r) for r in selection['candidates']]
+                    or ranking(selected) != min(map(ranking, candidates))):
+                raise ValueError(f'Checkpoint selection differs from the training log: {fold}/{seed}')
             selections.append(dict(fold=fold,seed=seed,trained_epochs=len(history),
                 selected_epoch=selected['epoch'],validation_energy_score=selected['energy_score'],
                 validation_mean_ade=selected['mean_ade'],validation_candidates=len(selection['candidates']),

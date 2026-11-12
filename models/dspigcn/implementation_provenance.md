@@ -17,9 +17,13 @@ shared infrastructure.
 Each run saves config (including train/validation identities and environment),
 training history, validation candidate table, selected checkpoint and complete
 predictions. Shared audit binds scores to configs, weights, predictions and
-test manifests. Final release provenance will identify the actual run matrix,
-artifact digest and measured runtime; missing experiments must remain pending.
+test manifests. The [release record](../../submission/contributions/dspigcn/provenance.json)
+identifies all 15 fits, the numerical archive and the measured runtime.
 
 Known implementation differences and the registered selection policy are in
 `independent_design.md`. No comparison with published table values is claimed
 without matching their preprocessing, coordinate and sampling conventions.
+
+## Supplementary formal experiment
+
+Group 7 used YAN Zhengyang's registered network, loss, optimizer, anchor sampler and experiment settings at `020466c` for the common formal matrix. Zongmin Zhang coordinated the supplementary training, shared scoring, replay and preparation of the measured results with generative AI assistance. The original A800 pilot and the candidate variant retain their original attribution. The supplementary runs used NVIDIA GeForce RTX 4090. [Formal evidence](../../submission/contributions/dspigcn/)

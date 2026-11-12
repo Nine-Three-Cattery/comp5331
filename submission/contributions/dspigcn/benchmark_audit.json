@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
+  "model": "dspigcn",
+  "prediction_bundles": 90,
+  "protocol": "causal_v2",
+  "results_sha256": "a15d500ddeeb31d2b4057954e51c00a1507b9ef38bf6cef7a2aef275b18260b3",
+  "status": "passed"
+}

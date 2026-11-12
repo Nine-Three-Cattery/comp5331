@@ -1,0 +1,115 @@
+{
+  "examples": [
+    {
+      "fold": "eth",
+      "max_truth_heading_change_rad": 0.19712908565998077,
+      "mean_ade": 0.9892165064811707,
+      "prediction_sha256": "15d117ae59c5d909593ab0503e3ffbcabd08eb5b80f73732b138d82e87d87341",
+      "role": "fixed",
+      "seed": 0,
+      "truth_travel_m": 9.085444450378418,
+      "visible_neighbor_count": 2,
+      "window_id": "eth:biwi_eth:11:34"
+    },
+    {
+      "fold": "eth",
+      "max_truth_heading_change_rad": 2.034447193145752,
+      "mean_ade": 5.539470195770264,
+      "prediction_sha256": "15d117ae59c5d909593ab0503e3ffbcabd08eb5b80f73732b138d82e87d87341",
+      "role": "largest_clean_mean_ade",
+      "seed": 0,
+      "truth_travel_m": 2.1006178855895996,
+      "visible_neighbor_count": 2,
+      "window_id": "eth:biwi_eth:230:907"
+    },
+    {
+      "fold": "hotel",
+      "max_truth_heading_change_rad": 0.7853624820709229,
+      "mean_ade": 0.2468618005514145,
+      "prediction_sha256": "782c1e570e153010405f40aa63d5deee440af0967b3e334fa5f00e1464d985a9",
+      "role": "fixed",
+      "seed": 0,
+      "truth_travel_m": 0.02414160594344139,
+      "visible_neighbor_count": 2,
+      "window_id": "hotel:biwi_hotel:101:407"
+    },
+    {
+      "fold": "hotel",
+      "max_truth_heading_change_rad": 0.36840981245040894,
+      "mean_ade": 3.0482559204101562,
+      "prediction_sha256": "782c1e570e153010405f40aa63d5deee440af0967b3e334fa5f00e1464d985a9",
+      "role": "largest_clean_mean_ade",
+      "seed": 0,
+      "truth_travel_m": 6.7203826904296875,
+      "visible_neighbor_count": 1,
+      "window_id": "hotel:biwi_hotel:334:1441"
+    },
+    {
+      "fold": "univ",
+      "max_truth_heading_change_rad": 0.07634831964969635,
+      "mean_ade": 0.4928225874900818,
+      "prediction_sha256": "ee43af65ee14a8a671f7bf741908025bd77a2f3d340d55bf188a88c952d6d620",
+      "role": "fixed",
+      "seed": 0,
+      "truth_travel_m": 4.986693859100342,
+      "visible_neighbor_count": 15,
+      "window_id": "univ:students001:1:7"
+    },
+    {
+      "fold": "univ",
+      "max_truth_heading_change_rad": 0.6479184627532959,
+      "mean_ade": 5.061691761016846,
+      "prediction_sha256": "ee43af65ee14a8a671f7bf741908025bd77a2f3d340d55bf188a88c952d6d620",
+      "role": "largest_clean_mean_ade",
+      "seed": 0,
+      "truth_travel_m": 5.298459053039551,
+      "visible_neighbor_count": 3,
+      "window_id": "univ:students003:434:519"
+    },
+    {
+      "fold": "zara1",
+      "max_truth_heading_change_rad": 0.12185186892747879,
+      "mean_ade": 0.7421534061431885,
+      "prediction_sha256": "fde1fd666bd6457e05e405494ab1f538789861ef8c51393fed22b4ca0ba09e6a",
+      "role": "fixed",
+      "seed": 0,
+      "truth_travel_m": 6.315120220184326,
+      "visible_neighbor_count": 5,
+      "window_id": "zara1:crowds_zara01:1:7"
+    },
+    {
+      "fold": "zara1",
+      "max_truth_heading_change_rad": 0.0853627547621727,
+      "mean_ade": 2.9539506435394287,
+      "prediction_sha256": "fde1fd666bd6457e05e405494ab1f538789861ef8c51393fed22b4ca0ba09e6a",
+      "role": "largest_clean_mean_ade",
+      "seed": 0,
+      "truth_travel_m": 5.354112148284912,
+      "visible_neighbor_count": 6,
+      "window_id": "zara1:crowds_zara01:18:74"
+    },
+    {
+      "fold": "zara2",
+      "max_truth_heading_change_rad": 0.1272425502538681,
+      "mean_ade": 0.41445261240005493,
+      "prediction_sha256": "ca4f7ec5d2041db858e0aca95413a13c283634317b0ba489c65d70d0fd911ed2",
+      "role": "fixed",
+      "seed": 0,
+      "truth_travel_m": 5.1442952156066895,
+      "visible_neighbor_count": 1,
+      "window_id": "zara2:crowds_zara02:1:7"
+    },
+    {
+      "fold": "zara2",
+      "max_truth_heading_change_rad": 0.23930467665195465,
+      "mean_ade": 3.9828760623931885,
+      "prediction_sha256": "ca4f7ec5d2041db858e0aca95413a13c283634317b0ba489c65d70d0fd911ed2",
+      "role": "largest_clean_mean_ade",
+      "seed": 0,
+      "truth_travel_m": 7.3451924324035645,
+      "visible_neighbor_count": 0,
+      "window_id": "zara2:crowds_zara02:161:821"
+    }
+  ],
+  "selection": "Fixed: first locked runtime ID. Failure: argmax clean meanADE, seed 0, all samples shown."
+}
