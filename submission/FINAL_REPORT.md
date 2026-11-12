@@ -169,6 +169,21 @@ budget with clean validation Energy Score as the primary selection criterion.
 A supplemental candidate experiment used an independently packaged workflow
 and a different protocol. [Registered DSPIGCN](../models/dspigcn/) · [Candidate workflow](../models/dspigcn/provisional_variant/)
 
+### Paper deviations, implementation provenance, and reproduction
+
+The common runs use the group-owned loader and evaluator. The attribution
+records document code reuse and AI assistance. The [model registry](models.json)
+records editor acceptance.
+
+| Model | Main departure from the reference | Independent implementation | Reproduction status |
+| --- | --- | --- | --- |
+| [Individual LSTM](../models/individual_lstm/independent_design.md) | Course-designed K=1 displacement encoder–decoder using standard LSTM cells and a squared position loss. | Retained the earlier AI-assisted owner baseline and added the causal adapter. [Attribution](../models/individual_lstm/implementation_provenance.md) | All 90 bundles passed the common audit on Apple M5 CPU. Linux reproduction and editor review are pending. [Evidence](contributions/individual_lstm/README.md) |
+| [Social-LSTM](../models/social_lstm/independent_design.md) | Deterministic K=1 displacement decoder with closed-loop position loss in place of the paper's Gaussian output. | Implemented social-grid pooling and recurrent rollout in the project code. [Attribution](../models/social_lstm/implementation_provenance.md) | All 90 bundles passed the common audit on macOS. Linux reproduction and editor review are pending. [Evidence](contributions/social_lstm/README.md) |
+| [Social-GAN](../models/social_gan/independent_design.md) | Capped the visible neighborhood, added a constant-velocity residual, and used a target-level discriminator and shorter training budget. | Implemented the generator, pooling, discriminator, loss, and trainer in the project code. [Attribution](../models/social_gan/implementation_provenance.md) | All 90 bundles passed the common audit. Archived-source ETH replay and pilot retraining matched the saved outputs. Editor review is pending. [Evidence](contributions/social_gan/reproduction_check.json) |
+| [Social-STGCNN](../models/social_stgcnn/independent_design.md) | Retained the full-scene operators, formed graphs from visible histories, and changed minibatch handling and checkpoint selection. | Trained and exported with project code. The authors' code was used for numerical reference checks. [Attribution](../models/social_stgcnn/implementation_provenance.md) | All 90 bundles passed the common audit. A fresh checkout reproduced the ETH seed-0 clean forecast exactly. Editor review is pending. [Evidence](contributions/social_stgcnn/evidence/reproduction_check.json) |
+| [Trajectron++](../li_junhao_trajectronpp/independent_design.md) | Used one pedestrian edge type, a hard 3 m mask, and motion derivatives computed within each observed window. | Trained and exported with the project's pedestrian-only implementation. The earlier upstream run served as a reference. [Attribution](../li_junhao_trajectronpp/implementation_provenance.md) | All 90 bundles passed the common audit. Relocated release verification passed. The registry marks the contribution ready. [Evidence](contributions/trajectronpp/provenance.json) |
+| [DSPIGCN](../models/dspigcn/independent_design.md) | Used a Gaussian head for positions relative to the forecast origin and fixed the polynomial's time scaling and numerical conventions. | Implemented the dual-stream model, physics objective, and anchor assignment in the project code. [Attribution](../models/dspigcn/implementation_provenance.md) | The two-epoch ETH seed-0 pilot passed. The common formal matrix is pending. [Pilot evidence](contributions/dspigcn/evidence/pilot_audit.json) |
+
 ## Evaluation
 
 Average displacement error (ADE) is the average Euclidean error over the
