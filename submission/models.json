@@ -1,8 +1,8 @@
 [
-  {"id": "individual_lstm", "name": "Individual LSTM", "owner": "LU Yichong", "code": "models/individual_lstm", "status": "pending", "sample_count": 1},
-  {"id": "social_lstm", "name": "Social-LSTM", "owner": "WANG Yifan", "code": "models/social_lstm", "status": "pending", "sample_count": 1},
-  {"id": "social_gan", "name": "Social-GAN", "owner": "Cheung, Alan Pak To", "code": "models/social_gan", "status": "pending", "sample_count": 20},
-  {"id": "social_stgcnn", "name": "Social-STGCNN", "owner": "Zongmin Zhang", "code": "models/social_stgcnn", "status": "pending", "sample_count": 20},
+  {"id": "individual_lstm", "name": "Individual LSTM", "owner": "LU Yichong", "code": "models/individual_lstm", "status": "ready", "sample_count": 1},
+  {"id": "social_lstm", "name": "Social-LSTM", "owner": "WANG Yifan", "code": "models/social_lstm", "status": "ready", "sample_count": 1},
+  {"id": "social_gan", "name": "Social-GAN", "owner": "Cheung, Alan Pak To", "code": "models/social_gan", "status": "ready", "sample_count": 20},
+  {"id": "social_stgcnn", "name": "Social-STGCNN", "owner": "Zongmin Zhang", "code": "models/social_stgcnn", "status": "ready", "sample_count": 20},
   {"id": "trajectronpp", "name": "Trajectron++", "owner": "LI Junhao", "code": "li_junhao_trajectronpp", "status": "ready", "sample_count": 20},
-  {"id": "dspigcn", "name": "DSPIGCN", "owner": "YAN Zhengyang", "code": "models/dspigcn", "status": "pending", "sample_count": 20}
+  {"id": "dspigcn", "name": "DSPIGCN", "owner": "YAN Zhengyang", "code": "models/dspigcn", "status": "ready", "sample_count": 20}
 ]

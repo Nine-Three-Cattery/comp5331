@@ -1,0 +1,19 @@
+\begin{frame}{Position noise raised mean ADE more than two missing points}
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Model & \(K\) & 0.20\,m noise & Two missing \\
+\midrule
+Individual LSTM & 1 & \ModelMeanADEChange{individual_lstm}{noise_020} & \ModelMeanADEChange{individual_lstm}{missing_2} \\
+Social-LSTM & 1 & \ModelMeanADEChange{social_lstm}{noise_020} & \ModelMeanADEChange{social_lstm}{missing_2} \\
+Social-GAN & 20 & \ModelMeanADEChange{social_gan}{noise_020} & \ModelMeanADEChange{social_gan}{missing_2} \\
+Social-STGCNN & 20 & \ModelMeanADEChange{social_stgcnn}{noise_020} & \ModelMeanADEChange{social_stgcnn}{missing_2} \\
+Trajectron++ & 20 & \ModelMeanADEChange{trajectronpp}{noise_020} & \ModelMeanADEChange{trajectronpp}{missing_2} \\
+DSPIGCN & 20 & \ModelMeanADEChange{dspigcn}{noise_020} & \ModelMeanADEChange{dspigcn}{missing_2} \\
+\bottomrule
+\end{tabular}
+
+\medskip
+{\footnotesize\color{Muted}Paired mean ADE change from clean input, in meters.}
+\end{frame}

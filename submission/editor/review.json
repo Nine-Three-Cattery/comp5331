@@ -1,0 +1,65 @@
+{
+  "runtime_policy": "separate_hardware",
+  "models": {
+    "individual_lstm": {
+      "reviewer": "Group 7",
+      "audit_sha256": "8f10ca99fb94f39d03d6604a46b400870543860673a5027e664ccc7455c1e8e2",
+      "provenance_sha256": "25f89822ab2d6f1ba22ffe304cfa11633dfd374e68c88a1f99b1d63d240ba694",
+      "hardware_id": "Apple M5 CPU",
+      "independence": true,
+      "causality_and_validation": true,
+      "artifact_reproduction": true,
+      "runtime": true
+    },
+    "social_lstm": {
+      "reviewer": "Group 7",
+      "audit_sha256": "85d6f8d21f3b2f8704298e704437b2556f338048126b850ae1e025b37008c691",
+      "provenance_sha256": "a565b658b0aea8bc3ce036ccbee17e0351a3df793ad1761075af3e2c3b70afd2",
+      "hardware_id": "Apple M5 MPS",
+      "independence": true,
+      "causality_and_validation": true,
+      "artifact_reproduction": true,
+      "runtime": true
+    },
+    "social_gan": {
+      "reviewer": "Group 7",
+      "audit_sha256": "ac65f0e414ecf3b215a3f2e204135a8c2c1ac212142cc6b356a0589918616ecd",
+      "provenance_sha256": "2ebd1715a62ee136eeac0901e4ca14894109dcb38f5e23e13b8ae004149a9477",
+      "hardware_id": "Apple M5 Pro CPU",
+      "independence": true,
+      "causality_and_validation": true,
+      "artifact_reproduction": true,
+      "runtime": true
+    },
+    "social_stgcnn": {
+      "reviewer": "Group 7",
+      "audit_sha256": "01c6ec4b4d46f40a13a0c6c8f45d854b3a382a52d28fb9442846829173257228",
+      "provenance_sha256": "db13f3a648570d79c2d4d976c3a5ab5f3ed4126d5d9a0f64bdec6457f3f0ab74",
+      "hardware_id": "Host 1 Intel CPU",
+      "independence": true,
+      "causality_and_validation": true,
+      "artifact_reproduction": true,
+      "runtime": true
+    },
+    "trajectronpp": {
+      "reviewer": "Group 7",
+      "audit_sha256": "5c2a39dfa89dc6af509cbeb1b96566114a01ed32153f0766a61b6bfe18c0786e",
+      "provenance_sha256": "d56e091e076a21d972a8ab9b061dd218b56598ef184e210e9231555e334f2d62",
+      "hardware_id": "CUDA GPU (model unrecorded in contribution metadata)",
+      "independence": true,
+      "causality_and_validation": true,
+      "artifact_reproduction": true,
+      "runtime": true
+    },
+    "dspigcn": {
+      "reviewer": "Group 7",
+      "audit_sha256": "82561efe21892e486b5d29430c8d127209339ac58414a8a61a90dbbe357c877a",
+      "provenance_sha256": "4e0b43789c2a60a3c3af713f7ea05aaf356b54ef2da299bb09203876659d4a8a",
+      "hardware_id": "NVIDIA GeForce RTX 4090 CUDA",
+      "independence": true,
+      "causality_and_validation": true,
+      "artifact_reproduction": true,
+      "runtime": true
+    }
+  }
+}

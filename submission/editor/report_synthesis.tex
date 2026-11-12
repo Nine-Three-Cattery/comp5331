@@ -1,0 +1,25 @@
+\paragraph{Clean forecasts.}
+The supplementary last-step constant-velocity baseline achieved
+0.534\,m ADE, below both learned \(K=1\) models. At \(K=20\), Social-GAN
+had the lowest minimum ADE, Trajectron++ had the lowest minimum FDE and
+Energy Score, and DSPIGCN had the lowest mean ADE and mean FDE. The paired
+Trajectron++ minus Social-GAN minimum ADE difference was \(-0.032\)\,m on
+ETH and \(+0.069\)\,m on Hotel. These differences are descriptive because
+test windows overlap and the benchmark covers five scenes.
+
+\paragraph{Sensitivity to corrupted histories.}
+The 0.20\,m noise condition increased mean ADE more than removing and
+causally filling the last two positions in each model. DSPIGCN's paired
+macro changes were \(\ModelMeanADEChange{dspigcn}{noise_020}\)\,m for noise
+and \(\ModelMeanADEChange{dspigcn}{missing_2}\)\,m for missing positions.
+For DSPIGCN, the noise penalty was \(+1.719\)\,m on ETH and
+\(+2.120\)\,m on Hotel, while the two-missing penalty was \(+0.298\)\,m
+on ETH and \(+0.049\)\,m on Hotel.
+
+\paragraph{Runtime and scope.}
+The timing evidence uses different hardware and includes owner-specific
+preprocessing boundaries. We report timings with their measurement setup
+and reserve speed rankings for runs measured on the same host and device.
+Architectures, training objectives and budgets also differ, so these
+comparisons describe the full implementations. Controlled ablations would
+be needed to attribute differences to individual model components.
