@@ -1,0 +1,18 @@
+{
+  "artifact": {
+    "name": "dspigcn-causal-v2.tar.gz",
+    "sha256": "afb418fde6e04970e986a9d24888654b60bd3fb017d239316d6fdcd6b96aff0a"
+  },
+  "evidence": {
+    "benchmark_audit.json": "82561efe21892e486b5d29430c8d127209339ac58414a8a61a90dbbe357c877a",
+    "results.csv": "a15d500ddeeb31d2b4057954e51c00a1507b9ef38bf6cef7a2aef275b18260b3"
+  },
+  "prediction_bundles": 90,
+  "protocol": "causal_v2",
+  "runs": 15,
+  "runtime_ms": {
+    "end_to_end_ms": 142.68678706139326,
+    "prediction_sampling_ms": 123.50853998214006,
+    "preprocessing_ms": 19.07542441040277
+  }
+}

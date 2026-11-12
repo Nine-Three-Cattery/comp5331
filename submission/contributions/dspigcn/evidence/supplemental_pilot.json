@@ -1,0 +1,58 @@
+{
+  "common_pilot": {
+    "contract_sha256": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
+    "model": "dspigcn",
+    "prediction_bundles": 6,
+    "protocol": "causal_v2",
+    "results_sha256": null,
+    "status": "passed"
+  },
+  "environment": {
+    "cuda": "12.8",
+    "device": "cuda",
+    "machine": "x86_64",
+    "numpy": "2.5.3",
+    "platform": "Linux-6.17.0-14-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "threads": 4,
+    "torch": "2.7.0+cu128"
+  },
+  "epochs": [
+    {
+      "elapsed_seconds": 23.60472690872848,
+      "energy_score": 0.4619520561179923,
+      "epoch": 1,
+      "epoch_seconds": 21.02665240317583,
+      "mean_ade": 0.7729744115134047,
+      "peak_cuda_bytes": 503714304,
+      "peak_host_rss_bytes": 1880461312,
+      "reconstruction_weight": 0.01,
+      "train": {
+        "nll": 1.8284540597256416,
+        "physics": 0.00019391044550707802,
+        "reconstruction": 0.6565505094722038,
+        "total": 1.8350389385200396
+      }
+    },
+    {
+      "elapsed_seconds": 30.01482718810439,
+      "energy_score": 0.446036954354734,
+      "epoch": 2,
+      "epoch_seconds": 6.409148063510656,
+      "mean_ade": 0.7329345652006779,
+      "peak_cuda_bytes": 503714304,
+      "peak_host_rss_bytes": 1880461312,
+      "reconstruction_weight": 0.0101,
+      "train": {
+        "nll": 0.7448041645078312,
+        "physics": 0.0008153437486697596,
+        "reconstruction": 0.6568263919769729,
+        "total": 0.7515196461607868
+      }
+    }
+  ],
+  "hardware": "NVIDIA GeForce RTX 4090",
+  "protocol": "causal_v2",
+  "source_revision": "020466cede652119e3f69e2dd3bad88eb4fbc736",
+  "stage": "supplemental two-epoch pilot"
+}
