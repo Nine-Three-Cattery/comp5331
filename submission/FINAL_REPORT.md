@@ -403,18 +403,21 @@ report section and presentation. The owner statement records AI assistance.
 
 ### LI Junhao
 
-LI Junhao implemented and packaged the independent pedestrian-only
-Trajectron++ workflow. LI built the recurrent graph model and velocity
-integration, adapted data to metric trajectories, and derived target and
-neighbor state causally within each observed window. The contribution
-includes the pinned data preparation and neutral data utilities used by
-the group benchmark. LI ran the formal fold and seed matrix, documented
-validation checkpoint selection and produced verification commands for
-replaying and rescoring the released predictions. LI analyzed clean
-sampling budgets, paired robustness effects, and preprocessing and
-prediction time. The delivered materials include the accepted benchmark
-table, provenance, figures, a technical handoff and English report and
-slide contributions. [Owner evidence](contributions/trajectronpp/)
+LI Junhao built the shared benchmark used for the five common result
+tables, including pinned ETH/UCY data preparation, ordered holdout
+manifests, target-history corruption fixtures, scoring, and audits. LI
+implemented the independent pedestrian-only Trajectron++ pipeline with a
+recurrent graph encoder, probabilistic velocity decoder, and metric
+prediction export. A regression test verified that changing future target
+and neighbor positions left fixed-seed predictions identical across all six
+conditions. LI selected checkpoints using clean validation Energy Score and
+delivered 90 audited prediction bundles at K=20 across five holdouts and
+three seeds, with release hashes and commands to replay and rescore
+predictions. LI analyzed sample budgets and paired robustness to noise and
+missing observations, and timed preprocessing and inference separately.
+LI also built the shared LaTeX report and Beamer slide masters and their
+assembly workflow, and delivered the Trajectron++ report section, figures,
+slides, and speaker notes. [Shared benchmark](../benchmark/README.md) · [Owner evidence](contributions/trajectronpp/)
 
 ### YAN Zhengyang
 
