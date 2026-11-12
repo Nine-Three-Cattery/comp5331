@@ -120,8 +120,8 @@ future displacements with a recurrent decoder. The prediction accumulates
 those increments from the last input point. Training uses Adam and squared
 position error with a 40-epoch ceiling and eight-epoch patience. The selected
 checkpoint minimizes clean validation ADE. The supplementary constant-velocity
-forecast repeats the final observed displacement and provides a direct test of
-the benefit of learned motion. [Individual LSTM implementation](../models/individual_lstm/)
+forecast extends the displacement between the last two input positions by the
+same amount at each prediction step. [Individual LSTM implementation](../models/individual_lstm/)
 
 **Social-LSTM.** At each observed step, the deterministic adaptation pools
 neighbor hidden states in a spatial grid centered on the target. The decoder
@@ -204,7 +204,7 @@ records editor acceptance separately.
 | Social-GAN | 20 | 0.322 | 0.603 | 0.839 | 1.748 | 0.558 | 0.892 |
 | Social-STGCNN | 20 | 0.583 | 1.006 | 0.971 | 1.760 | 0.796 | 0.622 |
 | Trajectron++ | 20 | 0.330 | 0.578 | 0.855 | 1.823 | 0.540 | 0.991 |
-| Constant velocity | 1 | 0.534 | 1.148 | 0.534 | 1.148 | — | — |
+| Constant velocity (last step) | 1 | 0.534 | 1.148 | 0.534 | 1.148 | 0.651 | 0.000 |
 
 Constant velocity had lower clean ADE and FDE than the two learned K=1
 models. The fold means qualify the aggregate difference between those learned
@@ -239,6 +239,7 @@ the single forecast's error.
 | Social-GAN | +0.068 | +0.184 | +0.466 | +0.049 | +0.120 |
 | Social-STGCNN | +0.027 | +0.105 | +0.341 | +0.036 | +0.090 |
 | Trajectron++ | +0.627 | +1.239 | +2.178 | +0.040 | +0.092 |
+| Constant velocity (last step, supplementary) | +0.366 | +0.900 | +2.073 | +0.095 | +0.198 |
 
 The strongest tested noise increased mean ADE more than two missing points
 in every common model. For Social-STGCNN the 0.20 m noise penalty exceeded
@@ -258,7 +259,7 @@ constant velocity were close, at 0.735 and 0.732 m. When recent
 positions are available but corrupted, repeating the last displacement can
 carry the error throughout the forecast. When the suffix is missing, the
 benchmark already replaces that suffix with a constant-velocity continuation.
-These are distinct observation failures. [Paired LSTM and CV results](contributions/individual_lstm/evidence/cv_supplement.csv)
+These are distinct observation failures. [Paired LSTM and CV results](contributions/individual_lstm/evidence/macro_comparison.csv)
 
 ### Motion, qualitative examples and runtime
 
@@ -307,9 +308,9 @@ budgets. Claims about individual components require controlled ablations.
 Independent editor review and reference-environment reproduction remain
 pending where indicated in the registry. [Model registry](models.json) · [Review requirements](editor/README.md)
 
-The common experiment establishes three practical results. Constant velocity
-is a strong clean deterministic baseline, while both learned recurrent
-baselines improve on it at all three tested Gaussian noise levels.
+The constant-velocity baseline repeats the last observed displacement. It had
+the lowest clean ADE among the deterministic predictors. Both recurrent
+baselines had lower ADE than this baseline at all three tested noise levels.
 Increasing an ensemble's sample budget improves best-path coverage under
 oracle selection, and the clean minimum ADE, minimum FDE and Energy Score
 favor different models. The largest noise condition consistently caused
