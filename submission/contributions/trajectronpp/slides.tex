@@ -1,7 +1,9 @@
 \input{contributions/trajectronpp/analysis.tex}
 \providecommand{\TppInsight}[1]{\csname tpp:#1\endcsname}
+\begingroup
+\setbeamertemplate{frame footer}[custom]{LI Junhao}
+
 \begin{frame}{Trajectron++ samples futures from visible histories}
-\noindent{\small\bfseries\color{Teal} LI JUNHAO / MODEL IMPLEMENTATION}\par\medskip
 \begin{tikzpicture}[
   stage/.style={draw=Rule,fill=Wash,rounded corners=3pt,minimum height=1.38cm,
     text width=2.72cm,align=left,inner sep=0.14cm,anchor=west,font=\small}
@@ -93,3 +95,4 @@ Open circles show scenes. Diamonds and bars show macros and descriptive
 95\% intervals. Neighbor histories stay visible.
 \end{minipage}
 \end{frame}
+\endgroup
