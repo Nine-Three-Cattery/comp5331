@@ -191,9 +191,10 @@ twelve future positions. Final displacement error (FDE) uses the final point.
 For an ensemble, minimum ADE and minimum FDE select their best paths
 separately using the observed future, whereas mean ADE and mean FDE average
 the errors across all paths. For K=1, minimum and mean coincide. The sample
-Energy Score uses the RMS trajectory distance to the observed future minus
-half the mean RMS distance between distinct ensemble paths [9]. Diversity is
-that mean pairwise RMS distance. A wide ensemble can improve coverage while
+Energy Score averages the RMS trajectory distance from each draw to the
+observed future, then subtracts half the mean RMS distance over pairs of
+distinct draw indices [9]. Diversity is that mean pairwise RMS distance,
+defined as zero for K=1. A wide ensemble can improve coverage while
 increasing typical error. Energy Score and diversity provide evidence about
 the ensemble alongside the displacement measures.
 

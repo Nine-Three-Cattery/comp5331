@@ -38,9 +38,11 @@ training seeds and validation-only checkpoint selection.
 \section{Reading the evidence}
 ADE averages displacement over time. FDE measures endpoint displacement.
 Report one path for deterministic models, or minimum and mean errors over
-twenty samples for probabilistic models. Energy Score uses RMS trajectory
-displacement \cite{gneiting2007}. Folds receive equal weight after
-averaging seeds.
+twenty samples for probabilistic models. Energy Score averages the RMS
+trajectory distance from each draw to the observed future, then subtracts
+half the mean RMS distance over pairs of distinct draw indices
+\cite{gneiting2007}. The pairwise term is zero for \(K=1\).
+Folds receive equal weight after averaging seeds.
 
 We perturb target history with 0.05, 0.10 or 0.20\,m Gaussian position noise,
 or remove the last one or two target observations and extrapolate from the
