@@ -1,18 +1,74 @@
 {
   "artifact": {
+    "bytes": 1098822385,
     "name": "dspigcn-causal-v2.tar.gz",
-    "sha256": "afb418fde6e04970e986a9d24888654b60bd3fb017d239316d6fdcd6b96aff0a"
+    "sha256": "afb418fde6e04970e986a9d24888654b60bd3fb017d239316d6fdcd6b96aff0a",
+    "url": "https://github.com/Nine-Three-Cattery/comp5331/releases/download/dspigcn-causal-v2-group-review-v1/dspigcn-causal-v2.tar.gz"
+  },
+  "checkpoint_replay": {
+    "atol_m": 1e-05,
+    "checkpoints": 15,
+    "coordinates_checked": 295151040,
+    "device": "cuda",
+    "max_abs_coordinate_difference_m": 0.0,
+    "prediction_bundles": 90,
+    "rtol": 1e-05,
+    "status": "passed"
+  },
+  "common_scoring_environment": {
+    "architecture": "x86_64",
+    "device": "cpu",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "platform": "Linux",
+    "python": "3.12.3",
+    "torch": "2.14.0+cpu"
+  },
+  "comparison_population": {
+    "fields": [
+      "manifest_hash",
+      "window_count",
+      "sample_count",
+      "protocol"
+    ],
+    "matched_fold_seed_condition_rows": 90,
+    "matches": "trajectronpp"
   },
   "evidence": {
     "benchmark_audit.json": "82561efe21892e486b5d29430c8d127209339ac58414a8a61a90dbbe357c877a",
+    "evidence/checkpoint_selection.csv": "ae563d8343c5abc77fa212b6c1f635374604de3c95ace57ec25aa5e372bf5169",
+    "evidence/extracted_replay.json": "e6bdd80ab06a05bd6357287364e811afcb0d64a6b2c12bebf86d2b34d4eda779",
+    "evidence/review_metrics.csv": "581d68da7fb507c83c91c486dc99a7ed7adb4bd35bbfb377b453f0f4a6a7f2a5",
+    "evidence/runtime.csv": "f18a8fbc91e4244f4289b191c0bd0267112e16b235cc497b447dcdad2f13c708",
+    "evidence/supplemental_pilot.json": "63e1bc418733a9935275e5724f37acaef1fd670d6ed69a0a51a149ec234a1277",
     "results.csv": "a15d500ddeeb31d2b4057954e51c00a1507b9ef38bf6cef7a2aef275b18260b3"
   },
+  "formal_epochs": 200,
+  "implementation_owner": "YAN Zhengyang",
+  "model": "dspigcn",
   "prediction_bundles": 90,
   "protocol": "causal_v2",
+  "registered_implementation": "020466cede652119e3f69e2dd3bad88eb4fbc736",
+  "results_sha256": "a15d500ddeeb31d2b4057954e51c00a1507b9ef38bf6cef7a2aef275b18260b3",
   "runs": 15,
+  "runtime_environment": {
+    "cuda": "12.8",
+    "device": "cuda",
+    "driver": "590.48.01",
+    "hardware": "NVIDIA GeForce RTX 4090",
+    "machine": "x86_64",
+    "numpy": "2.5.3",
+    "platform": "Linux-6.17.0-14-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "threads": 4,
+    "torch": "2.7.0+cu128"
+  },
   "runtime_ms": {
     "end_to_end_ms": 142.68678706139326,
     "prediction_sampling_ms": 123.50853998214006,
     "preprocessing_ms": 19.07542441040277
-  }
+  },
+  "sample_count": 20,
+  "shared_protocol_fingerprint": "f6787cd19a36d3c12e524f9b6db53f9f66a017daf579ed6e4e34dcaed2f68f07",
+  "supplemental_experiment": "Group 7, coordinated by Zongmin Zhang"
 }

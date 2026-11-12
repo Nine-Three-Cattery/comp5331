@@ -26,3 +26,7 @@ On clean histories the within-window 99th percentile of sampled acceleration exc
 The original A800 pilot and the supplementary pilot have separate records. The earlier candidate results used a different population, perturbation rule and Energy Score definition. [Original pilot](evidence/pilot_audit.json) · [Supplementary pilot](evidence/supplemental_pilot.json) · [Candidate protocol](../../../models/dspigcn/provisional_variant/docs/TEAM_INTEGRATION.md)
 
 [Report section](report.tex) · [Presentation frames](slides.tex) · [Speaker notes](speaker_notes.md) · [Weights, predictions and release information](provenance.json) · [Replay instructions](../../../models/dspigcn/README.md)
+
+## Weights and forecast replay
+
+The [numerical archive](https://github.com/Nine-Three-Cattery/comp5331/releases/download/dspigcn-causal-v2-group-review-v1/dspigcn-causal-v2.tar.gz) contains the registered model, configurations, training histories, selected weights, and all 90 forecast bundles. On the extracted copy the reviewer regenerated 295,151,040 forecast coordinates. The maximum absolute difference from the stored outputs was 0 m. The observed histories, masks, future labels and ordered records agreed exactly. [Extracted replay](evidence/extracted_replay.json)
