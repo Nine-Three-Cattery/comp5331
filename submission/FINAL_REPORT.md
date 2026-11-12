@@ -384,18 +384,7 @@ the local and reference environments. [Owner evidence](contributions/social_lstm
 
 ### Cheung, Alan Pak To
 
-Cheung, Alan Pak To implemented the Social-GAN generator, discriminator,
-observed-neighbor pooling, residual displacement decoder and seeded
-sampling. Cheung completed the ETH pilot and full five-fold matrix,
-selected weights with the clean validation rule, and verified that
-target and neighbor futures did not enter the model inputs. Cheung
-prepared the prediction exporter, implemented an independent check of
-the headline metrics, and recorded both a selected checkpoint replay and
-a short retraining reproduction. The analysis traces changes in forecast
-coverage across sample budgets, compares corrupted inputs with the clean
-counterparts, and reports trajectory examples, motion diagnostics and
-runtime boundaries. Cheung delivered the audit, provenance and the
-owner's report and presentation materials. [Owner evidence](contributions/social_gan/)
+Cheung, Alan Pak To implemented the Social-GAN framework, including the generator, discriminator, observed-neighbor pooling mechanism, residual displacement decoder, and reproducible seeded sampling. He completed the ETH pilot and the full five-fold, three-seed evaluation under the shared benchmark, using clean validation Energy Score for checkpoint selection. He verified that neither target nor neighbor future trajectories leaked into the model inputs and developed the prediction exporter to produce outputs aligned with the shared evaluation protocol. He independently checked the reported metrics and conducted both checkpoint-replay and short-retraining reproducibility tests. For the experimental analysis, he investigated the trade-offs between best-of-K forecast accuracy, typical-sample error, and sample diversity, and evaluated model robustness under noisy and missing trajectory observations. He also prepared qualitative trajectory examples, motion diagnostics, and runtime measurements with documented measurement boundaries. Finally, he contributed the model audit, experimental provenance, Social-GAN report section, and presentation materials. [Owner evidence](contributions/social_gan/)
 
 ### Zongmin Zhang
 
