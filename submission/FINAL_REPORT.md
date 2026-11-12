@@ -218,13 +218,41 @@ identify the isolated effect of social pooling.
 At K=20, Social-GAN had lower clean minimum ADE than Trajectron++ by 0.008 m.
 Trajectron++ had lower minimum FDE by 0.025 m and lower Energy Score by
 0.018 m. The mean ADE values of both models are more than twice their
-minimum ADE values. At fixed trained weights, Social-STGCNN's minimum ADE
-fell from 0.971 to 0.583 m when scoring the first draw and then all twenty
-draws from the same streams. The mean ADE changed by less than 0.001 m.
-The improvement is a property of the available set of paths and of
-selection with knowledge of the future. A system acting before the future
-is known needs a rule for using the ensemble.
-[Social-GAN results](contributions/social_gan/results.csv) · [Social-STGCNN analysis](contributions/social_stgcnn/) · [Trajectron++ results](contributions/trajectronpp/results.csv)
+minimum ADE values. The table gives Trajectron++ minus Social-GAN on the
+same clean test windows, averaged over the three paired seeds in each fold.
+Negative differences favor Trajectron++.
+
+| Held-out scene | Difference in minADE (m) | Difference in minFDE (m) | Difference in Energy Score (m) |
+| --- | ---: | ---: | ---: |
+| ETH | −0.032 | −0.196 | −0.046 |
+| Hotel | +0.069 | +0.087 | +0.036 |
+| Univ | −0.021 | −0.046 | −0.036 |
+| Zara1 | +0.005 | −0.012 | −0.038 |
+| Zara2 | +0.017 | +0.039 | −0.005 |
+
+Trajectron++ had lower minimum ADE on two folds, lower minimum FDE on
+three, and lower Energy Score on four. Social-GAN had lower values on
+all three metrics in Hotel.
+[Social-GAN results](contributions/social_gan/results.csv) · [Trajectron++ results](contributions/trajectronpp/results.csv)
+
+For Trajectron++, we scored the first 1, 5, 10 and 20 draws from the same
+clean forecast streams at fixed trained weights, giving the five holdouts
+equal weight.
+
+| Draws scored (K) | Minimum ADE (m) | Mean ADE (m) |
+| ---: | ---: | ---: |
+| 1 | 0.857 | 0.857 |
+| 5 | 0.484 | 0.855 |
+| 10 | 0.394 | 0.856 |
+| 20 | 0.330 | 0.855 |
+
+From one to twenty draws, minimum ADE fell by 62% while mean ADE stayed
+near 0.855 m. Social-STGCNN showed a similar pattern on its own forecast
+streams, with minimum ADE falling from 0.971 to 0.583 m and mean ADE
+changing by less than 0.001 m. A larger sample set gives the evaluator
+more paths to choose from after observing the future. A system acting before
+the future is known needs a rule for using the ensemble.
+[Trajectron++ sampling evidence](contributions/trajectronpp/evidence/sample_budget.csv) · [Social-STGCNN analysis](contributions/social_stgcnn/)
 
 ### Robustness to corrupted histories
 
