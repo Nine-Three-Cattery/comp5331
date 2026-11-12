@@ -15,7 +15,7 @@ in research question, data, methods or deliverables. Enter N/A where applicable.
 | --- | --- | --- | --- | --- | --- |
 | LU Yichong | 21350771 | Qifeng Chen | World Models | My research focuses on how world models represent an environment. In this course project, I implemented and evaluated an LSTM that predicts a pedestrian’s future positions from their observed trajectory. | Confirmed |
 | WANG Yifan | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
-| Cheung, Alan Pak To | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
+| Cheung, Alan Pak To | 21055723 | Arpit Narechania | Analyzing Text in Videos |  The goal of this project is to exctract text from the moive opening/ending credit and analysis the relationship and networks among crews of the moives. In this course project, I implemented and evaluated an GAN that analyze the relationship between best-sample accuracy, typical-sample error, and diversity, alongside the common robustness and runtime results. | Confirmed |
 | Zongmin Zhang | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
 | LI Junhao | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
 | YAN Zhengyang | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
