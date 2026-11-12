@@ -2,35 +2,42 @@
 
 ## Frame 1 · Forecast paths from history
 
-The four steps are graph history, a categorical latent, a velocity
-decoder and integration. The graph gives the target access to nearby
-pedestrian histories. A sampled latent changes the velocity sequence, so
-the decoder can generate several futures. The original derivative
-pipeline could use positions after the anchor. We recompute velocity and
-acceleration within the visible window. When we change future positions
-for either the target or its neighbor, the same-seed predictions stay
-identical. The revised protocol covers 15 runs and all 90 bundles.
+My Trajectron++ implementation starts with a graph of the target and nearby
+pedestrians. A categorical latent conditions the velocity decoder, and
+integrating the decoded velocities yields the forecast paths. We compute
+velocity and acceleration within the observed window. Changing future
+positions for either the target or a neighbor leaves the same-seed
+predictions identical. We selected checkpoints on validation and audited
+15 trained runs and 90 test bundles. That gives us one set of forecasts to
+score at different sample budgets.
 
-## Frame 2 · Coverage and typical error
+## Frame 2 · Sample budget and scene differences
 
-Follow the green curve on the left. If we score one path, ADE is 0.857
-meters. If we allow the evaluator to choose the closest of 20 samples from
-the same stream, it becomes 0.330 meters. That is a 62 percent reduction
-in best-sample error. The orange curve barely moves, at about 0.855
-meters. Best-of-20 therefore tells us how well the forecast covers the
-realized future. Mean error describes the quality of a typical sample.
-The report also breaks this down by scene. Clean minADE is 0.600 meters
-on ETH and 0.222 on Zara2.
+Start on the left. We score the first one, five, ten and twenty draws from
+the same clean forecast stream. Minimum ADE falls from 0.857 to 0.484,
+0.394 and finally 0.330 meters, a 62 percent reduction. Mean ADE stays
+near 0.855 meters. Minimum ADE uses the realized future to pick the best
+draw, while mean ADE describes a typical draw.
+
+Now fix both models at twenty draws. Each row on the right is Trajectron++
+minus Social-GAN on the same clean test windows, averaged across the three
+seeds. Negative means Trajectron++ was lower. It had lower minimum ADE on
+two of five scenes, lower minimum FDE on three and lower Energy Score on
+four. Social-GAN was lower on all three metrics in Hotel. The group
+averages capture the overall pattern, and the table shows how it varies
+by scene. Next, we hold the model fixed and change what it observes.
 
 ## Frame 3 · Noise and short gaps
 
-These are changes against clean for the same windows. Open points show
-individual scenes, and diamonds give the equal-weight average. The
-0.20-meter noise condition adds 2.178 meters of meanADE. Dropping the
-last two observations and filling causally adds 0.092 meters. Even
-five centimeters of noise hurts more than missing two on every holdout.
-One possible explanation is that differencing noisy positions magnifies
-the velocity and acceleration disturbance. This is a hypothesis.
-The measured conclusion applies to target-only perturbations with
-neighbor histories still available. When we compare models, keep the
-sample budgets, corruption rules and timing boundaries visible.
+These are changes against clean for the same windows. Open circles show
+individual scenes, and diamonds give the equal-weight average. Adding
+0.20 meters of noise increases mean ADE by 2.178 meters. Dropping and
+causally filling the final two observations increases it by 0.092 meters.
+Even five centimeters of noise hurts more than the two-point gap in every
+scene. Differencing noisy positions could amplify the disturbance in
+velocity and acceleration. This experiment changes only the target
+history, with neighbor histories still available.
+
+I’ll hand back to the group for the remaining model evidence. For the
+group comparison, keep the draw budget in view for best-path scores and
+read each corruption result against that model’s clean forecast.

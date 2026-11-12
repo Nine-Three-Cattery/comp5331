@@ -31,20 +31,55 @@ neighbor positions leaves same-seed forecasts identical.
 \end{columns}
 \end{frame}
 
-\begin{frame}{More samples improve coverage while mean error stays flat}
-\begin{columns}[c,onlytextwidth]
-\column{.61\textwidth}
-\includegraphics[width=\linewidth]{contributions/trajectronpp/assets/sampling_slide.pdf}
-\column{.34\textwidth}
-{\color{Teal}\Huge\bfseries \TppInsight{BudgetReduction}\%\par}
-\textbf{lower minADE}\par
+% Sampling values come from evidence/sample_budget.csv.
+% Fold differences match the Clean forecasts section of submission/FINAL_REPORT.md.
+\begin{frame}{Clean performance varies with sample budget and scene}
+\begin{columns}[T,onlytextwidth]
+\column{.44\textwidth}
+{\small\bfseries\color{Teal} Trajectron++ sampling}\par\smallskip
+{\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rrr@{}}
+\toprule
+Draws \(K\) & minADE (m) & meanADE (m) \\
+\midrule
+1  & \TppInsight{OneSampleADE} & \TppInsight{OneSampleADE} \\
+5  & 0.484 & 0.855 \\
+10 & 0.394 & 0.856 \\
+20 & \ModelMetric{trajectronpp}{clean_0}{min_ade_mean} & \ModelMetric{trajectronpp}{clean_0}{mean_ade_mean} \\
+\bottomrule
+\end{tabular*}\par
+}
 \smallskip
-\TppInsight{OneSampleADE}\,m with one path\\
-\ModelMetric{trajectronpp}{clean_0}{min_ade_mean}\,m with twenty\\[3pt]
-MeanADE stays near \ModelMetric{trajectronpp}{clean_0}{mean_ade_mean}\,m.
+{\footnotesize\color{Muted} Prefixes of the same clean forecasts.
+Equal weight per scene.}\par
+\smallskip
+{\small\bfseries\color{Teal} \(K=1\) to 20 cuts minADE by \TppInsight{BudgetReduction}\%.}
+
+\column{.52\textwidth}
+{\small\bfseries\color{Teal} Trajectron++ vs.\ Social-GAN at \(K=20\)}\par\smallskip
+{\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+Scene & \(\Delta\)minADE & \(\Delta\)minFDE & \(\Delta\)ES \\
+\midrule
+ETH   & \( -0.032 \) & \( -0.196 \) & \( -0.046 \) \\
+Hotel & \( +0.069 \) & \( +0.087 \) & \( +0.036 \) \\
+Univ  & \( -0.021 \) & \( -0.046 \) & \( -0.036 \) \\
+Zara1 & \( +0.005 \) & \( -0.012 \) & \( -0.038 \) \\
+Zara2 & \( +0.017 \) & \( +0.039 \) & \( -0.005 \) \\
+\bottomrule
+\end{tabular*}\par
+}
+\smallskip
+{\footnotesize\color{Muted} Same clean windows. Differences average three paired seeds.
+Negative differences (m) favor Trajectron++. ES is Energy Score.}\par
+\smallskip
+{\small\bfseries\color{Teal} Lower minFDE on 3/5 scenes and ES on 4/5.}
 \end{columns}
-\smallskip
-{\small\color{Muted}Same forecasts, re-scored at each budget. Equal weight for five held-out scenes.}
 \end{frame}
 
 \begin{frame}{Even 5\,cm noise hurt more than two missing points}
