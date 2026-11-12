@@ -18,7 +18,7 @@ in research question, data, methods or deliverables. Enter N/A where applicable.
 | Cheung, Alan Pak To | 21055723 | Arpit Narechania | Analyzing Text in Videos |  The goal of this project is to exctract text from the moive opening/ending credit and analysis the relationship and networks among crews of the moives. In this course project, I implemented and evaluated an GAN that analyze the relationship between best-sample accuracy, typical-sample error, and diversity, alongside the common robustness and runtime results. | Confirmed |
 | Zongmin Zhang | 21041605 | Prof. Chaojian Li (FYT supervisor) and Prof. Lixue Cheng (research supervisor and collaborating FYT supervisor) | *Embodied Multi-Agent System for High-Stakes Environment Safety: Transferring Autonomous Driving Architectures to Edge-Deployed Labs* (FYT). My broader research area is AI for Science. | My FYT studies how a laboratory safety system can use camera images and temperature readings to decide whether to continue or pause a liquid-handling procedure. For COMP5331, I implemented and evaluated Social-STGCNN on ETH/UCY pedestrian tracks to predict the next 12 positions from eight observations. | Confirmed |
 | LI Junhao | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
-| YAN Zhengyang | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
+| YAN Zhengyang | 21320594 | Song Guo | Reinforcement Learning for Robotics | My research focuses on reinforcement learning methods for robotic tasks. In this course project, I implemented and evaluated DSPIGCN for pedestrian trajectory forecasting from ETH/UCY position histories, studying prediction accuracy, robustness and motion consistency. The course project concerns supervised trajectory prediction, while my research concerns learning robotic behavior through reinforcement learning. | [Member confirmation] |
 
 Each member confirms the following statement for their own submission.
 “I declare that this project was carried out solely for COMP5331. I did not
@@ -437,18 +437,35 @@ slides, and speaker notes. [Shared benchmark](../benchmark/README.md) · [Owner 
 
 ### YAN Zhengyang
 
-YAN Zhengyang implemented the registered DSPIGCN displacement and velocity
-streams, polynomial physics coupling, training loss, anchor sampling and
-causal benchmark integration. YAN documented model departures, tested
-causal target and neighbor features and the physical derivatives, and
-recorded the two-epoch A800 pilot evidence for the registered workflow.
-YAN also preserved a separately audited candidate workflow, including
-its 15 fitted runs, result summaries, failure plots and original archive
-digest. The candidate handoff documents differences in splits, feature
-eligibility, corruption and scoring, and includes an adapter tested with
-the group observation batch. YAN prepared the report and slide materials
-for the registered model. The common formal matrix remains pending.
-[Registered owner evidence](contributions/dspigcn/) · [Candidate evidence](../models/dspigcn/provisional_variant/)
+YAN Zhengyang implemented DSPIGCN's displacement and velocity streams,
+temporal attention, graph convolution, fourth-order polynomial physics
+coupling, training objective and anchor sampler. The registered workflow
+includes history-only target and neighbor features, validation-based
+checkpoint selection and metric prediction export. YAN documented the
+implementation's departures from the paper and checked causal inputs,
+coordinate transformations, physical derivatives and likelihood calculations.
+The two-epoch ETH seed-0 pilot on the A800 passed the shared audit across
+all six conditions. [Registered implementation and pilot evidence](contributions/dspigcn/)
+
+YAN also completed a separate candidate workflow with five held-out scenes,
+three training seeds and twenty forecast samples, producing 15 fitted models
+and 90 evaluation rows. The local audit checked source trajectories,
+perturbations, checkpoint selection and accuracy and motion metrics. The
+analysis covers minimum and mean ADE/FDE, ensemble diversity, Energy Score,
+noise and missing-history sensitivity, motion consistency, runtime and
+qualitative failures. YAN retained the checkpoints and predictions in a
+checksummed archive and verified replay of the first clean window from
+each of the fifteen checkpoints. [Candidate audit and replay evidence](../models/dspigcn/provisional_variant/results/provisional_main/)
+
+To support integration, YAN packaged the candidate in an isolated namespace
+and added a group-batch prediction adapter. Eighteen tests passed, including
+checks with the actual shared loader for future invariance, padding,
+batch ordering and preservation of the caller's random state. YAN prepared
+report and presentation materials and recorded external references and
+Codex assistance. The candidate's different populations, graph eligibility,
+corruptions and scoring conventions remain explicit; its results are kept
+outside the common comparison. The registered common formal matrix and
+editor review remain pending. [Integration and attribution](../models/dspigcn/provisional_variant/docs/TEAM_INTEGRATION.md)
 
 ## References
 
