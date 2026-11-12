@@ -13,7 +13,7 @@ in research question, data, methods or deliverables. Enter N/A where applicable.
 
 | Student name | Student ID | Research or FYP supervisor | Research or FYP topic | Difference from this course project | Declaration |
 | --- | --- | --- | --- | --- | --- |
-| LU Yichong | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
+| LU Yichong | 21350771 | Qifeng Chen | World Models | My research focuses on how world models represent an environment. In this course project, I implemented and evaluated an LSTM that predicts a pedestrian’s future positions from their observed trajectory. | Confirmed |
 | WANG Yifan | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
 | Cheung, Alan Pak To | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
 | Zongmin Zhang | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
