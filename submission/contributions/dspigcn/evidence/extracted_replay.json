@@ -1,0 +1,19 @@
+{
+  "atol_m": 1e-05,
+  "checkpoints": 15,
+  "coordinates_checked": 295151040,
+  "device": "cuda",
+  "exact_fields": [
+    "ground_truth",
+    "observed",
+    "observed_mask",
+    "records",
+    "metadata"
+  ],
+  "max_abs_coordinate_difference_m": 0.0,
+  "prediction_bundles": 90,
+  "protocol": "causal_v2",
+  "rtol": 1e-05,
+  "status": "passed",
+  "verified_files": 418
+}

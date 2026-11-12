@@ -1,0 +1,47 @@
+{
+  "status": "pilot_only_not_formal_results",
+  "model": "dspigcn",
+  "fold": "eth",
+  "seed": 0,
+  "epochs": 2,
+  "sample_count": 20,
+  "device": "NVIDIA A800-SXM4-80GB",
+  "python": "3.12.3",
+  "torch": "2.7.0+cu128",
+  "common_scoring_torch": "2.14.0+cpu",
+  "owner_tests_passed": 11,
+  "training": [
+    {
+      "epoch": 1,
+      "reconstruction_weight": 0.01,
+      "train": {
+        "total": 1.8341156860729835,
+        "nll": 1.827530474309676,
+        "reconstruction": 0.6565483625222285,
+        "physics": 0.0001974250251936315
+      },
+      "energy_score": 0.4621283000304937,
+      "mean_ade": 0.7716982791970922,
+      "elapsed_seconds": 6.2278631259687245,
+      "epoch_seconds": 4.305130710126832,
+      "peak_cuda_bytes": 503714304,
+      "peak_host_rss_bytes": 2199322624
+    },
+    {
+      "epoch": 2,
+      "reconstruction_weight": 0.0101,
+      "train": {
+        "total": 0.734473751342145,
+        "nll": 0.7277562121959235,
+        "reconstruction": 0.6568100598975223,
+        "physics": 0.0008375771200761285
+      },
+      "energy_score": 0.44613027279767026,
+      "mean_ade": 0.7418050164287148,
+      "elapsed_seconds": 9.859154660953209,
+      "epoch_seconds": 3.6310267120134085,
+      "peak_cuda_bytes": 503714304,
+      "peak_host_rss_bytes": 2514542592
+    }
+  ]
+}

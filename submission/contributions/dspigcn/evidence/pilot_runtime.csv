@@ -1,0 +1,2 @@
+fold,seed,checkpoint_sha256,windows,batch_size,sample_count,warmups,repetitions,preprocessing_ms,prediction_sampling_ms,end_to_end_ms
+eth,0,77148d1d8a3599e7d9ab1af0d923adea344ca8c8654d50517304ade32a63ae14,128,32,20,3,10,24.554121075198054,95.93170857988298,121.80174153763801

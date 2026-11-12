@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "comp5331-dspigcn-candidate"
+version = "0.1.0"
+description = "Isolated DSPIGCN workflow for COMP5331, Zhengyang Yan"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24,<3", "torch>=2.2,<3", "scikit-learn>=1.3,<2", "matplotlib>=3.7,<4"]
+
+[project.scripts]
+comp5331-dspigcn-candidate = "dspigcn_candidate.runner:main"
+
+[tool.setuptools.packages.find]
+include = ["dspigcn_candidate*"]
+
+[tool.setuptools.package-data]
+dspigcn_candidate = []

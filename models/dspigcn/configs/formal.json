@@ -1,0 +1,15 @@
+{
+  "width": 64,
+  "dropout": 0.1,
+  "radius": 3.0,
+  "epochs": 200,
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "lr_step": 50,
+  "physics_weight": 0.1,
+  "reconstruction_weight": 0.01,
+  "reconstruction_growth": 1.01,
+  "gradient_clip": 10.0,
+  "validate_every": 10,
+  "sample_count": 20
+}
