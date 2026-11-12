@@ -3,7 +3,6 @@
 - **Course** COMP5331 Knowledge Discovery in Databases, Fall 2026
 - **Project type** Implementation
 - **Group number** 7
-- **Main text word count** Approximately 2,400, excluding the Contribution section
 
 ## Group members and declarations
 
@@ -17,7 +16,7 @@ in research question, data, methods or deliverables. Enter N/A where applicable.
 | WANG Yifan | 20945256 | Prof. Qifeng Chen | Controllable joint audio-video generation | My research focuses on controllable joint audio-video generation. In this course project, I implemented and evaluated Social-LSTM for pedestrian trajectory forecasting under noisy and missing observations. The projects address different research questions and use different data and methods. | Confirmed |
 | Cheung, Alan Pak To | 21055723 | Arpit Narechania | Analyzing Text in Videos |  The goal of this project is to exctract text from the moive opening/ending credit and analysis the relationship and networks among crews of the moives. In this course project, I implemented and evaluated an GAN that analyze the relationship between best-sample accuracy, typical-sample error, and diversity, alongside the common robustness and runtime results. | Confirmed |
 | Zongmin Zhang | 21041605 | Prof. Chaojian Li (FYT supervisor) and Prof. Lixue Cheng (research supervisor and collaborating FYT supervisor) | *Embodied Multi-Agent System for High-Stakes Environment Safety: Transferring Autonomous Driving Architectures to Edge-Deployed Labs* (FYT). My broader research area is AI for Science. | My FYT studies how a laboratory safety system can use camera images and temperature readings to decide whether to continue or pause a liquid-handling procedure. For COMP5331, I implemented and evaluated Social-STGCNN on ETH/UCY pedestrian tracks to predict the next 12 positions from eight observations. | Confirmed |
-| LI Junhao | [Student ID] | [Name or N/A] | [Topic or N/A] | [Explanation or N/A] | [Member confirmation] |
+| LI Junhao | 21352303 | Song Guo | Agentic Robotics | My research focuses on implementing agentic harnesses for robotic tasks. In this course project, I implemented and evaluated Trajectron++ for time-series forecasting of pedestrian trajectories on ETH/UCY. | Confirmed |
 | YAN Zhengyang | 21320594 | Song Guo | Reinforcement Learning for Robotics | My research focuses on reinforcement learning methods for robotic tasks. In this course project, I implemented and evaluated DSPIGCN for pedestrian trajectory forecasting from ETH/UCY position histories, studying prediction accuracy, robustness and motion consistency. The course project concerns supervised trajectory prediction, while my research concerns learning robotic behavior through reinforcement learning. | Confirmed |
 
 Each member confirms the following statement for their own submission.
@@ -28,19 +27,19 @@ and assistance used in my contribution.”
 
 ## Abstract
 
-We implemented six pedestrian forecasting models and evaluated five on a
-shared ETH/UCY benchmark with 34,161 test windows across five held-out scenes.
+We evaluated six pedestrian forecasting models on a shared ETH/UCY benchmark
+with 34,161 test windows across five held-out scenes.
 The benchmark pairs clean inputs with three levels of Gaussian noise and two
 missing-history conditions. The deterministic Individual LSTM and Social-LSTM
-produced one forecast, and Social-GAN, Social-STGCNN and Trajectron++ produced
-twenty. The constant-velocity sanity check achieved the lowest clean
+produced one forecast, and Social-GAN, Social-STGCNN, Trajectron++ and DSPIGCN
+produced twenty. The constant-velocity baseline achieved the lowest clean
 single-forecast ADE at 0.534 m. At 0.20 m noise, Social-LSTM achieved 1.128 m ADE
 and the constant-velocity error rose to 2.607 m. Among the twenty-draw models,
 Social-GAN had the lowest clean minimum ADE at 0.322 m, while Trajectron++ had
-the lowest minimum FDE and Energy Score. All five common result tables have
-passed a numerical audit. DSPIGCN has a shared ETH pilot and a separate
-five-fold candidate experiment. The candidate used different populations and
-scoring conventions and is reported on its own.
+the lowest minimum FDE and Energy Score. DSPIGCN had the lowest clean mean ADE
+at 0.760 m among the twenty-draw models, rising to 2.716 m at 0.20 m noise
+and 0.912 m with two missing observations. The shared audit passed for all
+six models.
 
 ## Introduction
 
@@ -89,7 +88,7 @@ after the final observation. Model-specific local coordinate transforms are
 inverted before scoring in meters. Neighbor histories and derived motion
 features use positions available through the observation anchor. The benchmark
 does not supply maps, images or future neighbor positions to the models.
-[Ordered manifests](../benchmark/fixtures/manifests.json) · [Shared contract](../benchmark/README.md)
+[Ordered manifests](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/benchmark/fixtures/manifests.json) · [Shared contract](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/benchmark/README.md)
 
 The six conditions are clean observations, zero-mean Gaussian position noise
 at standard deviations of 0.05, 0.10 and 0.20 m, and missing suffixes of one
@@ -100,7 +99,7 @@ extrapolation from the last two visible observations. The mask records those
 filled positions. Model inputs that use velocity or acceleration derive them
 from the resulting history. Future targets and neighbor observations remain
 fixed across conditions. This pairs each corrupted input with its clean
-counterpart at the same checkpoint. [Corruption fixture](../benchmark/fixtures/corruption.json)
+counterpart at the same checkpoint. [Corruption fixture](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/benchmark/fixtures/corruption.json)
 
 Formal common runs use seeds 0, 1 and 2. Each model selects one checkpoint per
 fold and seed using clean validation and applies it to all six test conditions.
@@ -110,7 +109,7 @@ masks, future labels, run identity and headline scores. Checkpoints,
 configuration and predictions have recorded digests. Feature regressions
 alter future target or neighbor records and check that model inputs and
 fixed-seed predictions remain invariant where those inputs are used.
-[Audit and bundle contract](../benchmark/README.md#input-and-output-files)
+[Audit and bundle contract](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/benchmark/README.md#input-and-output-files)
 
 ## Implementations
 
@@ -121,7 +120,7 @@ those increments from the last input point. Training uses Adam and squared
 position error with a 40-epoch ceiling and eight-epoch patience. The selected
 checkpoint minimizes clean validation ADE. The supplementary constant-velocity
 forecast extends the displacement between the last two input positions by the
-same amount at each prediction step. [Individual LSTM implementation](../models/individual_lstm/)
+same amount at each prediction step. [Individual LSTM implementation](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/models/individual_lstm)
 
 **Social-LSTM.** At each observed step, the deterministic adaptation pools
 neighbor hidden states in a spatial grid centered on the target. The decoder
@@ -130,7 +129,7 @@ a 12-epoch training budget and selected the checkpoint with the lowest
 clean validation ADE. The earlier Gaussian K=20 exploration used different
 data and training settings and remains in the owner evidence. The causal
 K=1 adaptation is the version evaluated in the common tables.
-[Social-LSTM implementation](../models/social_lstm/)
+[Social-LSTM implementation](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_lstm)
 
 **Social-GAN.** A recurrent generator encodes the target and eligible neighbors
 from their observed displacements. At the anchor, a learned function combines
@@ -139,7 +138,7 @@ neighbors within 6 m. A Gaussian latent draw conditions a residual recurrent
 decoder. The recurrent discriminator scores real and generated continuations.
 The generator minimizes best-of-twenty trajectory loss plus a weighted
 adversarial term. Selection uses clean validation Energy Score, then mean
-ADE and the earlier epoch. [Social-GAN implementation](../models/social_gan/)
+ADE and the earlier epoch. [Social-GAN implementation](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_gan)
 
 **Social-STGCNN.** The full-scene graph represents observed displacements.
 The spatial operator weights edges by the reciprocal distance between
@@ -150,7 +149,7 @@ Observed neighbors can enter the graph even if they leave before the forecast
 ends. The model selected the minimum clean-validation displacement negative
 log likelihood from the 250-epoch run. An owner replay of trained weights
 against the reference network checked 45 fixed-window cases.
-[Social-STGCNN implementation](../models/social_stgcnn/)
+[Social-STGCNN implementation](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_stgcnn)
 
 **Trajectron++.** The pedestrian-only model encodes observed target and
 neighbor histories with a recurrent graph encoder and a 3 m radius.
@@ -158,7 +157,7 @@ The 25-category prior conditions a GRU decoder that samples and integrates
 correlated velocities. The causal implementation computes motion
 derivatives within the observed window. Checkpoint selection uses
 validation Energy Score, then mean ADE and the earlier epoch.
-[Trajectron++ implementation](../li_junhao_trajectronpp/)
+[Trajectron++ implementation](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/li_junhao_trajectronpp)
 
 **DSPIGCN.** The registered implementation uses separate displacement and
 velocity branches with temporal attention, graph convolution and temporal
@@ -167,22 +166,22 @@ the streams in the training loss. The decoder uses Gaussian parameters and
 anchor-based sampling. The registered configuration specifies a 200-epoch
 budget with clean validation Energy Score as the primary selection criterion.
 A supplemental candidate experiment used an independently packaged workflow
-and a different protocol. [Registered DSPIGCN](../models/dspigcn/) · [Candidate workflow](../models/dspigcn/provisional_variant/)
+and a different protocol. [Registered DSPIGCN](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/models/dspigcn) · [Candidate workflow](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/models/dspigcn/provisional_variant)
 
 ### Paper deviations, implementation provenance, and reproduction
 
 The common runs use the group-owned loader and evaluator. The attribution
-records document code reuse and AI assistance. The [model registry](models.json)
+records document code reuse and AI assistance. The [model registry](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/models.json)
 records editor acceptance.
 
 | Model | Main departure from the reference | Independent implementation | Reproduction status |
 | --- | --- | --- | --- |
-| [Individual LSTM](../models/individual_lstm/independent_design.md) | Course-designed K=1 displacement encoder–decoder using standard LSTM cells and a squared position loss. | Retained the earlier AI-assisted owner baseline and added the causal adapter. [Attribution](../models/individual_lstm/implementation_provenance.md) | All 90 bundles passed the common audit on Apple M5 CPU. Linux reproduction and editor review are pending. [Evidence](contributions/individual_lstm/README.md) |
-| [Social-LSTM](../models/social_lstm/independent_design.md) | Deterministic K=1 displacement decoder with closed-loop position loss in place of the paper's Gaussian output. | Implemented social-grid pooling and recurrent rollout in the project code. [Attribution](../models/social_lstm/implementation_provenance.md) | All 90 bundles passed the common audit on macOS. Linux reproduction and editor review are pending. [Evidence](contributions/social_lstm/README.md) |
-| [Social-GAN](../models/social_gan/independent_design.md) | Capped the visible neighborhood, added a constant-velocity residual, and used a target-level discriminator and shorter training budget. | Implemented the generator, pooling, discriminator, loss, and trainer in the project code. [Attribution](../models/social_gan/implementation_provenance.md) | All 90 bundles passed the common audit. Archived-source ETH replay and pilot retraining matched the saved outputs. Editor review is pending. [Evidence](contributions/social_gan/reproduction_check.json) |
-| [Social-STGCNN](../models/social_stgcnn/independent_design.md) | Retained the full-scene operators, formed graphs from visible histories, and changed minibatch handling and checkpoint selection. | Trained and exported with project code. The authors' code was used for numerical reference checks. [Attribution](../models/social_stgcnn/implementation_provenance.md) | All 90 bundles passed the common audit. A fresh checkout reproduced the ETH seed-0 clean forecast exactly. Editor review is pending. [Evidence](contributions/social_stgcnn/evidence/reproduction_check.json) |
-| [Trajectron++](../li_junhao_trajectronpp/independent_design.md) | Used one pedestrian edge type, a hard 3 m mask, and motion derivatives computed within each observed window. | Trained and exported with the project's pedestrian-only implementation. The earlier upstream run served as a reference. [Attribution](../li_junhao_trajectronpp/implementation_provenance.md) | All 90 bundles passed the common audit. Relocated release verification passed. The registry marks the contribution ready. [Evidence](contributions/trajectronpp/provenance.json) |
-| [DSPIGCN](../models/dspigcn/independent_design.md) | Used a Gaussian head for positions relative to the forecast origin and fixed the polynomial's time scaling and numerical conventions. | Implemented the dual-stream model, physics objective, and anchor assignment in the project code. [Attribution](../models/dspigcn/implementation_provenance.md) | The two-epoch ETH seed-0 pilot passed. The common formal matrix is pending. [Pilot evidence](contributions/dspigcn/evidence/pilot_audit.json) |
+| [Individual LSTM](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/individual_lstm/independent_design.md) | Course-designed K=1 displacement encoder–decoder using standard LSTM cells and a squared position loss. | Retained the earlier AI-assisted owner baseline and added the causal adapter. [Attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/individual_lstm/implementation_provenance.md) | All 90 bundles passed the common audit on Apple M5 CPU. Linux reproduction and editor review are pending. [Evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/individual_lstm/README.md) |
+| [Social-LSTM](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_lstm/independent_design.md) | Deterministic K=1 displacement decoder with closed-loop position loss in place of the paper's Gaussian output. | Implemented social-grid pooling and recurrent rollout in the project code. [Attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_lstm/implementation_provenance.md) | All 90 bundles passed the common audit on macOS. Linux reproduction and editor review are pending. [Evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_lstm/README.md) |
+| [Social-GAN](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_gan/independent_design.md) | Capped the visible neighborhood, added a constant-velocity residual, and used a target-level discriminator and shorter training budget. | Implemented the generator, pooling, discriminator, loss, and trainer in the project code. [Attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_gan/implementation_provenance.md) | All 90 bundles passed the common audit. Archived-source ETH replay and pilot retraining matched the saved outputs. Editor review is pending. [Evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_gan/reproduction_check.json) |
+| [Social-STGCNN](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_stgcnn/independent_design.md) | Retained the full-scene operators, formed graphs from visible histories, and changed minibatch handling and checkpoint selection. | Trained and exported with project code. The authors' code was used for numerical reference checks. [Attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/social_stgcnn/implementation_provenance.md) | All 90 bundles passed the common audit. A fresh checkout reproduced the ETH seed-0 clean forecast exactly. Editor review is pending. [Evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_stgcnn/evidence/reproduction_check.json) |
+| [Trajectron++](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/li_junhao_trajectronpp/independent_design.md) | Used one pedestrian edge type, a hard 3 m mask, and motion derivatives computed within each observed window. | Trained and exported with the project's pedestrian-only implementation. The earlier upstream run served as a reference. [Attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/li_junhao_trajectronpp/implementation_provenance.md) | All 90 bundles passed the common audit. Relocated release verification passed. The registry marks the contribution ready. [Evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/trajectronpp/provenance.json) |
+| [DSPIGCN](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/dspigcn/independent_design.md) | Used a Gaussian head for positions relative to the forecast origin and fixed the polynomial's time scaling and numerical conventions. | Implemented the dual-stream model, physics objective, and anchor assignment in the project code. [Attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/dspigcn/implementation_provenance.md) | All 90 bundles passed the common audit. Replay reproduced all stored forecast coordinates exactly. Editor review is pending. [Audit](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/benchmark_audit.json) · [Replay](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/evidence/extracted_replay.json) |
 
 ## Evaluation
 
@@ -202,7 +201,7 @@ We average over windows within each fold and seed, then average the three
 seeds within each fold and give the five holdouts equal weight. This keeps
 Univ's much larger test population from dominating the aggregate. We pair
 robustness changes by fold and seed. Windows can overlap, so seed variation
-and fold differences are descriptive. [Group scoring and aggregation](../GROUP7_COMMON_DATA_EVALUATION_SPEC.md)
+and fold differences are descriptive. [Group scoring and aggregation](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/GROUP7_COMMON_DATA_EVALUATION_SPEC.md)
 
 ## Results
 
@@ -220,6 +219,7 @@ records editor acceptance separately.
 | Social-GAN | 20 | 0.322 | 0.603 | 0.839 | 1.748 | 0.558 | 0.892 |
 | Social-STGCNN | 20 | 0.583 | 1.006 | 0.971 | 1.760 | 0.796 | 0.622 |
 | Trajectron++ | 20 | 0.330 | 0.578 | 0.855 | 1.823 | 0.540 | 0.991 |
+| DSPIGCN | 20 | 0.495 | 0.753 | 0.760 | 1.488 | 0.548 | 0.736 |
 | Constant velocity (last step) | 1 | 0.534 | 1.148 | 0.534 | 1.148 | 0.651 | 0.000 |
 
 Constant velocity had lower clean ADE and FDE than the two learned K=1
@@ -229,9 +229,10 @@ Hotel (0.493 versus 0.506 m). Individual LSTM was lower on Univ
 (0.558 versus 0.637 m), Zara1 and Zara2. Because their architectures,
 context and training settings also differ, the comparison does not
 identify the isolated effect of social pooling.
-[Individual LSTM results and CV](contributions/individual_lstm/) · [Social-LSTM results](contributions/social_lstm/results.csv)
+[Individual LSTM results and CV](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/individual_lstm) · [Social-LSTM results](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_lstm/results.csv)
 
-At K=20, Social-GAN had lower clean minimum ADE than Trajectron++ by 0.008 m.
+DSPIGCN had the lowest clean mean ADE and mean FDE among the K=20 models.
+Social-GAN had the lowest clean minimum ADE, 0.008 m below Trajectron++.
 Trajectron++ had lower minimum FDE by 0.025 m and lower Energy Score by
 0.018 m. The mean ADE values of both models are more than twice their
 minimum ADE values. The table gives Trajectron++ minus Social-GAN on the
@@ -249,7 +250,7 @@ Negative differences favor Trajectron++.
 Trajectron++ had lower minimum ADE on two folds, lower minimum FDE on
 three, and lower Energy Score on four. Social-GAN had lower values on
 all three metrics in Hotel.
-[Social-GAN results](contributions/social_gan/results.csv) · [Trajectron++ results](contributions/trajectronpp/results.csv)
+[Social-GAN results](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_gan/results.csv) · [Trajectron++ results](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/trajectronpp/results.csv) · [DSPIGCN results](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/results.csv)
 
 For Trajectron++, we scored the first 1, 5, 10 and 20 draws from the same
 clean forecast streams at fixed trained weights, giving the five holdouts
@@ -268,7 +269,7 @@ streams, with minimum ADE falling from 0.971 to 0.583 m and mean ADE
 changing by less than 0.001 m. A larger sample set gives the evaluator
 more paths to choose from after observing the future. A system acting before
 the future is known needs a rule for using the ensemble.
-[Trajectron++ sampling evidence](contributions/trajectronpp/evidence/sample_budget.csv) · [Social-STGCNN analysis](contributions/social_stgcnn/)
+[Trajectron++ sampling evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/trajectronpp/evidence/sample_budget.csv) · [Social-STGCNN analysis](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_stgcnn)
 
 ### Robustness to corrupted histories
 
@@ -283,18 +284,21 @@ the single forecast's error.
 | Social-GAN | +0.068 | +0.184 | +0.466 | +0.049 | +0.120 |
 | Social-STGCNN | +0.027 | +0.105 | +0.341 | +0.036 | +0.090 |
 | Trajectron++ | +0.627 | +1.239 | +2.178 | +0.040 | +0.092 |
+| DSPIGCN | +0.324 | +0.822 | +1.955 | +0.072 | +0.152 |
 | Constant velocity (last step, supplementary) | +0.366 | +0.900 | +2.073 | +0.095 | +0.198 |
 
 The strongest tested noise increased mean ADE more than two missing points
 in every common model. For Social-STGCNN the 0.20 m noise penalty exceeded
 the two-missing penalty in all five folds, with a larger difference on
 Hotel (+0.432 versus +0.046 m) than on ETH (+0.264 versus +0.230 m).
-Trajectron++ had a small improvement on Hotel after masking two points
-(−0.024 m) and a +0.149 m penalty on Univ. A causal fill can produce a
+For DSPIGCN, the same noise penalty ranged from +1.719 m on ETH to +2.120 m
+on Hotel. Masking two points increased mean ADE by +0.298 m on ETH and
++0.049 m on Hotel. Trajectron++ had a small improvement on Hotel after
+masking two points (−0.024 m) and a +0.149 m penalty on Univ. A causal fill can produce a
 smoother velocity signal than differencing independently noisy positions.
 These runs measure the combined behavior of the input transform and the
 forecast model. They leave the individual contribution of each mechanism open.
-[Social-STGCNN paired analysis](contributions/social_stgcnn/) · [Trajectron++ paired evidence](contributions/trajectronpp/evidence/paired_mean_ade.csv)
+[Social-STGCNN paired analysis](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_stgcnn) · [Trajectron++ paired evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/trajectronpp/evidence/paired_mean_ade.csv) · [DSPIGCN paired evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/evidence/paired_differences.csv)
 
 The baseline ordering changed under noise. At 0.20 m, the deterministic
 Social-LSTM reached 1.128 m ADE, followed by Individual LSTM at 1.871 m and
@@ -303,7 +307,7 @@ constant velocity were close, at 0.735 and 0.732 m. When recent
 positions are available but corrupted, repeating the last displacement can
 carry the error throughout the forecast. When the suffix is missing, the
 benchmark already replaces that suffix with a constant-velocity continuation.
-These are distinct observation failures. [Paired LSTM and CV results](contributions/individual_lstm/evidence/macro_comparison.csv)
+These are distinct observation failures. [Paired LSTM and CV results](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/individual_lstm/evidence/macro_comparison.csv)
 
 ### Motion, qualitative examples and runtime
 
@@ -316,7 +320,7 @@ rate fell. Interpreting that decrease requires checking where the sampled
 paths moved. The Social-STGCNN fixed ETH example shows a separate coverage
 failure. The pedestrian doubled back, while all twenty draws continued
 forward. The fixed examples and the explicitly selected large-error cases
-answer different questions about model behavior. [Social-GAN motion evidence](contributions/social_gan/evidence/motion_spatial.csv) · [Social-STGCNN fixed ETH example](contributions/social_stgcnn/assets/shared_eth_case.pdf)
+answer different questions about model behavior. [Social-GAN motion evidence](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_gan/evidence/motion_spatial.csv) · [Social-STGCNN fixed ETH example](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_stgcnn/assets/shared_eth_case.pdf)
 
 The reference timing workload specifies 128 locked targets in batches of
 32, with three warmups and ten measured repetitions per fold and seed.
@@ -326,21 +330,18 @@ preprocessing boundaries. For example, the Social-GAN timing begins with
 neutral positions on an Apple M5 Pro CPU, while the Social-LSTM MPS
 measurement starts from cached neutral histories. We retain owner timings
 with their environment and boundaries and leave cross-model speed rankings
-to a matched measurement. [Shared timing workload](../benchmark/README.md#runtime-and-diagnostics)
+to a matched measurement. [Shared timing workload](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/benchmark/README.md#runtime-and-diagnostics)
 
-### DSPIGCN evidence
+### DSPIGCN motion diagnostics and replay
 
-The registered DSPIGCN workflow passed the ETH seed-0 pilot with two
-epochs and all six conditions. Its common formal result table and audit
-are pending. The candidate completed 15 fits and 90 evaluation rows at K=20
-under its own protocol. Across its five holdouts, candidate mean ADE rose
-from 0.607 m clean to 2.364 m at 0.20 m noise and to 0.723 m with two
-missing points. The candidate uses different split boundaries, requires
-future track availability for graph membership, perturbs all eligible
-graph nodes, and uses a different Energy Score normalization. Its audit
-and metrics characterize that experiment. The inference adapter accepts
-the shared batch format, while the saved candidate forecasts retain their
-original protocol. [Registered pilot evidence](contributions/dspigcn/evidence/) · [Candidate scores](../models/dspigcn/provisional_variant/results/provisional_main/seed_summary.csv) · [Protocol comparison](../models/dspigcn/provisional_variant/docs/TEAM_INTEGRATION.md)
+The registered DSPIGCN completed all 15 formal fits at 200 epochs each.
+Checkpoint selection used clean validation Energy Score, then mean ADE
+and the earlier epoch. The reviewer regenerated all 90 forecast bundles
+from the archived weights with a maximum coordinate difference of 0 m.
+On clean histories, the 99th percentile of sampled acceleration exceeded
+the training threshold in 99.6% of windows after equal-fold aggregation.
+This diagnostic qualifies the model's clean mean displacement scores.
+[Checkpoint selection](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/evidence/checkpoint_selection.csv) · [Forecast replay](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/evidence/extracted_replay.json) · [Motion diagnostics](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/evidence/diagnostics.csv)
 
 ## Limitations and conclusion
 
@@ -350,17 +351,16 @@ inferences that can be drawn about other populations. The experiments compare
 complete implementations with different architectures, objectives and training
 budgets. Claims about individual components require controlled ablations.
 Independent editor review and reference-environment reproduction remain
-pending where indicated in the registry. [Model registry](models.json) · [Review requirements](editor/README.md)
+pending where indicated in the registry. [Model registry](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/models.json) · [Review requirements](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/editor/README.md)
 
 The constant-velocity baseline repeats the last observed displacement. It had
 the lowest clean ADE among the deterministic predictors. Both recurrent
 baselines had lower ADE than this baseline at all three tested noise levels.
 Increasing an ensemble's sample budget improves best-path coverage under
-oracle selection, and the clean minimum ADE, minimum FDE and Energy Score
-favor different models. The largest noise condition consistently caused
-more mean-ADE degradation than removing and causally filling two observations.
-Completing DSPIGCN under the locked contract would extend these comparisons
-to the registered physics-informed model.
+oracle selection. Among the K=20 models, Social-GAN led in clean minimum
+ADE, Trajectron++ led in minimum FDE and Energy Score, and DSPIGCN led in
+mean ADE and mean FDE. Across all six models, 0.20 m noise caused more
+mean-ADE degradation than removing and causally filling two observations.
 
 ## Contribution
 
@@ -381,7 +381,7 @@ learned baseline improved on extrapolation, and documented changes from
 the legacy population. LU also prepared fold and paired result summaries,
 reproduction commands, and report and presentation materials. The numerical
 audit was recorded on Apple M5 CPU, with Linux reference-environment
-reproduction pending. [Owner evidence](contributions/individual_lstm/)
+reproduction pending. [Owner evidence](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/individual_lstm)
 
 ### WANG Yifan
 
@@ -396,11 +396,11 @@ missing-history sensitivity, crowded and turning strata, a fixed Hotel
 example, and hardware-specific runtime. WANG supplied the numerical audit,
 provenance, an English report subsection, three Beamer frames, speaker
 notes and an editable PowerPoint. WANG also documented differences between
-the local and reference environments. [Owner evidence](contributions/social_lstm/)
+the local and reference environments. [Owner evidence](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_lstm)
 
 ### Cheung, Alan Pak To
 
-Cheung, Alan Pak To implemented the Social-GAN framework, including the generator, discriminator, observed-neighbor pooling mechanism, residual displacement decoder, and reproducible seeded sampling. He completed the ETH pilot and the full five-fold, three-seed evaluation under the shared benchmark, using clean validation Energy Score for checkpoint selection. He verified that neither target nor neighbor future trajectories leaked into the model inputs and developed the prediction exporter to produce outputs aligned with the shared evaluation protocol. He independently checked the reported metrics and conducted both checkpoint-replay and short-retraining reproducibility tests. For the experimental analysis, he investigated the trade-offs between best-of-K forecast accuracy, typical-sample error, and sample diversity, and evaluated model robustness under noisy and missing trajectory observations. He also prepared qualitative trajectory examples, motion diagnostics, and runtime measurements with documented measurement boundaries. Finally, he contributed the model audit, experimental provenance, Social-GAN report section, and presentation materials. [Owner evidence](contributions/social_gan/)
+Cheung, Alan Pak To implemented the Social-GAN framework, including the generator, discriminator, observed-neighbor pooling mechanism, residual displacement decoder, and reproducible seeded sampling. He completed the ETH pilot and the full five-fold, three-seed evaluation under the shared benchmark, using clean validation Energy Score for checkpoint selection. He verified that neither target nor neighbor future trajectories leaked into the model inputs and developed the prediction exporter to produce outputs aligned with the shared evaluation protocol. He independently checked the reported metrics and conducted both checkpoint-replay and short-retraining reproducibility tests. For the experimental analysis, he investigated the trade-offs between best-of-K forecast accuracy, typical-sample error, and sample diversity, and evaluated model robustness under noisy and missing trajectory observations. He also prepared qualitative trajectory examples, motion diagnostics, and runtime measurements with documented measurement boundaries. Finally, he contributed the model audit, experimental provenance, Social-GAN report section, and presentation materials. [Owner evidence](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_gan)
 
 ### Zongmin Zhang
 
@@ -415,11 +415,11 @@ rechecked the selected validation likelihoods and replayed forecasts with
 the authors' model. Zhang prepared accuracy, robustness, crowd, motion and
 timing analyses, published review archives, and delivered figures, the
 report section and presentation. The owner statement records AI assistance.
-[Owner evidence](contributions/social_stgcnn/)
+[Owner evidence](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/social_stgcnn)
 
 ### LI Junhao
 
-LI Junhao built the shared benchmark used for the five common result
+LI Junhao built the shared benchmark used for the six common result
 tables, including pinned ETH/UCY data preparation, ordered holdout
 manifests, target-history corruption fixtures, scoring, and audits. LI
 implemented the independent pedestrian-only Trajectron++ pipeline with a
@@ -433,7 +433,7 @@ predictions. LI analyzed sample budgets and paired robustness to noise and
 missing observations, and timed preprocessing and inference separately.
 LI also built the shared LaTeX report and Beamer slide masters and their
 assembly workflow, and delivered the Trajectron++ report section, figures,
-slides, and speaker notes. [Shared benchmark](../benchmark/README.md) · [Owner evidence](contributions/trajectronpp/)
+slides, and speaker notes. [Shared benchmark](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/benchmark/README.md) · [Owner evidence](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/trajectronpp)
 
 ### YAN Zhengyang
 
@@ -445,7 +445,7 @@ checkpoint selection and metric prediction export. YAN documented the
 implementation's departures from the paper and checked causal inputs,
 coordinate transformations, physical derivatives and likelihood calculations.
 The two-epoch ETH seed-0 pilot on the A800 passed the shared audit across
-all six conditions. [Registered implementation and pilot evidence](contributions/dspigcn/)
+all six conditions. [Registered implementation and pilot evidence](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn)
 
 YAN also completed a separate candidate workflow with five held-out scenes,
 three training seeds and twenty forecast samples, producing 15 fitted models
@@ -455,7 +455,7 @@ analysis covers minimum and mean ADE/FDE, ensemble diversity, Energy Score,
 noise and missing-history sensitivity, motion consistency, runtime and
 qualitative failures. YAN retained the checkpoints and predictions in a
 checksummed archive and verified replay of the first clean window from
-each of the fifteen checkpoints. [Candidate audit and replay evidence](../models/dspigcn/provisional_variant/results/provisional_main/)
+each of the fifteen checkpoints. [Candidate audit and replay evidence](https://github.com/Nine-Three-Cattery/comp5331/tree/e956215a75acc2ccebf622c4a89566adc14f8766/models/dspigcn/provisional_variant/results/provisional_main)
 
 To support integration, YAN packaged the candidate in an isolated namespace
 and added a group-batch prediction adapter. Eighteen tests passed, including
@@ -464,8 +464,9 @@ batch ordering and preservation of the caller's random state. YAN prepared
 report and presentation materials and recorded external references and
 Codex assistance. The candidate's different populations, graph eligibility,
 corruptions and scoring conventions remain explicit; its results are kept
-outside the common comparison. The registered common formal matrix and
-editor review remain pending. [Integration and attribution](../models/dspigcn/provisional_variant/docs/TEAM_INTEGRATION.md)
+outside the common comparison. Group 7 ran the registered formal matrix,
+with Zongmin Zhang coordinating training, verification and reporting with
+generative AI assistance. [Candidate integration and attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/models/dspigcn/provisional_variant/docs/TEAM_INTEGRATION.md) · [Formal experiment and attribution](https://github.com/Nine-Three-Cattery/comp5331/blob/e956215a75acc2ccebf622c4a89566adc14f8766/submission/contributions/dspigcn/README.md)
 
 ## References
 
